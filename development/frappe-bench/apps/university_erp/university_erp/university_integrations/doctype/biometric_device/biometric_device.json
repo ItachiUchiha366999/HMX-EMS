@@ -1,0 +1,246 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "device_name",
+    "device_type",
+    "serial_number",
+    "column_break_basic",
+    "location",
+    "department",
+    "building",
+    "status",
+    "connection_section",
+    "ip_address",
+    "port",
+    "column_break_connection",
+    "communication_password",
+    "connection_timeout",
+    "sync_section",
+    "auto_sync",
+    "sync_interval",
+    "column_break_sync",
+    "last_sync",
+    "last_sync_status",
+    "sync_direction",
+    "attendance_section",
+    "attendance_type",
+    "default_shift",
+    "column_break_attendance",
+    "mark_half_day_after",
+    "working_hours_threshold"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "BIO-.####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "device_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Device Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "device_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Device Type",
+      "options": "ZKTeco\nESSL\nBioMax\nMantra\nHikvision\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "serial_number",
+      "fieldtype": "Data",
+      "label": "Serial Number"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Installation Location"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "building",
+      "fieldtype": "Data",
+      "label": "Building"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Active\nInactive\nMaintenance\nOffline"
+    },
+    {
+      "fieldname": "connection_section",
+      "fieldtype": "Section Break",
+      "label": "Connection Settings"
+    },
+    {
+      "fieldname": "ip_address",
+      "fieldtype": "Data",
+      "label": "IP Address",
+      "reqd": 1
+    },
+    {
+      "default": "4370",
+      "fieldname": "port",
+      "fieldtype": "Int",
+      "label": "Port"
+    },
+    {
+      "fieldname": "column_break_connection",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "communication_password",
+      "fieldtype": "Password",
+      "label": "Communication Password"
+    },
+    {
+      "default": "5",
+      "fieldname": "connection_timeout",
+      "fieldtype": "Int",
+      "label": "Connection Timeout (seconds)"
+    },
+    {
+      "fieldname": "sync_section",
+      "fieldtype": "Section Break",
+      "label": "Sync Settings"
+    },
+    {
+      "default": "1",
+      "fieldname": "auto_sync",
+      "fieldtype": "Check",
+      "label": "Enable Auto Sync"
+    },
+    {
+      "default": "15",
+      "depends_on": "auto_sync",
+      "description": "Sync interval in minutes",
+      "fieldname": "sync_interval",
+      "fieldtype": "Int",
+      "label": "Sync Interval (minutes)"
+    },
+    {
+      "fieldname": "column_break_sync",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "last_sync",
+      "fieldtype": "Datetime",
+      "label": "Last Sync",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_sync_status",
+      "fieldtype": "Select",
+      "label": "Last Sync Status",
+      "options": "\nSuccess\nFailed\nPartial",
+      "read_only": 1
+    },
+    {
+      "default": "Download",
+      "fieldname": "sync_direction",
+      "fieldtype": "Select",
+      "label": "Sync Direction",
+      "options": "Download\nUpload\nBoth"
+    },
+    {
+      "fieldname": "attendance_section",
+      "fieldtype": "Section Break",
+      "label": "Attendance Settings"
+    },
+    {
+      "default": "Employee",
+      "fieldname": "attendance_type",
+      "fieldtype": "Select",
+      "label": "Attendance Type",
+      "options": "Employee\nStudent\nBoth"
+    },
+    {
+      "fieldname": "default_shift",
+      "fieldtype": "Link",
+      "label": "Default Shift",
+      "options": "Shift Type"
+    },
+    {
+      "fieldname": "column_break_attendance",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "4",
+      "description": "Hours after which mark as half day",
+      "fieldname": "mark_half_day_after",
+      "fieldtype": "Float",
+      "label": "Half Day Threshold (hours)"
+    },
+    {
+      "default": "8",
+      "description": "Minimum hours for full day",
+      "fieldname": "working_hours_threshold",
+      "fieldtype": "Float",
+      "label": "Full Day Threshold (hours)"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Biometric Device",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

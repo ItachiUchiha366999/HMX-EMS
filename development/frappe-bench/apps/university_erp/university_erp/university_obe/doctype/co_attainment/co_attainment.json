@@ -1,0 +1,343 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{course}-{academic_term}-COATT",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "course_section",
+    "course",
+    "course_name",
+    "program",
+    "column_break_term",
+    "academic_term",
+    "academic_year",
+    "student_group",
+    "section_break_instructor",
+    "instructor",
+    "calculation_date",
+    "column_break_status",
+    "status",
+    "total_students",
+    "section_break_direct",
+    "direct_attainment_table",
+    "section_break_direct_summary",
+    "direct_weight",
+    "column_break_direct_avg",
+    "avg_direct_attainment",
+    "section_break_indirect",
+    "indirect_attainment_table",
+    "section_break_indirect_summary",
+    "indirect_weight",
+    "column_break_indirect_avg",
+    "avg_indirect_attainment",
+    "section_break_final",
+    "final_attainment_table",
+    "section_break_overall",
+    "overall_attainment",
+    "cos_achieved",
+    "column_break_total",
+    "total_cos",
+    "attainment_percentage",
+    "section_break_remarks",
+    "remarks",
+    "improvement_plan",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "course_section",
+      "fieldtype": "Section Break",
+      "label": "Course Information"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "course.course_name",
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "column_break_term",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Academic Term",
+      "options": "Academic Term",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year"
+    },
+    {
+      "fieldname": "student_group",
+      "fieldtype": "Link",
+      "label": "Student Group",
+      "options": "Student Group"
+    },
+    {
+      "fieldname": "section_break_instructor",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "instructor",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Employee"
+    },
+    {
+      "default": "Today",
+      "fieldname": "calculation_date",
+      "fieldtype": "Date",
+      "label": "Calculation Date"
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nCalculated\nSubmitted\nCancelled",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_students",
+      "fieldtype": "Int",
+      "label": "Total Students",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_direct",
+      "fieldtype": "Section Break",
+      "label": "Direct Attainment (From Assessments)"
+    },
+    {
+      "fieldname": "direct_attainment_table",
+      "fieldtype": "Table",
+      "label": "Direct Attainment",
+      "options": "CO Direct Attainment"
+    },
+    {
+      "fieldname": "section_break_direct_summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "default": "70",
+      "fieldname": "direct_weight",
+      "fieldtype": "Percent",
+      "label": "Direct Weight"
+    },
+    {
+      "fieldname": "column_break_direct_avg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_direct_attainment",
+      "fieldtype": "Float",
+      "label": "Avg Direct Attainment",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_indirect",
+      "fieldtype": "Section Break",
+      "label": "Indirect Attainment (From Surveys)"
+    },
+    {
+      "fieldname": "indirect_attainment_table",
+      "fieldtype": "Table",
+      "label": "Indirect Attainment",
+      "options": "CO Indirect Attainment"
+    },
+    {
+      "fieldname": "section_break_indirect_summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "default": "30",
+      "fieldname": "indirect_weight",
+      "fieldtype": "Percent",
+      "label": "Indirect Weight"
+    },
+    {
+      "fieldname": "column_break_indirect_avg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_indirect_attainment",
+      "fieldtype": "Float",
+      "label": "Avg Indirect Attainment",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_final",
+      "fieldtype": "Section Break",
+      "label": "Final CO Attainment"
+    },
+    {
+      "fieldname": "final_attainment_table",
+      "fieldtype": "Table",
+      "label": "Final Attainment",
+      "options": "CO Final Attainment"
+    },
+    {
+      "fieldname": "section_break_overall",
+      "fieldtype": "Section Break",
+      "label": "Overall Summary"
+    },
+    {
+      "default": "0",
+      "fieldname": "overall_attainment",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "label": "Overall CO Attainment",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "cos_achieved",
+      "fieldtype": "Int",
+      "label": "COs Achieved",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_total",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_cos",
+      "fieldtype": "Int",
+      "label": "Total COs",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Percentage of COs that met target",
+      "fieldname": "attainment_percentage",
+      "fieldtype": "Percent",
+      "label": "Achievement Rate",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_remarks",
+      "fieldtype": "Section Break",
+      "label": "Remarks & Improvement"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Text Editor",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "improvement_plan",
+      "fieldtype": "Text Editor",
+      "label": "Improvement Plan"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "CO Attainment",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "CO Attainment",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

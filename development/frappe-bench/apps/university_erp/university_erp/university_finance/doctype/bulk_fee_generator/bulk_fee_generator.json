@@ -1,0 +1,188 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:BFG-{YYYY}-{#####}",
+  "creation": "2025-12-31 00:00:00",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "program",
+    "academic_year",
+    "semester",
+    "fee_structure",
+    "column_break_1",
+    "student_batch",
+    "admission_category",
+    "due_date",
+    "auto_submit",
+    "section_students",
+    "students",
+    "section_summary",
+    "total_students",
+    "column_break_2",
+    "fees_to_generate"
+  ],
+  "fields": [
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "semester",
+      "fieldtype": "Link",
+      "label": "Semester",
+      "options": "Academic Term"
+    },
+    {
+      "fieldname": "fee_structure",
+      "fieldtype": "Link",
+      "label": "Fee Structure",
+      "options": "Fee Structure",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "student_batch",
+      "fieldtype": "Link",
+      "label": "Student Batch",
+      "options": "Student Batch Name"
+    },
+    {
+      "fieldname": "admission_category",
+      "fieldtype": "Select",
+      "label": "Admission Category",
+      "options": "\nGeneral\nOBC\nSC/ST\nEWS"
+    },
+    {
+      "fieldname": "due_date",
+      "fieldtype": "Date",
+      "label": "Due Date"
+    },
+    {
+      "fieldname": "auto_submit",
+      "fieldtype": "Check",
+      "label": "Auto Submit After Generation"
+    },
+    {
+      "fieldname": "section_students",
+      "fieldtype": "Section Break",
+      "label": "Students"
+    },
+    {
+      "fieldname": "students",
+      "fieldtype": "Table",
+      "label": "Students",
+      "options": "Bulk Fee Generator Student"
+    },
+    {
+      "fieldname": "section_summary",
+      "fieldtype": "Section Break",
+      "label": "Summary"
+    },
+    {
+      "fieldname": "total_students",
+      "fieldtype": "Int",
+      "label": "Total Students",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fees_to_generate",
+      "fieldtype": "Int",
+      "label": "Fees to Generate",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2025-12-31 00:00:00",
+  "modified_by": "Administrator",
+  "module": "University Finance",
+  "name": "Bulk Fee Generator",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

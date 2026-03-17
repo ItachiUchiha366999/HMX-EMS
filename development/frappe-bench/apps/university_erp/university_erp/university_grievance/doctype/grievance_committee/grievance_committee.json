@@ -1,0 +1,160 @@
+{
+  "actions": [],
+  "autoname": "field:committee_name",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "committee_name",
+    "committee_type",
+    "description",
+    "column_break_1",
+    "is_active",
+    "meeting_frequency",
+    "section_break_members",
+    "chairperson",
+    "secretary",
+    "members",
+    "section_break_categories",
+    "grievance_categories",
+    "section_break_contact",
+    "email",
+    "phone",
+    "office_location"
+  ],
+  "fields": [
+    {
+      "fieldname": "committee_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Committee Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "committee_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Committee Type",
+      "options": "\nGeneral Grievance\nAnti-Ragging\nSexual Harassment (ICC)\nSC/ST Cell\nWomen Cell\nDisciplinary\nAcademic Appeals\nFinancial Aid",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": 1,
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "default": "As Needed",
+      "fieldname": "meeting_frequency",
+      "fieldtype": "Select",
+      "label": "Meeting Frequency",
+      "options": "\nAs Needed\nWeekly\nFortnightly\nMonthly"
+    },
+    {
+      "fieldname": "section_break_members",
+      "fieldtype": "Section Break",
+      "label": "Committee Members"
+    },
+    {
+      "fieldname": "chairperson",
+      "fieldtype": "Link",
+      "label": "Chairperson",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "secretary",
+      "fieldtype": "Link",
+      "label": "Secretary",
+      "options": "User"
+    },
+    {
+      "fieldname": "members",
+      "fieldtype": "Table",
+      "label": "Members",
+      "options": "Committee Member"
+    },
+    {
+      "fieldname": "section_break_categories",
+      "fieldtype": "Section Break",
+      "label": "Handles Categories"
+    },
+    {
+      "fieldname": "grievance_categories",
+      "fieldtype": "Table MultiSelect",
+      "label": "Grievance Categories",
+      "options": "Committee Category Link"
+    },
+    {
+      "fieldname": "section_break_contact",
+      "fieldtype": "Section Break",
+      "label": "Contact Information"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Committee Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone"
+    },
+    {
+      "fieldname": "office_location",
+      "fieldtype": "Data",
+      "label": "Office Location"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Grievance",
+  "name": "Grievance Committee",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,64 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ complainant_name or "Student" }},</p>
+
+<p>We are pleased to inform you that your grievance has been <strong style="color: #28a745;">resolved</strong>.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 40%;">Grievance ID</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ grievance_id }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Subject</td>
+        <td style="padding: 10px;">{{ subject }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Category</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ category }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Submission Date</td>
+        <td style="padding: 10px;">{{ submission_date }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Resolution Date</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ resolution_date }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Resolved By</td>
+        <td style="padding: 10px;">{{ resolved_by }}</td>
+    </tr>
+</table>
+
+<div style="background: #d4edda; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #28a745;">
+    <strong>Resolution Summary:</strong>
+    <p style="margin: 10px 0 0 0;">{{ resolution_summary }}</p>
+</div>
+
+{% if actions_taken %}
+<p><strong>Actions Taken:</strong></p>
+<ul>
+    {% for action in actions_taken %}
+    <li>{{ action }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<p><strong>Your Feedback Matters!</strong></p>
+<p>We value your feedback on how this grievance was handled. Please take a moment to rate your experience:</p>
+
+<p style="margin-top: 15px;">
+    <a href="{{ feedback_link }}" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Rate Your Experience</a>
+</p>
+
+<p style="margin-top: 20px;">If you are not satisfied with the resolution or need further assistance, you may reopen this grievance through the Student Portal within 7 days.</p>
+
+<p>
+    Thank you for your patience and cooperation.<br><br>
+    Best regards,<br>
+    Grievance Redressal Cell<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

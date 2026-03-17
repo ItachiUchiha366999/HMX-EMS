@@ -1,0 +1,137 @@
+[
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_faculty_section",
+  "fieldname": "custom_faculty_section",
+  "fieldtype": "Section Break",
+  "label": "University Faculty Details",
+  "insert_after": "personal_details"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_is_faculty",
+  "fieldname": "custom_is_faculty",
+  "fieldtype": "Check",
+  "label": "Is Faculty",
+  "insert_after": "custom_faculty_section",
+  "default": "0"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_faculty_profile",
+  "fieldname": "custom_faculty_profile",
+  "fieldtype": "Link",
+  "label": "Faculty Profile",
+  "options": "Faculty Profile",
+  "insert_after": "custom_is_faculty",
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_employee_category",
+  "fieldname": "custom_employee_category",
+  "fieldtype": "Select",
+  "label": "Employee Category",
+  "options": "\nTeaching Staff\nNon-Teaching Staff\nAdministrative Staff\nContract Faculty\nVisiting Faculty",
+  "insert_after": "custom_faculty_profile"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_column_break_faculty",
+  "fieldname": "custom_column_break_faculty",
+  "fieldtype": "Column Break",
+  "insert_after": "custom_employee_category"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_faculty_type",
+  "fieldname": "custom_faculty_type",
+  "fieldtype": "Select",
+  "label": "Faculty Type",
+  "options": "\nPermanent\nTemporary\nAdhoc\nGuest",
+  "insert_after": "custom_column_break_faculty"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_current_workload",
+  "fieldname": "custom_current_workload",
+  "fieldtype": "Float",
+  "label": "Current Workload (Hours/Week)",
+  "precision": "2",
+  "read_only": 1,
+  "insert_after": "custom_faculty_type"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_qualification_section",
+  "fieldname": "custom_qualification_section",
+  "fieldtype": "Section Break",
+  "label": "Qualifications",
+  "insert_after": "custom_current_workload"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_qualifications",
+  "fieldname": "custom_qualifications",
+  "fieldtype": "Table",
+  "label": "Qualifications",
+  "options": "Employee Qualification",
+  "insert_after": "custom_qualification_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_highest_qualification",
+  "fieldname": "custom_highest_qualification",
+  "fieldtype": "Data",
+  "label": "Highest Qualification",
+  "insert_after": "custom_qualifications"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_specialization",
+  "fieldname": "custom_specialization",
+  "fieldtype": "Data",
+  "label": "Specialization",
+  "insert_after": "custom_highest_qualification"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_experience_section",
+  "fieldname": "custom_experience_section",
+  "fieldtype": "Section Break",
+  "label": "Experience",
+  "insert_after": "custom_specialization"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_total_experience",
+  "fieldname": "custom_total_experience",
+  "fieldtype": "Float",
+  "label": "Total Experience (Years)",
+  "precision": "1",
+  "insert_after": "custom_experience_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "name": "Employee-custom_teaching_experience",
+  "fieldname": "custom_teaching_experience",
+  "fieldtype": "Float",
+  "label": "Teaching Experience (Years)",
+  "precision": "1",
+  "insert_after": "custom_total_experience"
+ }
+]

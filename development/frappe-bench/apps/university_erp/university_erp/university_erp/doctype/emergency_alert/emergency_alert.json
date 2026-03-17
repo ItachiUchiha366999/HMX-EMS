@@ -1,0 +1,437 @@
+{
+  "actions": [],
+  "autoname": "format:EMRG-{YYYY}-{#####}",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "alert_type",
+    "severity",
+    "column_break_basic",
+    "status",
+    "initiated_by",
+    "message_section",
+    "title",
+    "message",
+    "instructions",
+    "channels_section",
+    "send_sms",
+    "send_push",
+    "column_break_channels",
+    "send_whatsapp",
+    "send_email",
+    "column_break_channels2",
+    "trigger_siren",
+    "play_audio_alert",
+    "targeting_section",
+    "target_audience",
+    "target_locations",
+    "column_break_targeting",
+    "affected_buildings",
+    "affected_zones",
+    "timing_section",
+    "broadcast_time",
+    "expires_at",
+    "column_break_timing",
+    "repeat_interval",
+    "max_repeats",
+    "repeats_sent",
+    "response_section",
+    "require_acknowledgment",
+    "acknowledgment_deadline",
+    "column_break_response",
+    "total_recipients",
+    "acknowledgments_received",
+    "acknowledgment_rate",
+    "delivery_section",
+    "sms_sent",
+    "sms_delivered",
+    "column_break_delivery",
+    "push_sent",
+    "push_delivered",
+    "column_break_delivery2",
+    "whatsapp_sent",
+    "whatsapp_delivered",
+    "column_break_delivery3",
+    "email_sent",
+    "email_delivered",
+    "resolution_section",
+    "resolved_at",
+    "resolved_by",
+    "resolution_notes",
+    "all_clear_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "alert_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Alert Type",
+      "options": "\nFire\nMedical Emergency\nSecurity Threat\nNatural Disaster\nEvacuation\nLockdown\nUtility Failure\nWeather Alert\nAccident\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "severity",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Severity",
+      "options": "\nCritical\nHigh\nMedium\nLow",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nActive\nResolved\nCancelled",
+      "read_only": 1
+    },
+    {
+      "fieldname": "initiated_by",
+      "fieldtype": "Link",
+      "label": "Initiated By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "message_section",
+      "fieldtype": "Section Break",
+      "label": "Alert Message"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Alert Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Text",
+      "label": "Alert Message",
+      "reqd": 1
+    },
+    {
+      "description": "Safety instructions for recipients",
+      "fieldname": "instructions",
+      "fieldtype": "Text",
+      "label": "Safety Instructions"
+    },
+    {
+      "fieldname": "channels_section",
+      "fieldtype": "Section Break",
+      "label": "Broadcast Channels"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_sms",
+      "fieldtype": "Check",
+      "label": "Send SMS"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_push",
+      "fieldtype": "Check",
+      "label": "Send Push Notification"
+    },
+    {
+      "fieldname": "column_break_channels",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_whatsapp",
+      "fieldtype": "Check",
+      "label": "Send WhatsApp"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_email",
+      "fieldtype": "Check",
+      "label": "Send Email"
+    },
+    {
+      "fieldname": "column_break_channels2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "description": "Trigger physical siren/alarm systems",
+      "fieldname": "trigger_siren",
+      "fieldtype": "Check",
+      "label": "Trigger Siren"
+    },
+    {
+      "default": "0",
+      "description": "Play audio alert on web/mobile apps",
+      "fieldname": "play_audio_alert",
+      "fieldtype": "Check",
+      "label": "Play Audio Alert"
+    },
+    {
+      "fieldname": "targeting_section",
+      "fieldtype": "Section Break",
+      "label": "Target Audience"
+    },
+    {
+      "default": "All",
+      "fieldname": "target_audience",
+      "fieldtype": "Select",
+      "label": "Target Audience",
+      "options": "All\nStudents\nFaculty\nStaff\nVisitors\nSpecific Buildings\nSpecific Zones",
+      "reqd": 1
+    },
+    {
+      "description": "Comma-separated list of locations",
+      "depends_on": "eval:['Specific Buildings', 'Specific Zones'].includes(doc.target_audience)",
+      "fieldname": "target_locations",
+      "fieldtype": "Small Text",
+      "label": "Target Locations"
+    },
+    {
+      "fieldname": "column_break_targeting",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Buildings affected by this emergency",
+      "fieldname": "affected_buildings",
+      "fieldtype": "Small Text",
+      "label": "Affected Buildings"
+    },
+    {
+      "fieldname": "affected_zones",
+      "fieldtype": "Small Text",
+      "label": "Affected Zones"
+    },
+    {
+      "fieldname": "timing_section",
+      "fieldtype": "Section Break",
+      "label": "Timing"
+    },
+    {
+      "fieldname": "broadcast_time",
+      "fieldtype": "Datetime",
+      "label": "Broadcast Time",
+      "read_only": 1
+    },
+    {
+      "description": "When the alert should stop being displayed",
+      "fieldname": "expires_at",
+      "fieldtype": "Datetime",
+      "label": "Expires At"
+    },
+    {
+      "fieldname": "column_break_timing",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "description": "Repeat alert every N minutes (0 = no repeat)",
+      "fieldname": "repeat_interval",
+      "fieldtype": "Int",
+      "label": "Repeat Interval (minutes)"
+    },
+    {
+      "default": "0",
+      "fieldname": "max_repeats",
+      "fieldtype": "Int",
+      "label": "Max Repeats"
+    },
+    {
+      "default": "0",
+      "fieldname": "repeats_sent",
+      "fieldtype": "Int",
+      "label": "Repeats Sent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "Response Tracking"
+    },
+    {
+      "default": "1",
+      "fieldname": "require_acknowledgment",
+      "fieldtype": "Check",
+      "label": "Require Acknowledgment"
+    },
+    {
+      "depends_on": "require_acknowledgment",
+      "fieldname": "acknowledgment_deadline",
+      "fieldtype": "Datetime",
+      "label": "Acknowledgment Deadline"
+    },
+    {
+      "fieldname": "column_break_response",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_recipients",
+      "fieldtype": "Int",
+      "label": "Total Recipients",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "acknowledgments_received",
+      "fieldtype": "Int",
+      "label": "Acknowledgments Received",
+      "read_only": 1
+    },
+    {
+      "fieldname": "acknowledgment_rate",
+      "fieldtype": "Percent",
+      "label": "Acknowledgment Rate",
+      "read_only": 1
+    },
+    {
+      "fieldname": "delivery_section",
+      "fieldtype": "Section Break",
+      "label": "Delivery Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "sms_sent",
+      "fieldtype": "Int",
+      "label": "SMS Sent",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "sms_delivered",
+      "fieldtype": "Int",
+      "label": "SMS Delivered",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_delivery",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "push_sent",
+      "fieldtype": "Int",
+      "label": "Push Sent",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "push_delivered",
+      "fieldtype": "Int",
+      "label": "Push Delivered",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_delivery2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "whatsapp_sent",
+      "fieldtype": "Int",
+      "label": "WhatsApp Sent",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "whatsapp_delivered",
+      "fieldtype": "Int",
+      "label": "WhatsApp Delivered",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_delivery3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "email_sent",
+      "fieldtype": "Int",
+      "label": "Email Sent",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "email_delivered",
+      "fieldtype": "Int",
+      "label": "Email Delivered",
+      "read_only": 1
+    },
+    {
+      "fieldname": "resolution_section",
+      "fieldtype": "Section Break",
+      "label": "Resolution"
+    },
+    {
+      "fieldname": "resolved_at",
+      "fieldtype": "Datetime",
+      "label": "Resolved At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "resolved_by",
+      "fieldtype": "Link",
+      "label": "Resolved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "resolution_notes",
+      "fieldtype": "Text",
+      "label": "Resolution Notes"
+    },
+    {
+      "description": "Message to send when all-clear is given",
+      "fieldname": "all_clear_message",
+      "fieldtype": "Text",
+      "label": "All Clear Message"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Emergency Alert",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

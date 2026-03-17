@@ -1,0 +1,234 @@
+{
+  "actions": [],
+  "autoname": "format:SUB-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "assignment",
+    "student",
+    "student_name",
+    "column_break_1",
+    "submission_date",
+    "attempt_number",
+    "is_late",
+    "section_submission",
+    "submission_text",
+    "submission_files",
+    "student_comments",
+    "section_grading",
+    "status",
+    "marks_obtained",
+    "late_penalty",
+    "final_marks",
+    "column_break_2",
+    "graded_by",
+    "graded_on",
+    "feedback",
+    "section_rubric",
+    "rubric_scores"
+  ],
+  "fields": [
+    {
+      "fieldname": "assignment",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Assignment",
+      "options": "LMS Assignment",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Now",
+      "fieldname": "submission_date",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Submitted On",
+      "read_only": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "attempt_number",
+      "fieldtype": "Int",
+      "label": "Attempt #"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_late",
+      "fieldtype": "Check",
+      "label": "Late Submission",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_submission",
+      "fieldtype": "Section Break",
+      "label": "Submission"
+    },
+    {
+      "fieldname": "submission_text",
+      "fieldtype": "Text Editor",
+      "label": "Submission Text"
+    },
+    {
+      "fieldname": "submission_files",
+      "fieldtype": "Table",
+      "label": "Submission Files",
+      "options": "Submission File"
+    },
+    {
+      "fieldname": "student_comments",
+      "fieldtype": "Small Text",
+      "label": "Student Comments"
+    },
+    {
+      "fieldname": "section_grading",
+      "fieldtype": "Section Break",
+      "label": "Grading"
+    },
+    {
+      "default": "Submitted",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Submitted\nUnder Review\nGraded\nResubmission Required"
+    },
+    {
+      "fieldname": "marks_obtained",
+      "fieldtype": "Float",
+      "label": "Marks Obtained"
+    },
+    {
+      "default": "0",
+      "fieldname": "late_penalty",
+      "fieldtype": "Float",
+      "label": "Late Penalty",
+      "read_only": 1
+    },
+    {
+      "fieldname": "final_marks",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Final Marks",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "graded_by",
+      "fieldtype": "Link",
+      "label": "Graded By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "graded_on",
+      "fieldtype": "Datetime",
+      "label": "Graded On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "feedback",
+      "fieldtype": "Text Editor",
+      "label": "Instructor Feedback"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_rubric",
+      "fieldtype": "Section Break",
+      "label": "Rubric Scores"
+    },
+    {
+      "fieldname": "rubric_scores",
+      "fieldtype": "Table",
+      "label": "Rubric Scores",
+      "options": "Submission Rubric Score"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "Assignment Submission",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

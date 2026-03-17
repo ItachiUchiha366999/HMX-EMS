@@ -1,0 +1,417 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Pay Fees{% endblock %}
+
+{% block head_include %}
+<style>
+    .payment-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    .fee-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+    .fee-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .fee-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: var(--text-color);
+    }
+    .fee-status {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    .fee-status.unpaid {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+    .fee-status.partial {
+        background: #fef3c7;
+        color: #d97706;
+    }
+    .fee-status.paid {
+        background: #d1fae5;
+        color: #059669;
+    }
+    .fee-details {
+        margin-bottom: 20px;
+    }
+    .fee-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .fee-row:last-child {
+        border-bottom: none;
+    }
+    .fee-row.total {
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-top: 2px solid var(--border-color);
+        margin-top: 10px;
+        padding-top: 15px;
+    }
+    .fee-label {
+        color: var(--text-muted);
+    }
+    .fee-value {
+        color: var(--text-color);
+    }
+    .payment-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 24px;
+    }
+    .payment-section h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.2rem;
+    }
+    .gateway-options {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .gateway-option {
+        flex: 1;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    .gateway-option:hover {
+        border-color: var(--primary);
+    }
+    .gateway-option.selected {
+        border-color: var(--primary);
+        background: var(--control-bg);
+    }
+    .gateway-option img {
+        height: 30px;
+        margin-bottom: 8px;
+    }
+    .gateway-option span {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+    .pay-btn {
+        width: 100%;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .pay-btn:hover {
+        background: var(--primary-dark);
+    }
+    .pay-btn:disabled {
+        background: var(--disabled-control-bg);
+        cursor: not-allowed;
+    }
+    .student-info {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: var(--control-bg);
+        border-radius: 8px;
+    }
+    .student-info-item {
+        flex: 1;
+    }
+    .student-info-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+    .student-info-value {
+        font-weight: 500;
+    }
+    .error-message {
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .loading {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-muted);
+    }
+    .spinner {
+        border: 3px solid var(--border-color);
+        border-top: 3px solid var(--primary);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="payment-container">
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% elif not fees %}
+    <div class="error-message">
+        No fee record found. Please check the URL or contact administration.
+    </div>
+    {% else %}
+    <div class="fee-card">
+        <div class="fee-header">
+            <h2>Fee Payment</h2>
+            <span class="fee-status {{ 'paid' if fees.outstanding_amount == 0 else ('partial' if fees.paid_amount > 0 else 'unpaid') }}">
+                {{ 'Paid' if fees.outstanding_amount == 0 else ('Partially Paid' if fees.paid_amount > 0 else 'Unpaid') }}
+            </span>
+        </div>
+
+        <div class="student-info">
+            <div class="student-info-item">
+                <div class="student-info-label">Student</div>
+                <div class="student-info-value">{{ fees.student_name }}</div>
+            </div>
+            <div class="student-info-item">
+                <div class="student-info-label">Student ID</div>
+                <div class="student-info-value">{{ fees.student }}</div>
+            </div>
+            <div class="student-info-item">
+                <div class="student-info-label">Program</div>
+                <div class="student-info-value">{{ fees.program or '-' }}</div>
+            </div>
+        </div>
+
+        <div class="fee-details">
+            <div class="fee-row">
+                <span class="fee-label">Fee Reference</span>
+                <span class="fee-value">{{ fees.name }}</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">Due Date</span>
+                <span class="fee-value">{{ frappe.format_date(fees.due_date) }}</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">Total Amount</span>
+                <span class="fee-value">{{ frappe.format_currency(fees.grand_total, 'INR') }}</span>
+            </div>
+            {% if fees.paid_amount > 0 %}
+            <div class="fee-row">
+                <span class="fee-label">Paid Amount</span>
+                <span class="fee-value" style="color: #059669;">- {{ frappe.format_currency(fees.paid_amount, 'INR') }}</span>
+            </div>
+            {% endif %}
+            <div class="fee-row total">
+                <span class="fee-label">Outstanding Amount</span>
+                <span class="fee-value">{{ frappe.format_currency(fees.outstanding_amount, 'INR') }}</span>
+            </div>
+        </div>
+    </div>
+
+    {% if fees.outstanding_amount > 0 %}
+    <div class="payment-section">
+        <h3>Select Payment Method</h3>
+
+        <div class="gateway-options">
+            {% if razorpay_enabled %}
+            <div class="gateway-option selected" data-gateway="razorpay" onclick="selectGateway('razorpay')">
+                <img src="/assets/university_erp/images/razorpay-logo.png" alt="Razorpay" onerror="this.style.display='none'">
+                <strong>Razorpay</strong>
+                <span>Cards, UPI, Netbanking</span>
+            </div>
+            {% endif %}
+            {% if payu_enabled %}
+            <div class="gateway-option {{ 'selected' if not razorpay_enabled else '' }}" data-gateway="payu" onclick="selectGateway('payu')">
+                <img src="/assets/university_erp/images/payu-logo.png" alt="PayU" onerror="this.style.display='none'">
+                <strong>PayU</strong>
+                <span>Cards, UPI, Netbanking</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <button class="pay-btn" id="pay-button" onclick="initiatePayment()">
+            Pay {{ frappe.format_currency(fees.outstanding_amount, 'INR') }}
+        </button>
+    </div>
+    {% else %}
+    <div class="payment-section" style="text-align: center;">
+        <p style="color: #059669; font-size: 1.2rem; margin: 0;">
+            <strong>This fee has been fully paid.</strong>
+        </p>
+        <p style="color: var(--text-muted); margin-top: 10px;">
+            <a href="/student-portal/fees">View your fee history</a>
+        </p>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+<div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); z-index: 1000;">
+    <div class="loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="spinner"></div>
+        <p>Processing payment...</p>
+    </div>
+</div>
+
+{% if razorpay_enabled %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+{% endif %}
+
+<script>
+    let selectedGateway = '{{ "razorpay" if razorpay_enabled else "payu" }}';
+    const feesName = '{{ fees.name if fees else "" }}';
+
+    function selectGateway(gateway) {
+        selectedGateway = gateway;
+        document.querySelectorAll('.gateway-option').forEach(el => {
+            el.classList.remove('selected');
+        });
+        document.querySelector(`[data-gateway="${gateway}"]`).classList.add('selected');
+    }
+
+    function initiatePayment() {
+        if (!feesName) {
+            frappe.msgprint('Invalid fee record');
+            return;
+        }
+
+        document.getElementById('pay-button').disabled = true;
+        document.getElementById('pay-button').textContent = 'Processing...';
+
+        frappe.call({
+            method: 'university_erp.university_payments.payment_gateway.create_fee_payment_order',
+            args: {
+                fees_name: feesName
+            },
+            callback: function(r) {
+                if (r.message && r.message.success) {
+                    if (selectedGateway === 'razorpay') {
+                        openRazorpay(r.message);
+                    } else if (selectedGateway === 'payu') {
+                        submitPayU(r.message);
+                    }
+                } else {
+                    frappe.msgprint(r.message?.error || 'Failed to create payment order');
+                    resetButton();
+                }
+            },
+            error: function() {
+                frappe.msgprint('An error occurred. Please try again.');
+                resetButton();
+            }
+        });
+    }
+
+    function openRazorpay(data) {
+        const options = {
+            key: data.key,
+            amount: data.amount * 100,
+            currency: 'INR',
+            name: '{{ frappe.get_website_settings().website_name or "University" }}',
+            description: data.description,
+            order_id: data.order_id,
+            prefill: {
+                name: data.student_name || '',
+                email: data.student_email || ''
+            },
+            theme: {
+                color: '#2490ef'
+            },
+            handler: function(response) {
+                document.getElementById('loading-overlay').style.display = 'block';
+                verifyPayment({
+                    payment_order: data.payment_order,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature
+                });
+            },
+            modal: {
+                ondismiss: function() {
+                    resetButton();
+                }
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function(response) {
+            frappe.msgprint('Payment failed: ' + response.error.description);
+            resetButton();
+        });
+        rzp.open();
+    }
+
+    function submitPayU(data) {
+        // Create form and submit to PayU
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = data.payment_url;
+
+        for (const key in data.params) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data.params[key];
+            form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function verifyPayment(paymentData) {
+        frappe.call({
+            method: 'university_erp.university_payments.payment_gateway.verify_and_process_payment',
+            args: {
+                payment_data: JSON.stringify(paymentData)
+            },
+            callback: function(r) {
+                document.getElementById('loading-overlay').style.display = 'none';
+                if (r.message && r.message.success) {
+                    window.location.href = '/fee-payment-success?payment=' + r.message.payment_entry;
+                } else {
+                    window.location.href = '/fee-payment-failed?error=' + encodeURIComponent(r.message?.error || 'Payment verification failed');
+                }
+            },
+            error: function() {
+                document.getElementById('loading-overlay').style.display = 'none';
+                window.location.href = '/fee-payment-failed?error=An+error+occurred';
+            }
+        });
+    }
+
+    function resetButton() {
+        document.getElementById('pay-button').disabled = false;
+        document.getElementById('pay-button').textContent = 'Pay {{ frappe.format_currency(fees.outstanding_amount, "INR") if fees else "" }}';
+    }
+</script>
+{% endblock %}

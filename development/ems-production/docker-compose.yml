@@ -1,0 +1,177 @@
+services:
+  ems-mariadb:
+    image: mariadb:10.6
+    container_name: ems-mariadb
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - ems-db-data:/var/lib/mysql
+    networks:
+      - ems-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--password=${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  ems-redis-cache:
+    image: redis:6.2-alpine
+    container_name: ems-redis-cache
+    restart: unless-stopped
+    networks:
+      - ems-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ems-redis-queue:
+    image: redis:6.2-alpine
+    container_name: ems-redis-queue
+    restart: unless-stopped
+    networks:
+      - ems-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ems-configurator:
+    image: ems-university:v1
+    container_name: ems-configurator
+    restart: "no"
+    entrypoint: ["bash", "-c"]
+    command:
+      - >
+        ls -1 apps > sites/apps.txt;
+        bench set-config -g db_host ems-mariadb;
+        bench set-config -gp db_port 3306;
+        bench set-config -g redis_cache "redis://ems-redis-cache:6379";
+        bench set-config -g redis_queue "redis://ems-redis-queue:6379";
+        bench set-config -g redis_socketio "redis://ems-redis-queue:6379";
+        bench set-config -gp socketio_port 9000;
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-mariadb:
+        condition: service_healthy
+
+  ems-backend:
+    image: ems-university:v1
+    container_name: ems-backend
+    restart: unless-stopped
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-configurator:
+        condition: service_completed_successfully
+
+  ems-frontend:
+    image: ems-university:v1
+    container_name: ems-frontend
+    restart: unless-stopped
+    command: nginx-entrypoint.sh
+    environment:
+      BACKEND: ems-backend:8000
+      FRAPPE_SITE_NAME_HEADER: ${SITE_DOMAIN}
+      SOCKETIO: ems-websocket:9000
+      UPSTREAM_REAL_IP_ADDRESS: 172.18.0.0/16
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+      UPSTREAM_REAL_IP_RECURSIVE: "off"
+      PROXY_READ_TIMEOUT: "120"
+      CLIENT_MAX_BODY_SIZE: 100m
+      VIRTUAL_HOST: ${SITE_DOMAIN}
+      LETSENCRYPT_HOST: ${SITE_DOMAIN}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+    networks:
+      - ems-network
+      - hanumatrix-erp_proxy
+    expose:
+      - "8080"
+    depends_on:
+      - ems-backend
+      - ems-websocket
+
+  ems-websocket:
+    image: ems-university:v1
+    container_name: ems-websocket
+    restart: unless-stopped
+    command: node /home/frappe/frappe-bench/apps/frappe/socketio.js
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-configurator:
+        condition: service_completed_successfully
+
+  ems-queue-short:
+    image: ems-university:v1
+    container_name: ems-queue-short
+    restart: unless-stopped
+    command: bench worker --queue short,default
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-configurator:
+        condition: service_completed_successfully
+
+  ems-queue-long:
+    image: ems-university:v1
+    container_name: ems-queue-long
+    restart: unless-stopped
+    command: bench worker --queue long,default,short
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-configurator:
+        condition: service_completed_successfully
+
+  ems-scheduler:
+    image: ems-university:v1
+    container_name: ems-scheduler
+    restart: unless-stopped
+    command: bench schedule
+    volumes:
+      - ems-sites:/home/frappe/frappe-bench/sites
+      - ems-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - ems-network
+    depends_on:
+      ems-configurator:
+        condition: service_completed_successfully
+
+volumes:
+  ems-db-data:
+  ems-sites:
+  ems-logs:
+
+networks:
+  ems-network:
+    name: ems-network
+    driver: bridge
+  hanumatrix-erp_proxy:
+    external: true

@@ -1,0 +1,307 @@
+{
+  "actions": [],
+  "autoname": "ACC-.YYYY.-.#####",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "accreditation_body",
+    "cycle_name",
+    "cycle_number",
+    "column_break_1",
+    "assessment_year",
+    "data_period_start",
+    "data_period_end",
+    "section_break_scope",
+    "scope_type",
+    "programs",
+    "departments",
+    "section_break_timeline",
+    "iiqa_submission_date",
+    "ssr_submission_deadline",
+    "peer_team_visit_date",
+    "column_break_2",
+    "ssr_submitted_date",
+    "visit_completed_date",
+    "result_date",
+    "section_break_team",
+    "coordinator",
+    "team_members",
+    "section_break_criteria",
+    "criteria",
+    "section_break_result",
+    "grade_obtained",
+    "cgpa_obtained",
+    "validity_period",
+    "column_break_3",
+    "valid_from",
+    "valid_until",
+    "certificate",
+    "section_break_status",
+    "status",
+    "overall_progress"
+  ],
+  "fields": [
+    {
+      "fieldname": "accreditation_body",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Accreditation Body",
+      "options": "\nNAAC\nNBA\nNIRF\nUGC\nAICTE\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "cycle_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Cycle Name",
+      "reqd": 1
+    },
+    {
+      "description": "1st, 2nd, 3rd cycle etc.",
+      "fieldname": "cycle_number",
+      "fieldtype": "Int",
+      "label": "Cycle Number"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assessment_year",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Assessment Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "data_period_start",
+      "fieldtype": "Date",
+      "label": "Data Period Start",
+      "reqd": 1
+    },
+    {
+      "fieldname": "data_period_end",
+      "fieldtype": "Date",
+      "label": "Data Period End",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_scope",
+      "fieldtype": "Section Break",
+      "label": "Scope"
+    },
+    {
+      "fieldname": "scope_type",
+      "fieldtype": "Select",
+      "label": "Scope Type",
+      "options": "\nInstitution Level\nProgram Level\nDepartment Level",
+      "reqd": 1
+    },
+    {
+      "depends_on": "eval:doc.scope_type == 'Program Level'",
+      "fieldname": "programs",
+      "fieldtype": "Table MultiSelect",
+      "label": "Programs (for NBA)",
+      "options": "Accreditation Program Link"
+    },
+    {
+      "depends_on": "eval:doc.scope_type == 'Department Level'",
+      "fieldname": "departments",
+      "fieldtype": "Table MultiSelect",
+      "label": "Departments",
+      "options": "Accreditation Department Link"
+    },
+    {
+      "fieldname": "section_break_timeline",
+      "fieldtype": "Section Break",
+      "label": "Timeline"
+    },
+    {
+      "fieldname": "iiqa_submission_date",
+      "fieldtype": "Date",
+      "label": "IIQA Submission Date"
+    },
+    {
+      "fieldname": "ssr_submission_deadline",
+      "fieldtype": "Date",
+      "label": "SSR Submission Deadline"
+    },
+    {
+      "fieldname": "peer_team_visit_date",
+      "fieldtype": "Date",
+      "label": "Peer Team Visit Date"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "ssr_submitted_date",
+      "fieldtype": "Date",
+      "label": "SSR Submitted Date"
+    },
+    {
+      "fieldname": "visit_completed_date",
+      "fieldtype": "Date",
+      "label": "Visit Completed Date"
+    },
+    {
+      "fieldname": "result_date",
+      "fieldtype": "Date",
+      "label": "Result Declaration Date"
+    },
+    {
+      "fieldname": "section_break_team",
+      "fieldtype": "Section Break",
+      "label": "Coordination Team"
+    },
+    {
+      "fieldname": "coordinator",
+      "fieldtype": "Link",
+      "label": "IQAC Coordinator / Nodal Officer",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "team_members",
+      "fieldtype": "Table",
+      "label": "Team Members",
+      "options": "Accreditation Team Member"
+    },
+    {
+      "fieldname": "section_break_criteria",
+      "fieldtype": "Section Break",
+      "label": "Criteria & Metrics"
+    },
+    {
+      "fieldname": "criteria",
+      "fieldtype": "Table",
+      "label": "Criteria",
+      "options": "Accreditation Criterion"
+    },
+    {
+      "fieldname": "section_break_result",
+      "fieldtype": "Section Break",
+      "label": "Result"
+    },
+    {
+      "description": "A++, A+, A, B++, etc.",
+      "fieldname": "grade_obtained",
+      "fieldtype": "Data",
+      "label": "Grade Obtained"
+    },
+    {
+      "fieldname": "cgpa_obtained",
+      "fieldtype": "Float",
+      "label": "CGPA Obtained",
+      "precision": "2"
+    },
+    {
+      "fieldname": "validity_period",
+      "fieldtype": "Int",
+      "label": "Validity Period (Years)"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "valid_from",
+      "fieldtype": "Date",
+      "label": "Valid From"
+    },
+    {
+      "fieldname": "valid_until",
+      "fieldtype": "Date",
+      "label": "Valid Until"
+    },
+    {
+      "fieldname": "certificate",
+      "fieldtype": "Attach",
+      "label": "Certificate"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Planning",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Planning\nData Collection\nSSR Preparation\nSSR Submitted\nPeer Team Visit Scheduled\nVisit Completed\nResult Awaited\nAccredited\nNot Accredited\nWithdrawn"
+    },
+    {
+      "fieldname": "overall_progress",
+      "fieldtype": "Percent",
+      "label": "Overall Progress",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Accreditation Cycle",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

@@ -1,0 +1,60 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ recipient_name or "Sir/Madam" }},</p>
+
+<p>A grievance has been escalated to your attention and requires immediate review.</p>
+
+<div style="background: #f8d7da; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #dc3545;">
+    <strong>Escalation Notice</strong>
+    <p style="margin: 10px 0 0 0;">This grievance has been escalated from Level {{ from_level }} to Level {{ to_level }} due to {{ escalation_reason or "SLA breach" }}.</p>
+</div>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 40%;">Grievance ID</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ grievance_id }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Subject</td>
+        <td style="padding: 10px;">{{ subject }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Category</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ category }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Priority</td>
+        <td style="padding: 10px;"><strong style="color: {% if priority == 'Urgent' %}#dc3545{% elif priority == 'High' %}#fd7e14{% else %}#007bff{% endif %};">{{ priority }}</strong></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Days Open</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ days_open }} days</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">SLA Status</td>
+        <td style="padding: 10px;"><strong style="color: #dc3545;">{{ sla_status }}</strong></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Previous Assignee</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ previous_assignee or "Not assigned" }}</td>
+    </tr>
+</table>
+
+<p><strong>Description:</strong></p>
+<div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
+    {{ description | truncate(500) }}
+</div>
+
+<p>Please review this grievance at your earliest convenience and take appropriate action.</p>
+
+<p style="margin-top: 20px;">
+    <a href="{{ grievance_link }}" style="background: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Review Grievance</a>
+</p>
+
+<p>
+    Best regards,<br>
+    Grievance Management System<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

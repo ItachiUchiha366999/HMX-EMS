@@ -1,0 +1,184 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Grade Entry") }} - {{ _("Faculty Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container faculty-portal">
+    <div class="portal-header">
+        <a href="/faculty-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("Grade Entry") }}</h2>
+    </div>
+
+    {% if not selected_assessment %}
+    <!-- Assessment Selection -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Assessments") }}</h3>
+
+        {% if pending_assessments %}
+        <div class="assessment-list">
+            {% for assessment in pending_assessments %}
+            <div class="assessment-item">
+                <div class="assessment-info">
+                    <h4>{{ assessment.assessment_name }}</h4>
+                    <p>{{ assessment.course }} | {{ assessment.student_group }}</p>
+                    <span class="date">{{ frappe.format_date(assessment.assessment_date) }}</span>
+                    <span class="max-marks">{{ _("Max") }}: {{ assessment.maximum_assessment_score }}</span>
+                </div>
+                <div class="assessment-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ (assessment.graded_count / assessment.student_count * 100) if assessment.student_count else 0 }}%"></div>
+                    </div>
+                    <span class="progress-text">{{ assessment.graded_count }}/{{ assessment.student_count }} {{ _("graded") }}</span>
+                </div>
+                <div class="assessment-action">
+                    <a href="/faculty-portal/grades?assessment={{ assessment.name }}" class="btn btn-sm btn-primary">
+                        {{ _("Enter Grades") }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No assessments pending grading") }}</p>
+        {% endif %}
+    </div>
+
+    {% else %}
+    <!-- Grade Entry Form -->
+    <div class="portal-section">
+        <div class="assessment-header">
+            <h3>{{ selected_assessment.assessment_name }}</h3>
+            <p>{{ selected_assessment.course }} | {{ selected_assessment.student_group }}</p>
+            <p>{{ frappe.format_date(selected_assessment.assessment_date) }} | {{ _("Maximum Marks") }}: {{ selected_assessment.maximum_assessment_score }}</p>
+        </div>
+
+        <!-- Grading Scale Reference -->
+        {% if grading_scale %}
+        <div class="grading-scale-ref">
+            <h4>{{ _("Grading Scale") }}</h4>
+            <div class="scale-items">
+                {% for grade in grading_scale %}
+                <span class="scale-item">{{ grade.grade_code }}: ≥{{ grade.threshold }}%</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Student Grade Entry -->
+        <div class="grade-entry-list">
+            <div class="grade-entry-header">
+                <span class="col-student">{{ _("Student") }}</span>
+                <span class="col-marks">{{ _("Obtained Marks") }}</span>
+                <span class="col-grade">{{ _("Grade") }}</span>
+            </div>
+
+            {% for student in students %}
+            <div class="grade-entry-row" data-student="{{ student.student }}">
+                <div class="col-student">
+                    <div class="student-avatar-sm">
+                        {% if student.image %}
+                        <img src="{{ student.image }}" alt="{{ student.student_name }}">
+                        {% else %}
+                        <div class="avatar-placeholder">{{ student.student_name[0] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="student-info">
+                        <span class="name">{{ student.student_name }}</span>
+                        <span class="id">{{ student.student }}</span>
+                    </div>
+                </div>
+                <div class="col-marks">
+                    <input type="number" class="form-control marks-input"
+                           name="marks_{{ student.student }}"
+                           value="{{ student.obtained_marks or '' }}"
+                           min="0" max="{{ selected_assessment.maximum_assessment_score }}"
+                           step="0.5"
+                           onchange="calculateGrade(this)">
+                </div>
+                <div class="col-grade">
+                    <span class="grade-display">{{ student.grade or '-' }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+            <a href="/faculty-portal/grades" class="btn btn-default">{{ _("Cancel") }}</a>
+            <button class="btn btn-primary" onclick="submitGrades()">
+                <svg class="icon icon-sm"><use href="#icon-check"></use></svg>
+                {{ _("Save Grades") }}
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+const maxMarks = {{ selected_assessment.maximum_assessment_score if selected_assessment else 0 }};
+const gradingScale = {{ grading_scale | tojson }};
+
+function calculateGrade(input) {
+    const marks = parseFloat($(input).val()) || 0;
+    const percentage = (marks / maxMarks) * 100;
+
+    let grade = '-';
+    for (const interval of gradingScale) {
+        if (percentage >= interval.threshold) {
+            grade = interval.grade_code;
+            break;
+        }
+    }
+
+    $(input).closest('.grade-entry-row').find('.grade-display').text(grade);
+}
+
+function submitGrades() {
+    const resultsData = [];
+
+    $('.grade-entry-row').each(function() {
+        const student = $(this).data('student');
+        const marks = $(this).find('.marks-input').val();
+
+        if (marks !== '') {
+            resultsData.push({
+                student: student,
+                obtained_marks: parseFloat(marks)
+            });
+        }
+    });
+
+    if (resultsData.length === 0) {
+        frappe.msgprint(__('Please enter marks for at least one student'));
+        return;
+    }
+
+    frappe.call({
+        method: 'university_erp.university_portals.www.faculty-portal.grades.submit_assessment_results',
+        args: {
+            assessment_plan: '{{ selected_assessment.name if selected_assessment else "" }}',
+            results_data: JSON.stringify(resultsData)
+        },
+        callback: function(r) {
+            if (r.message && r.message.success) {
+                frappe.msgprint({
+                    title: __('Success'),
+                    message: r.message.message,
+                    indicator: 'green'
+                });
+                setTimeout(() => window.location.href = '/faculty-portal/grades', 1500);
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

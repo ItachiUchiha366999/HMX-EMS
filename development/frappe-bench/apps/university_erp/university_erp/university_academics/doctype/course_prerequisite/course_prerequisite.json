@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "creation": "2025-12-31 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "prerequisite_course",
+  "prerequisite_course_name",
+  "is_mandatory"
+ ],
+ "fields": [
+  {
+   "fieldname": "prerequisite_course",
+   "fieldtype": "Link",
+   "label": "Prerequisite Course",
+   "options": "Course",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "prerequisite_course_name",
+   "fieldtype": "Data",
+   "label": "Course Name",
+   "fetch_from": "prerequisite_course.course_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_mandatory",
+   "fieldtype": "Check",
+   "label": "Is Mandatory",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-31 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "University Academics",
+ "name": "Course Prerequisite",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "permissions": []
+}

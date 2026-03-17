@@ -1,0 +1,713 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Bank Reconciliation{% endblock %}
+
+{% block head_include %}
+<style>
+    .reconciliation-container {
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .filter-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .filter-row {
+        display: flex;
+        gap: 20px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+    .filter-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+    .filter-group select,
+    .filter-group input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--control-bg);
+        color: var(--text-color);
+    }
+    .btn-fetch {
+        padding: 8px 24px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    .btn-fetch:hover {
+        background: var(--primary-dark);
+    }
+    .stats-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .stat-card {
+        flex: 1;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px 20px;
+        text-align: center;
+    }
+    .stat-value {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 5px;
+    }
+    .stat-card.matched .stat-value { color: #059669; }
+    .stat-card.pending .stat-value { color: #d97706; }
+    .stat-card.unmatched .stat-value { color: #dc2626; }
+    .reconciliation-panels {
+        display: flex;
+        gap: 20px;
+    }
+    .panel {
+        flex: 1;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: var(--control-bg);
+        border-bottom: 1px solid var(--border-color);
+    }
+    .panel-header h3 {
+        margin: 0;
+        font-size: 1rem;
+    }
+    .panel-body {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .transaction-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .transaction-item {
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .transaction-item:hover {
+        background: var(--control-bg);
+    }
+    .transaction-item.selected {
+        background: rgba(37, 99, 235, 0.1);
+        border-left: 3px solid var(--primary);
+    }
+    .transaction-item.matched {
+        background: rgba(5, 150, 105, 0.1);
+    }
+    .txn-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    .txn-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+    .txn-amount {
+        font-weight: 600;
+    }
+    .txn-amount.credit { color: #059669; }
+    .txn-amount.debit { color: #dc2626; }
+    .txn-description {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        margin-bottom: 5px;
+    }
+    .txn-reference {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    .match-status {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    .match-status.high { background: #d1fae5; color: #059669; }
+    .match-status.medium { background: #fef3c7; color: #d97706; }
+    .match-status.low { background: #fee2e2; color: #dc2626; }
+    .action-bar {
+        padding: 15px 20px;
+        background: var(--control-bg);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    .btn-action {
+        padding: 8px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        border: none;
+    }
+    .btn-reconcile {
+        background: #059669;
+        color: white;
+    }
+    .btn-reconcile:hover { background: #047857; }
+    .btn-reconcile:disabled {
+        background: var(--disabled-control-bg);
+        cursor: not-allowed;
+    }
+    .btn-import {
+        background: var(--primary);
+        color: white;
+    }
+    .btn-import:hover { background: var(--primary-dark); }
+    .btn-auto-match {
+        background: #7c3aed;
+        color: white;
+    }
+    .btn-auto-match:hover { background: #6d28d9; }
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-muted);
+    }
+    .suggested-matches {
+        margin-top: 20px;
+    }
+    .match-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .match-arrow {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+    }
+    .match-details {
+        flex: 1;
+    }
+    .confidence-bar {
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        margin-top: 8px;
+        overflow: hidden;
+    }
+    .confidence-fill {
+        height: 100%;
+        background: #059669;
+        border-radius: 2px;
+    }
+    .import-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+    .import-modal.show { display: flex; }
+    .modal-content {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+    }
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .modal-header h3 { margin: 0; }
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+    }
+    .file-upload {
+        border: 2px dashed var(--border-color);
+        border-radius: 8px;
+        padding: 40px;
+        text-align: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+    .file-upload:hover {
+        border-color: var(--primary);
+    }
+    .file-upload input {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="reconciliation-container">
+    <h1 style="margin-bottom: 20px;">Bank Reconciliation</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>Bank Account</label>
+                <select id="bank-account">
+                    <option value="">Select Bank Account</option>
+                    {% for account in bank_accounts %}
+                    <option value="{{ account.name }}">{{ account.account_name }} - {{ account.bank }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>From Date</label>
+                <input type="date" id="from-date" value="{{ frappe.utils.add_months(frappe.utils.today(), -1) }}">
+            </div>
+            <div class="filter-group">
+                <label>To Date</label>
+                <input type="date" id="to-date" value="{{ frappe.utils.today() }}">
+            </div>
+            <div>
+                <button class="btn-fetch" onclick="fetchData()">Fetch Transactions</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-value" id="total-bank-txns">0</div>
+            <div class="stat-label">Bank Transactions</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="total-system-entries">0</div>
+            <div class="stat-label">System Entries</div>
+        </div>
+        <div class="stat-card matched">
+            <div class="stat-value" id="matched-count">0</div>
+            <div class="stat-label">Matched</div>
+        </div>
+        <div class="stat-card pending">
+            <div class="stat-value" id="pending-count">0</div>
+            <div class="stat-label">Pending Match</div>
+        </div>
+        <div class="stat-card unmatched">
+            <div class="stat-value" id="unmatched-count">0</div>
+            <div class="stat-label">Unmatched</div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+        <button class="btn-action btn-import" onclick="showImportModal()">
+            Import Statement
+        </button>
+        <button class="btn-action btn-auto-match" onclick="autoMatch()">
+            Auto Match
+        </button>
+        <button class="btn-action btn-reconcile" id="btn-reconcile-selected" onclick="reconcileSelected()" disabled>
+            Reconcile Selected
+        </button>
+    </div>
+
+    <!-- Reconciliation Panels -->
+    <div class="reconciliation-panels">
+        <!-- Bank Transactions Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                <h3>Bank Transactions</h3>
+                <span class="badge" id="bank-txn-count">0</span>
+            </div>
+            <div class="panel-body">
+                <ul class="transaction-list" id="bank-transactions">
+                    <li class="empty-state">Select a bank account and date range to load transactions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- System Entries Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                <h3>System Entries</h3>
+                <span class="badge" id="system-entry-count">0</span>
+            </div>
+            <div class="panel-body">
+                <ul class="transaction-list" id="system-entries">
+                    <li class="empty-state">Select a bank account and date range to load entries</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suggested Matches Section -->
+    <div class="suggested-matches" id="suggested-matches" style="display: none;">
+        <h3 style="margin-bottom: 15px;">Suggested Matches</h3>
+        <div id="matches-list"></div>
+    </div>
+</div>
+
+<!-- Import Modal -->
+<div class="import-modal" id="import-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Import Bank Statement</h3>
+            <button class="modal-close" onclick="hideImportModal()">&times;</button>
+        </div>
+        <div class="filter-group" style="margin-bottom: 15px;">
+            <label>Bank Format</label>
+            <select id="bank-format">
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="sbi">SBI</option>
+                <option value="axis">Axis Bank</option>
+                <option value="generic">Generic CSV</option>
+            </select>
+        </div>
+        <div class="file-upload" onclick="document.getElementById('statement-file').click()">
+            <input type="file" id="statement-file" accept=".csv,.xlsx" onchange="handleFileSelect(this)">
+            <p id="file-name">Click to select or drag a file here</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Supports CSV and Excel files</p>
+        </div>
+        <button class="btn-action btn-import" style="width: 100%;" onclick="importStatement()">
+            Import Statement
+        </button>
+    </div>
+</div>
+
+<script>
+    let bankTransactions = [];
+    let systemEntries = [];
+    let suggestedMatches = [];
+    let selectedBankTxn = null;
+    let selectedSystemEntry = null;
+
+    function fetchData() {
+        const bankAccount = document.getElementById('bank-account').value;
+        const fromDate = document.getElementById('from-date').value;
+        const toDate = document.getElementById('to-date').value;
+
+        if (!bankAccount) {
+            frappe.msgprint('Please select a bank account');
+            return;
+        }
+
+        frappe.call({
+            method: 'university_erp.university_payments.bank_reconciliation.get_reconciliation_data',
+            args: {
+                bank_account: bankAccount,
+                from_date: fromDate,
+                to_date: toDate
+            },
+            callback: function(r) {
+                if (r.message) {
+                    bankTransactions = r.message.bank_transactions || [];
+                    systemEntries = r.message.system_entries || [];
+                    suggestedMatches = r.message.suggested_matches || [];
+
+                    renderBankTransactions();
+                    renderSystemEntries();
+                    renderSuggestedMatches();
+                    updateStats();
+                }
+            }
+        });
+    }
+
+    function renderBankTransactions() {
+        const list = document.getElementById('bank-transactions');
+        if (bankTransactions.length === 0) {
+            list.innerHTML = '<li class="empty-state">No unreconciled bank transactions found</li>';
+            return;
+        }
+
+        list.innerHTML = bankTransactions.map(txn => `
+            <li class="transaction-item ${txn.status === 'Reconciled' ? 'matched' : ''}"
+                data-name="${txn.name}"
+                onclick="selectBankTransaction('${txn.name}')">
+                <div class="txn-header">
+                    <span class="txn-date">${txn.date}</span>
+                    <span class="txn-amount ${txn.deposit > 0 ? 'credit' : 'debit'}">
+                        ${txn.deposit > 0 ? '+' : '-'} ${formatCurrency(txn.deposit || txn.withdrawal)}
+                    </span>
+                </div>
+                <div class="txn-description">${txn.description || 'No description'}</div>
+                <div class="txn-reference">Ref: ${txn.reference_number || '-'}</div>
+            </li>
+        `).join('');
+
+        document.getElementById('bank-txn-count').textContent = bankTransactions.length;
+    }
+
+    function renderSystemEntries() {
+        const list = document.getElementById('system-entries');
+        if (systemEntries.length === 0) {
+            list.innerHTML = '<li class="empty-state">No uncleared payment entries found</li>';
+            return;
+        }
+
+        list.innerHTML = systemEntries.map(entry => `
+            <li class="transaction-item"
+                data-name="${entry.name}"
+                onclick="selectSystemEntry('${entry.name}')">
+                <div class="txn-header">
+                    <span class="txn-date">${entry.posting_date}</span>
+                    <span class="txn-amount ${entry.payment_type === 'Receive' ? 'credit' : 'debit'}">
+                        ${entry.payment_type === 'Receive' ? '+' : '-'} ${formatCurrency(entry.paid_amount)}
+                    </span>
+                </div>
+                <div class="txn-description">${entry.party_name || entry.party || 'Unknown'}</div>
+                <div class="txn-reference">Ref: ${entry.reference_no || '-'} | ${entry.mode_of_payment || ''}</div>
+            </li>
+        `).join('');
+
+        document.getElementById('system-entry-count').textContent = systemEntries.length;
+    }
+
+    function renderSuggestedMatches() {
+        const container = document.getElementById('suggested-matches');
+        const list = document.getElementById('matches-list');
+
+        if (suggestedMatches.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.style.display = 'block';
+        list.innerHTML = suggestedMatches.map(match => {
+            const bankTxn = bankTransactions.find(t => t.name === match.bank_transaction);
+            const sysEntry = systemEntries.find(e => e.name === match.payment_entry);
+
+            if (!bankTxn || !sysEntry) return '';
+
+            const confidenceClass = match.confidence >= 80 ? 'high' : (match.confidence >= 50 ? 'medium' : 'low');
+
+            return `
+                <div class="match-card">
+                    <div class="match-details">
+                        <strong>${bankTxn.description || 'Bank Transaction'}</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">
+                            ${bankTxn.date} | ${formatCurrency(bankTxn.deposit || bankTxn.withdrawal)}
+                        </div>
+                    </div>
+                    <div class="match-arrow">→</div>
+                    <div class="match-details">
+                        <strong>${sysEntry.party_name || sysEntry.name}</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">
+                            ${sysEntry.posting_date} | ${formatCurrency(sysEntry.paid_amount)}
+                        </div>
+                    </div>
+                    <div style="text-align: center; min-width: 100px;">
+                        <span class="match-status ${confidenceClass}">${match.confidence}% Match</span>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${match.confidence}%"></div>
+                        </div>
+                    </div>
+                    <button class="btn-action btn-reconcile" style="padding: 6px 12px; font-size: 0.85rem;"
+                            onclick="reconcileMatch('${match.bank_transaction}', '${match.payment_entry}')">
+                        Reconcile
+                    </button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function updateStats() {
+        document.getElementById('total-bank-txns').textContent = bankTransactions.length;
+        document.getElementById('total-system-entries').textContent = systemEntries.length;
+
+        const matched = bankTransactions.filter(t => t.status === 'Reconciled').length;
+        const pending = suggestedMatches.length;
+        const unmatched = bankTransactions.length - matched - pending;
+
+        document.getElementById('matched-count').textContent = matched;
+        document.getElementById('pending-count').textContent = pending;
+        document.getElementById('unmatched-count').textContent = Math.max(0, unmatched);
+    }
+
+    function selectBankTransaction(name) {
+        selectedBankTxn = name;
+        document.querySelectorAll('#bank-transactions .transaction-item').forEach(el => {
+            el.classList.remove('selected');
+            if (el.dataset.name === name) el.classList.add('selected');
+        });
+        updateReconcileButton();
+    }
+
+    function selectSystemEntry(name) {
+        selectedSystemEntry = name;
+        document.querySelectorAll('#system-entries .transaction-item').forEach(el => {
+            el.classList.remove('selected');
+            if (el.dataset.name === name) el.classList.add('selected');
+        });
+        updateReconcileButton();
+    }
+
+    function updateReconcileButton() {
+        const btn = document.getElementById('btn-reconcile-selected');
+        btn.disabled = !(selectedBankTxn && selectedSystemEntry);
+    }
+
+    function reconcileSelected() {
+        if (!selectedBankTxn || !selectedSystemEntry) return;
+
+        reconcileMatch(selectedBankTxn, selectedSystemEntry);
+    }
+
+    function reconcileMatch(bankTxn, paymentEntry) {
+        frappe.call({
+            method: 'university_erp.university_payments.bank_reconciliation.manual_reconcile',
+            args: {
+                bank_transaction: bankTxn,
+                payment_entry: paymentEntry
+            },
+            callback: function(r) {
+                if (r.message && r.message.success) {
+                    frappe.show_alert({message: 'Reconciliation successful', indicator: 'green'});
+                    fetchData(); // Refresh data
+                    selectedBankTxn = null;
+                    selectedSystemEntry = null;
+                    updateReconcileButton();
+                } else {
+                    frappe.msgprint(r.message?.error || 'Reconciliation failed');
+                }
+            }
+        });
+    }
+
+    function autoMatch() {
+        const bankAccount = document.getElementById('bank-account').value;
+        if (!bankAccount) {
+            frappe.msgprint('Please select a bank account first');
+            return;
+        }
+
+        frappe.call({
+            method: 'university_erp.university_payments.bank_reconciliation.auto_reconcile',
+            args: {
+                bank_account: bankAccount,
+                from_date: document.getElementById('from-date').value,
+                to_date: document.getElementById('to-date').value
+            },
+            callback: function(r) {
+                if (r.message) {
+                    frappe.show_alert({
+                        message: `Auto-matched ${r.message.matched} transactions`,
+                        indicator: 'green'
+                    });
+                    fetchData(); // Refresh data
+                }
+            }
+        });
+    }
+
+    function showImportModal() {
+        document.getElementById('import-modal').classList.add('show');
+    }
+
+    function hideImportModal() {
+        document.getElementById('import-modal').classList.remove('show');
+    }
+
+    function handleFileSelect(input) {
+        if (input.files.length > 0) {
+            document.getElementById('file-name').textContent = input.files[0].name;
+        }
+    }
+
+    function importStatement() {
+        const fileInput = document.getElementById('statement-file');
+        const bankAccount = document.getElementById('bank-account').value;
+        const bankFormat = document.getElementById('bank-format').value;
+
+        if (!bankAccount) {
+            frappe.msgprint('Please select a bank account first');
+            return;
+        }
+
+        if (!fileInput.files.length) {
+            frappe.msgprint('Please select a file to import');
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            frappe.call({
+                method: 'university_erp.university_payments.bank_reconciliation.import_statement_data',
+                args: {
+                    bank_account: bankAccount,
+                    bank_format: bankFormat,
+                    file_content: e.target.result
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.show_alert({
+                            message: `Imported ${r.message.created} transactions (${r.message.duplicates} duplicates skipped)`,
+                            indicator: 'green'
+                        });
+                        hideImportModal();
+                        fetchData(); // Refresh data
+                    }
+                }
+            });
+        };
+
+        reader.readAsText(file);
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            minimumFractionDigits: 2
+        }).format(amount || 0);
+    }
+
+    // Close modal on outside click
+    document.getElementById('import-modal').addEventListener('click', function(e) {
+        if (e.target === this) hideImportModal();
+    });
+</script>
+{% endblock %}

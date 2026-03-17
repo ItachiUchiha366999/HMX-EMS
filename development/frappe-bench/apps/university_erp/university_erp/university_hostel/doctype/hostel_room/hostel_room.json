@@ -1,0 +1,279 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{hostel_building}-{room_number}",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "hostel_building",
+    "room_number",
+    "floor",
+    "room_type",
+    "column_break_1",
+    "capacity",
+    "occupied_beds",
+    "available_beds",
+    "status",
+    "occupants_section",
+    "occupants",
+    "pricing_section",
+    "rent_per_month",
+    "rent_per_semester",
+    "security_deposit",
+    "amenities_section",
+    "has_attached_bathroom",
+    "has_ac",
+    "has_balcony",
+    "column_break_amenities",
+    "has_study_table",
+    "has_wardrobe",
+    "has_hot_water",
+    "furniture_condition",
+    "maintenance_section",
+    "last_maintenance_date",
+    "next_maintenance_due",
+    "maintenance_remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "hostel_building",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Hostel Building",
+      "options": "Hostel Building",
+      "reqd": 1
+    },
+    {
+      "fieldname": "room_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Room Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "floor",
+      "fieldtype": "Int",
+      "in_standard_filter": 1,
+      "label": "Floor"
+    },
+    {
+      "default": "Double",
+      "fieldname": "room_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Room Type",
+      "options": "Single\nDouble\nTriple\nDormitory"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "2",
+      "fieldname": "capacity",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Capacity",
+      "reqd": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "occupied_beds",
+      "fieldtype": "Int",
+      "label": "Occupied Beds",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "available_beds",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Available Beds",
+      "read_only": 1
+    },
+    {
+      "default": "Available",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Available\nPartially Occupied\nFully Occupied\nUnder Maintenance"
+    },
+    {
+      "fieldname": "occupants_section",
+      "fieldtype": "Section Break",
+      "label": "Current Occupants"
+    },
+    {
+      "fieldname": "occupants",
+      "fieldtype": "Table",
+      "label": "Occupants",
+      "options": "Hostel Room Occupant"
+    },
+    {
+      "fieldname": "pricing_section",
+      "fieldtype": "Section Break",
+      "label": "Pricing"
+    },
+    {
+      "fieldname": "rent_per_month",
+      "fieldtype": "Currency",
+      "label": "Rent per Month"
+    },
+    {
+      "fieldname": "rent_per_semester",
+      "fieldtype": "Currency",
+      "label": "Rent per Semester"
+    },
+    {
+      "fieldname": "security_deposit",
+      "fieldtype": "Currency",
+      "label": "Security Deposit"
+    },
+    {
+      "fieldname": "amenities_section",
+      "fieldtype": "Section Break",
+      "label": "Amenities"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_attached_bathroom",
+      "fieldtype": "Check",
+      "label": "Attached Bathroom"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_ac",
+      "fieldtype": "Check",
+      "label": "Air Conditioned"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_balcony",
+      "fieldtype": "Check",
+      "label": "Balcony"
+    },
+    {
+      "fieldname": "column_break_amenities",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "has_study_table",
+      "fieldtype": "Check",
+      "label": "Study Table"
+    },
+    {
+      "default": "1",
+      "fieldname": "has_wardrobe",
+      "fieldtype": "Check",
+      "label": "Wardrobe"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_hot_water",
+      "fieldtype": "Check",
+      "label": "Hot Water"
+    },
+    {
+      "fieldname": "furniture_condition",
+      "fieldtype": "Select",
+      "label": "Furniture Condition",
+      "options": "\nExcellent\nGood\nFair\nPoor"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "maintenance_section",
+      "fieldtype": "Section Break",
+      "label": "Maintenance"
+    },
+    {
+      "fieldname": "last_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Last Maintenance Date"
+    },
+    {
+      "fieldname": "next_maintenance_due",
+      "fieldtype": "Date",
+      "label": "Next Maintenance Due"
+    },
+    {
+      "fieldname": "maintenance_remarks",
+      "fieldtype": "Small Text",
+      "label": "Maintenance Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Hostel Allocation",
+      "link_fieldname": "room"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Room",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "hostel_building, room_number, room_type, status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

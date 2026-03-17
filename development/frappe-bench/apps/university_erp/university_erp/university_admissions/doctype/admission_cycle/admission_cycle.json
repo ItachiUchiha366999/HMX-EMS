@@ -1,0 +1,202 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:cycle_name",
+  "creation": "2025-12-31 14:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "cycle_name",
+    "cycle_code",
+    "academic_year",
+    "column_break_2",
+    "status",
+    "section_break_3",
+    "application_start_date",
+    "application_deadline",
+    "column_break_6",
+    "counseling_start_date",
+    "admission_deadline",
+    "programs_section",
+    "programs",
+    "settings_section",
+    "allow_online_application",
+    "entrance_exam_required",
+    "column_break_12",
+    "min_age",
+    "max_age"
+  ],
+  "fields": [
+    {
+      "fieldname": "cycle_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Cycle Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "cycle_code",
+      "fieldtype": "Data",
+      "label": "Cycle Code",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Upcoming",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Upcoming\nOpen\nClosed\nCompleted",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_3",
+      "fieldtype": "Section Break",
+      "label": "Important Dates"
+    },
+    {
+      "fieldname": "application_start_date",
+      "fieldtype": "Date",
+      "label": "Application Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "application_deadline",
+      "fieldtype": "Date",
+      "label": "Application Deadline",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_6",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "counseling_start_date",
+      "fieldtype": "Date",
+      "label": "Counseling Start Date"
+    },
+    {
+      "fieldname": "admission_deadline",
+      "fieldtype": "Date",
+      "label": "Admission Deadline"
+    },
+    {
+      "fieldname": "programs_section",
+      "fieldtype": "Section Break",
+      "label": "Programs"
+    },
+    {
+      "fieldname": "programs",
+      "fieldtype": "Table",
+      "label": "Programs",
+      "options": "Admission Cycle Program"
+    },
+    {
+      "fieldname": "settings_section",
+      "fieldtype": "Section Break",
+      "label": "Settings"
+    },
+    {
+      "default": "1",
+      "fieldname": "allow_online_application",
+      "fieldtype": "Check",
+      "label": "Allow Online Application"
+    },
+    {
+      "default": "0",
+      "fieldname": "entrance_exam_required",
+      "fieldtype": "Check",
+      "label": "Entrance Exam Required"
+    },
+    {
+      "fieldname": "column_break_12",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "min_age",
+      "fieldtype": "Int",
+      "label": "Minimum Age"
+    },
+    {
+      "fieldname": "max_age",
+      "fieldtype": "Int",
+      "label": "Maximum Age"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-12-31 14:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Admissions",
+  "name": "Admission Cycle",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

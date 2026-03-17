@@ -1,0 +1,354 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{program}-{academic_year}-POATT",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "program_section",
+    "program",
+    "program_name",
+    "department",
+    "column_break_year",
+    "academic_year",
+    "batch",
+    "calculation_date",
+    "section_break_prepared",
+    "prepared_by",
+    "status",
+    "section_break_direct",
+    "direct_po_attainment",
+    "section_break_direct_summary",
+    "direct_weight",
+    "column_break_direct_avg",
+    "avg_direct_attainment",
+    "section_break_indirect",
+    "indirect_po_attainment",
+    "section_break_indirect_summary",
+    "indirect_weight",
+    "column_break_indirect_avg",
+    "avg_indirect_attainment",
+    "section_break_final",
+    "final_po_attainment",
+    "section_break_summary",
+    "overall_attainment",
+    "pos_achieved",
+    "column_break_summary",
+    "total_pos",
+    "psos_achieved",
+    "total_psos",
+    "section_break_nba",
+    "nba_compliance_score",
+    "naac_compliance_score",
+    "section_break_remarks",
+    "summary_remarks",
+    "action_plan",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "program_section",
+      "fieldtype": "Section Break",
+      "label": "Program Information"
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "program.program_name",
+      "fieldname": "program_name",
+      "fieldtype": "Data",
+      "label": "Program Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "program.department",
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_year",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "batch",
+      "fieldtype": "Link",
+      "label": "Batch",
+      "options": "Student Batch Name"
+    },
+    {
+      "default": "Today",
+      "fieldname": "calculation_date",
+      "fieldtype": "Date",
+      "label": "Calculation Date"
+    },
+    {
+      "fieldname": "section_break_prepared",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "prepared_by",
+      "fieldtype": "Link",
+      "label": "Prepared By",
+      "options": "Employee"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nCalculated\nSubmitted\nCancelled",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_direct",
+      "fieldtype": "Section Break",
+      "label": "Direct PO Attainment (From CO Attainments)"
+    },
+    {
+      "fieldname": "direct_po_attainment",
+      "fieldtype": "Table",
+      "label": "Direct PO Attainment",
+      "options": "PO Attainment Entry"
+    },
+    {
+      "fieldname": "section_break_direct_summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "default": "80",
+      "fieldname": "direct_weight",
+      "fieldtype": "Percent",
+      "label": "Direct Weight"
+    },
+    {
+      "fieldname": "column_break_direct_avg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_direct_attainment",
+      "fieldtype": "Float",
+      "label": "Avg Direct Attainment",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_indirect",
+      "fieldtype": "Section Break",
+      "label": "Indirect PO Attainment (From Surveys)"
+    },
+    {
+      "fieldname": "indirect_po_attainment",
+      "fieldtype": "Table",
+      "label": "Indirect PO Attainment",
+      "options": "PO Indirect Entry"
+    },
+    {
+      "fieldname": "section_break_indirect_summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "default": "20",
+      "fieldname": "indirect_weight",
+      "fieldtype": "Percent",
+      "label": "Indirect Weight"
+    },
+    {
+      "fieldname": "column_break_indirect_avg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_indirect_attainment",
+      "fieldtype": "Float",
+      "label": "Avg Indirect Attainment",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_final",
+      "fieldtype": "Section Break",
+      "label": "Final PO Attainment"
+    },
+    {
+      "fieldname": "final_po_attainment",
+      "fieldtype": "Table",
+      "label": "Final PO Attainment",
+      "options": "PO Final Entry"
+    },
+    {
+      "fieldname": "section_break_summary",
+      "fieldtype": "Section Break",
+      "label": "Overall Summary"
+    },
+    {
+      "default": "0",
+      "fieldname": "overall_attainment",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "label": "Overall PO Attainment",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "pos_achieved",
+      "fieldtype": "Int",
+      "label": "POs Achieved",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_summary",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_pos",
+      "fieldtype": "Int",
+      "label": "Total POs",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "psos_achieved",
+      "fieldtype": "Int",
+      "label": "PSOs Achieved",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_psos",
+      "fieldtype": "Int",
+      "label": "Total PSOs",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_nba",
+      "fieldtype": "Section Break",
+      "label": "Accreditation Compliance"
+    },
+    {
+      "default": "0",
+      "description": "Percentage compliance with NBA Graduate Attributes",
+      "fieldname": "nba_compliance_score",
+      "fieldtype": "Percent",
+      "label": "NBA Compliance Score",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Percentage compliance with NAAC criteria",
+      "fieldname": "naac_compliance_score",
+      "fieldtype": "Percent",
+      "label": "NAAC Compliance Score",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_remarks",
+      "fieldtype": "Section Break",
+      "label": "Summary & Action Plan"
+    },
+    {
+      "fieldname": "summary_remarks",
+      "fieldtype": "Text Editor",
+      "label": "Summary Remarks"
+    },
+    {
+      "fieldname": "action_plan",
+      "fieldtype": "Text Editor",
+      "label": "Action Plan for Improvement"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "PO Attainment",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "PO Attainment",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

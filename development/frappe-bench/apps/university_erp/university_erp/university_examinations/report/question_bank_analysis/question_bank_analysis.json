@@ -1,0 +1,14 @@
+{
+  "name": "Question Bank Analysis",
+  "doctype": "Report",
+  "ref_doctype": "Question Bank",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "University Examinations",
+  "roles": [
+    {"role": "System Manager"},
+    {"role": "Instructor"},
+    {"role": "HOD"},
+    {"role": "Examination Controller"}
+  ]
+}

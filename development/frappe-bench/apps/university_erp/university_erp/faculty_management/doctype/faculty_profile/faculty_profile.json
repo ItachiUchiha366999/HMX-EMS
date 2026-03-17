@@ -1,0 +1,275 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:FAC-{employee_number}",
+  "creation": "2026-01-01 00:00:00",
+  "doctype": "DocType",
+  "document_type": "Document",
+  "engine": "InnoDB",
+  "field_order": [
+    "employee",
+    "employee_name",
+    "employee_number",
+    "department",
+    "designation",
+    "section_break_1",
+    "qualifications",
+    "specialization",
+    "date_of_joining",
+    "column_break_1",
+    "teaching_experience_years",
+    "research_experience_years",
+    "is_phd_guide",
+    "section_break_2",
+    "h_index",
+    "total_publications",
+    "column_break_2",
+    "scopus_publications",
+    "total_citations",
+    "section_break_3",
+    "publications",
+    "section_break_4",
+    "research_projects",
+    "section_break_5",
+    "awards",
+    "section_break_6",
+    "current_workload_hours"
+  ],
+  "fields": [
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "fieldtype": "Data",
+      "label": "Employee Name",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "employee_number",
+      "fieldtype": "Data",
+      "label": "Employee Number",
+      "fetch_from": "employee.name",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department",
+      "fetch_from": "employee.department",
+      "read_only": 1
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Link",
+      "label": "Designation",
+      "options": "Designation",
+      "fetch_from": "employee.designation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_1",
+      "fieldtype": "Section Break",
+      "label": "Academic Information"
+    },
+    {
+      "fieldname": "qualifications",
+      "fieldtype": "Table",
+      "label": "Qualifications",
+      "options": "Employee Qualification"
+    },
+    {
+      "fieldname": "specialization",
+      "fieldtype": "Data",
+      "label": "Specialization"
+    },
+    {
+      "fieldname": "date_of_joining",
+      "fieldtype": "Date",
+      "label": "Date of Joining",
+      "fetch_from": "employee.date_of_joining"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "teaching_experience_years",
+      "fieldtype": "Int",
+      "label": "Teaching Experience (Years)"
+    },
+    {
+      "fieldname": "research_experience_years",
+      "fieldtype": "Int",
+      "label": "Research Experience (Years)"
+    },
+    {
+      "fieldname": "is_phd_guide",
+      "fieldtype": "Check",
+      "label": "PhD Guide"
+    },
+    {
+      "fieldname": "section_break_2",
+      "fieldtype": "Section Break",
+      "label": "Research Metrics"
+    },
+    {
+      "fieldname": "h_index",
+      "fieldtype": "Int",
+      "label": "H-Index",
+      "default": "0"
+    },
+    {
+      "fieldname": "total_publications",
+      "fieldtype": "Int",
+      "label": "Total Publications",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "scopus_publications",
+      "fieldtype": "Int",
+      "label": "Scopus Indexed Publications",
+      "default": "0"
+    },
+    {
+      "fieldname": "total_citations",
+      "fieldtype": "Int",
+      "label": "Total Citations",
+      "default": "0"
+    },
+    {
+      "fieldname": "section_break_3",
+      "fieldtype": "Section Break",
+      "label": "Publications"
+    },
+    {
+      "fieldname": "publications",
+      "fieldtype": "Table",
+      "label": "Publications",
+      "options": "Faculty Publication"
+    },
+    {
+      "fieldname": "section_break_4",
+      "fieldtype": "Section Break",
+      "label": "Research Projects"
+    },
+    {
+      "fieldname": "research_projects",
+      "fieldtype": "Table",
+      "label": "Research Projects",
+      "options": "Faculty Research Project"
+    },
+    {
+      "fieldname": "section_break_5",
+      "fieldtype": "Section Break",
+      "label": "Awards & Recognition"
+    },
+    {
+      "fieldname": "awards",
+      "fieldtype": "Table",
+      "label": "Awards",
+      "options": "Faculty Award"
+    },
+    {
+      "fieldname": "section_break_6",
+      "fieldtype": "Section Break",
+      "label": "Current Workload"
+    },
+    {
+      "fieldname": "current_workload_hours",
+      "fieldtype": "Float",
+      "label": "Current Workload (Hours/Week)",
+      "read_only": 1,
+      "precision": "2"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-01-01 00:00:00",
+  "modified_by": "Administrator",
+  "module": "Faculty Management",
+  "name": "Faculty Profile",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HR Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

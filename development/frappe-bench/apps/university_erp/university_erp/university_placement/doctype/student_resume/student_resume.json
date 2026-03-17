@@ -1,0 +1,315 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{student}-Resume",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "student_section",
+    "student",
+    "student_name",
+    "email",
+    "column_break_1",
+    "phone",
+    "program",
+    "current_semester",
+    "profile_section",
+    "career_objective",
+    "linkedin_url",
+    "github_url",
+    "column_break_2",
+    "portfolio_url",
+    "resume_file",
+    "education_section",
+    "education",
+    "skills_section",
+    "skills",
+    "projects_section",
+    "projects",
+    "experience_section",
+    "work_experience",
+    "certifications_section",
+    "certifications",
+    "achievements_section",
+    "achievements",
+    "extra_curricular",
+    "status_section",
+    "status",
+    "last_updated",
+    "verified_by",
+    "verification_date"
+  ],
+  "fields": [
+    {
+      "fieldname": "student_section",
+      "fieldtype": "Section Break",
+      "label": "Student Information"
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fetch_from": "student.first_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.student_email_id",
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "student.student_mobile_number",
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.program",
+      "fieldname": "program",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "read_only": 1
+    },
+    {
+      "fieldname": "current_semester",
+      "fieldtype": "Int",
+      "label": "Current Semester"
+    },
+    {
+      "fieldname": "profile_section",
+      "fieldtype": "Section Break",
+      "label": "Profile"
+    },
+    {
+      "fieldname": "career_objective",
+      "fieldtype": "Small Text",
+      "label": "Career Objective"
+    },
+    {
+      "fieldname": "linkedin_url",
+      "fieldtype": "Data",
+      "label": "LinkedIn URL",
+      "options": "URL"
+    },
+    {
+      "fieldname": "github_url",
+      "fieldtype": "Data",
+      "label": "GitHub URL",
+      "options": "URL"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "portfolio_url",
+      "fieldtype": "Data",
+      "label": "Portfolio URL",
+      "options": "URL"
+    },
+    {
+      "fieldname": "resume_file",
+      "fieldtype": "Attach",
+      "label": "Resume PDF"
+    },
+    {
+      "fieldname": "education_section",
+      "fieldtype": "Section Break",
+      "label": "Education"
+    },
+    {
+      "fieldname": "education",
+      "fieldtype": "Table",
+      "label": "Educational Qualifications",
+      "options": "Resume Education"
+    },
+    {
+      "fieldname": "skills_section",
+      "fieldtype": "Section Break",
+      "label": "Skills"
+    },
+    {
+      "fieldname": "skills",
+      "fieldtype": "Table",
+      "label": "Skills",
+      "options": "Resume Skill"
+    },
+    {
+      "fieldname": "projects_section",
+      "fieldtype": "Section Break",
+      "label": "Projects"
+    },
+    {
+      "fieldname": "projects",
+      "fieldtype": "Table",
+      "label": "Projects",
+      "options": "Resume Project"
+    },
+    {
+      "fieldname": "experience_section",
+      "fieldtype": "Section Break",
+      "label": "Work Experience"
+    },
+    {
+      "fieldname": "work_experience",
+      "fieldtype": "Text Editor",
+      "label": "Work Experience"
+    },
+    {
+      "fieldname": "certifications_section",
+      "fieldtype": "Section Break",
+      "label": "Certifications"
+    },
+    {
+      "fieldname": "certifications",
+      "fieldtype": "Text Editor",
+      "label": "Certifications"
+    },
+    {
+      "fieldname": "achievements_section",
+      "fieldtype": "Section Break",
+      "label": "Achievements & Extra-Curricular"
+    },
+    {
+      "fieldname": "achievements",
+      "fieldtype": "Text Editor",
+      "label": "Achievements"
+    },
+    {
+      "fieldname": "extra_curricular",
+      "fieldtype": "Text Editor",
+      "label": "Extra-Curricular Activities"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nSubmitted\nVerified\nRejected"
+    },
+    {
+      "fieldname": "last_updated",
+      "fieldtype": "Datetime",
+      "label": "Last Updated",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_by",
+      "fieldtype": "Link",
+      "label": "Verified By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verification_date",
+      "fieldtype": "Date",
+      "label": "Verification Date",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Placement",
+  "name": "Student Resume",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Placement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "student_name",
+  "track_changes": 1
+}

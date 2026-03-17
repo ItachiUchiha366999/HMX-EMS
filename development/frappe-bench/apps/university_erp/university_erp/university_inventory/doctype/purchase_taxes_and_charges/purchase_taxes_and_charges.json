@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "creation": "2026-01-14 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "charge_type",
+  "row_id",
+  "account_head",
+  "column_break_1",
+  "description",
+  "rate",
+  "tax_amount",
+  "total",
+  "add_deduct_tax"
+ ],
+ "fields": [
+  {
+   "default": "On Net Total",
+   "fieldname": "charge_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Actual\nOn Net Total\nOn Previous Row Amount\nOn Previous Row Total",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:in_list(['On Previous Row Amount', 'On Previous Row Total'], doc.charge_type)",
+   "fieldname": "row_id",
+   "fieldtype": "Data",
+   "label": "Row ID"
+  },
+  {
+   "fieldname": "account_head",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Account Head",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "rate",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Rate"
+  },
+  {
+   "default": "0",
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Tax Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "default": "Add",
+   "fieldname": "add_deduct_tax",
+   "fieldtype": "Select",
+   "label": "Add or Deduct",
+   "options": "Add\nDeduct"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-14 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "University Inventory",
+ "name": "Purchase Taxes and Charges",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

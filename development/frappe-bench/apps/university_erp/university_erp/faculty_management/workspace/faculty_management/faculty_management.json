@@ -1,0 +1,185 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"hr_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Faculty Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_employee\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"shortcut_faculty\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Faculty Profile\",\"col\":3}},{\"id\":\"shortcut_teaching\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Teaching Assignment\",\"col\":3}},{\"id\":\"shortcut_leave\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Application\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_hr\",\"type\":\"card\",\"data\":{\"card_name\":\"HR Management\",\"col\":4}},{\"id\":\"card_performance\",\"type\":\"card\",\"data\":{\"card_name\":\"Performance & Feedback\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-01 00:00:00",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "users",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "Faculty Management",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "HR Management",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Employee",
+      "link_count": 0,
+      "link_to": "Employee",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Faculty Profile",
+      "link_count": 0,
+      "link_to": "Faculty Profile",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Teaching Assignment",
+      "link_count": 0,
+      "link_to": "Teaching Assignment",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Leave Application",
+      "link_count": 0,
+      "link_to": "Leave Application",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Workload Distributor",
+      "link_count": 0,
+      "link_to": "Workload Distributor",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Performance & Feedback",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Student Feedback",
+      "link_count": 0,
+      "link_to": "Student Feedback",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Faculty Directory",
+      "link_count": 0,
+      "link_to": "Faculty Directory",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Faculty Workload Summary",
+      "link_count": 0,
+      "link_to": "Faculty Workload Summary",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Department HR Summary",
+      "link_count": 0,
+      "link_to": "Department HR Summary",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "type": "Link",
+      "link_to": "Temporary Teaching Assignment",
+      "link_type": "DocType",
+      "label": "Temporary Teaching Assignment"
+    },
+    {
+      "type": "Link",
+      "link_to": "Leave Utilization Report",
+      "link_type": "Report",
+      "label": "Leave Utilization Report",
+      "is_query_report": 1
+    }
+  ],
+  "modified": "2026-03-16 15:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Faculty Management",
+  "name": "Faculty Management",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "HR",
+  "public": 1,
+  "quick_lists": [],
+  "roles": [],
+  "sequence_id": 15,
+  "shortcuts": [
+    {
+      "color": "Grey",
+      "doc_view": "List",
+      "label": "Employee",
+      "link_to": "Employee",
+      "type": "DocType"
+    },
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Faculty Profile",
+      "link_to": "Faculty Profile",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Teaching Assignment",
+      "link_to": "Teaching Assignment",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Leave Application",
+      "link_to": "Leave Application",
+      "type": "DocType"
+    }
+  ],
+  "title": "Faculty Management"
+}

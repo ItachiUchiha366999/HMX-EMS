@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - University ERP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .offline-container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .offline-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offline-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #6c757d;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .retry-btn:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .status.online {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .cached-pages {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .cached-pages h3 {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .cached-pages ul {
+            list-style: none;
+        }
+
+        .cached-pages li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cached-pages a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .cached-pages a:hover {
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            }
+
+            .offline-container {
+                background: #2d2d2d;
+            }
+
+            h1 {
+                color: #fff;
+            }
+
+            p {
+                color: #aaa;
+            }
+
+            .offline-icon {
+                background: #3d3d3d;
+            }
+
+            .offline-icon svg {
+                color: #aaa;
+            }
+
+            .cached-pages h3 {
+                color: #fff;
+            }
+
+            .cached-pages li {
+                border-bottom-color: #444;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3" />
+            </svg>
+        </div>
+
+        <h1>You're Offline</h1>
+        <p>It looks like you've lost your internet connection. Please check your connection and try again.</p>
+
+        <button class="retry-btn" onclick="checkConnection()">
+            Try Again
+        </button>
+
+        <div id="status" class="status offline">
+            Currently offline
+        </div>
+
+        <div class="cached-pages" id="cached-pages" style="display: none;">
+            <h3>Available Offline:</h3>
+            <ul id="cached-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status
+        function checkConnection() {
+            if (navigator.onLine) {
+                window.location.reload();
+            } else {
+                const status = document.getElementById('status');
+                status.textContent = 'Still offline. Please check your connection.';
+                status.className = 'status offline';
+
+                // Shake animation
+                const btn = document.querySelector('.retry-btn');
+                btn.style.animation = 'shake 0.5s';
+                setTimeout(() => btn.style.animation = '', 500);
+            }
+        }
+
+        // Listen for online/offline events
+        window.addEventListener('online', () => {
+            const status = document.getElementById('status');
+            status.textContent = 'Connection restored! Redirecting...';
+            status.className = 'status online';
+            setTimeout(() => window.location.reload(), 1000);
+        });
+
+        window.addEventListener('offline', () => {
+            const status = document.getElementById('status');
+            status.textContent = 'Currently offline';
+            status.className = 'status offline';
+        });
+
+        // Show cached pages
+        if ('caches' in window) {
+            caches.open('university-erp-v1').then(cache => {
+                cache.keys().then(keys => {
+                    if (keys.length > 0) {
+                        const container = document.getElementById('cached-pages');
+                        const list = document.getElementById('cached-list');
+
+                        keys.forEach(request => {
+                            const url = new URL(request.url);
+                            if (url.pathname !== '/offline.html') {
+                                const li = document.createElement('li');
+                                const a = document.createElement('a');
+                                a.href = url.pathname;
+                                a.textContent = url.pathname === '/' ? 'Home' : url.pathname;
+                                li.appendChild(a);
+                                list.appendChild(li);
+                            }
+                        });
+
+                        if (list.children.length > 0) {
+                            container.style.display = 'block';
+                        }
+                    }
+                });
+            });
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

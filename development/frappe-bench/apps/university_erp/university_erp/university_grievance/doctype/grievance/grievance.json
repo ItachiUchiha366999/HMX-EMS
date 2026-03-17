@@ -1,0 +1,422 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "subject",
+    "grievance_type",
+    "category",
+    "column_break_1",
+    "priority",
+    "submitted_by_type",
+    "is_anonymous",
+    "section_break_submitter",
+    "student",
+    "faculty",
+    "guardian",
+    "employee",
+    "column_break_2",
+    "contact_email",
+    "contact_phone",
+    "department",
+    "section_break_details",
+    "description",
+    "against_person",
+    "incident_date",
+    "incident_location",
+    "witnesses",
+    "section_break_evidence",
+    "attachments",
+    "section_break_assignment",
+    "assigned_to",
+    "assigned_committee",
+    "assignment_date",
+    "column_break_3",
+    "expected_resolution_date",
+    "current_escalation_level",
+    "escalation_history",
+    "section_break_resolution",
+    "resolution_notes",
+    "action_taken",
+    "resolved_by",
+    "resolution_date",
+    "column_break_4",
+    "resolution_type",
+    "satisfaction_rating",
+    "satisfaction_feedback",
+    "section_break_communication",
+    "communications",
+    "section_break_status",
+    "status",
+    "column_break_5",
+    "sla_status",
+    "days_open",
+    "reopened_count"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "GRV-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Subject",
+      "reqd": 1
+    },
+    {
+      "fieldname": "grievance_type",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Grievance Type",
+      "options": "Grievance Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Category",
+      "options": "\nAcademic\nAdministrative\nFinancial\nInfrastructure\nHostel\nTransport\nLibrary\nExamination\nFaculty Related\nRagging\nHarassment\nDiscrimination\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Medium",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Priority",
+      "options": "\nLow\nMedium\nHigh\nUrgent",
+      "reqd": 1
+    },
+    {
+      "fieldname": "submitted_by_type",
+      "fieldtype": "Select",
+      "label": "Submitted By Type",
+      "options": "\nStudent\nFaculty\nParent\nStaff\nAlumni\nOther",
+      "reqd": 1
+    },
+    {
+      "default": 0,
+      "fieldname": "is_anonymous",
+      "fieldtype": "Check",
+      "label": "Anonymous Submission"
+    },
+    {
+      "depends_on": "eval:!doc.is_anonymous",
+      "fieldname": "section_break_submitter",
+      "fieldtype": "Section Break",
+      "label": "Submitter Details"
+    },
+    {
+      "depends_on": "eval:doc.submitted_by_type == 'Student'",
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student"
+    },
+    {
+      "depends_on": "eval:doc.submitted_by_type == 'Faculty'",
+      "fieldname": "faculty",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Instructor"
+    },
+    {
+      "depends_on": "eval:doc.submitted_by_type == 'Parent'",
+      "fieldname": "guardian",
+      "fieldtype": "Link",
+      "label": "Parent/Guardian",
+      "options": "Guardian"
+    },
+    {
+      "depends_on": "eval:doc.submitted_by_type == 'Staff'",
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "section_break_details",
+      "fieldtype": "Section Break",
+      "label": "Grievance Details"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description",
+      "reqd": 1
+    },
+    {
+      "description": "Name of person/department the grievance is against",
+      "fieldname": "against_person",
+      "fieldtype": "Data",
+      "label": "Against (if applicable)"
+    },
+    {
+      "fieldname": "incident_date",
+      "fieldtype": "Date",
+      "label": "Date of Incident"
+    },
+    {
+      "fieldname": "incident_location",
+      "fieldtype": "Data",
+      "label": "Location of Incident"
+    },
+    {
+      "fieldname": "witnesses",
+      "fieldtype": "Small Text",
+      "label": "Witnesses (if any)"
+    },
+    {
+      "fieldname": "section_break_evidence",
+      "fieldtype": "Section Break",
+      "label": "Supporting Documents"
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Table",
+      "label": "Attachments",
+      "options": "Grievance Attachment"
+    },
+    {
+      "fieldname": "section_break_assignment",
+      "fieldtype": "Section Break",
+      "label": "Assignment & Handling"
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To",
+      "options": "User"
+    },
+    {
+      "fieldname": "assigned_committee",
+      "fieldtype": "Link",
+      "label": "Assigned Committee",
+      "options": "Grievance Committee"
+    },
+    {
+      "fieldname": "assignment_date",
+      "fieldtype": "Datetime",
+      "label": "Assignment Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expected_resolution_date",
+      "fieldtype": "Date",
+      "label": "Expected Resolution Date"
+    },
+    {
+      "default": "1",
+      "fieldname": "current_escalation_level",
+      "fieldtype": "Int",
+      "label": "Current Escalation Level",
+      "read_only": 1
+    },
+    {
+      "fieldname": "escalation_history",
+      "fieldtype": "Table",
+      "label": "Escalation History",
+      "options": "Grievance Escalation Log"
+    },
+    {
+      "fieldname": "section_break_resolution",
+      "fieldtype": "Section Break",
+      "label": "Resolution"
+    },
+    {
+      "fieldname": "resolution_notes",
+      "fieldtype": "Text Editor",
+      "label": "Resolution Notes"
+    },
+    {
+      "fieldname": "action_taken",
+      "fieldtype": "Table",
+      "label": "Actions Taken",
+      "options": "Grievance Action"
+    },
+    {
+      "fieldname": "resolved_by",
+      "fieldtype": "Link",
+      "label": "Resolved By",
+      "options": "User"
+    },
+    {
+      "fieldname": "resolution_date",
+      "fieldtype": "Datetime",
+      "label": "Resolution Date"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "resolution_type",
+      "fieldtype": "Select",
+      "label": "Resolution Type",
+      "options": "\nResolved\nPartially Resolved\nNo Action Required\nWithdrawn\nReferred to External Authority\nDismissed"
+    },
+    {
+      "fieldname": "satisfaction_rating",
+      "fieldtype": "Rating",
+      "label": "Complainant Satisfaction Rating"
+    },
+    {
+      "fieldname": "satisfaction_feedback",
+      "fieldtype": "Small Text",
+      "label": "Satisfaction Feedback"
+    },
+    {
+      "fieldname": "section_break_communication",
+      "fieldtype": "Section Break",
+      "label": "Communication Log"
+    },
+    {
+      "fieldname": "communications",
+      "fieldtype": "Table",
+      "label": "Communications",
+      "options": "Grievance Communication"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nSubmitted\nUnder Review\nAssigned\nIn Progress\nPending Information\nEscalated\nResolved\nClosed\nReopened"
+    },
+    {
+      "fieldname": "column_break_5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sla_status",
+      "fieldtype": "Select",
+      "label": "SLA Status",
+      "options": "\nWithin SLA\nAt Risk\nBreached",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "days_open",
+      "fieldtype": "Int",
+      "label": "Days Open",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "reopened_count",
+      "fieldtype": "Int",
+      "label": "Times Reopened",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Grievance",
+  "name": "Grievance",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "search_fields": "subject,category,status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "subject",
+  "track_changes": 1
+}

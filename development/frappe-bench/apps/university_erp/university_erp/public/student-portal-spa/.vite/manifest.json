@@ -1,0 +1,130 @@
+{
+  "index.html": {
+    "file": "assets/index-BQk_t8YH.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/views/Finance.vue",
+      "src/views/Examinations.vue",
+      "src/views/Library.vue",
+      "src/views/Hostel.vue",
+      "src/views/Transport.vue",
+      "src/views/Placement.vue",
+      "src/views/Notifications.vue",
+      "src/views/Grievances.vue",
+      "src/views/Profile.vue"
+    ],
+    "css": [
+      "assets/index-DJeu8DGd.css"
+    ]
+  },
+  "src/views/Examinations.vue": {
+    "file": "assets/Examinations-QQKTIBUB.js",
+    "name": "Examinations",
+    "src": "src/views/Examinations.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Examinations-BMitnArL.css"
+    ]
+  },
+  "src/views/Finance.vue": {
+    "file": "assets/Finance-Ct5CRfFi.js",
+    "name": "Finance",
+    "src": "src/views/Finance.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Finance-CGLMQimT.css"
+    ]
+  },
+  "src/views/Grievances.vue": {
+    "file": "assets/Grievances-Dq2Mts9p.js",
+    "name": "Grievances",
+    "src": "src/views/Grievances.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Grievances-CihayM5Z.css"
+    ]
+  },
+  "src/views/Hostel.vue": {
+    "file": "assets/Hostel-DtOPosNY.js",
+    "name": "Hostel",
+    "src": "src/views/Hostel.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Hostel-C9jVa1Qj.css"
+    ]
+  },
+  "src/views/Library.vue": {
+    "file": "assets/Library-D5oQ1rTl.js",
+    "name": "Library",
+    "src": "src/views/Library.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Library-DZ6F82ZJ.css"
+    ]
+  },
+  "src/views/Notifications.vue": {
+    "file": "assets/Notifications-DwNAe0rb.js",
+    "name": "Notifications",
+    "src": "src/views/Notifications.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Notifications-zhw0VzP2.css"
+    ]
+  },
+  "src/views/Placement.vue": {
+    "file": "assets/Placement-ChFUUkqR.js",
+    "name": "Placement",
+    "src": "src/views/Placement.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Placement-CavyTh9a.css"
+    ]
+  },
+  "src/views/Profile.vue": {
+    "file": "assets/Profile-CqT8krQE.js",
+    "name": "Profile",
+    "src": "src/views/Profile.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Profile-BlnBGjH_.css"
+    ]
+  },
+  "src/views/Transport.vue": {
+    "file": "assets/Transport-BJ0FelOv.js",
+    "name": "Transport",
+    "src": "src/views/Transport.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Transport-M9pzZiYJ.css"
+    ]
+  }
+}

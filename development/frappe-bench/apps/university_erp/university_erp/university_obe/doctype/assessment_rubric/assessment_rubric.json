@@ -1,0 +1,218 @@
+{
+  "doctype": "DocType",
+  "name": "Assessment Rubric",
+  "module": "University OBE",
+  "naming_rule": "Expression",
+  "autoname": "RUB-.YYYY.-.#####",
+  "fields": [
+    {
+      "fieldname": "rubric_name",
+      "fieldtype": "Data",
+      "label": "Rubric Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assessment_type",
+      "fieldtype": "Select",
+      "label": "Assessment Type",
+      "options": "\nAssignment\nQuiz\nProject\nPresentation\nLab Work\nPractical\nViva\nGeneral",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "section_break_levels",
+      "fieldtype": "Section Break",
+      "label": "Rubric Levels"
+    },
+    {
+      "fieldname": "level_1_label",
+      "fieldtype": "Data",
+      "label": "Level 1 Label",
+      "default": "Excellent"
+    },
+    {
+      "fieldname": "level_1_min_percentage",
+      "fieldtype": "Percent",
+      "label": "Level 1 Min %",
+      "default": "90"
+    },
+    {
+      "fieldname": "level_1_description",
+      "fieldtype": "Text",
+      "label": "Level 1 Description"
+    },
+    {
+      "fieldname": "column_break_l1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "level_2_label",
+      "fieldtype": "Data",
+      "label": "Level 2 Label",
+      "default": "Good"
+    },
+    {
+      "fieldname": "level_2_min_percentage",
+      "fieldtype": "Percent",
+      "label": "Level 2 Min %",
+      "default": "75"
+    },
+    {
+      "fieldname": "level_2_description",
+      "fieldtype": "Text",
+      "label": "Level 2 Description"
+    },
+    {
+      "fieldname": "section_break_l3",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "level_3_label",
+      "fieldtype": "Data",
+      "label": "Level 3 Label",
+      "default": "Satisfactory"
+    },
+    {
+      "fieldname": "level_3_min_percentage",
+      "fieldtype": "Percent",
+      "label": "Level 3 Min %",
+      "default": "60"
+    },
+    {
+      "fieldname": "level_3_description",
+      "fieldtype": "Text",
+      "label": "Level 3 Description"
+    },
+    {
+      "fieldname": "column_break_l3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "level_4_label",
+      "fieldtype": "Data",
+      "label": "Level 4 Label",
+      "default": "Needs Improvement"
+    },
+    {
+      "fieldname": "level_4_min_percentage",
+      "fieldtype": "Percent",
+      "label": "Level 4 Min %",
+      "default": "40"
+    },
+    {
+      "fieldname": "level_4_description",
+      "fieldtype": "Text",
+      "label": "Level 4 Description"
+    },
+    {
+      "fieldname": "section_break_l5",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "level_5_label",
+      "fieldtype": "Data",
+      "label": "Level 5 Label",
+      "default": "Unsatisfactory"
+    },
+    {
+      "fieldname": "level_5_min_percentage",
+      "fieldtype": "Percent",
+      "label": "Level 5 Min %",
+      "default": "0"
+    },
+    {
+      "fieldname": "level_5_description",
+      "fieldtype": "Text",
+      "label": "Level 5 Description"
+    },
+    {
+      "fieldname": "column_break_l5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "created_by",
+      "fieldtype": "Link",
+      "label": "Created By",
+      "options": "Instructor",
+      "read_only": 1
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": "1"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "rubric_name",
+  "search_fields": "rubric_name,course,assessment_type",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

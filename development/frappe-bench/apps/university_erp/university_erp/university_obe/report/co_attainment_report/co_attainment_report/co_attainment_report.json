@@ -1,0 +1,14 @@
+{
+  "name": "CO Attainment Report",
+  "doctype": "Report",
+  "ref_doctype": "Internal Assessment",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "University OBE",
+  "roles": [
+    {"role": "System Manager"},
+    {"role": "Instructor"},
+    {"role": "HOD"},
+    {"role": "Examination Controller"}
+  ]
+}

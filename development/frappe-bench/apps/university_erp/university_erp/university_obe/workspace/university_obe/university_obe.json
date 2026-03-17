@@ -1,0 +1,283 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"header_obe\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>OBE & Accreditation</b></span>\",\"col\":12}},{\"id\":\"shortcut_peo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New PEO\",\"col\":3}},{\"id\":\"shortcut_po\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New PO\",\"col\":3}},{\"id\":\"shortcut_co\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New CO\",\"col\":3}},{\"id\":\"shortcut_mapping\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New CO-PO Mapping\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_outcomes\",\"type\":\"card\",\"data\":{\"card_name\":\"Outcome Definitions\",\"col\":4}},{\"id\":\"card_mapping\",\"type\":\"card\",\"data\":{\"card_name\":\"Outcome Mapping\",\"col\":4}},{\"id\":\"card_attainment\",\"type\":\"card\",\"data\":{\"card_name\":\"Attainment Calculation\",\"col\":4}},{\"id\":\"card_surveys\",\"type\":\"card\",\"data\":{\"card_name\":\"OBE Surveys\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-02 10:00:00.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "target",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University OBE",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Outcome Definitions",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Program Educational Objective",
+      "link_count": 0,
+      "link_to": "Program Educational Objective",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Program Outcome",
+      "link_count": 0,
+      "link_to": "Program Outcome",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Course Outcome",
+      "link_count": 0,
+      "link_to": "Course Outcome",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Outcome Mapping",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "CO PO Mapping",
+      "link_count": 0,
+      "link_to": "CO PO Mapping",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Attainment Calculation",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "CO Attainment",
+      "link_count": 0,
+      "link_to": "CO Attainment",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "PO Attainment",
+      "link_count": 0,
+      "link_to": "PO Attainment",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "OBE Surveys",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "OBE Survey",
+      "link_count": 0,
+      "link_to": "OBE Survey",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Survey Template",
+      "link_count": 0,
+      "link_to": "Survey Template",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "CO-PO Mapping Matrix",
+      "link_count": 0,
+      "link_to": "CO-PO Mapping Matrix",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "CO Attainment Report",
+      "link_count": 0,
+      "link_to": "CO Attainment Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "PO Attainment Report",
+      "link_count": 0,
+      "link_to": "PO Attainment Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Program Attainment Summary",
+      "link_count": 0,
+      "link_to": "Program Attainment Summary",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Survey Analysis Report",
+      "link_count": 0,
+      "link_to": "Survey Analysis Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "type": "Link",
+      "link_to": "Assessment Rubric",
+      "link_type": "DocType",
+      "label": "Assessment Rubric"
+    },
+    {
+      "type": "Card Break",
+      "label": "Accreditation"
+    },
+    {
+      "type": "Link",
+      "link_to": "Accreditation Cycle",
+      "link_type": "DocType",
+      "label": "Accreditation Cycle"
+    },
+    {
+      "type": "Link",
+      "link_to": "NAAC Metric",
+      "link_type": "DocType",
+      "label": "NAAC Metric"
+    },
+    {
+      "type": "Link",
+      "link_to": "NIRF Data",
+      "link_type": "DocType",
+      "label": "NIRF Data"
+    },
+    {
+      "type": "Link",
+      "link_to": "NAAC Criterion Progress",
+      "link_type": "Report",
+      "label": "NAAC Criterion Progress",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "NIRF Parameter Report",
+      "link_type": "Report",
+      "label": "NIRF Parameter Report",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Program Outcome Attainment",
+      "link_type": "Report",
+      "label": "Program Outcome Attainment",
+      "is_query_report": 1
+    }
+  ],
+  "modified": "2026-01-04 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "University OBE",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 14,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "New",
+      "label": "New PEO",
+      "link_to": "Program Educational Objective",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "New",
+      "label": "New PO",
+      "link_to": "Program Outcome",
+      "type": "DocType"
+    },
+    {
+      "color": "Yellow",
+      "doc_view": "New",
+      "label": "New CO",
+      "link_to": "Course Outcome",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "New",
+      "label": "New CO-PO Mapping",
+      "link_to": "CO PO Mapping",
+      "type": "DocType"
+    }
+  ],
+  "title": "University OBE"
+}

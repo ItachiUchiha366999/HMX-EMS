@@ -1,0 +1,57 @@
+{
+  "actions": [],
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "button_type",
+    "button_text",
+    "button_url",
+    "phone_number"
+  ],
+  "fields": [
+    {
+      "default": "Quick Reply",
+      "fieldname": "button_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Button Type",
+      "options": "Quick Reply\nURL\nPhone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "button_text",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Button Text",
+      "reqd": 1
+    },
+    {
+      "depends_on": "eval:doc.button_type=='URL'",
+      "description": "Use {{1}} for dynamic URL suffix",
+      "fieldname": "button_url",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "URL"
+    },
+    {
+      "depends_on": "eval:doc.button_type=='Phone'",
+      "fieldname": "phone_number",
+      "fieldtype": "Data",
+      "label": "Phone Number"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "WhatsApp Template Button",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

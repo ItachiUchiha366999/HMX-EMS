@@ -1,0 +1,285 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{course}-{academic_term}-COPOMAP",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "course_section",
+    "course",
+    "course_name",
+    "program",
+    "column_break_info",
+    "academic_term",
+    "academic_year",
+    "status",
+    "section_break_prepared",
+    "prepared_by",
+    "prepared_date",
+    "column_break_approved",
+    "approved_by",
+    "approval_date",
+    "section_break_mapping",
+    "mapping_table",
+    "section_break_statistics",
+    "total_mappings",
+    "strong_correlations",
+    "column_break_stats",
+    "moderate_correlations",
+    "weak_correlations",
+    "column_break_avg",
+    "avg_correlation",
+    "no_correlations",
+    "section_break_justification",
+    "mapping_justification",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "course_section",
+      "fieldtype": "Section Break",
+      "label": "Course Information"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "course.course_name",
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_info",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Academic Term",
+      "options": "Academic Term",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nPending Approval\nApproved\nCancelled",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_prepared",
+      "fieldtype": "Section Break",
+      "label": "Preparation Details"
+    },
+    {
+      "fieldname": "prepared_by",
+      "fieldtype": "Link",
+      "label": "Prepared By",
+      "options": "Employee"
+    },
+    {
+      "default": "Today",
+      "fieldname": "prepared_date",
+      "fieldtype": "Date",
+      "label": "Prepared Date"
+    },
+    {
+      "fieldname": "column_break_approved",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "approval_date",
+      "fieldtype": "Date",
+      "label": "Approval Date"
+    },
+    {
+      "fieldname": "section_break_mapping",
+      "fieldtype": "Section Break",
+      "label": "CO-PO Mapping Matrix"
+    },
+    {
+      "fieldname": "mapping_table",
+      "fieldtype": "Table",
+      "label": "CO-PO Mapping",
+      "options": "CO PO Mapping Entry",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_statistics",
+      "fieldtype": "Section Break",
+      "label": "Mapping Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_mappings",
+      "fieldtype": "Int",
+      "label": "Total Mappings",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Correlation Level = 3",
+      "fieldname": "strong_correlations",
+      "fieldtype": "Int",
+      "label": "Strong Correlations",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_stats",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "description": "Correlation Level = 2",
+      "fieldname": "moderate_correlations",
+      "fieldtype": "Int",
+      "label": "Moderate Correlations",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Correlation Level = 1",
+      "fieldname": "weak_correlations",
+      "fieldtype": "Int",
+      "label": "Weak Correlations",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_avg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_correlation",
+      "fieldtype": "Float",
+      "label": "Average Correlation",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Correlation Level = 0",
+      "fieldname": "no_correlations",
+      "fieldtype": "Int",
+      "label": "No Correlations",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_justification",
+      "fieldtype": "Section Break",
+      "label": "Mapping Justification"
+    },
+    {
+      "fieldname": "mapping_justification",
+      "fieldtype": "Text Editor",
+      "label": "Mapping Justification"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "CO PO Mapping",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "CO PO Mapping",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

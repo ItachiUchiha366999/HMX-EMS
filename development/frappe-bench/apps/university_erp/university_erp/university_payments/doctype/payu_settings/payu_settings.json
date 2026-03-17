@@ -1,0 +1,168 @@
+{
+  "doctype": "DocType",
+  "name": "PayU Settings",
+  "module": "University Payments",
+  "issingle": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "test_mode",
+    "column_break_1",
+    "merchant_key",
+    "merchant_salt",
+    "merchant_salt_v2",
+    "urls_section",
+    "test_url",
+    "production_url",
+    "column_break_2",
+    "success_url",
+    "failure_url",
+    "cancel_url",
+    "account_settings_section",
+    "fee_income_account",
+    "column_break_3",
+    "payment_gateway_account"
+  ],
+  "fields": [
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "0",
+      "bold": 1
+    },
+    {
+      "fieldname": "test_mode",
+      "fieldtype": "Check",
+      "label": "Test Mode",
+      "default": "1",
+      "description": "Use test/sandbox credentials"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "merchant_key",
+      "fieldtype": "Data",
+      "label": "Merchant Key",
+      "reqd": 1,
+      "depends_on": "enabled"
+    },
+    {
+      "fieldname": "merchant_salt",
+      "fieldtype": "Password",
+      "label": "Merchant Salt",
+      "reqd": 1,
+      "depends_on": "enabled"
+    },
+    {
+      "fieldname": "merchant_salt_v2",
+      "fieldtype": "Password",
+      "label": "Merchant Salt V2",
+      "description": "Salt V2 for additional security (if provided by PayU)"
+    },
+    {
+      "fieldname": "urls_section",
+      "fieldtype": "Section Break",
+      "label": "URL Configuration"
+    },
+    {
+      "fieldname": "test_url",
+      "fieldtype": "Data",
+      "label": "Test URL",
+      "default": "https://test.payu.in/_payment"
+    },
+    {
+      "fieldname": "production_url",
+      "fieldtype": "Data",
+      "label": "Production URL",
+      "default": "https://secure.payu.in/_payment"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "success_url",
+      "fieldtype": "Data",
+      "label": "Success URL",
+      "description": "URL to redirect after successful payment"
+    },
+    {
+      "fieldname": "failure_url",
+      "fieldtype": "Data",
+      "label": "Failure URL",
+      "description": "URL to redirect after failed payment"
+    },
+    {
+      "fieldname": "cancel_url",
+      "fieldtype": "Data",
+      "label": "Cancel URL",
+      "description": "URL to redirect if payment is cancelled"
+    },
+    {
+      "fieldname": "account_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Account Settings"
+    },
+    {
+      "fieldname": "fee_income_account",
+      "fieldtype": "Link",
+      "label": "Fee Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_gateway_account",
+      "fieldtype": "Link",
+      "label": "Payment Gateway Account",
+      "options": "Account",
+      "description": "Bank account linked to PayU"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "track_changes": 1,
+  "modified_by": "Administrator",
+  "owner": "Administrator"
+}

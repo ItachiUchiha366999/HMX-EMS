@@ -1,0 +1,87 @@
+{
+  "actions": [],
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "criterion_number",
+    "criterion_name",
+    "weightage",
+    "responsible_person",
+    "data_status",
+    "score",
+    "max_score",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "columns": 1,
+      "fieldname": "criterion_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Criterion No."
+    },
+    {
+      "columns": 3,
+      "fieldname": "criterion_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Criterion Name"
+    },
+    {
+      "columns": 1,
+      "fieldname": "weightage",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Weightage"
+    },
+    {
+      "columns": 2,
+      "fieldname": "responsible_person",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Responsible",
+      "options": "User"
+    },
+    {
+      "columns": 1,
+      "default": "Not Started",
+      "fieldname": "data_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Data Status",
+      "options": "\nNot Started\nIn Progress\nCompleted\nVerified"
+    },
+    {
+      "columns": 1,
+      "fieldname": "score",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Score",
+      "precision": "2"
+    },
+    {
+      "fieldname": "max_score",
+      "fieldtype": "Float",
+      "label": "Max Score",
+      "precision": "2"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Accreditation Criterion",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 0
+}

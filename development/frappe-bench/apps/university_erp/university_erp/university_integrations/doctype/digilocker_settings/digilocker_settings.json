@@ -1,0 +1,173 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "environment",
+    "column_break_basic",
+    "api_version",
+    "credentials_section",
+    "client_id",
+    "client_secret",
+    "column_break_credentials",
+    "hmac_key",
+    "issuer_section",
+    "org_id",
+    "issuer_id",
+    "column_break_issuer",
+    "issuer_name",
+    "doc_types_section",
+    "document_types",
+    "urls_section",
+    "callback_url",
+    "column_break_urls",
+    "verify_url"
+  ],
+  "fields": [
+    {
+      "default": "0",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enable DigiLocker Integration"
+    },
+    {
+      "default": "Sandbox",
+      "fieldname": "environment",
+      "fieldtype": "Select",
+      "label": "Environment",
+      "options": "Sandbox\nProduction"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "v1",
+      "fieldname": "api_version",
+      "fieldtype": "Data",
+      "label": "API Version"
+    },
+    {
+      "fieldname": "credentials_section",
+      "fieldtype": "Section Break",
+      "label": "API Credentials"
+    },
+    {
+      "fieldname": "client_id",
+      "fieldtype": "Data",
+      "label": "Client ID"
+    },
+    {
+      "fieldname": "client_secret",
+      "fieldtype": "Password",
+      "label": "Client Secret"
+    },
+    {
+      "fieldname": "column_break_credentials",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "hmac_key",
+      "fieldtype": "Password",
+      "label": "HMAC Key"
+    },
+    {
+      "fieldname": "issuer_section",
+      "fieldtype": "Section Break",
+      "label": "Issuer Details"
+    },
+    {
+      "description": "Organization ID registered with DigiLocker",
+      "fieldname": "org_id",
+      "fieldtype": "Data",
+      "label": "Organization ID"
+    },
+    {
+      "description": "Issuer ID for document issuance",
+      "fieldname": "issuer_id",
+      "fieldtype": "Data",
+      "label": "Issuer ID"
+    },
+    {
+      "fieldname": "column_break_issuer",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "issuer_name",
+      "fieldtype": "Data",
+      "label": "Issuer Name"
+    },
+    {
+      "fieldname": "doc_types_section",
+      "fieldtype": "Section Break",
+      "label": "Document Types"
+    },
+    {
+      "fieldname": "document_types",
+      "fieldtype": "Table",
+      "label": "Document Types",
+      "options": "DigiLocker Document Type"
+    },
+    {
+      "fieldname": "urls_section",
+      "fieldtype": "Section Break",
+      "label": "URLs"
+    },
+    {
+      "fieldname": "callback_url",
+      "fieldtype": "Data",
+      "label": "Callback URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_urls",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "verify_url",
+      "fieldtype": "Data",
+      "label": "Verification URL",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "DigiLocker Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,33 @@
+{
+  "doctype": "DocType",
+  "name": "Answer Sheet Score",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "question_number",
+      "fieldtype": "Int",
+      "label": "Question Number",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "max_marks",
+      "fieldtype": "Float",
+      "label": "Max Marks",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "marks_obtained",
+      "fieldtype": "Float",
+      "label": "Marks Obtained",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "comments",
+      "fieldtype": "Small Text",
+      "label": "Comments"
+    }
+  ],
+  "engine": "InnoDB"
+}

@@ -1,0 +1,74 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ student_name or "Student" }},</p>
+
+<div style="text-align: center; margin: 30px 0;">
+    <div style="font-size: 48px; margin-bottom: 10px;">&#127881;</div>
+    <h2 style="color: #28a745; margin: 0;">Thank You!</h2>
+</div>
+
+<p>We sincerely appreciate you taking the time to complete the feedback form:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 40%;">Feedback Form</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ feedback_form_title }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Form Type</td>
+        <td style="padding: 10px;">{{ form_type }}</td>
+    </tr>
+    {% if course %}
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Course</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ course }}</td>
+    </tr>
+    {% endif %}
+    {% if instructor %}
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Instructor</td>
+        <td style="padding: 10px;">{{ instructor }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Submitted On</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ submission_date }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Response ID</td>
+        <td style="padding: 10px;">{{ response_id }}</td>
+    </tr>
+</table>
+
+<div style="background: #d4edda; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #28a745;">
+    <strong>Your feedback has been recorded successfully.</strong>
+    {% if is_anonymous %}
+    <p style="margin: 10px 0 0 0;">Your response was submitted anonymously as requested.</p>
+    {% endif %}
+</div>
+
+<p><strong>What happens next?</strong></p>
+<ul>
+    <li>Your feedback will be compiled with other responses</li>
+    <li>The analysis will be shared with relevant departments</li>
+    <li>Actionable insights will be used to improve our programs</li>
+</ul>
+
+{% if pending_forms_count and pending_forms_count > 0 %}
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>Reminder:</strong>
+    <p style="margin: 10px 0 0 0;">You have <strong>{{ pending_forms_count }}</strong> more feedback form(s) pending. Please complete them before their deadlines.</p>
+    <p style="margin-top: 10px;">
+        <a href="{{ portal_link or '/student-portal/feedback' }}" style="color: #856404; text-decoration: underline;">View Pending Feedback</a>
+    </p>
+</div>
+{% endif %}
+
+<p>
+    Thank you for helping us improve!<br><br>
+    Best regards,<br>
+    Academic Affairs<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

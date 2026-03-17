@@ -1,0 +1,163 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("My Results") }} - {{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <div class="portal-header">
+        <a href="/student-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("My Results") }}</h2>
+    </div>
+
+    <!-- CGPA Summary Cards -->
+    {% if results %}
+    <div class="results-summary">
+        <div class="summary-card">
+            <h3>{{ results[0].cgpa if results else '0.00' }}</h3>
+            <p>{{ _("Current CGPA") }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>{{ results[0].sgpa if results else '0.00' }}</h3>
+            <p>{{ _("Latest SGPA") }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>{{ results | length }}</h3>
+            <p>{{ _("Semesters Completed") }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- CGPA Trend Chart -->
+    {% if cgpa_trend %}
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("CGPA Trend") }}</h3>
+        <div id="cgpa-chart" class="chart-container"></div>
+    </div>
+    {% endif %}
+
+    <!-- Semester Results -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Semester Results") }}</h3>
+
+        {% for semester, courses in semester_results.items() %}
+        <div class="semester-result">
+            <div class="semester-header" onclick="toggleSemester(this)">
+                <h4>{{ semester }}</h4>
+                <svg class="icon icon-sm toggle-icon"><use href="#icon-chevron-down"></use></svg>
+            </div>
+            <div class="semester-courses">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{ _("Course") }}</th>
+                            <th>{{ _("Assessment") }}</th>
+                            <th class="text-center">{{ _("Max Marks") }}</th>
+                            <th class="text-center">{{ _("Obtained") }}</th>
+                            <th class="text-center">{{ _("Grade") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{ course.course_name or course.course }}</td>
+                            <td>{{ course.assessment_name }}</td>
+                            <td class="text-center">{{ course.maximum_marks }}</td>
+                            <td class="text-center">{{ course.obtained_marks }}</td>
+                            <td class="text-center">
+                                <span class="grade-badge grade-{{ course.grade | lower }}">{{ course.grade }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if not semester_results %}
+        <p class="text-muted empty-message">{{ _("No results available yet") }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Overall Results -->
+    {% if results %}
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Overall Results") }}</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ _("Semester") }}</th>
+                    <th class="text-center">{{ _("Total Marks") }}</th>
+                    <th class="text-center">{{ _("Percentage") }}</th>
+                    <th class="text-center">{{ _("SGPA") }}</th>
+                    <th class="text-center">{{ _("CGPA") }}</th>
+                    <th class="text-center">{{ _("Status") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.academic_year }} - {{ result.academic_term }}</td>
+                    <td class="text-center">{{ result.total_marks }}</td>
+                    <td class="text-center">{{ result.percentage }}%</td>
+                    <td class="text-center">{{ result.sgpa }}</td>
+                    <td class="text-center">{{ result.cgpa }}</td>
+                    <td class="text-center">
+                        <span class="status-badge status-{{ result.result_status | lower }}">
+                            {{ result.result_status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+function toggleSemester(header) {
+    const semester = header.parentElement;
+    semester.classList.toggle('collapsed');
+}
+
+{% if cgpa_trend %}
+frappe.ready(function() {
+    const data = {{ cgpa_trend | tojson }};
+    if (data.length > 0) {
+        new frappe.Chart("#cgpa-chart", {
+            data: {
+                labels: data.map(d => d.semester),
+                datasets: [
+                    {
+                        name: "SGPA",
+                        values: data.map(d => d.sgpa || 0)
+                    },
+                    {
+                        name: "CGPA",
+                        values: data.map(d => d.cgpa || 0)
+                    }
+                ]
+            },
+            type: "line",
+            height: 250,
+            colors: ["#5e64ff", "#28a745"],
+            lineOptions: {
+                hideDots: 0,
+                regionFill: 1
+            }
+        });
+    }
+});
+{% endif %}
+</script>
+{% endblock %}

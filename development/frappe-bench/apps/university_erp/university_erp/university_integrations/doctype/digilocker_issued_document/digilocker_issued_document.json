@@ -1,0 +1,184 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "aadhaar_number",
+    "column_break_basic",
+    "document_type",
+    "document_uri",
+    "status",
+    "issue_section",
+    "issued_date",
+    "issued_by",
+    "column_break_issue",
+    "certificate_request",
+    "reference_section",
+    "reference_doctype",
+    "reference_name",
+    "response_section",
+    "api_response",
+    "error_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "DGL-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "description": "Aadhaar number for DigiLocker linking",
+      "fieldname": "aadhaar_number",
+      "fieldtype": "Data",
+      "label": "Aadhaar Number"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "document_type",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Document Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "document_uri",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Document URI"
+    },
+    {
+      "default": "Pending",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Pending\nIssued\nFailed\nRevoked"
+    },
+    {
+      "fieldname": "issue_section",
+      "fieldtype": "Section Break",
+      "label": "Issue Details"
+    },
+    {
+      "fieldname": "issued_date",
+      "fieldtype": "Datetime",
+      "label": "Issued Date"
+    },
+    {
+      "fieldname": "issued_by",
+      "fieldtype": "Link",
+      "label": "Issued By",
+      "options": "User"
+    },
+    {
+      "fieldname": "column_break_issue",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "certificate_request",
+      "fieldtype": "Link",
+      "label": "Certificate Request",
+      "options": "Certificate Request"
+    },
+    {
+      "fieldname": "reference_section",
+      "fieldtype": "Section Break",
+      "label": "Reference"
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Reference DocType",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Name",
+      "options": "reference_doctype"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "API Response"
+    },
+    {
+      "fieldname": "api_response",
+      "fieldtype": "Code",
+      "label": "API Response",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "DigiLocker Issued Document",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

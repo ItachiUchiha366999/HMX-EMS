@@ -1,0 +1,600 @@
+{% extends "templates/web.html" %}
+
+{% block title %}My Grievances{% endblock %}
+
+{% block head_include %}
+<style>
+    .grievance-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    .page-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        color: white;
+        text-decoration: none;
+    }
+    .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 5px;
+    }
+    .stat-card.pending .stat-value { color: #d97706; }
+    .stat-card.resolved .stat-value { color: #059669; }
+    .grievance-list {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .grievance-item {
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .grievance-item:last-child {
+        border-bottom: none;
+    }
+    .grievance-item:hover {
+        background: var(--control-bg);
+    }
+    .grievance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    .grievance-subject {
+        font-weight: 600;
+        color: var(--text-color);
+        font-size: 1.05rem;
+    }
+    .grievance-id {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    .grievance-meta {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+    .grievance-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    .status-badge.submitted { background: #dbeafe; color: #1e40af; }
+    .status-badge.under-review { background: #fef3c7; color: #92400e; }
+    .status-badge.in-progress { background: #fef3c7; color: #d97706; }
+    .status-badge.assigned { background: #e0e7ff; color: #4338ca; }
+    .status-badge.escalated { background: #fee2e2; color: #dc2626; }
+    .status-badge.resolved { background: #d1fae5; color: #059669; }
+    .status-badge.closed { background: #e5e7eb; color: #374151; }
+    .status-badge.pending-info { background: #fce7f3; color: #be185d; }
+    .sla-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+    .sla-badge.within { background: #d1fae5; color: #059669; }
+    .sla-badge.at-risk { background: #fef3c7; color: #d97706; }
+    .sla-badge.breached { background: #fee2e2; color: #dc2626; }
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+    .empty-state svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    .back-link:hover {
+        color: var(--primary);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-overlay.active {
+        display: flex;
+    }
+    .modal-content {
+        background: var(--card-bg);
+        border-radius: 12px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 25px;
+    }
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .modal-header h2 {
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--control-bg);
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .form-check input[type="checkbox"] {
+        width: auto;
+    }
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 25px;
+    }
+    .btn-secondary {
+        background: var(--control-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .filter-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    .filter-tab {
+        padding: 8px 16px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+    }
+    .filter-tab.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+    .filter-tab:hover:not(.active) {
+        background: var(--control-bg);
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="grievance-container">
+    <a href="/student-portal" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to Portal
+    </a>
+
+    <div class="page-header">
+        <h1>My Grievances</h1>
+        <button class="btn-primary" onclick="openNewGrievanceModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+            New Grievance
+        </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-value">{{ total_grievances }}</div>
+            <div class="stat-label">Total Grievances</div>
+        </div>
+        <div class="stat-card pending">
+            <div class="stat-value">{{ pending_grievances }}</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card resolved">
+            <div class="stat-value">{{ resolved_grievances }}</div>
+            <div class="stat-label">Resolved</div>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="pending">Pending</button>
+        <button class="filter-tab" data-filter="resolved">Resolved</button>
+    </div>
+
+    <!-- Grievance List -->
+    <div class="grievance-list">
+        {% if grievances %}
+            {% for grievance in grievances %}
+            <div class="grievance-item"
+                 data-status="{{ 'pending' if grievance.status in ['Submitted', 'Under Review', 'Assigned', 'In Progress', 'Pending Information', 'Escalated'] else 'resolved' }}"
+                 onclick="viewGrievance('{{ grievance.name }}')">
+                <div class="grievance-header">
+                    <div>
+                        <div class="grievance-subject">{{ grievance.subject }}</div>
+                        <div class="grievance-id">{{ grievance.name }}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        {% set status_class = grievance.status | lower | replace(' ', '-') %}
+                        <span class="status-badge {{ status_class }}">{{ grievance.status }}</span>
+                        {% if grievance.sla_status %}
+                        <br><span class="sla-badge {{ grievance.sla_status | lower | replace(' ', '-') }}">{{ grievance.sla_status }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="grievance-meta">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
+                        {{ frappe.format_date(grievance.creation, 'dd MMM yyyy') }}
+                    </span>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12z"/>
+                        </svg>
+                        {{ grievance.category }}
+                    </span>
+                    {% if grievance.days_open %}
+                    <span>{{ grievance.days_open }} days open</span>
+                    {% endif %}
+                    {% if grievance.is_anonymous %}
+                    <span style="color: #6b7280;">Anonymous</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h3>No Grievances</h3>
+                <p>You haven't submitted any grievances yet.</p>
+                <button class="btn-primary" style="margin-top: 15px;" onclick="openNewGrievanceModal()">Submit Your First Grievance</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- New Grievance Modal -->
+<div class="modal-overlay" id="newGrievanceModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Submit New Grievance</h2>
+            <button class="modal-close" onclick="closeModal('newGrievanceModal')">&times;</button>
+        </div>
+        <form id="grievanceForm" onsubmit="submitGrievance(event)">
+            <div class="form-group">
+                <label>Subject *</label>
+                <input type="text" name="subject" required placeholder="Brief description of your grievance">
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select name="category" required onchange="updateGrievanceTypes(this.value)">
+                    <option value="">Select Category</option>
+                    {% for category in grievance_categories.keys() %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Grievance Type</label>
+                <select name="grievance_type" id="grievanceTypeSelect">
+                    <option value="">Select Type (Optional)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea name="description" required placeholder="Please provide detailed description of your grievance..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-check">
+                    <input type="checkbox" name="is_anonymous">
+                    <span>Submit Anonymously</span>
+                </label>
+                <small style="color: var(--text-muted); display: block; margin-top: 5px;">
+                    Your identity will be hidden from the grievance handlers
+                </small>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeModal('newGrievanceModal')">Cancel</button>
+                <button type="submit" class="btn-primary">Submit Grievance</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Grievance Modal -->
+<div class="modal-overlay" id="viewGrievanceModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Grievance Details</h2>
+            <button class="modal-close" onclick="closeModal('viewGrievanceModal')">&times;</button>
+        </div>
+        <div id="grievanceDetails">Loading...</div>
+    </div>
+</div>
+
+<script>
+    // Store grievance types data
+    const grievanceTypes = {{ grievance_categories | tojson }};
+
+    function openNewGrievanceModal() {
+        document.getElementById('newGrievanceModal').classList.add('active');
+        document.getElementById('grievanceForm').reset();
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function updateGrievanceTypes(category) {
+        const select = document.getElementById('grievanceTypeSelect');
+        select.innerHTML = '<option value="">Select Type (Optional)</option>';
+
+        if (category && grievanceTypes[category]) {
+            grievanceTypes[category].forEach(type => {
+                const option = document.createElement('option');
+                option.value = type.name;
+                option.textContent = type.grievance_type_name;
+                select.appendChild(option);
+            });
+        }
+    }
+
+    async function submitGrievance(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await frappe.call({
+                method: 'university_erp.www.student-portal.grievances.index.submit_grievance',
+                args: {
+                    subject: formData.get('subject'),
+                    description: formData.get('description'),
+                    category: formData.get('category'),
+                    grievance_type: formData.get('grievance_type'),
+                    is_anonymous: formData.get('is_anonymous') ? 1 : 0
+                }
+            });
+
+            if (response.message.success) {
+                frappe.msgprint({
+                    title: 'Success',
+                    message: response.message.message + ' Reference: ' + response.message.grievance_id,
+                    indicator: 'green'
+                });
+                closeModal('newGrievanceModal');
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                frappe.msgprint({
+                    title: 'Error',
+                    message: response.message.message,
+                    indicator: 'red'
+                });
+            }
+        } catch (error) {
+            frappe.msgprint({
+                title: 'Error',
+                message: 'An error occurred. Please try again.',
+                indicator: 'red'
+            });
+        }
+    }
+
+    async function viewGrievance(grievanceId) {
+        document.getElementById('viewGrievanceModal').classList.add('active');
+        document.getElementById('grievanceDetails').innerHTML = 'Loading...';
+
+        try {
+            const response = await frappe.call({
+                method: 'university_erp.www.student-portal.grievances.index.get_grievance_details',
+                args: { grievance_id: grievanceId }
+            });
+
+            if (response.message.success) {
+                const g = response.message.grievance;
+                let html = `
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="margin: 0 0 5px 0;">${g.subject}</h3>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">
+                            ${g.name} | ${g.category} | Status: <strong>${g.status}</strong>
+                        </div>
+                    </div>
+                    <div style="background: var(--control-bg); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <strong>Description:</strong>
+                        <p style="margin: 10px 0 0 0; white-space: pre-wrap;">${g.description}</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <small style="color: var(--text-muted);">Submitted</small>
+                            <div>${frappe.datetime.str_to_user(g.creation)}</div>
+                        </div>
+                        <div>
+                            <small style="color: var(--text-muted);">Expected Resolution</small>
+                            <div>${g.expected_resolution_date ? frappe.datetime.str_to_user(g.expected_resolution_date) : 'Not set'}</div>
+                        </div>
+                        <div>
+                            <small style="color: var(--text-muted);">Days Open</small>
+                            <div>${g.days_open || 0}</div>
+                        </div>
+                        <div>
+                            <small style="color: var(--text-muted);">SLA Status</small>
+                            <div>${g.sla_status || 'N/A'}</div>
+                        </div>
+                    </div>
+                `;
+
+                if (g.resolution_summary) {
+                    html += `
+                        <div style="background: #d1fae5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <strong style="color: #059669;">Resolution:</strong>
+                            <p style="margin: 10px 0 0 0;">${g.resolution_summary}</p>
+                        </div>
+                    `;
+                }
+
+                if (g.communications && g.communications.length > 0) {
+                    html += `<h4 style="margin: 20px 0 10px 0;">Communication History</h4>`;
+                    g.communications.forEach(comm => {
+                        html += `
+                            <div style="border-left: 3px solid var(--primary); padding-left: 15px; margin-bottom: 15px;">
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                                    ${comm.type} - ${frappe.datetime.str_to_user(comm.timestamp)}
+                                </div>
+                                <div style="margin-top: 5px;">${comm.message}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                document.getElementById('grievanceDetails').innerHTML = html;
+            } else {
+                document.getElementById('grievanceDetails').innerHTML = `<p style="color: red;">${response.message.message}</p>`;
+            }
+        } catch (error) {
+            document.getElementById('grievanceDetails').innerHTML = '<p style="color: red;">Error loading grievance details.</p>';
+        }
+    }
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.dataset.filter;
+            document.querySelectorAll('.grievance-item').forEach(item => {
+                if (filter === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = item.dataset.status === filter ? 'block' : 'none';
+                }
+            });
+        });
+    });
+
+    // Close modal on outside click
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    });
+</script>
+{% endblock %}

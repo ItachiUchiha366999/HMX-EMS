@@ -1,0 +1,136 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("My Attendance") }} - {{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <div class="portal-header">
+        <a href="/student-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("My Attendance") }}</h2>
+    </div>
+
+    <!-- Attendance Summary -->
+    <div class="attendance-summary">
+        <div class="summary-card {% if attendance_summary.percentage >= 75 %}success{% elif attendance_summary.percentage >= 60 %}warning{% else %}danger{% endif %}">
+            <div class="percentage-circle">
+                <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path class="circle" stroke-dasharray="{{ attendance_summary.percentage }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                </svg>
+                <span class="percentage">{{ attendance_summary.percentage }}%</span>
+            </div>
+            <p>{{ _("Overall Attendance") }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>{{ attendance_summary.total_classes }}</h3>
+            <p>{{ _("Total Classes") }}</p>
+        </div>
+        <div class="summary-card success">
+            <h3>{{ attendance_summary.present }}</h3>
+            <p>{{ _("Present") }}</p>
+        </div>
+        <div class="summary-card danger">
+            <h3>{{ attendance_summary.absent }}</h3>
+            <p>{{ _("Absent") }}</p>
+        </div>
+    </div>
+
+    <!-- Month Navigation -->
+    <div class="month-navigation">
+        <a href="/student-portal/attendance?month={{ frappe.utils.add_months(selected_month, -1).strftime('%Y-%m') }}" class="btn btn-sm btn-default">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+        </a>
+        <span class="month-label">{{ selected_month.strftime('%B %Y') }}</span>
+        <a href="/student-portal/attendance?month={{ frappe.utils.add_months(selected_month, 1).strftime('%Y-%m') }}" class="btn btn-sm btn-default">
+            <svg class="icon icon-sm"><use href="#icon-arrow-right"></use></svg>
+        </a>
+    </div>
+
+    <!-- Course-wise Attendance -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Course-wise Attendance") }}</h3>
+
+        {% if course_attendance %}
+        <div class="course-attendance-list">
+            {% for course in course_attendance %}
+            <div class="course-attendance-item">
+                <div class="course-info">
+                    <h4>{{ course.course }}</h4>
+                    <p>{{ course.present }}/{{ course.total }} {{ _("classes attended") }}</p>
+                </div>
+                <div class="attendance-bar">
+                    <div class="bar-fill {% if course.percentage >= 75 %}success{% elif course.percentage >= 60 %}warning{% else %}danger{% endif %}"
+                         style="width: {{ course.percentage }}%"></div>
+                </div>
+                <span class="attendance-percentage {% if course.percentage >= 75 %}success{% elif course.percentage >= 60 %}warning{% else %}danger{% endif %}">
+                    {{ course.percentage }}%
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No course attendance data available") }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Monthly Attendance List -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Attendance Details") }} - {{ selected_month.strftime('%B %Y') }}</h3>
+
+        {% if monthly_attendance %}
+        <div class="attendance-list">
+            {% for att in monthly_attendance %}
+            <div class="attendance-item status-{{ att.status | lower }}">
+                <div class="attendance-date">
+                    <span class="day">{{ att.date.strftime('%d') }}</span>
+                    <span class="month">{{ att.date.strftime('%b') }}</span>
+                </div>
+                <div class="attendance-details">
+                    <h4>{{ att.course or _("Class") }}</h4>
+                    {% if att.from_time and att.to_time %}
+                    <p>{{ frappe.format_time(att.from_time) }} - {{ frappe.format_time(att.to_time) }}</p>
+                    {% endif %}
+                </div>
+                <span class="attendance-status {{ att.status | lower }}">{{ att.status }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No attendance records for this month") }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<style>
+.circular-chart {
+    width: 80px;
+    height: 80px;
+}
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+.success .circle { stroke: #28a745; }
+.warning .circle { stroke: #ffc107; }
+.danger .circle { stroke: #dc3545; }
+@keyframes progress {
+    0% { stroke-dasharray: 0 100; }
+}
+</style>
+{% endblock %}

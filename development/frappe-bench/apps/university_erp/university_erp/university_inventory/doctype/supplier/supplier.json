@@ -1,0 +1,287 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "supplier_name",
+    "supplier_type",
+    "supplier_group",
+    "column_break_1",
+    "is_active",
+    "supplier_rating",
+    "contact_section",
+    "contact_person",
+    "email",
+    "phone",
+    "mobile",
+    "column_break_contact",
+    "website",
+    "address",
+    "city",
+    "state",
+    "pincode",
+    "tax_section",
+    "gstin",
+    "pan",
+    "registration_number",
+    "column_break_tax",
+    "tax_category",
+    "is_msme",
+    "msme_registration",
+    "bank_section",
+    "bank_name",
+    "bank_account",
+    "ifsc_code",
+    "column_break_bank",
+    "payment_terms",
+    "accounting_section",
+    "default_currency",
+    "default_price_list",
+    "credit_limit"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "SUP-.YYYY.-.#####",
+      "reqd": 1,
+      "set_only_once": 1
+    },
+    {
+      "fieldname": "supplier_name",
+      "fieldtype": "Data",
+      "in_global_search": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Supplier Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supplier_type",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Supplier Type",
+      "options": "\nCompany\nIndividual\nGovernment\nNGO"
+    },
+    {
+      "fieldname": "supplier_group",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Supplier Group",
+      "options": "Supplier Group"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "supplier_rating",
+      "fieldtype": "Rating",
+      "label": "Supplier Rating"
+    },
+    {
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact Details"
+    },
+    {
+      "fieldname": "contact_person",
+      "fieldtype": "Data",
+      "label": "Contact Person"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "mobile",
+      "fieldtype": "Data",
+      "label": "Mobile"
+    },
+    {
+      "fieldname": "column_break_contact",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "website",
+      "fieldtype": "Data",
+      "label": "Website"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Small Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "city",
+      "fieldtype": "Data",
+      "label": "City"
+    },
+    {
+      "fieldname": "state",
+      "fieldtype": "Data",
+      "label": "State"
+    },
+    {
+      "fieldname": "pincode",
+      "fieldtype": "Data",
+      "label": "PIN Code"
+    },
+    {
+      "fieldname": "tax_section",
+      "fieldtype": "Section Break",
+      "label": "Tax & Registration"
+    },
+    {
+      "fieldname": "gstin",
+      "fieldtype": "Data",
+      "label": "GSTIN"
+    },
+    {
+      "fieldname": "pan",
+      "fieldtype": "Data",
+      "label": "PAN"
+    },
+    {
+      "fieldname": "registration_number",
+      "fieldtype": "Data",
+      "label": "Registration Number"
+    },
+    {
+      "fieldname": "column_break_tax",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "tax_category",
+      "fieldtype": "Link",
+      "label": "Tax Category",
+      "options": "Tax Category"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_msme",
+      "fieldtype": "Check",
+      "label": "Is MSME"
+    },
+    {
+      "depends_on": "is_msme",
+      "fieldname": "msme_registration",
+      "fieldtype": "Data",
+      "label": "MSME Registration No"
+    },
+    {
+      "fieldname": "bank_section",
+      "fieldtype": "Section Break",
+      "label": "Bank Details"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name"
+    },
+    {
+      "fieldname": "bank_account",
+      "fieldtype": "Data",
+      "label": "Bank Account No"
+    },
+    {
+      "fieldname": "ifsc_code",
+      "fieldtype": "Data",
+      "label": "IFSC Code"
+    },
+    {
+      "fieldname": "column_break_bank",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_terms",
+      "fieldtype": "Link",
+      "label": "Default Payment Terms",
+      "options": "Payment Terms Template"
+    },
+    {
+      "fieldname": "accounting_section",
+      "fieldtype": "Section Break",
+      "label": "Accounting"
+    },
+    {
+      "default": "INR",
+      "fieldname": "default_currency",
+      "fieldtype": "Link",
+      "label": "Default Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "default_price_list",
+      "fieldtype": "Link",
+      "label": "Default Price List",
+      "options": "Price List"
+    },
+    {
+      "default": "0",
+      "fieldname": "credit_limit",
+      "fieldtype": "Currency",
+      "label": "Credit Limit"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Supplier",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "supplier_name, supplier_group",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "supplier_name",
+  "track_changes": 1
+}

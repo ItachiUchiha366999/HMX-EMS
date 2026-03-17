@@ -1,0 +1,165 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:scholarship_name",
+  "creation": "2025-12-31 00:00:00",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "scholarship_name",
+    "scholarship_code",
+    "type",
+    "section_eligibility",
+    "min_cgpa",
+    "max_annual_income",
+    "applicable_categories",
+    "section_benefits",
+    "discount_percentage",
+    "discount_amount",
+    "applicable_fee_categories",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "scholarship_name",
+      "fieldtype": "Data",
+      "label": "Scholarship Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "scholarship_code",
+      "fieldtype": "Data",
+      "label": "Scholarship Code",
+      "reqd": 1
+    },
+    {
+      "fieldname": "type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Merit-based\nNeed-based\nCategory-based\nSports\nCultural\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_eligibility",
+      "fieldtype": "Section Break",
+      "label": "Eligibility Criteria"
+    },
+    {
+      "fieldname": "min_cgpa",
+      "fieldtype": "Float",
+      "label": "Minimum CGPA"
+    },
+    {
+      "fieldname": "max_annual_income",
+      "fieldtype": "Currency",
+      "label": "Maximum Annual Income"
+    },
+    {
+      "fieldname": "applicable_categories",
+      "fieldtype": "Small Text",
+      "label": "Applicable Categories"
+    },
+    {
+      "fieldname": "section_benefits",
+      "fieldtype": "Section Break",
+      "label": "Benefits"
+    },
+    {
+      "fieldname": "discount_percentage",
+      "fieldtype": "Percent",
+      "label": "Discount Percentage"
+    },
+    {
+      "fieldname": "discount_amount",
+      "fieldtype": "Currency",
+      "label": "Discount Amount"
+    },
+    {
+      "fieldname": "applicable_fee_categories",
+      "fieldtype": "Small Text",
+      "label": "Applicable Fee Categories"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2025-12-31 00:00:00",
+  "modified_by": "Administrator",
+  "module": "University Finance",
+  "name": "Scholarship Type",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

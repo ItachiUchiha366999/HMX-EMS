@@ -1,0 +1,46 @@
+{
+  "doctype": "DocType",
+  "name": "Assessment CO Link",
+  "module": "University OBE",
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "course_outcome",
+      "fieldtype": "Link",
+      "label": "Course Outcome",
+      "options": "Course Outcome",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "co_code",
+      "fieldtype": "Data",
+      "label": "CO Code",
+      "fetch_from": "course_outcome.co_code",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "co_description",
+      "fieldtype": "Data",
+      "label": "CO Description",
+      "fetch_from": "course_outcome.description",
+      "read_only": 1
+    },
+    {
+      "fieldname": "weightage",
+      "fieldtype": "Percent",
+      "label": "Weightage",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "max_marks_for_co",
+      "fieldtype": "Float",
+      "label": "Max Marks for CO",
+      "in_list_view": 1
+    }
+  ],
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

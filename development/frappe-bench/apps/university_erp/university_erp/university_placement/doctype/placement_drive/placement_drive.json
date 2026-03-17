@@ -1,0 +1,347 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "PD-.YYYY.-.#####",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "drive_details_section",
+    "company",
+    "company_name",
+    "industry_type",
+    "column_break_1",
+    "drive_date",
+    "drive_end_date",
+    "academic_year",
+    "section_break_2",
+    "job_opening",
+    "job_title",
+    "package_offered",
+    "column_break_2",
+    "venue",
+    "coordinator",
+    "status",
+    "eligibility_section",
+    "eligible_programs",
+    "minimum_cgpa",
+    "column_break_3",
+    "maximum_backlogs",
+    "eligible_batch",
+    "rounds_section",
+    "rounds",
+    "registration_section",
+    "registration_start",
+    "registration_end",
+    "column_break_4",
+    "max_registrations",
+    "statistics_section",
+    "total_registered",
+    "total_shortlisted",
+    "column_break_5",
+    "total_placed",
+    "placement_percentage",
+    "notes_section",
+    "description",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "drive_details_section",
+      "fieldtype": "Section Break",
+      "label": "Drive Details"
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Company",
+      "options": "Placement Company",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "company.company_name",
+      "fieldname": "company_name",
+      "fieldtype": "Data",
+      "label": "Company Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "company.industry_type",
+      "fieldname": "industry_type",
+      "fieldtype": "Data",
+      "label": "Industry Type",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "drive_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Drive Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "drive_end_date",
+      "fieldtype": "Date",
+      "label": "Drive End Date"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_2",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "job_opening",
+      "fieldtype": "Link",
+      "label": "Job Opening",
+      "options": "Placement Job Opening"
+    },
+    {
+      "fetch_from": "job_opening.job_title",
+      "fieldname": "job_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Job Title",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "job_opening.package_offered",
+      "fieldname": "package_offered",
+      "fieldtype": "Currency",
+      "label": "Package Offered (LPA)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "venue",
+      "fieldtype": "Data",
+      "label": "Venue"
+    },
+    {
+      "fieldname": "coordinator",
+      "fieldtype": "Link",
+      "label": "Placement Coordinator",
+      "options": "User"
+    },
+    {
+      "default": "Scheduled",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Scheduled\nRegistration Open\nRegistration Closed\nIn Progress\nCompleted\nCancelled"
+    },
+    {
+      "fieldname": "eligibility_section",
+      "fieldtype": "Section Break",
+      "label": "Eligibility Criteria"
+    },
+    {
+      "fieldname": "eligible_programs",
+      "fieldtype": "Table MultiSelect",
+      "label": "Eligible Programs",
+      "options": "Job Eligible Program"
+    },
+    {
+      "default": "0",
+      "fieldname": "minimum_cgpa",
+      "fieldtype": "Float",
+      "label": "Minimum CGPA",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "maximum_backlogs",
+      "fieldtype": "Int",
+      "label": "Maximum Backlogs Allowed"
+    },
+    {
+      "fieldname": "eligible_batch",
+      "fieldtype": "Data",
+      "label": "Eligible Batch"
+    },
+    {
+      "fieldname": "rounds_section",
+      "fieldtype": "Section Break",
+      "label": "Selection Rounds"
+    },
+    {
+      "fieldname": "rounds",
+      "fieldtype": "Table",
+      "label": "Rounds",
+      "options": "Placement Round"
+    },
+    {
+      "fieldname": "registration_section",
+      "fieldtype": "Section Break",
+      "label": "Registration"
+    },
+    {
+      "fieldname": "registration_start",
+      "fieldtype": "Datetime",
+      "label": "Registration Start"
+    },
+    {
+      "fieldname": "registration_end",
+      "fieldtype": "Datetime",
+      "label": "Registration End"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "max_registrations",
+      "fieldtype": "Int",
+      "label": "Max Registrations"
+    },
+    {
+      "fieldname": "statistics_section",
+      "fieldtype": "Section Break",
+      "label": "Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_registered",
+      "fieldtype": "Int",
+      "label": "Total Registered",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_shortlisted",
+      "fieldtype": "Int",
+      "label": "Total Shortlisted",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_placed",
+      "fieldtype": "Int",
+      "label": "Total Placed",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "placement_percentage",
+      "fieldtype": "Percent",
+      "label": "Placement Percentage",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Additional Information"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Placement",
+  "name": "Placement Drive",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Placement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "drive_date",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "company_name",
+  "track_changes": 1
+}

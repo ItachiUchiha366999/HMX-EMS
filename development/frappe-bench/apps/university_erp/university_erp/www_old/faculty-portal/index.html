@@ -1,0 +1,291 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Faculty Portal") }}{% endblock %}
+
+{% block page_content %}
+<div class="faculty-portal-container">
+	<!-- Header Section -->
+	<div class="portal-header mb-5">
+		<div class="row">
+			<div class="col-md-8">
+				<h2>{{ _("Welcome, {0}").format(employee.employee_name) }}</h2>
+				<p class="text-muted">
+					{{ employee.designation }} | {{ employee.department }}
+				</p>
+			</div>
+			<div class="col-md-4 text-right">
+				<a href="/app/employee/{{ employee.name }}" class="btn btn-sm btn-primary">
+					{{ _("View Full Profile") }}
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Quick Stats -->
+	<div class="row mb-5">
+		<div class="col-md-3">
+			<div class="card text-center">
+				<div class="card-body">
+					<h3 class="text-primary">{{ teaching_assignments|length }}</h3>
+					<p class="text-muted mb-0">{{ _("Active Courses") }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card text-center">
+				<div class="card-body">
+					{% set total_hours = teaching_assignments|sum(attribute='total_weekly_hours') or 0 %}
+					<h3 class="text-success">{{ total_hours }}</h3>
+					<p class="text-muted mb-0">{{ _("Weekly Hours") }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card text-center">
+				<div class="card-body">
+					{% if feedback_summary %}
+						<h3 class="text-warning">{{ "%.2f"|format(feedback_summary.avg_rating or 0) }}</h3>
+					{% else %}
+						<h3 class="text-muted">-</h3>
+					{% endif %}
+					<p class="text-muted mb-0">{{ _("Avg. Rating") }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card text-center">
+				<div class="card-body">
+					{% if feedback_summary %}
+						<h3 class="text-info">{{ feedback_summary.total_feedbacks or 0 }}</h3>
+					{% else %}
+						<h3 class="text-muted">0</h3>
+					{% endif %}
+					<p class="text-muted mb-0">{{ _("Feedbacks") }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Teaching Assignments -->
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">{{ _("Current Teaching Assignments") }}</h5>
+				</div>
+				<div class="card-body">
+					{% if teaching_assignments %}
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>{{ _("Course") }}</th>
+										<th>{{ _("Program") }}</th>
+										<th>{{ _("Academic Year") }}</th>
+										<th>{{ _("Term") }}</th>
+										<th>{{ _("Lecture Hours") }}</th>
+										<th>{{ _("Lab Hours") }}</th>
+										<th>{{ _("Total Hours") }}</th>
+										<th>{{ _("Actions") }}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for assignment in teaching_assignments %}
+									<tr>
+										<td>{{ assignment.course_name }}</td>
+										<td>{{ assignment.program }}</td>
+										<td>{{ assignment.academic_year }}</td>
+										<td>{{ assignment.academic_term }}</td>
+										<td>{{ assignment.lecture_hours or 0 }}</td>
+										<td>{{ assignment.lab_hours or 0 }}</td>
+										<td><strong>{{ assignment.total_weekly_hours or 0 }}</strong></td>
+										<td>
+											<a href="/app/teaching-assignment/{{ assignment.name }}" class="btn btn-xs btn-secondary">
+												{{ _("View") }}
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					{% else %}
+						<p class="text-muted">{{ _("No teaching assignments found") }}</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Leave Balance & Recent Leaves -->
+	<div class="row mb-5">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">{{ _("Leave Balance") }}</h5>
+				</div>
+				<div class="card-body">
+					{% if leave_balance %}
+						<div class="table-responsive">
+							<table class="table table-sm">
+								<thead>
+									<tr>
+										<th>{{ _("Leave Type") }}</th>
+										<th>{{ _("Allocated") }}</th>
+										<th>{{ _("Used") }}</th>
+										<th>{{ _("Remaining") }}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for lb in leave_balance %}
+									<tr>
+										<td>{{ lb.leave_type }}</td>
+										<td>{{ lb.total_allocated }}</td>
+										<td>{{ lb.used }}</td>
+										<td><strong>{{ lb.remaining }}</strong></td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					{% else %}
+						<p class="text-muted">{{ _("No leave allocations found") }}</p>
+					{% endif %}
+					<div class="mt-3">
+						<a href="/app/leave-application/new" class="btn btn-sm btn-primary">
+							{{ _("Apply for Leave") }}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">{{ _("Recent Leave Applications") }}</h5>
+				</div>
+				<div class="card-body">
+					{% if recent_leaves %}
+						<div class="table-responsive">
+							<table class="table table-sm">
+								<thead>
+									<tr>
+										<th>{{ _("Leave Type") }}</th>
+										<th>{{ _("From") }}</th>
+										<th>{{ _("To") }}</th>
+										<th>{{ _("Days") }}</th>
+										<th>{{ _("Status") }}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for leave in recent_leaves %}
+									<tr>
+										<td>{{ leave.leave_type }}</td>
+										<td>{{ leave.from_date }}</td>
+										<td>{{ leave.to_date }}</td>
+										<td>{{ leave.total_leave_days }}</td>
+										<td>
+											<span class="badge badge-{{ 'success' if leave.status == 'Approved' else 'warning' if leave.status == 'Open' else 'danger' }}">
+												{{ leave.status }}
+											</span>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					{% else %}
+						<p class="text-muted">{{ _("No leave applications found") }}</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Performance Evaluations -->
+	{% if performance_evals %}
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">{{ _("Recent Performance Evaluations") }}</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>{{ _("Period") }}</th>
+									<th>{{ _("Evaluation Date") }}</th>
+									<th>{{ _("Overall Rating") }}</th>
+									<th>{{ _("Status") }}</th>
+									<th>{{ _("Actions") }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for eval in performance_evals %}
+								<tr>
+									<td>{{ eval.evaluation_period }}</td>
+									<td>{{ eval.evaluation_date }}</td>
+									<td>
+										<strong class="text-{{ 'success' if eval.overall_rating >= 4 else 'warning' if eval.overall_rating >= 3 else 'danger' }}">
+											{{ eval.overall_rating }}/5
+										</strong>
+									</td>
+									<td>
+										<span class="badge badge-{{ 'success' if eval.status == 'Completed' else 'warning' }}">
+											{{ eval.status }}
+										</span>
+									</td>
+									<td>
+										<a href="/app/faculty-performance-evaluation/{{ eval.name }}" class="btn btn-xs btn-secondary">
+											{{ _("View") }}
+										</a>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+</div>
+
+<style>
+	.faculty-portal-container {
+		padding: 2rem;
+	}
+
+	.portal-header {
+		padding-bottom: 1.5rem;
+		border-bottom: 2px solid #e9ecef;
+	}
+
+	.card {
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		border: none;
+		margin-bottom: 1.5rem;
+	}
+
+	.card-header {
+		background-color: #f8f9fa;
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	.table thead th {
+		background-color: #f8f9fa;
+		font-weight: 600;
+		font-size: 0.875rem;
+	}
+
+	.badge {
+		font-size: 0.75rem;
+		padding: 0.25rem 0.5rem;
+	}
+</style>
+{% endblock %}

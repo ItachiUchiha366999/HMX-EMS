@@ -1,0 +1,177 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Mark Attendance") }} - {{ _("Faculty Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container faculty-portal">
+    <div class="portal-header">
+        <a href="/faculty-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("Mark Attendance") }}</h2>
+    </div>
+
+    {% if not selected_class %}
+    <!-- Class Selection -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Today's Classes") }}</h3>
+
+        {% if today_classes %}
+        <div class="class-selection-list">
+            {% for cls in today_classes %}
+            <div class="class-selection-item {% if cls.attendance_marked %}marked{% endif %}">
+                <div class="class-info">
+                    <h4>{{ cls.course }}</h4>
+                    <p>{{ cls.student_group }} | {{ cls.student_count }} students</p>
+                    <span class="time">{{ frappe.format_time(cls.from_time) }} - {{ frappe.format_time(cls.to_time) }}</span>
+                    {% if cls.room %}
+                    <span class="room">{{ cls.room }}</span>
+                    {% endif %}
+                </div>
+                <div class="class-action">
+                    {% if cls.attendance_marked %}
+                    <span class="status-badge success">{{ _("Marked") }}</span>
+                    <a href="/faculty-portal/attendance?class={{ cls.name }}" class="btn btn-sm btn-default">{{ _("Edit") }}</a>
+                    {% else %}
+                    <a href="/faculty-portal/attendance?class={{ cls.name }}" class="btn btn-sm btn-primary">{{ _("Mark Attendance") }}</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No classes scheduled for today") }}</p>
+        {% endif %}
+    </div>
+
+    {% else %}
+    <!-- Attendance Marking Form -->
+    <div class="portal-section">
+        <div class="class-header">
+            <h3>{{ selected_class.course }}</h3>
+            <p>{{ selected_class.student_group }} | {{ frappe.format_date(selected_class.schedule_date) }}</p>
+            <p>{{ frappe.format_time(selected_class.from_time) }} - {{ frappe.format_time(selected_class.to_time) }}
+               {% if selected_class.room %}| {{ selected_class.room }}{% endif %}</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="attendance-actions">
+            <button class="btn btn-success btn-sm" onclick="markAll('Present')">
+                <svg class="icon icon-sm"><use href="#icon-check"></use></svg>
+                {{ _("Mark All Present") }}
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="markAll('Absent')">
+                <svg class="icon icon-sm"><use href="#icon-x"></use></svg>
+                {{ _("Mark All Absent") }}
+            </button>
+        </div>
+
+        <!-- Student List -->
+        <div class="attendance-list">
+            {% for student in students %}
+            <div class="attendance-student" data-student="{{ student.student }}">
+                <div class="student-info">
+                    <div class="student-avatar">
+                        {% if student.image %}
+                        <img src="{{ student.image }}" alt="{{ student.student_name }}">
+                        {% else %}
+                        <div class="avatar-placeholder">{{ student.student_name[0] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="student-details">
+                        <h4>{{ student.student_name }}</h4>
+                        <p>{{ student.student }}</p>
+                    </div>
+                </div>
+                <div class="attendance-options">
+                    <label class="attendance-option present {% if student.current_status == 'Present' %}selected{% endif %}">
+                        <input type="radio" name="att_{{ student.student }}" value="Present"
+                               {% if student.current_status == 'Present' %}checked{% endif %}>
+                        <span>{{ _("Present") }}</span>
+                    </label>
+                    <label class="attendance-option absent {% if student.current_status == 'Absent' %}selected{% endif %}">
+                        <input type="radio" name="att_{{ student.student }}" value="Absent"
+                               {% if student.current_status == 'Absent' %}checked{% endif %}>
+                        <span>{{ _("Absent") }}</span>
+                    </label>
+                    <label class="attendance-option late {% if student.current_status == 'Late' %}selected{% endif %}">
+                        <input type="radio" name="att_{{ student.student }}" value="Late"
+                               {% if student.current_status == 'Late' %}checked{% endif %}>
+                        <span>{{ _("Late") }}</span>
+                    </label>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+            <a href="/faculty-portal/attendance" class="btn btn-default">{{ _("Cancel") }}</a>
+            <button class="btn btn-primary" onclick="submitAttendance()">
+                <svg class="icon icon-sm"><use href="#icon-check"></use></svg>
+                {{ _("Submit Attendance") }}
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+// Handle attendance option selection
+$('.attendance-option input').on('change', function() {
+    const parent = $(this).closest('.attendance-options');
+    parent.find('.attendance-option').removeClass('selected');
+    $(this).closest('.attendance-option').addClass('selected');
+});
+
+function markAll(status) {
+    $(`.attendance-option.${status.toLowerCase()} input`).prop('checked', true).trigger('change');
+}
+
+function submitAttendance() {
+    const attendanceData = [];
+
+    $('.attendance-student').each(function() {
+        const student = $(this).data('student');
+        const status = $(this).find('input:checked').val();
+
+        if (status) {
+            attendanceData.push({
+                student: student,
+                status: status
+            });
+        }
+    });
+
+    if (attendanceData.length === 0) {
+        frappe.msgprint(__('Please mark attendance for at least one student'));
+        return;
+    }
+
+    frappe.call({
+        method: 'university_erp.university_portals.www.faculty-portal.attendance.mark_attendance',
+        args: {
+            class_schedule: '{{ selected_class.name if selected_class else "" }}',
+            attendance_data: JSON.stringify(attendanceData)
+        },
+        callback: function(r) {
+            if (r.message && r.message.success) {
+                frappe.msgprint({
+                    title: __('Success'),
+                    message: r.message.message,
+                    indicator: 'green'
+                });
+                setTimeout(() => window.location.href = '/faculty-portal/attendance', 1500);
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

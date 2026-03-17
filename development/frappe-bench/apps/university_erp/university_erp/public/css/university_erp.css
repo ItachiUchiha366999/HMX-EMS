@@ -1,0 +1,128 @@
+/**
+ * University ERP - Main Application Styles
+ * Core styles for the desk/backend interface
+ */
+
+/* Import theme variables */
+:root {
+  --university-primary: #6366f1;
+  --university-primary-hover: #4f46e5;
+  --university-primary-light: #e0e7ff;
+  --university-success: #10b981;
+  --university-warning: #f59e0b;
+  --university-error: #ef4444;
+  --university-info: #3b82f6;
+}
+
+/* Desk customizations */
+.frappe-control[data-fieldtype="Link"] .link-btn,
+.frappe-control[data-fieldtype="Dynamic Link"] .link-btn {
+  border-radius: 6px;
+}
+
+/* Form styling */
+.frappe-control input,
+.frappe-control select,
+.frappe-control textarea {
+  border-radius: 6px;
+}
+
+/* Button styling */
+.btn-primary-dark {
+  background-color: var(--university-primary);
+  border-color: var(--university-primary);
+}
+
+.btn-primary-dark:hover {
+  background-color: var(--university-primary-hover);
+  border-color: var(--university-primary-hover);
+}
+
+/* Card styling */
+.frappe-card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Sidebar styling */
+.desk-sidebar .sidebar-menu .sidebar-item.active {
+  background-color: var(--university-primary-light);
+}
+
+.desk-sidebar .sidebar-menu .sidebar-item.active a {
+  color: var(--university-primary);
+}
+
+/* Page header */
+.page-head .page-title {
+  font-weight: 600;
+}
+
+/* List view enhancements */
+.list-row:hover {
+  background-color: #f9fafb;
+}
+
+/* Report view */
+.report-wrapper .datatable .dt-scrollable {
+  border-radius: 8px;
+}
+
+/* Modal styling */
+.modal-content {
+  border-radius: 12px;
+}
+
+.modal-header {
+  border-radius: 12px 12px 0 0;
+}
+
+/* Alert styling */
+.alert {
+  border-radius: 8px;
+}
+
+/* Badge styling */
+.badge,
+.indicator-pill {
+  border-radius: 9999px;
+}
+
+/* University-specific workspace styling */
+[data-page-container="workspace"] .widget {
+  border-radius: 12px;
+}
+
+/* Student-related highlighting */
+.doctype-student .layout-main-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+/* Faculty-related highlighting */
+.doctype-faculty .layout-main-section {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+/* Quick entry dialog */
+.quick-entry-dialog .modal-dialog {
+  max-width: 600px;
+}
+
+/* Timeline improvements */
+.timeline-item {
+  border-radius: 8px;
+}
+
+/* Print improvements */
+@media print {
+  .page-head,
+  .desk-sidebar,
+  .navbar {
+    display: none !important;
+  }
+
+  .layout-main-section {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

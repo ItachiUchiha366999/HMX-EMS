@@ -1,0 +1,69 @@
+{
+  "actions": [],
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": ["field_name", "field_label", "field_type", "column_break_1", "link_to", "options", "default_value", "is_mandatory"],
+  "fields": [
+    {
+      "fieldname": "field_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Field Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "field_label",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Field Label",
+      "reqd": 1
+    },
+    {
+      "fieldname": "field_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Field Type",
+      "options": "\nData\nLink\nDate\nDatetime\nSelect\nCheck\nInt\nFloat"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.field_type == 'Link'",
+      "fieldname": "link_to",
+      "fieldtype": "Data",
+      "label": "Link To"
+    },
+    {
+      "depends_on": "eval:doc.field_type == 'Select'",
+      "fieldname": "options",
+      "fieldtype": "Text",
+      "label": "Options"
+    },
+    {
+      "fieldname": "default_value",
+      "fieldtype": "Data",
+      "label": "Default Value"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_mandatory",
+      "fieldtype": "Check",
+      "label": "Is Mandatory"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "Report Filter Definition",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

@@ -1,0 +1,61 @@
+{
+  "actions": [],
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "level",
+    "assignee",
+    "column_break_1",
+    "days_before_escalation",
+    "auto_escalate_on_sla_breach"
+  ],
+  "fields": [
+    {
+      "fieldname": "level",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Level",
+      "reqd": 1
+    },
+    {
+      "fieldname": "assignee",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Assignee",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "3",
+      "description": "Days to wait before auto-escalating to next level",
+      "fieldname": "days_before_escalation",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Days Before Escalation"
+    },
+    {
+      "default": 0,
+      "fieldname": "auto_escalate_on_sla_breach",
+      "fieldtype": "Check",
+      "label": "Auto-Escalate on SLA Breach"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Grievance",
+  "name": "Grievance Escalation Rule",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

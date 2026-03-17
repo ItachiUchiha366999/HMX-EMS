@@ -1,0 +1,225 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:dashboard_name",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "dashboard_name",
+    "dashboard_type",
+    "description",
+    "column_break_basic",
+    "is_public",
+    "is_active",
+    "owner_role",
+    "view_count",
+    "section_break_settings",
+    "refresh_interval",
+    "layout_type",
+    "columns",
+    "column_break_filters",
+    "enable_date_filter",
+    "default_date_range",
+    "enable_department_filter",
+    "enable_program_filter",
+    "section_break_widgets",
+    "widgets",
+    "section_break_access",
+    "allowed_roles",
+    "column_break_access",
+    "allowed_users"
+  ],
+  "fields": [
+    {
+      "fieldname": "dashboard_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Dashboard Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "dashboard_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Dashboard Type",
+      "options": "\nExecutive\nAcademic\nFinancial\nAdmissions\nExamination\nFaculty\nStudent\nDepartmental\nCustom",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_public",
+      "fieldtype": "Check",
+      "label": "Is Public"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "owner_role",
+      "fieldtype": "Link",
+      "label": "Owner Role",
+      "options": "Role"
+    },
+    {
+      "default": "0",
+      "fieldname": "view_count",
+      "fieldtype": "Int",
+      "label": "View Count",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Display Settings"
+    },
+    {
+      "default": "Manual",
+      "fieldname": "refresh_interval",
+      "fieldtype": "Select",
+      "label": "Refresh Interval",
+      "options": "Manual\n1 minute\n5 minutes\n15 minutes\n30 minutes\n1 hour"
+    },
+    {
+      "default": "Grid",
+      "fieldname": "layout_type",
+      "fieldtype": "Select",
+      "label": "Layout Type",
+      "options": "Grid\nFreeform\nTabs"
+    },
+    {
+      "default": "3",
+      "fieldname": "columns",
+      "fieldtype": "Int",
+      "label": "Columns"
+    },
+    {
+      "fieldname": "column_break_filters",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "enable_date_filter",
+      "fieldtype": "Check",
+      "label": "Enable Date Filter"
+    },
+    {
+      "default": "This Month",
+      "depends_on": "eval:doc.enable_date_filter",
+      "fieldname": "default_date_range",
+      "fieldtype": "Select",
+      "label": "Default Date Range",
+      "options": "Today\nThis Week\nThis Month\nThis Quarter\nThis Year\nLast 7 Days\nLast 30 Days\nLast 90 Days\nLast Year\nCustom"
+    },
+    {
+      "default": "0",
+      "fieldname": "enable_department_filter",
+      "fieldtype": "Check",
+      "label": "Enable Department Filter"
+    },
+    {
+      "default": "0",
+      "fieldname": "enable_program_filter",
+      "fieldtype": "Check",
+      "label": "Enable Program Filter"
+    },
+    {
+      "fieldname": "section_break_widgets",
+      "fieldtype": "Section Break",
+      "label": "Widgets"
+    },
+    {
+      "fieldname": "widgets",
+      "fieldtype": "Table",
+      "label": "Widgets",
+      "options": "Dashboard Widget"
+    },
+    {
+      "fieldname": "section_break_access",
+      "fieldtype": "Section Break",
+      "label": "Access Control"
+    },
+    {
+      "fieldname": "allowed_roles",
+      "fieldtype": "Table MultiSelect",
+      "label": "Allowed Roles",
+      "options": "Dashboard Role"
+    },
+    {
+      "fieldname": "column_break_access",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allowed_users",
+      "fieldtype": "Table MultiSelect",
+      "label": "Allowed Users",
+      "options": "Dashboard User"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "Custom Dashboard",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

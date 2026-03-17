@@ -1,0 +1,65 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ recipient_name or "Sir/Madam" }},</p>
+
+<p>This is a reminder about a pending grievance that requires your attention.</p>
+
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #ffc107;">
+    <strong>Reminder:</strong>
+    <p style="margin: 10px 0 0 0;">This grievance has been pending for <strong>{{ days_open }}</strong> days.
+    {% if sla_status == 'At Risk' %}
+    It is at risk of breaching the SLA deadline.
+    {% elif sla_status == 'Breached' %}
+    The SLA deadline has been breached.
+    {% endif %}
+    </p>
+</div>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 40%;">Grievance ID</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ grievance_id }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Subject</td>
+        <td style="padding: 10px;">{{ subject }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Category</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ category }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Priority</td>
+        <td style="padding: 10px;">{{ priority }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Current Status</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ current_status }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Days Open</td>
+        <td style="padding: 10px;">{{ days_open }} days</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Expected Resolution</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ expected_resolution_date }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">SLA Status</td>
+        <td style="padding: 10px;"><strong style="color: {% if sla_status == 'Breached' %}#dc3545{% elif sla_status == 'At Risk' %}#ffc107{% else %}#28a745{% endif %};">{{ sla_status }}</strong></td>
+    </tr>
+</table>
+
+<p>Please take immediate action to address this grievance.</p>
+
+<p style="margin-top: 20px;">
+    <a href="{{ grievance_link }}" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">View Grievance</a>
+</p>
+
+<p>
+    Best regards,<br>
+    Grievance Management System<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

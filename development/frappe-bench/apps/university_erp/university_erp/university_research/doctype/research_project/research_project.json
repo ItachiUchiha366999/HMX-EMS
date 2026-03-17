@@ -1,0 +1,276 @@
+{
+  "actions": [],
+  "autoname": "format:RP-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "project_title",
+    "project_type",
+    "column_break_1",
+    "principal_investigator",
+    "pi_name",
+    "department",
+    "status",
+    "section_team",
+    "co_investigators",
+    "section_funding",
+    "funding_agency",
+    "funding_scheme",
+    "sanctioned_amount",
+    "received_amount",
+    "column_break_2",
+    "sanction_letter_no",
+    "sanction_date",
+    "project_duration_months",
+    "section_dates",
+    "start_date",
+    "expected_end_date",
+    "actual_end_date",
+    "section_description",
+    "abstract",
+    "objectives",
+    "methodology",
+    "section_outcomes",
+    "publications",
+    "patents_filed",
+    "phd_produced"
+  ],
+  "fields": [
+    {
+      "fieldname": "project_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Project Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Project Type",
+      "options": "Sponsored\nConsultancy\nInternal\nCollaborative\nPhD Research",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "principal_investigator",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Principal Investigator",
+      "options": "Employee",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "principal_investigator.employee_name",
+      "fieldname": "pi_name",
+      "fieldtype": "Data",
+      "label": "PI Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "default": "Proposed",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Proposed\nApproved\nOngoing\nCompleted\nTerminated"
+    },
+    {
+      "fieldname": "section_team",
+      "fieldtype": "Section Break",
+      "label": "Research Team"
+    },
+    {
+      "fieldname": "co_investigators",
+      "fieldtype": "Table",
+      "label": "Co-Investigators",
+      "options": "Research Team Member"
+    },
+    {
+      "fieldname": "section_funding",
+      "fieldtype": "Section Break",
+      "label": "Funding Details"
+    },
+    {
+      "fieldname": "funding_agency",
+      "fieldtype": "Data",
+      "label": "Funding Agency"
+    },
+    {
+      "fieldname": "funding_scheme",
+      "fieldtype": "Data",
+      "label": "Funding Scheme"
+    },
+    {
+      "default": "0",
+      "fieldname": "sanctioned_amount",
+      "fieldtype": "Currency",
+      "label": "Sanctioned Amount"
+    },
+    {
+      "default": "0",
+      "fieldname": "received_amount",
+      "fieldtype": "Currency",
+      "label": "Amount Received"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sanction_letter_no",
+      "fieldtype": "Data",
+      "label": "Sanction Letter No."
+    },
+    {
+      "fieldname": "sanction_date",
+      "fieldtype": "Date",
+      "label": "Sanction Date"
+    },
+    {
+      "fieldname": "project_duration_months",
+      "fieldtype": "Int",
+      "label": "Duration (months)"
+    },
+    {
+      "fieldname": "section_dates",
+      "fieldtype": "Section Break",
+      "label": "Project Timeline"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date"
+    },
+    {
+      "fieldname": "expected_end_date",
+      "fieldtype": "Date",
+      "label": "Expected End Date"
+    },
+    {
+      "fieldname": "actual_end_date",
+      "fieldtype": "Date",
+      "label": "Actual End Date"
+    },
+    {
+      "fieldname": "section_description",
+      "fieldtype": "Section Break",
+      "label": "Project Description"
+    },
+    {
+      "fieldname": "abstract",
+      "fieldtype": "Text Editor",
+      "label": "Project Abstract"
+    },
+    {
+      "fieldname": "objectives",
+      "fieldtype": "Text Editor",
+      "label": "Objectives"
+    },
+    {
+      "fieldname": "methodology",
+      "fieldtype": "Text Editor",
+      "label": "Methodology"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_outcomes",
+      "fieldtype": "Section Break",
+      "label": "Outcomes"
+    },
+    {
+      "fieldname": "publications",
+      "fieldtype": "Table",
+      "label": "Publications",
+      "options": "Project Publication Link"
+    },
+    {
+      "default": "0",
+      "fieldname": "patents_filed",
+      "fieldtype": "Int",
+      "label": "Patents Filed"
+    },
+    {
+      "default": "0",
+      "fieldname": "phd_produced",
+      "fieldtype": "Int",
+      "label": "PhD Students Produced"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Research",
+  "name": "Research Project",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

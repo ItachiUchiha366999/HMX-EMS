@@ -1,0 +1,197 @@
+{
+  "actions": [],
+  "creation": "2025-12-31 16:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "course",
+    "course_name",
+    "column_break_2",
+    "academic_term",
+    "exam_type",
+    "section_break_4",
+    "exam_date",
+    "start_time",
+    "end_time",
+    "column_break_7",
+    "venue",
+    "max_students",
+    "section_break_9",
+    "invigilators",
+    "section_break_11",
+    "instructions"
+  ],
+  "fields": [
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "fetch_from": "course.course_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "label": "Academic Term",
+      "options": "Academic Term",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "exam_type",
+      "fieldtype": "Select",
+      "label": "Exam Type",
+      "options": "Mid-Term\nEnd-Term\nSupplementary\nImprovement",
+      "default": "End-Term",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_4",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "exam_date",
+      "fieldtype": "Date",
+      "label": "Exam Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "start_time",
+      "fieldtype": "Time",
+      "label": "Start Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_time",
+      "fieldtype": "Time",
+      "label": "End Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_7",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "venue",
+      "fieldtype": "Link",
+      "label": "Venue",
+      "options": "Room",
+      "reqd": 1
+    },
+    {
+      "fieldname": "max_students",
+      "fieldtype": "Int",
+      "label": "Max Students"
+    },
+    {
+      "fieldname": "section_break_9",
+      "fieldtype": "Section Break",
+      "label": "Invigilators"
+    },
+    {
+      "fieldname": "invigilators",
+      "fieldtype": "Table",
+      "label": "Invigilators",
+      "options": "Exam Invigilator"
+    },
+    {
+      "fieldname": "section_break_11",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "instructions",
+      "fieldtype": "Text Editor",
+      "label": "Special Instructions"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-12-31 16:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Examinations",
+  "name": "Exam Schedule",
+  "owner": "Administrator",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "autoname": "hash",
+  "naming_rule": "Random",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "track_changes": 1
+}

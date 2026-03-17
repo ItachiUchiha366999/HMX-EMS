@@ -1,0 +1,170 @@
+{
+  "actions": [],
+  "autoname": "field:category_name",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "category_name",
+    "description",
+    "depreciation_section",
+    "depreciation_method",
+    "total_number_of_depreciations",
+    "frequency_of_depreciation",
+    "column_break_depreciation",
+    "rate_of_depreciation",
+    "expected_value_after_useful_life",
+    "accounts_section",
+    "fixed_asset_account",
+    "accumulated_depreciation_account",
+    "column_break_accounts",
+    "depreciation_expense_account",
+    "cwip_section",
+    "is_cwip_enabled",
+    "cwip_account"
+  ],
+  "fields": [
+    {
+      "fieldname": "category_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Category Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "depreciation_section",
+      "fieldtype": "Section Break",
+      "label": "Depreciation Settings"
+    },
+    {
+      "default": "Straight Line",
+      "fieldname": "depreciation_method",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Depreciation Method",
+      "options": "\nStraight Line\nDouble Declining Balance\nWritten Down Value"
+    },
+    {
+      "default": "0",
+      "description": "Total number of depreciation entries to be made",
+      "fieldname": "total_number_of_depreciations",
+      "fieldtype": "Int",
+      "label": "Total Number of Depreciations"
+    },
+    {
+      "default": "12",
+      "description": "Frequency of depreciation in months (e.g., 12 for yearly)",
+      "fieldname": "frequency_of_depreciation",
+      "fieldtype": "Int",
+      "label": "Frequency of Depreciation (Months)"
+    },
+    {
+      "fieldname": "column_break_depreciation",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "depends_on": "eval:doc.depreciation_method=='Written Down Value'",
+      "fieldname": "rate_of_depreciation",
+      "fieldtype": "Percent",
+      "label": "Rate of Depreciation (%)"
+    },
+    {
+      "default": "0",
+      "fieldname": "expected_value_after_useful_life",
+      "fieldtype": "Currency",
+      "label": "Expected Value After Useful Life"
+    },
+    {
+      "fieldname": "accounts_section",
+      "fieldtype": "Section Break",
+      "label": "Accounts"
+    },
+    {
+      "fieldname": "fixed_asset_account",
+      "fieldtype": "Link",
+      "label": "Fixed Asset Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "accumulated_depreciation_account",
+      "fieldtype": "Link",
+      "label": "Accumulated Depreciation Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_accounts",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "depreciation_expense_account",
+      "fieldtype": "Link",
+      "label": "Depreciation Expense Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "cwip_section",
+      "fieldtype": "Section Break",
+      "label": "Capital Work in Progress"
+    },
+    {
+      "default": "0",
+      "description": "Enable if you want to track assets under construction",
+      "fieldname": "is_cwip_enabled",
+      "fieldtype": "Check",
+      "label": "Enable Capital Work in Progress Accounting"
+    },
+    {
+      "depends_on": "is_cwip_enabled",
+      "fieldname": "cwip_account",
+      "fieldtype": "Link",
+      "label": "Capital Work in Progress Account",
+      "options": "Account"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Asset Category",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "category_name, depreciation_method",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

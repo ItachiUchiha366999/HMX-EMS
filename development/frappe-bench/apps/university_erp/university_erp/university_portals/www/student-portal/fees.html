@@ -1,0 +1,151 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Fee Payments") }} - {{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <div class="portal-header">
+        <a href="/student-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("Fee Payments") }}</h2>
+    </div>
+
+    <!-- Fee Summary -->
+    {% if fee_summary %}
+    <div class="fee-summary">
+        <div class="summary-card">
+            <h3>{{ frappe.format_value(fee_summary.total_fees, {"fieldtype": "Currency"}) }}</h3>
+            <p>{{ _("Total Fees") }}</p>
+        </div>
+        <div class="summary-card success">
+            <h3>{{ frappe.format_value(fee_summary.total_paid, {"fieldtype": "Currency"}) }}</h3>
+            <p>{{ _("Paid") }}</p>
+        </div>
+        <div class="summary-card {% if fee_summary.total_pending > 0 %}danger{% endif %}">
+            <h3>{{ frappe.format_value(fee_summary.total_pending, {"fieldtype": "Currency"}) }}</h3>
+            <p>{{ _("Pending") }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Pending Fees -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Pending Fees") }}</h3>
+
+        {% if pending_fees %}
+        <div class="fee-list">
+            {% for fee in pending_fees %}
+            <div class="fee-card status-{{ fee.status | lower | replace(' ', '-') }}">
+                <div class="fee-header">
+                    <div class="fee-info">
+                        <h4>{{ fee.fee_structure }}</h4>
+                        <p>{{ fee.academic_year }} - {{ fee.academic_term }}</p>
+                    </div>
+                    <span class="fee-status {{ fee.status | lower | replace(' ', '-') }}">{{ fee.status }}</span>
+                </div>
+                <div class="fee-details">
+                    <div class="fee-amounts">
+                        <div class="amount-item">
+                            <span class="label">{{ _("Total") }}</span>
+                            <span class="value">{{ frappe.format_value(fee.total_amount, {"fieldtype": "Currency"}) }}</span>
+                        </div>
+                        <div class="amount-item">
+                            <span class="label">{{ _("Paid") }}</span>
+                            <span class="value">{{ frappe.format_value(fee.paid_amount, {"fieldtype": "Currency"}) }}</span>
+                        </div>
+                        <div class="amount-item highlight">
+                            <span class="label">{{ _("Due") }}</span>
+                            <span class="value">{{ frappe.format_value(fee.outstanding_amount, {"fieldtype": "Currency"}) }}</span>
+                        </div>
+                    </div>
+                    <div class="fee-due-date">
+                        <span class="label">{{ _("Due Date") }}:</span>
+                        <span class="value">{{ frappe.format_date(fee.due_date) }}</span>
+                    </div>
+                </div>
+                <div class="fee-actions">
+                    <button class="btn btn-primary btn-sm pay-now-btn" data-fee="{{ fee.name }}">
+                        {{ _("Pay Now") }}
+                    </button>
+                    <a href="/printview?doctype=Fee Schedule&name={{ fee.name }}&format=Standard" target="_blank" class="btn btn-default btn-sm">
+                        {{ _("View Details") }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state success">
+            <svg class="icon icon-lg"><use href="#icon-check-circle"></use></svg>
+            <p>{{ _("All fees are paid! You have no pending dues.") }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Payment History -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Payment History") }}</h3>
+
+        {% if payment_history %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{{ _("Date") }}</th>
+                        <th>{{ _("Description") }}</th>
+                        <th>{{ _("Mode") }}</th>
+                        <th>{{ _("Reference") }}</th>
+                        <th class="text-right">{{ _("Amount") }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payment_history %}
+                    <tr>
+                        <td>{{ frappe.format_date(payment.posting_date) }}</td>
+                        <td>{{ payment.fee_structure }} ({{ payment.academic_term }})</td>
+                        <td>{{ payment.mode_of_payment }}</td>
+                        <td>{{ payment.reference_no or '-' }}</td>
+                        <td class="text-right">{{ frappe.format_value(payment.paid_amount, {"fieldtype": "Currency"}) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No payment history found") }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+frappe.ready(function() {
+    $('.pay-now-btn').on('click', function() {
+        const feeSchedule = $(this).data('fee');
+
+        frappe.call({
+            method: 'university_erp.university_portals.www.student-portal.fees.initiate_fee_payment',
+            args: { fee_schedule: feeSchedule },
+            callback: function(r) {
+                if (r.message && r.message.success) {
+                    frappe.msgprint({
+                        title: __('Payment'),
+                        message: __('Redirecting to payment gateway...'),
+                        indicator: 'blue'
+                    });
+                    // Redirect to payment URL
+                    // window.location.href = r.message.payment_url;
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

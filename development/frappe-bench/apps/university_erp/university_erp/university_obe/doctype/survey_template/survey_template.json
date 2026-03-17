@@ -1,0 +1,200 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:template_name",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "survey_type",
+    "program",
+    "column_break_status",
+    "is_active",
+    "is_default",
+    "section_break_intro",
+    "introduction_text",
+    "section_break_settings",
+    "include_po_ratings",
+    "include_overall_ratings",
+    "column_break_settings",
+    "include_comments",
+    "anonymous_allowed",
+    "section_break_questions",
+    "additional_questions",
+    "section_break_thank_you",
+    "thank_you_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "survey_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Survey Type",
+      "options": "Alumni Survey\nEmployer Survey\nStudent Exit Survey\nCourse End Survey\nProgram Exit Survey\nMid-term Feedback",
+      "reqd": 1
+    },
+    {
+      "description": "Leave blank for all programs",
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "default": "0",
+      "description": "Use this template as default for the survey type",
+      "fieldname": "is_default",
+      "fieldtype": "Check",
+      "label": "Is Default"
+    },
+    {
+      "fieldname": "section_break_intro",
+      "fieldtype": "Section Break",
+      "label": "Introduction"
+    },
+    {
+      "fieldname": "introduction_text",
+      "fieldtype": "Text Editor",
+      "label": "Introduction Text"
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Survey Settings"
+    },
+    {
+      "default": "1",
+      "fieldname": "include_po_ratings",
+      "fieldtype": "Check",
+      "label": "Include PO Ratings"
+    },
+    {
+      "default": "1",
+      "fieldname": "include_overall_ratings",
+      "fieldtype": "Check",
+      "label": "Include Overall Ratings"
+    },
+    {
+      "fieldname": "column_break_settings",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "include_comments",
+      "fieldtype": "Check",
+      "label": "Include Comment Fields"
+    },
+    {
+      "default": "0",
+      "fieldname": "anonymous_allowed",
+      "fieldtype": "Check",
+      "label": "Allow Anonymous Responses"
+    },
+    {
+      "fieldname": "section_break_questions",
+      "fieldtype": "Section Break",
+      "label": "Additional Questions"
+    },
+    {
+      "fieldname": "additional_questions",
+      "fieldtype": "Table",
+      "label": "Additional Questions",
+      "options": "Survey Question Item"
+    },
+    {
+      "fieldname": "section_break_thank_you",
+      "fieldtype": "Section Break",
+      "label": "Thank You Message"
+    },
+    {
+      "default": "<p>Thank you for taking the time to complete this survey. Your feedback is valuable and will help us improve our programs.</p>",
+      "fieldname": "thank_you_message",
+      "fieldtype": "Text Editor",
+      "label": "Thank You Message"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Survey Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

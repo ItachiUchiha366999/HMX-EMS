@@ -1,0 +1,12 @@
+2026-03-16 17:38:34,820 INFO /home/frappe/.local/bin/bench --site university.local migrate
+2026-03-16 17:38:34,821 WARNING Command not being executed in bench directory
+2026-03-16 17:38:40,537 INFO /home/frappe/.local/bin/bench --site university.local migrate
+2026-03-16 17:38:40,538 WARNING Command not being executed in bench directory
+2026-03-16 17:40:37,126 INFO /home/frappe/.local/bin/bench --site university.local migrate
+2026-03-16 17:40:37,127 WARNING Command not being executed in bench directory
+2026-03-16 19:45:29,634 INFO /home/frappe/.local/bin/bench --site university.local console
+2026-03-16 19:45:29,636 WARNING Command not being executed in bench directory
+2026-03-16 19:45:36,681 INFO /home/frappe/.local/bin/bench --site university.local console
+2026-03-16 19:45:36,684 WARNING Command not being executed in bench directory
+2026-03-16 20:39:59,938 INFO /home/frappe/.local/bin/bench --site university.local clear-cache
+2026-03-16 20:39:59,941 WARNING Command not being executed in bench directory

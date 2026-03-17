@@ -1,0 +1,192 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:TTA-{YYYY}-{#####}",
+  "creation": "2026-01-01 00:00:00",
+  "doctype": "DocType",
+  "document_type": "Document",
+  "engine": "InnoDB",
+  "field_order": [
+    "leave_application",
+    "original_instructor",
+    "column_break_1",
+    "substitute_instructor",
+    "substitute_name",
+    "section_break_1",
+    "course",
+    "course_name",
+    "program",
+    "column_break_2",
+    "from_date",
+    "to_date",
+    "classes_covered",
+    "section_break_2",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "leave_application",
+      "fieldtype": "Link",
+      "label": "Leave Application",
+      "options": "Leave Application",
+      "reqd": 1
+    },
+    {
+      "fieldname": "original_instructor",
+      "fieldtype": "Link",
+      "label": "Original Instructor",
+      "options": "Employee",
+      "reqd": 1,
+      "fetch_from": "leave_application.employee"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "substitute_instructor",
+      "fieldtype": "Link",
+      "label": "Substitute Instructor",
+      "options": "Employee",
+      "reqd": 1
+    },
+    {
+      "fieldname": "substitute_name",
+      "fieldtype": "Data",
+      "label": "Substitute Name",
+      "fetch_from": "substitute_instructor.employee_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_1",
+      "fieldtype": "Section Break",
+      "label": "Assignment Details"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "fetch_from": "course.course_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "from_date",
+      "fieldtype": "Date",
+      "label": "From Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "to_date",
+      "fieldtype": "Date",
+      "label": "To Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "classes_covered",
+      "fieldtype": "Int",
+      "label": "Classes Covered"
+    },
+    {
+      "fieldname": "section_break_2",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-01-01 00:00:00",
+  "modified_by": "Administrator",
+  "module": "Faculty Management",
+  "name": "Temporary Teaching Assignment",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HR Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,61 @@
+{
+    "actions": [],
+    "creation": "2026-01-02 00:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "expense_head",
+        "allocated_amount",
+        "utilized_amount",
+        "balance",
+        "remarks"
+    ],
+    "fields": [
+        {
+            "fieldname": "expense_head",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Expense Head",
+            "reqd": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "allocated_amount",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Allocated Amount"
+        },
+        {
+            "default": "0",
+            "fieldname": "utilized_amount",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Utilized Amount"
+        },
+        {
+            "default": "0",
+            "fieldname": "balance",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Balance",
+            "read_only": 1
+        },
+        {
+            "fieldname": "remarks",
+            "fieldtype": "Small Text",
+            "label": "Remarks"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-02 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University Research",
+    "name": "Grant Utilization",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}

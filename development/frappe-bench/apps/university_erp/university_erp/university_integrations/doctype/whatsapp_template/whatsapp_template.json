@@ -1,0 +1,192 @@
+{
+  "actions": [],
+  "autoname": "field:template_key",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "template_key",
+    "category",
+    "column_break_basic",
+    "language",
+    "status",
+    "meta_template_id",
+    "header_section",
+    "header_type",
+    "header_text",
+    "column_break_header",
+    "header_media_url",
+    "body_section",
+    "body_text",
+    "footer_section",
+    "footer_text",
+    "buttons_section",
+    "buttons",
+    "variables_section",
+    "available_variables"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Template Name",
+      "reqd": 1
+    },
+    {
+      "description": "Unique identifier for the template (e.g., fee_reminder, exam_schedule)",
+      "fieldname": "template_key",
+      "fieldtype": "Data",
+      "label": "Template Key",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Utility",
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Marketing\nUtility\nAuthentication",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "en",
+      "fieldname": "language",
+      "fieldtype": "Data",
+      "label": "Language Code"
+    },
+    {
+      "default": "Pending",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Pending\nApproved\nRejected\nPaused",
+      "read_only": 1
+    },
+    {
+      "description": "Template ID from Meta/WhatsApp after approval",
+      "fieldname": "meta_template_id",
+      "fieldtype": "Data",
+      "label": "Meta Template ID"
+    },
+    {
+      "fieldname": "header_section",
+      "fieldtype": "Section Break",
+      "label": "Header"
+    },
+    {
+      "default": "None",
+      "fieldname": "header_type",
+      "fieldtype": "Select",
+      "label": "Header Type",
+      "options": "None\nText\nImage\nDocument\nVideo"
+    },
+    {
+      "depends_on": "eval:doc.header_type=='Text'",
+      "fieldname": "header_text",
+      "fieldtype": "Data",
+      "label": "Header Text"
+    },
+    {
+      "fieldname": "column_break_header",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:['Image', 'Document', 'Video'].includes(doc.header_type)",
+      "description": "URL for media header (optional, can be provided at send time)",
+      "fieldname": "header_media_url",
+      "fieldtype": "Data",
+      "label": "Header Media URL"
+    },
+    {
+      "fieldname": "body_section",
+      "fieldtype": "Section Break",
+      "label": "Body"
+    },
+    {
+      "description": "Use {{1}}, {{2}}, etc. for variables",
+      "fieldname": "body_text",
+      "fieldtype": "Small Text",
+      "label": "Body Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "footer_section",
+      "fieldtype": "Section Break",
+      "label": "Footer"
+    },
+    {
+      "description": "Optional footer text (max 60 characters)",
+      "fieldname": "footer_text",
+      "fieldtype": "Data",
+      "label": "Footer Text"
+    },
+    {
+      "fieldname": "buttons_section",
+      "fieldtype": "Section Break",
+      "label": "Buttons"
+    },
+    {
+      "fieldname": "buttons",
+      "fieldtype": "Table",
+      "label": "Buttons",
+      "options": "WhatsApp Template Button"
+    },
+    {
+      "fieldname": "variables_section",
+      "fieldtype": "Section Break",
+      "label": "Variables"
+    },
+    {
+      "description": "List of available variables for this template",
+      "fieldname": "available_variables",
+      "fieldtype": "Small Text",
+      "label": "Available Variables",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "WhatsApp Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

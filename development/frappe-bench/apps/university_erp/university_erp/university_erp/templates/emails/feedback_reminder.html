@@ -1,0 +1,65 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ student_name or "Student" }},</p>
+
+<p>We kindly request you to complete the following feedback form(s). Your feedback is valuable and helps us improve our academic programs and services.</p>
+
+{% if feedback_forms %}
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <thead>
+        <tr style="background: #f5f5f5;">
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Feedback Form</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Type</th>
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Deadline</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #ddd;">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for form in feedback_forms %}
+        <tr>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ form.title }}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ form.form_type }}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ form.end_date }}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">
+                {% if form.is_mandatory %}
+                <span style="background: #f8d7da; color: #721c24; padding: 3px 8px; border-radius: 3px; font-size: 12px;">Mandatory</span>
+                {% else %}
+                <span style="background: #d4edda; color: #155724; padding: 3px 8px; border-radius: 3px; font-size: 12px;">Optional</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<div style="background: #e8f4fd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>Why Your Feedback Matters:</strong>
+    <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+        <li>Helps improve course content and teaching methods</li>
+        <li>Influences future academic planning</li>
+        <li>Ensures your concerns are heard and addressed</li>
+        <li>Contributes to a better learning environment for all</li>
+    </ul>
+</div>
+
+{% if is_anonymous_allowed %}
+<p><strong>Note:</strong> You can submit your feedback anonymously. Your identity will not be revealed to the instructors.</p>
+{% endif %}
+
+<p style="margin-top: 20px;">
+    <a href="{{ portal_link or '/student-portal/feedback' }}" style="background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Submit Feedback Now</a>
+</p>
+
+<p style="margin-top: 20px; color: #666; font-size: 14px;">
+    Please complete the feedback before the deadline. Late submissions may not be accepted.
+</p>
+
+<p>
+    Thank you for your valuable input!<br><br>
+    Best regards,<br>
+    Academic Affairs<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

@@ -1,0 +1,260 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "trip_date",
+    "trip_type",
+    "route",
+    "column_break_1",
+    "vehicle",
+    "driver",
+    "status",
+    "timing_section",
+    "scheduled_departure",
+    "actual_departure",
+    "column_break_timing",
+    "scheduled_arrival",
+    "actual_arrival",
+    "delay_minutes",
+    "odometer_section",
+    "start_odometer",
+    "end_odometer",
+    "column_break_odo",
+    "distance_covered",
+    "fuel_consumed",
+    "passengers_section",
+    "passengers_boarded",
+    "passengers_alighted",
+    "incidents_section",
+    "incident_reported",
+    "incident_details",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "TL-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "trip_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Trip Date",
+      "reqd": 1
+    },
+    {
+      "default": "Morning",
+      "fieldname": "trip_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Trip Type",
+      "options": "Morning\nEvening\nSpecial",
+      "reqd": 1
+    },
+    {
+      "fieldname": "route",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Route",
+      "options": "Transport Route",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "vehicle",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Vehicle",
+      "options": "Transport Vehicle",
+      "reqd": 1
+    },
+    {
+      "fieldname": "driver",
+      "fieldtype": "Link",
+      "label": "Driver",
+      "options": "Employee"
+    },
+    {
+      "default": "Scheduled",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Scheduled\nIn Progress\nCompleted\nCancelled"
+    },
+    {
+      "fieldname": "timing_section",
+      "fieldtype": "Section Break",
+      "label": "Timing"
+    },
+    {
+      "fieldname": "scheduled_departure",
+      "fieldtype": "Time",
+      "label": "Scheduled Departure"
+    },
+    {
+      "fieldname": "actual_departure",
+      "fieldtype": "Time",
+      "label": "Actual Departure"
+    },
+    {
+      "fieldname": "column_break_timing",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "scheduled_arrival",
+      "fieldtype": "Time",
+      "label": "Scheduled Arrival"
+    },
+    {
+      "fieldname": "actual_arrival",
+      "fieldtype": "Time",
+      "label": "Actual Arrival"
+    },
+    {
+      "fieldname": "delay_minutes",
+      "fieldtype": "Int",
+      "label": "Delay (minutes)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "odometer_section",
+      "fieldtype": "Section Break",
+      "label": "Odometer"
+    },
+    {
+      "fieldname": "start_odometer",
+      "fieldtype": "Float",
+      "label": "Start Odometer (km)"
+    },
+    {
+      "fieldname": "end_odometer",
+      "fieldtype": "Float",
+      "label": "End Odometer (km)"
+    },
+    {
+      "fieldname": "column_break_odo",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "distance_covered",
+      "fieldtype": "Float",
+      "label": "Distance Covered (km)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fuel_consumed",
+      "fieldtype": "Float",
+      "label": "Fuel Consumed (liters)"
+    },
+    {
+      "fieldname": "passengers_section",
+      "fieldtype": "Section Break",
+      "label": "Passengers"
+    },
+    {
+      "default": "0",
+      "fieldname": "passengers_boarded",
+      "fieldtype": "Int",
+      "label": "Passengers Boarded"
+    },
+    {
+      "default": "0",
+      "fieldname": "passengers_alighted",
+      "fieldtype": "Int",
+      "label": "Passengers Alighted"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "incidents_section",
+      "fieldtype": "Section Break",
+      "label": "Incidents & Remarks"
+    },
+    {
+      "default": "0",
+      "fieldname": "incident_reported",
+      "fieldtype": "Check",
+      "label": "Incident Reported"
+    },
+    {
+      "depends_on": "incident_reported",
+      "fieldname": "incident_details",
+      "fieldtype": "Small Text",
+      "label": "Incident Details"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Transport",
+  "name": "Transport Trip Log",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "route, vehicle, trip_date",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

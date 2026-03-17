@@ -1,0 +1,245 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:route_name",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "route_name",
+    "route_code",
+    "route_type",
+    "column_break_1",
+    "start_point",
+    "end_point",
+    "is_active",
+    "timing_section",
+    "departure_time",
+    "arrival_time",
+    "column_break_timing",
+    "return_departure_time",
+    "return_arrival_time",
+    "route_details_section",
+    "total_distance",
+    "total_duration",
+    "column_break_route",
+    "total_stops",
+    "monthly_fare",
+    "stops_section",
+    "stops",
+    "vehicle_section",
+    "assigned_vehicle",
+    "driver",
+    "driver_contact"
+  ],
+  "fields": [
+    {
+      "fieldname": "route_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Route Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "route_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Route Code",
+      "reqd": 1
+    },
+    {
+      "default": "Regular",
+      "fieldname": "route_type",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Route Type",
+      "options": "Regular\nExpress\nShuttle"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "start_point",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Start Point",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_point",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "End Point",
+      "reqd": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "timing_section",
+      "fieldtype": "Section Break",
+      "label": "Timing"
+    },
+    {
+      "fieldname": "departure_time",
+      "fieldtype": "Time",
+      "label": "Departure Time"
+    },
+    {
+      "fieldname": "arrival_time",
+      "fieldtype": "Time",
+      "label": "Arrival Time"
+    },
+    {
+      "fieldname": "column_break_timing",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "return_departure_time",
+      "fieldtype": "Time",
+      "label": "Return Departure Time"
+    },
+    {
+      "fieldname": "return_arrival_time",
+      "fieldtype": "Time",
+      "label": "Return Arrival Time"
+    },
+    {
+      "fieldname": "route_details_section",
+      "fieldtype": "Section Break",
+      "label": "Route Details"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_distance",
+      "fieldtype": "Float",
+      "label": "Total Distance (km)"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_duration",
+      "fieldtype": "Int",
+      "label": "Total Duration (minutes)"
+    },
+    {
+      "fieldname": "column_break_route",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_stops",
+      "fieldtype": "Int",
+      "label": "Total Stops",
+      "read_only": 1
+    },
+    {
+      "fieldname": "monthly_fare",
+      "fieldtype": "Currency",
+      "label": "Monthly Fare"
+    },
+    {
+      "fieldname": "stops_section",
+      "fieldtype": "Section Break",
+      "label": "Route Stops"
+    },
+    {
+      "fieldname": "stops",
+      "fieldtype": "Table",
+      "label": "Stops",
+      "options": "Transport Route Stop"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "vehicle_section",
+      "fieldtype": "Section Break",
+      "label": "Assigned Vehicle"
+    },
+    {
+      "fieldname": "assigned_vehicle",
+      "fieldtype": "Link",
+      "label": "Assigned Vehicle",
+      "options": "Transport Vehicle"
+    },
+    {
+      "fieldname": "driver",
+      "fieldtype": "Link",
+      "label": "Driver",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "driver_contact",
+      "fieldtype": "Data",
+      "label": "Driver Contact",
+      "options": "Phone"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Transport Allocation",
+      "link_fieldname": "route"
+    },
+    {
+      "link_doctype": "Transport Trip Log",
+      "link_fieldname": "route"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Transport",
+  "name": "Transport Route",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "quick_entry": 1,
+  "search_fields": "route_name, route_code, start_point, end_point",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "route_name",
+  "track_changes": 1
+}

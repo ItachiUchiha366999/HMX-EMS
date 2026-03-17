@@ -1,0 +1,17 @@
+{
+  "doctype": "DocType",
+  "name": "Question Tag Link",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "question_tag",
+      "fieldtype": "Link",
+      "label": "Question Tag",
+      "options": "Question Tag",
+      "reqd": 1,
+      "in_list_view": 1
+    }
+  ],
+  "engine": "InnoDB"
+}

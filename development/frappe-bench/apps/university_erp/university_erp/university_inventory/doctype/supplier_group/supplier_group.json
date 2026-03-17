@@ -1,0 +1,91 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:supplier_group_name",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "supplier_group_name",
+    "parent_supplier_group",
+    "is_group",
+    "column_break_1",
+    "default_payment_terms"
+  ],
+  "fields": [
+    {
+      "fieldname": "supplier_group_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Supplier Group Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "parent_supplier_group",
+      "fieldtype": "Link",
+      "label": "Parent Supplier Group",
+      "options": "Supplier Group"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_group",
+      "fieldtype": "Check",
+      "label": "Is Group"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_payment_terms",
+      "fieldtype": "Link",
+      "label": "Default Payment Terms",
+      "options": "Payment Terms Template"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_tree": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Supplier Group",
+  "naming_rule": "By fieldname",
+  "nsm_parent_field": "parent_supplier_group",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "quick_entry": 1,
+  "search_fields": "supplier_group_name",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "supplier_group_name",
+  "track_changes": 1
+}

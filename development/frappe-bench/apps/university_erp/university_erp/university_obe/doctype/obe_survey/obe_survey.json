@@ -1,0 +1,355 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:{survey_type}-{program}-{####}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "survey_section",
+    "survey_type",
+    "program",
+    "program_name",
+    "column_break_course",
+    "course",
+    "course_name",
+    "academic_year",
+    "survey_date",
+    "section_break_respondent",
+    "respondent_name",
+    "respondent_email",
+    "respondent_phone",
+    "column_break_resp_details",
+    "student",
+    "student_name",
+    "enrollment_number",
+    "section_break_alumni",
+    "graduation_year",
+    "batch",
+    "column_break_org",
+    "organization",
+    "designation",
+    "years_of_experience",
+    "section_break_ratings",
+    "po_ratings",
+    "section_break_feedback",
+    "overall_satisfaction",
+    "program_relevance",
+    "column_break_skills",
+    "employability_rating",
+    "skill_development_rating",
+    "section_break_comments",
+    "strengths",
+    "improvements",
+    "additional_comments",
+    "section_break_status",
+    "status",
+    "submitted_on",
+    "ip_address"
+  ],
+  "fields": [
+    {
+      "fieldname": "survey_section",
+      "fieldtype": "Section Break",
+      "label": "Survey Information"
+    },
+    {
+      "fieldname": "survey_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Survey Type",
+      "options": "Alumni Survey\nEmployer Survey\nStudent Exit Survey\nCourse End Survey\nProgram Exit Survey\nMid-term Feedback",
+      "reqd": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "program.program_name",
+      "fieldname": "program_name",
+      "fieldtype": "Data",
+      "label": "Program Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_course",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.survey_type=='Course End Survey'",
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "mandatory_depends_on": "eval:doc.survey_type=='Course End Survey'",
+      "options": "Course"
+    },
+    {
+      "fetch_from": "course.course_name",
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year"
+    },
+    {
+      "default": "Today",
+      "fieldname": "survey_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Survey Date"
+    },
+    {
+      "fieldname": "section_break_respondent",
+      "fieldtype": "Section Break",
+      "label": "Respondent Information"
+    },
+    {
+      "fieldname": "respondent_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Respondent Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "respondent_email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "respondent_phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "column_break_resp_details",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:['Student Exit Survey', 'Course End Survey', 'Program Exit Survey', 'Mid-term Feedback'].includes(doc.survey_type)",
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student"
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.name",
+      "fieldname": "enrollment_number",
+      "fieldtype": "Data",
+      "label": "Enrollment Number",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "depends_on": "eval:['Alumni Survey', 'Employer Survey'].includes(doc.survey_type)",
+      "fieldname": "section_break_alumni",
+      "fieldtype": "Section Break",
+      "label": "Alumni/Employer Details"
+    },
+    {
+      "depends_on": "eval:doc.survey_type=='Alumni Survey'",
+      "fieldname": "graduation_year",
+      "fieldtype": "Data",
+      "label": "Graduation Year"
+    },
+    {
+      "depends_on": "eval:doc.survey_type=='Alumni Survey'",
+      "fieldname": "batch",
+      "fieldtype": "Link",
+      "label": "Batch",
+      "options": "Student Batch Name"
+    },
+    {
+      "fieldname": "column_break_org",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "organization",
+      "fieldtype": "Data",
+      "label": "Organization"
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Data",
+      "label": "Designation"
+    },
+    {
+      "fieldname": "years_of_experience",
+      "fieldtype": "Int",
+      "label": "Years of Experience"
+    },
+    {
+      "fieldname": "section_break_ratings",
+      "fieldtype": "Section Break",
+      "label": "PO/PSO Ratings"
+    },
+    {
+      "fieldname": "po_ratings",
+      "fieldtype": "Table",
+      "label": "Program Outcome Ratings",
+      "options": "Survey PO Rating"
+    },
+    {
+      "fieldname": "section_break_feedback",
+      "fieldtype": "Section Break",
+      "label": "Overall Feedback"
+    },
+    {
+      "description": "1 = Very Poor, 5 = Excellent",
+      "fieldname": "overall_satisfaction",
+      "fieldtype": "Rating",
+      "in_list_view": 1,
+      "label": "Overall Satisfaction"
+    },
+    {
+      "description": "How relevant is the program to industry needs?",
+      "fieldname": "program_relevance",
+      "fieldtype": "Rating",
+      "label": "Program Relevance"
+    },
+    {
+      "fieldname": "column_break_skills",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "How well did the program prepare you for employment?",
+      "fieldname": "employability_rating",
+      "fieldtype": "Rating",
+      "label": "Employability Rating"
+    },
+    {
+      "description": "Rate the development of technical and soft skills",
+      "fieldname": "skill_development_rating",
+      "fieldtype": "Rating",
+      "label": "Skill Development Rating"
+    },
+    {
+      "fieldname": "section_break_comments",
+      "fieldtype": "Section Break",
+      "label": "Comments"
+    },
+    {
+      "fieldname": "strengths",
+      "fieldtype": "Text",
+      "label": "Strengths of the Program"
+    },
+    {
+      "fieldname": "improvements",
+      "fieldtype": "Text",
+      "label": "Areas for Improvement"
+    },
+    {
+      "fieldname": "additional_comments",
+      "fieldtype": "Text",
+      "label": "Additional Comments"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Submission Details"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nVerified",
+      "read_only": 1
+    },
+    {
+      "fieldname": "submitted_on",
+      "fieldtype": "Datetime",
+      "label": "Submitted On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ip_address",
+      "fieldtype": "Data",
+      "label": "IP Address",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "OBE Survey",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

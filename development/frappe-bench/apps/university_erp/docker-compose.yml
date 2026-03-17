@@ -1,0 +1,165 @@
+# University ERP Docker Compose Configuration
+# For PRODUCTION deployment only
+#
+# NOTE: For development, use the devcontainer setup:
+# - Open project in VS Code
+# - Use "Dev Containers: Reopen in Container"
+# - The devcontainer at /.devcontainer/ provides MariaDB, Redis, and Frappe Bench
+#
+# This file is for deploying to production servers.
+
+version: "3.8"
+
+services:
+  # MariaDB Database
+  mariadb:
+    image: mariadb:10.11
+    container_name: university_erp_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-changeme}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-university_erp}
+      MYSQL_USER: ${MYSQL_USER:-frappe}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-changeme}
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - ./mariadb-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-changeme}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - university_erp_network
+
+  # Redis Cache
+  redis-cache:
+    image: redis:7-alpine
+    container_name: university_erp_redis_cache
+    restart: unless-stopped
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-cache-data:/data
+    networks:
+      - university_erp_network
+
+  # Redis Queue
+  redis-queue:
+    image: redis:7-alpine
+    container_name: university_erp_redis_queue
+    restart: unless-stopped
+    command: redis-server --maxmemory 256mb --maxmemory-policy noeviction
+    volumes:
+      - redis-queue-data:/data
+    networks:
+      - university_erp_network
+
+  # Frappe/ERPNext Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: university_erp_backend
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis-cache:
+        condition: service_started
+      redis-queue:
+        condition: service_started
+    environment:
+      - FRAPPE_SITE_NAME=${SITE_NAME:-university.local}
+      - REDIS_CACHE=redis://redis-cache:6379
+      - REDIS_QUEUE=redis://redis-queue:6379
+      - MARIADB_HOST=mariadb
+      - SOCKETIO_PORT=9000
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+      - logs-data:/home/frappe/frappe-bench/logs
+    networks:
+      - university_erp_network
+
+  # Frappe Scheduler
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: university_erp_scheduler
+    restart: unless-stopped
+    depends_on:
+      - backend
+    command: bench schedule
+    environment:
+      - FRAPPE_SITE_NAME=${SITE_NAME:-university.local}
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+      - logs-data:/home/frappe/frappe-bench/logs
+    networks:
+      - university_erp_network
+
+  # Frappe Worker (Short)
+  worker-short:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: university_erp_worker_short
+    restart: unless-stopped
+    depends_on:
+      - backend
+    command: bench worker --queue short
+    environment:
+      - FRAPPE_SITE_NAME=${SITE_NAME:-university.local}
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+      - logs-data:/home/frappe/frappe-bench/logs
+    networks:
+      - university_erp_network
+
+  # Frappe Worker (Long)
+  worker-long:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: university_erp_worker_long
+    restart: unless-stopped
+    depends_on:
+      - backend
+    command: bench worker --queue long
+    environment:
+      - FRAPPE_SITE_NAME=${SITE_NAME:-university.local}
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+      - logs-data:/home/frappe/frappe-bench/logs
+    networks:
+      - university_erp_network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: university_erp_nginx
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - sites-data:/home/frappe/frappe-bench/sites:ro
+      - logs-data:/var/log/nginx
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - university_erp_network
+
+networks:
+  university_erp_network:
+    driver: bridge
+
+volumes:
+  mariadb-data:
+  redis-cache-data:
+  redis-queue-data:
+  sites-data:
+  logs-data:

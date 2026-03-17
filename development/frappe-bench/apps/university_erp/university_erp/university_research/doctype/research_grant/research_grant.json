@@ -1,0 +1,215 @@
+{
+  "actions": [],
+  "autoname": "format:GRT-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "grant_title",
+    "research_project",
+    "column_break_1",
+    "funding_agency",
+    "grant_type",
+    "status",
+    "section_amount",
+    "applied_amount",
+    "sanctioned_amount",
+    "disbursed_amount",
+    "utilized_amount",
+    "section_dates",
+    "application_date",
+    "sanction_date",
+    "validity_from",
+    "validity_to",
+    "section_utilization",
+    "utilization_certificate_submitted",
+    "uc_date",
+    "utilization_details"
+  ],
+  "fields": [
+    {
+      "fieldname": "grant_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Grant Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "research_project",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Research Project",
+      "options": "Research Project"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "funding_agency",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Funding Agency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "grant_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Grant Type",
+      "options": "Major\nMinor\nSeed Grant\nTravel Grant\nEquipment Grant"
+    },
+    {
+      "default": "Applied",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Applied\nUnder Review\nApproved\nRejected\nCompleted"
+    },
+    {
+      "fieldname": "section_amount",
+      "fieldtype": "Section Break",
+      "label": "Grant Amount"
+    },
+    {
+      "default": "0",
+      "fieldname": "applied_amount",
+      "fieldtype": "Currency",
+      "label": "Applied Amount"
+    },
+    {
+      "default": "0",
+      "fieldname": "sanctioned_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Sanctioned Amount"
+    },
+    {
+      "default": "0",
+      "fieldname": "disbursed_amount",
+      "fieldtype": "Currency",
+      "label": "Disbursed Amount"
+    },
+    {
+      "default": "0",
+      "fieldname": "utilized_amount",
+      "fieldtype": "Currency",
+      "label": "Utilized Amount"
+    },
+    {
+      "fieldname": "section_dates",
+      "fieldtype": "Section Break",
+      "label": "Timeline"
+    },
+    {
+      "fieldname": "application_date",
+      "fieldtype": "Date",
+      "label": "Application Date"
+    },
+    {
+      "fieldname": "sanction_date",
+      "fieldtype": "Date",
+      "label": "Sanction Date"
+    },
+    {
+      "fieldname": "validity_from",
+      "fieldtype": "Date",
+      "label": "Valid From"
+    },
+    {
+      "fieldname": "validity_to",
+      "fieldtype": "Date",
+      "label": "Valid Until"
+    },
+    {
+      "fieldname": "section_utilization",
+      "fieldtype": "Section Break",
+      "label": "Utilization"
+    },
+    {
+      "default": "0",
+      "fieldname": "utilization_certificate_submitted",
+      "fieldtype": "Check",
+      "label": "UC Submitted"
+    },
+    {
+      "depends_on": "utilization_certificate_submitted",
+      "fieldname": "uc_date",
+      "fieldtype": "Date",
+      "label": "UC Submission Date"
+    },
+    {
+      "fieldname": "utilization_details",
+      "fieldtype": "Table",
+      "label": "Utilization Details",
+      "options": "Grant Utilization"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Research",
+  "name": "Research Grant",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

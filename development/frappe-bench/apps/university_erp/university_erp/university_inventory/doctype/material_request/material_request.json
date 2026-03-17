@@ -1,0 +1,180 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "material_request_type",
+    "transaction_date",
+    "required_by",
+    "column_break_1",
+    "status",
+    "department",
+    "requested_by",
+    "items_section",
+    "items",
+    "warehouse_section",
+    "set_warehouse",
+    "set_from_warehouse",
+    "reason_section",
+    "reason",
+    "justification",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "MR-.YYYY.-.#####",
+      "reqd": 1,
+      "set_only_once": 1
+    },
+    {
+      "default": "Purchase",
+      "fieldname": "material_request_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Purpose",
+      "options": "Purchase\nMaterial Transfer\nMaterial Issue\nManufacture\nCustomer Provided",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "transaction_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Transaction Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "required_by",
+      "fieldtype": "Date",
+      "label": "Required By"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nPending\nPartially Ordered\nOrdered\nIssued\nTransferred\nReceived\nCancelled",
+      "read_only": 1
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Department",
+      "options": "University Department"
+    },
+    {
+      "fieldname": "requested_by",
+      "fieldtype": "Link",
+      "label": "Requested By",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "items_section",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "Material Request Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "warehouse_section",
+      "fieldtype": "Section Break",
+      "label": "Warehouse"
+    },
+    {
+      "fieldname": "set_warehouse",
+      "fieldtype": "Link",
+      "label": "Set Target Warehouse",
+      "options": "Warehouse"
+    },
+    {
+      "depends_on": "eval:doc.material_request_type=='Material Transfer'",
+      "fieldname": "set_from_warehouse",
+      "fieldtype": "Link",
+      "label": "Set Source Warehouse",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "reason_section",
+      "fieldtype": "Section Break",
+      "label": "Reason & Justification"
+    },
+    {
+      "fieldname": "reason",
+      "fieldtype": "Small Text",
+      "label": "Reason for Request"
+    },
+    {
+      "fieldname": "justification",
+      "fieldtype": "Text Editor",
+      "label": "Detailed Justification"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Material Request",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Material Request",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "material_request_type, status, transaction_date",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

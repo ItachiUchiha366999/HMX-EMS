@@ -1,0 +1,226 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "transaction_type",
+    "article",
+    "article_title",
+    "member",
+    "member_name",
+    "column_break_1",
+    "transaction_date",
+    "issue_date",
+    "due_date",
+    "return_date",
+    "status",
+    "fine_section",
+    "is_overdue",
+    "overdue_days",
+    "fine_amount",
+    "fine_reference"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "LT-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "default": "Issue",
+      "fieldname": "transaction_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Transaction Type",
+      "options": "Issue\nReturn\nRenew",
+      "reqd": 1
+    },
+    {
+      "fieldname": "article",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Article",
+      "options": "Library Article",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "article.title",
+      "fieldname": "article_title",
+      "fieldtype": "Data",
+      "label": "Article Title",
+      "read_only": 1
+    },
+    {
+      "fieldname": "member",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Member",
+      "options": "Library Member",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "member.member_name",
+      "fieldname": "member_name",
+      "fieldtype": "Data",
+      "label": "Member Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "transaction_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Transaction Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "issue_date",
+      "fieldtype": "Date",
+      "label": "Issue Date"
+    },
+    {
+      "fieldname": "due_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Due Date"
+    },
+    {
+      "fieldname": "return_date",
+      "fieldtype": "Date",
+      "label": "Return Date"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Active\nReturned\nLost"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "fine_section",
+      "fieldtype": "Section Break",
+      "label": "Fine Details"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_overdue",
+      "fieldtype": "Check",
+      "label": "Is Overdue",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "overdue_days",
+      "fieldtype": "Int",
+      "label": "Overdue Days",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "fine_amount",
+      "fieldtype": "Currency",
+      "label": "Fine Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fine_reference",
+      "fieldtype": "Link",
+      "label": "Fine Reference",
+      "options": "Library Fine",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Library",
+  "name": "Library Transaction",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Librarian",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "article, member, transaction_type",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,1700 @@
+2025-12-31 13:17:37,269 INFO ipython === bench console session ===
+2025-12-31 13:17:37,270 INFO ipython frappe.db.sql("DELETE FROM `tabInstalled Application` WHERE app_name='university_erp'")
+2025-12-31 13:17:37,272 INFO ipython frappe.db.commit()
+2025-12-31 13:17:37,273 INFO ipython print("Removed university_erp from installed apps")
+2025-12-31 13:17:37,274 INFO ipython === session end ===
+2025-12-31 13:22:24,106 INFO ipython === bench console session ===
+2025-12-31 13:22:24,108 INFO ipython frappe.db.sql("DELETE FROM `tabInstalled Applications` WHERE app_name='university_erp'")
+2025-12-31 13:22:24,109 INFO ipython frappe.db.sql("DELETE FROM `tabInstalled Application` WHERE app_name='university_erp'")
+2025-12-31 13:22:24,111 INFO ipython frappe.db.commit()
+2025-12-31 13:22:24,112 INFO ipython print("Cleaned up university_erp installation records")
+2025-12-31 13:22:24,113 INFO ipython === session end ===
+2025-12-31 13:28:24,394 INFO ipython === bench console session ===
+2025-12-31 13:28:24,395 INFO ipython import frappe
+2025-12-31 13:28:24,396 INFO ipython frappe.connect()
+2025-12-31 13:28:24,398 INFO ipython # Task 26: Verify custom fields on Student
+2025-12-31 13:28:24,399 INFO ipython student_fields = frappe.get_all("Custom Field", 
+    filters={"dt": "Student", "module": "University ERP"},
+    fields=["fieldname", "label", "fieldtype"]
+)
+2025-12-31 13:28:24,400 INFO ipython print(f"\n=== Task 26: Custom fields on Student ===")
+2025-12-31 13:28:24,401 INFO ipython print(f"Total custom fields: {len(student_fields)}")
+2025-12-31 13:28:24,402 INFO ipython for field in student_fields[:5]:
+    print(f"  - {field.fieldname}: {field.label} ({field.fieldtype})")
+2025-12-31 13:28:24,404 INFO ipython # Task 27: Verify custom fields on Program
+2025-12-31 13:28:24,405 INFO ipython program_fields = frappe.get_all("Custom Field",
+    filters={"dt": "Program", "module": "University ERP"},
+    fields=["fieldname"]
+)
+2025-12-31 13:28:24,406 INFO ipython print(f"\n=== Task 27: Custom fields on Program ===")
+2025-12-31 13:28:24,408 INFO ipython print(f"Total custom fields: {len(program_fields)}")
+2025-12-31 13:28:24,410 INFO ipython # Task 28: Verify custom fields on Course
+2025-12-31 13:28:24,411 INFO ipython course_fields = frappe.get_all("Custom Field",
+    filters={"dt": "Course", "module": "University ERP"},
+    fields=["fieldname"]
+)
+2025-12-31 13:28:24,412 INFO ipython print(f"\n=== Task 28: Custom fields on Course ===")
+2025-12-31 13:28:24,413 INFO ipython print(f"Total custom fields: {len(course_fields)}")
+2025-12-31 13:28:24,415 INFO ipython # Task 29: Verify university roles
+2025-12-31 13:28:24,416 INFO ipython university_roles = frappe.get_all("Role",
+    filters=[["name", "like", "University%"]],
+    fields=["name"]
+)
+2025-12-31 13:28:24,417 INFO ipython print(f"\n=== Task 29: University roles ===")
+2025-12-31 13:28:24,418 INFO ipython print(f"Total university roles: {len(university_roles)}")
+2025-12-31 13:28:24,420 INFO ipython for role in university_roles:
+    print(f"  - {role.name}")
+2025-12-31 13:28:24,421 INFO ipython === session end ===
+2025-12-31 13:28:53,337 INFO ipython === bench console session ===
+2025-12-31 13:28:53,338 INFO ipython import frappe
+2025-12-31 13:28:53,339 INFO ipython frappe.connect()
+2025-12-31 13:28:53,341 INFO ipython # Task 30: Verify ERPNext workspaces are hidden
+2025-12-31 13:28:53,343 INFO ipython manufacturing_workspace = frappe.db.get_value("Workspace", "Manufacturing", "public")
+2025-12-31 13:28:53,344 INFO ipython print(f"\n=== Task 30: ERPNext workspaces hidden ===")
+2025-12-31 13:28:53,345 INFO ipython print(f"Manufacturing workspace public: {manufacturing_workspace}")
+2025-12-31 13:28:53,346 INFO ipython # Task 31: Verify grading scale
+2025-12-31 13:28:53,348 INFO ipython grading_scale = frappe.db.exists("Grading Scale", "University 10-Point Scale")
+2025-12-31 13:28:53,349 INFO ipython print(f"\n=== Task 31: Grading scale ===")
+2025-12-31 13:28:53,350 INFO ipython print(f"University 10-Point Scale exists: {bool(grading_scale)}")
+2025-12-31 13:28:53,351 INFO ipython if grading_scale:
+    scale = frappe.get_doc("Grading Scale", "University 10-Point Scale")
+    print(f"Grading scale intervals: {len(scale.intervals)}")
+    for interval in scale.intervals[:3]:
+        print(f"  - {interval.grade_code}: {interval.threshold}% ({interval.grade_description})")
+2025-12-31 13:28:53,353 INFO ipython # Verify University DocTypes
+2025-12-31 13:28:53,354 INFO ipython dept_exists = frappe.db.exists("DocType", "University Department")
+2025-12-31 13:28:53,355 INFO ipython year_exists = frappe.db.exists("DocType", "University Academic Year") 
+2025-12-31 13:28:53,356 INFO ipython settings_exists = frappe.db.exists("DocType", "University Settings")
+2025-12-31 13:28:53,357 INFO ipython print(f"\n=== Core DocTypes ===")
+2025-12-31 13:28:53,359 INFO ipython print(f"University Department exists: {bool(dept_exists)}")
+2025-12-31 13:28:53,360 INFO ipython print(f"University Academic Year exists: {bool(year_exists)}")
+2025-12-31 13:28:53,361 INFO ipython print(f"University Settings exists: {bool(settings_exists)}")
+2025-12-31 13:28:53,362 INFO ipython === session end ===
+2026-01-01 11:28:49,903 INFO ipython === bench console session ===
+2026-01-01 11:28:49,904 INFO ipython import frappe
+2026-01-01 11:28:49,905 INFO ipython doctypes = ['UGC Pay Scale', 'Faculty Profile', 'Teaching Assignment', 'Workload Distributor', 'Temporary Teaching Assignment', 'Faculty Attendance', 'Faculty Performance Evaluation', 'Student Feedback']
+2026-01-01 11:28:49,907 INFO ipython === session end ===
+2026-01-02 13:38:24,805 INFO ipython === bench console session ===
+2026-01-02 13:38:24,808 INFO ipython import frappe
+2026-01-02 13:38:24,810 INFO ipython # Check existing data
+2026-01-02 13:38:24,813 INFO ipython print("=== Existing Data ===")
+2026-01-02 13:38:24,817 INFO ipython print(f"Students: {frappe.db.count('Student')}")
+2026-01-02 13:38:24,819 INFO ipython print(f"Instructors: {frappe.db.count('Instructor')}")
+2026-01-02 13:38:24,822 INFO ipython print(f"Programs: {frappe.db.count('Program')}")
+2026-01-02 13:38:24,825 INFO ipython print(f"Users: {frappe.db.count('User')}")
+2026-01-02 13:38:24,827 INFO ipython # List some students
+2026-01-02 13:38:24,831 INFO ipython students = frappe.get_all("Student", fields=["name", "student_name", "user"], limit=5)
+2026-01-02 13:38:24,834 INFO ipython print(f"\nSample Students: {students}")
+2026-01-02 13:38:24,837 INFO ipython # List instructors
+2026-01-02 13:38:24,840 INFO ipython instructors = frappe.get_all("Instructor", fields=["name", "instructor_name", "user"], limit=5)
+2026-01-02 13:38:24,842 INFO ipython print(f"Sample Instructors: {instructors}")
+2026-01-02 13:38:24,845 INFO ipython frappe.db.commit()
+2026-01-02 13:38:24,848 INFO ipython === session end ===
+2026-01-02 13:41:05,583 INFO ipython === bench console session ===
+2026-01-02 13:41:05,586 INFO ipython import frappe
+2026-01-02 13:41:05,588 INFO ipython # Check what doctypes exist
+2026-01-02 13:41:05,590 INFO ipython print("Checking DocTypes...")
+2026-01-02 13:41:05,593 INFO ipython print(f"Department exists: {frappe.db.exists('DocType', 'Department')}")
+2026-01-02 13:41:05,596 INFO ipython # List departments
+2026-01-02 13:41:05,599 INFO ipython depts = frappe.get_all("Department", fields=["name", "department_name"])
+2026-01-02 13:41:05,601 INFO ipython print(f"Departments: {depts}")
+2026-01-02 13:41:05,603 INFO ipython # Check Program doctype fields
+2026-01-02 13:41:05,606 INFO ipython program_meta = frappe.get_meta("Program")
+2026-01-02 13:41:05,608 INFO ipython dept_field = None
+2026-01-02 13:41:05,611 INFO ipython for f in program_meta.fields:
+    if "department" in f.fieldname.lower():
+        print(f"Program has field: {f.fieldname} ({f.fieldtype})")
+        dept_field = f
+2026-01-02 13:41:05,614 INFO ipython frappe.db.commit()
+2026-01-02 13:41:05,616 INFO ipython === session end ===
+2026-01-02 13:43:06,511 INFO ipython === bench console session ===
+2026-01-02 13:43:06,514 INFO ipython import frappe
+2026-01-02 13:43:06,517 INFO ipython frappe.flags.ignore_permissions = True
+2026-01-02 13:43:06,519 INFO ipython print("Creating test data...")
+2026-01-02 13:43:06,521 INFO ipython # 1. Create Academic Year
+2026-01-02 13:43:06,523 INFO ipython if not frappe.db.exists("Academic Year", "2025-26"):
+    frappe.get_doc({
+        "doctype": "Academic Year",
+        "academic_year_name": "2025-26",
+        "year_start_date": "2025-07-01",
+        "year_end_date": "2026-06-30"
+    }).insert(ignore_permissions=True)
+    print("  Created Academic Year: 2025-26")
+2026-01-02 13:43:06,526 INFO ipython # 2. Create Program (without department link)
+2026-01-02 13:43:06,528 INFO ipython if not frappe.db.exists("Program", "B.Tech Computer Science"):
+    frappe.get_doc({
+        "doctype": "Program",
+        "program_name": "B.Tech Computer Science",
+        "program_abbreviation": "BTCS"
+    }).insert(ignore_permissions=True)
+    print("  Created Program: B.Tech Computer Science")
+2026-01-02 13:43:06,530 INFO ipython # 3. Create Courses
+2026-01-02 13:43:06,533 INFO ipython courses = ["Data Structures", "Database Systems", "Operating Systems"]
+2026-01-02 13:43:06,535 INFO ipython for c in courses:
+    if not frappe.db.exists("Course", c):
+        frappe.get_doc({
+            "doctype": "Course",
+            "course_name": c
+        }).insert(ignore_permissions=True)
+        print(f"  Created Course: {c}")
+2026-01-02 13:43:06,538 INFO ipython # 4. Create Users
+2026-01-02 13:43:06,540 INFO ipython users_data = [
+    ("student@test.edu", "Test", "Student", ["Student"]),
+    ("faculty@test.edu", "Test", "Faculty", ["Instructor", "Academics User"]),
+    ("parent@test.edu", "Test", "Parent", []),
+    ("alumni@test.edu", "Test", "Alumni", []),
+]
+2026-01-02 13:43:06,542 INFO ipython for email, fname, lname, roles in users_data:
+    if not frappe.db.exists("User", email):
+        user = frappe.get_doc({
+            "doctype": "User",
+            "email": email,
+            "first_name": fname,
+            "last_name": lname,
+            "enabled": 1,
+            "new_password": "Test@123",
+            "send_welcome_email": 0
+        })
+        for role in roles:
+            if frappe.db.exists("Role", role):
+                user.append("roles", {"role": role})
+        user.insert(ignore_permissions=True)
+        print(f"  Created User: {email}")
+2026-01-02 13:43:06,544 INFO ipython frappe.db.commit()
+2026-01-02 13:43:06,547 INFO ipython # 5. Create Student
+2026-01-02 13:43:06,549 INFO ipython if not frappe.db.get_value("Student", {"student_email_id": "student@test.edu"}):
+    student = frappe.get_doc({
+        "doctype": "Student",
+        "first_name": "Test",
+        "last_name": "Student",
+        "student_email_id": "student@test.edu",
+        "gender": "Male",
+        "date_of_birth": "2003-05-15",
+        "joining_date": frappe.utils.nowdate(),
+        "user": "student@test.edu",
+        "enabled": 1
+    })
+    student.insert(ignore_permissions=True)
+    print(f"  Created Student: {student.name}")
+    
+2026-01-02 13:43:06,551 INFO ipython     # Program Enrollment
+2026-01-02 13:43:06,553 INFO ipython     frappe.get_doc({
+        "doctype": "Program Enrollment",
+        "student": student.name,
+        "student_name": "Test Student",
+        "program": "B.Tech Computer Science",
+        "academic_year": "2025-26",
+        "enrollment_date": frappe.utils.nowdate()
+    }).insert(ignore_permissions=True)
+2026-01-02 13:43:06,555 INFO ipython     print("  Created Program Enrollment")
+2026-01-02 13:43:06,557 INFO ipython else:
+    student = frappe.get_doc("Student", {"student_email_id": "student@test.edu"})
+2026-01-02 13:43:06,559 INFO ipython     print(f"  Student exists: {student.name}")
+2026-01-02 13:43:06,560 INFO ipython # 6. Create Instructor
+2026-01-02 13:43:06,563 INFO ipython if not frappe.db.get_value("Instructor", {"instructor_name": "Test Faculty"}):
+    instructor = frappe.get_doc({
+        "doctype": "Instructor",
+        "instructor_name": "Test Faculty"
+    })
+    instructor.insert(ignore_permissions=True)
+    # Link to user
+    frappe.db.set_value("User", "faculty@test.edu", "username", "faculty")
+    print(f"  Created Instructor: {instructor.name}")
+2026-01-02 13:43:06,564 INFO ipython # 7. Create Guardian
+2026-01-02 13:43:06,566 INFO ipython if not frappe.db.get_value("Guardian", {"email_address": "parent@test.edu"}):
+    guardian = frappe.get_doc({
+        "doctype": "Guardian",
+        "guardian_name": "Test Parent",
+        "email_address": "parent@test.edu",
+        "mobile_number": "9876543210"
+    })
+    guardian.insert(ignore_permissions=True)
+    
+2026-01-02 13:43:06,568 INFO ipython     # Link to student
+2026-01-02 13:43:06,570 INFO ipython     student_name = frappe.db.get_value("Student", {"student_email_id": "student@test.edu"})
+2026-01-02 13:43:06,572 INFO ipython     if student_name:
+        student_doc = frappe.get_doc("Student", student_name)
+        student_doc.append("guardians", {
+            "guardian": guardian.name,
+            "guardian_name": "Test Parent",
+            "relation": "Father"
+        })
+        student_doc.save(ignore_permissions=True)
+    print(f"  Created Guardian: {guardian.name}")
+2026-01-02 13:43:06,574 INFO ipython # 8. Create Alumni (if doctype exists)
+2026-01-02 13:43:06,575 INFO ipython if frappe.db.exists("DocType", "Alumni"):
+    if not frappe.db.get_value("Alumni", {"email": "alumni@test.edu"}):
+        try:
+            alumni = frappe.get_doc({
+                "doctype": "Alumni",
+                "alumni_name": "Test Alumni",
+                "email": "alumni@test.edu",
+                "graduation_year": 2020,
+                "batch": "2016-2020"
+            })
+            alumni.insert(ignore_permissions=True)
+            print(f"  Created Alumni: {alumni.name}")
+        except Exception as e:
+            print(f"  Alumni creation note: {e}")
+2026-01-02 13:43:06,577 INFO ipython frappe.db.commit()
+2026-01-02 13:43:06,579 INFO ipython print("\n" + "="*60)
+2026-01-02 13:43:06,581 INFO ipython print("TEST DATA CREATED!")
+2026-01-02 13:43:06,583 INFO ipython print("="*60)
+2026-01-02 13:43:06,585 INFO ipython print("\nLogin Credentials (Password: Test@123)")
+2026-01-02 13:43:06,587 INFO ipython print("-"*60)
+2026-01-02 13:43:06,589 INFO ipython print("Student:  student@test.edu  -> /student-portal")
+2026-01-02 13:43:06,591 INFO ipython print("Faculty:  faculty@test.edu  -> /faculty-portal")
+2026-01-02 13:43:06,592 INFO ipython print("Parent:   parent@test.edu   -> /parent-portal")
+2026-01-02 13:43:06,594 INFO ipython print("Alumni:   alumni@test.edu   -> /alumni-portal")
+2026-01-02 13:43:06,596 INFO ipython print("-"*60)
+2026-01-02 13:43:06,598 INFO ipython print("Access: http://localhost:8000")
+2026-01-02 13:43:06,600 INFO ipython print("="*60)
+2026-01-02 13:43:06,602 INFO ipython === session end ===
+2026-01-02 13:45:14,470 INFO ipython === bench console session ===
+2026-01-02 13:45:14,475 INFO ipython import frappe
+2026-01-02 13:45:14,480 INFO ipython frappe.flags.ignore_permissions = True
+2026-01-02 13:45:14,484 INFO ipython # 1. Create Gender if not exists
+2026-01-02 13:45:14,488 INFO ipython if not frappe.db.exists("Gender", "Male"):
+    frappe.get_doc({"doctype": "Gender", "gender": "Male"}).insert(ignore_permissions=True)
+    print("Created Gender: Male")
+2026-01-02 13:45:14,492 INFO ipython if not frappe.db.exists("Gender", "Female"):
+    frappe.get_doc({"doctype": "Gender", "gender": "Female"}).insert(ignore_permissions=True)
+    print("Created Gender: Female")
+2026-01-02 13:45:14,497 INFO ipython # 2. Create Program properly (skip validation)
+2026-01-02 13:45:14,501 INFO ipython if not frappe.db.exists("Program", "B.Tech Computer Science"):
+    frappe.db.sql("""
+        INSERT INTO `tabProgram` (name, program_name, program_abbreviation, creation, modified, owner, modified_by, docstatus)
+        VALUES ('B.Tech Computer Science', 'B.Tech Computer Science', 'BTCS', NOW(), NOW(), 'Administrator', 'Administrator', 0)
+    """)
+    frappe.db.commit()
+    print("Created Program: B.Tech Computer Science")
+2026-01-02 13:45:14,506 INFO ipython # 3. Create Student with ignore_links
+2026-01-02 13:45:14,510 INFO ipython student_email = "student@test.edu"
+2026-01-02 13:45:14,515 INFO ipython existing_student = frappe.db.get_value("Student", {"student_email_id": student_email})
+2026-01-02 13:45:14,519 INFO ipython if not existing_student:
+    student = frappe.get_doc({
+        "doctype": "Student",
+        "first_name": "Test",
+        "last_name": "Student",
+        "student_email_id": student_email,
+        "gender": "Male",
+        "date_of_birth": "2003-05-15",
+        "joining_date": frappe.utils.nowdate(),
+        "enabled": 1
+    })
+    student.insert(ignore_permissions=True, ignore_links=True)
+    
+2026-01-02 13:45:14,523 INFO ipython     # Link user to student
+2026-01-02 13:45:14,527 INFO ipython     frappe.db.set_value("Student", student.name, "user", student_email)
+2026-01-02 13:45:14,532 INFO ipython     print(f"Created Student: {student.name}")
+2026-01-02 13:45:14,536 INFO ipython     # Create program enrollment
+2026-01-02 13:45:14,540 INFO ipython     try:
+        pe = frappe.get_doc({
+            "doctype": "Program Enrollment",
+            "student": student.name,
+            "student_name": "Test Student",
+            "program": "B.Tech Computer Science",
+            "academic_year": "2025-26",
+            "enrollment_date": frappe.utils.nowdate()
+        })
+        pe.insert(ignore_permissions=True, ignore_links=True)
+        print("Created Program Enrollment")
+    except Exception as e:
+        print(f"Enrollment note: {e}")
+else:
+    print(f"Student already exists: {existing_student}")
+2026-01-02 13:45:14,544 INFO ipython     # Make sure user is linked
+2026-01-02 13:45:14,548 INFO ipython     frappe.db.set_value("Student", existing_student, "user", student_email)
+2026-01-02 13:45:14,552 INFO ipython frappe.db.commit()
+2026-01-02 13:45:14,555 INFO ipython # 4. Verify the data
+2026-01-02 13:45:14,559 INFO ipython print("\n=== VERIFICATION ===")
+2026-01-02 13:45:14,564 INFO ipython print(f"Users: {frappe.db.count('User')}")
+2026-01-02 13:45:14,568 INFO ipython print(f"Students: {frappe.db.count('Student')}")
+2026-01-02 13:45:14,573 INFO ipython print(f"Instructors: {frappe.db.count('Instructor')}")
+2026-01-02 13:45:14,577 INFO ipython print(f"Guardians: {frappe.db.count('Guardian')}")
+2026-01-02 13:45:14,582 INFO ipython print(f"Programs: {frappe.db.count('Program')}")
+2026-01-02 13:45:14,586 INFO ipython # Show student details
+2026-01-02 13:45:14,591 INFO ipython student = frappe.db.get_value("Student", {"student_email_id": "student@test.edu"}, ["name", "user"], as_dict=True)
+2026-01-02 13:45:14,597 INFO ipython print(f"\nStudent Record: {student}")
+2026-01-02 13:45:14,602 INFO ipython print("\n" + "="*60)
+2026-01-02 13:45:14,607 INFO ipython print("LOGIN CREDENTIALS")
+2026-01-02 13:45:14,612 INFO ipython print("="*60)
+2026-01-02 13:45:14,618 INFO ipython print("Password for all users: Test@123")
+2026-01-02 13:45:14,623 INFO ipython print("")
+2026-01-02 13:45:14,628 INFO ipython print("student@test.edu  -> http://localhost:8000/student-portal")
+2026-01-02 13:45:14,633 INFO ipython print("faculty@test.edu  -> http://localhost:8000/faculty-portal")
+2026-01-02 13:45:14,636 INFO ipython print("parent@test.edu   -> http://localhost:8000/parent-portal")
+2026-01-02 13:45:14,641 INFO ipython print("alumni@test.edu   -> http://localhost:8000/alumni-portal")
+2026-01-02 13:45:14,645 INFO ipython print("="*60)
+2026-01-02 13:45:14,650 INFO ipython === session end ===
+2026-01-02 13:54:26,960 INFO ipython === bench console session ===
+2026-01-02 13:54:26,965 INFO ipython import frappe
+2026-01-02 13:54:26,969 INFO ipython frappe.flags.ignore_permissions = True
+2026-01-02 13:54:26,974 INFO ipython # Create student with all required fields including custom_enrollment_number
+2026-01-02 13:54:26,978 INFO ipython student_email = "student@test.edu"
+2026-01-02 13:54:26,982 INFO ipython # Check if student exists
+2026-01-02 13:54:26,988 INFO ipython existing = frappe.db.get_value("Student", {"student_email_id": student_email})
+2026-01-02 13:54:26,992 INFO ipython if existing:
+    print(f"Deleting existing student: {existing}")
+    frappe.delete_doc("Student", existing, force=True)
+    frappe.db.commit()
+2026-01-02 13:54:26,997 INFO ipython # Create new student with enrollment number
+2026-01-02 13:54:27,002 INFO ipython student = frappe.get_doc({
+    "doctype": "Student",
+    "first_name": "Test",
+    "last_name": "Student", 
+    "student_email_id": student_email,
+    "gender": "Male",
+    "date_of_birth": "2003-05-15",
+    "joining_date": frappe.utils.nowdate(),
+    "custom_enrollment_number": "2025BTCS001",
+    "enabled": 1
+})
+2026-01-02 13:54:27,006 INFO ipython student.insert(ignore_permissions=True, ignore_mandatory=True)
+2026-01-02 13:54:27,010 INFO ipython frappe.db.set_value("Student", student.name, "user", student_email)
+2026-01-02 13:54:27,015 INFO ipython print(f"Created Student: {student.name}")
+2026-01-02 13:54:27,020 INFO ipython # Create Program Enrollment
+2026-01-02 13:54:27,025 INFO ipython try:
+    pe = frappe.get_doc({
+        "doctype": "Program Enrollment",
+        "student": student.name,
+        "student_name": "Test Student",
+        "program": "B.Tech Computer Science",
+        "academic_year": "2025-26",
+        "enrollment_date": frappe.utils.nowdate()
+    })
+    pe.insert(ignore_permissions=True, ignore_links=True, ignore_mandatory=True)
+    print("Created Program Enrollment")
+except Exception as e:
+    print(f"Enrollment: {e}")
+2026-01-02 13:54:27,029 INFO ipython frappe.db.commit()
+2026-01-02 13:54:27,033 INFO ipython # Verify
+2026-01-02 13:54:27,037 INFO ipython print("\n=== FINAL VERIFICATION ===")
+2026-01-02 13:54:27,042 INFO ipython students = frappe.get_all("Student", fields=["name", "first_name", "student_email_id", "user"])
+2026-01-02 13:54:27,046 INFO ipython print(f"Students: {students}")
+2026-01-02 13:54:27,051 INFO ipython instructors = frappe.get_all("Instructor", fields=["name", "instructor_name"])
+2026-01-02 13:54:27,055 INFO ipython print(f"Instructors: {instructors}")
+2026-01-02 13:54:27,059 INFO ipython guardians = frappe.get_all("Guardian", fields=["name", "guardian_name", "email_address"])
+2026-01-02 13:54:27,064 INFO ipython print(f"Guardians: {guardians}")
+2026-01-02 13:54:27,069 INFO ipython print("\n" + "="*70)
+2026-01-02 13:54:27,073 INFO ipython print("TEST USERS READY!")
+2026-01-02 13:54:27,078 INFO ipython print("="*70)
+2026-01-02 13:54:27,082 INFO ipython print("\nPassword for ALL users: Test@123")
+2026-01-02 13:54:27,086 INFO ipython print("")
+2026-01-02 13:54:27,091 INFO ipython print(f"{'Email':<30} {'Portal URL':<40}")
+2026-01-02 13:54:27,096 INFO ipython print("-"*70)
+2026-01-02 13:54:27,100 INFO ipython print(f"{'student@test.edu':<30} {'http://localhost:8000/student-portal':<40}")
+2026-01-02 13:54:27,105 INFO ipython print(f"{'faculty@test.edu':<30} {'http://localhost:8000/faculty-portal':<40}")  
+2026-01-02 13:54:27,110 INFO ipython print(f"{'parent@test.edu':<30} {'http://localhost:8000/parent-portal':<40}")
+2026-01-02 13:54:27,114 INFO ipython print(f"{'alumni@test.edu':<30} {'http://localhost:8000/alumni-portal':<40}")
+2026-01-02 13:54:27,119 INFO ipython print(f"{'admin@test.edu':<30} {'http://localhost:8000/app (Desk)':<40}")
+2026-01-02 13:54:27,124 INFO ipython print("="*70)
+2026-01-02 13:54:27,129 INFO ipython === session end ===
+2026-01-02 14:13:31,191 INFO ipython === bench console session ===
+2026-01-02 14:13:31,196 INFO ipython import frappe
+2026-01-02 14:13:31,201 INFO ipython # Check SMS Settings doctype fields
+2026-01-02 14:13:31,205 INFO ipython meta = frappe.get_meta("SMS Settings")
+2026-01-02 14:13:31,209 INFO ipython fields = [f.fieldname for f in meta.fields]
+2026-01-02 14:13:31,214 INFO ipython print(f"SMS Settings fields: {fields}")
+2026-01-02 14:13:31,218 INFO ipython === session end ===
+2026-01-02 14:24:16,279 INFO ipython === bench console session ===
+2026-01-02 14:24:16,281 INFO ipython import frappe
+2026-01-02 14:24:16,282 INFO ipython # Check Guardian doctype fields
+2026-01-02 14:24:16,285 INFO ipython meta = frappe.get_meta("Guardian")
+2026-01-02 14:24:16,287 INFO ipython fields = [f.fieldname for f in meta.fields]
+2026-01-02 14:24:16,288 INFO ipython print(f"Guardian fields: {fields}")
+2026-01-02 14:24:16,290 INFO ipython # Check if user field exists
+2026-01-02 14:24:16,292 INFO ipython user_field = [f for f in meta.fields if f.fieldname == "user"]
+2026-01-02 14:24:16,294 INFO ipython print(f"User field exists: {bool(user_field)}")
+2026-01-02 14:24:16,296 INFO ipython # Check guardian record
+2026-01-02 14:24:16,298 INFO ipython guardian = frappe.get_all("Guardian", fields=["name", "guardian_name", "email_address"])
+2026-01-02 14:24:16,300 INFO ipython print(f"Guardians: {guardian}")
+2026-01-02 14:24:16,302 INFO ipython === session end ===
+2026-01-02 14:24:42,014 INFO ipython === bench console session ===
+2026-01-02 14:24:42,016 INFO ipython import frappe
+2026-01-02 14:24:42,017 INFO ipython # Link user to guardian
+2026-01-02 14:24:42,019 INFO ipython frappe.db.set_value("Guardian", "EDU-GRD-2026-00001", "user", "parent@test.edu")
+2026-01-02 14:24:42,021 INFO ipython frappe.db.commit()
+2026-01-02 14:24:42,023 INFO ipython # Verify
+2026-01-02 14:24:42,025 INFO ipython guardian = frappe.get_doc("Guardian", "EDU-GRD-2026-00001")
+2026-01-02 14:24:42,027 INFO ipython print(f"Guardian: {guardian.name}")
+2026-01-02 14:24:42,028 INFO ipython print(f"User linked: {guardian.user}")
+2026-01-02 14:24:42,030 INFO ipython print("\nParent login should work now!")
+2026-01-02 14:24:42,032 INFO ipython === session end ===
+2026-01-03 18:06:04,519 INFO ipython === bench console session ===
+2026-01-03 18:06:04,521 INFO ipython fields = frappe.db.get_table_columns("tabStudent")
+2026-01-03 18:06:04,523 INFO ipython print("Student fields:", [f for f in fields if 'program' in f.lower() or 'name' in f.lower() or 'user' in f.lower() or 'image' in f.lower() or 'batch' in f.lower() or 'first' in f.lower()])
+2026-01-03 18:06:04,525 INFO ipython === session end ===
+2026-01-04 07:57:22,906 INFO ipython === bench console session ===
+2026-01-04 07:57:22,909 INFO ipython import frappe
+2026-01-04 07:57:22,911 INFO ipython # Check OBE doctypes
+2026-01-04 07:57:22,912 INFO ipython obe_doctypes = [
+    "Program Educational Objective",
+    "Program Outcome", 
+    "Course Outcome",
+    "CO PO Mapping",
+    "CO Attainment",
+    "PO Attainment",
+    "OBE Survey",
+    "Survey Template"
+]
+2026-01-04 07:57:22,914 INFO ipython print("=== OBE DocTypes ===")
+2026-01-04 07:57:22,916 INFO ipython for dt in obe_doctypes:
+    exists = frappe.db.exists("DocType", dt)
+    print(f"{dt}: {'EXISTS' if exists else 'MISSING'}")
+2026-01-04 07:57:22,918 INFO ipython # Check Integration doctypes
+2026-01-04 07:57:22,920 INFO ipython print("\n=== Integration DocTypes ===")
+2026-01-04 07:57:22,922 INFO ipython int_doctypes = [
+    "Payment Gateway Settings",
+    "Payment Transaction",
+    "University SMS Settings",
+    "SMS Log",
+    "SMS Template",
+    "Biometric Device",
+    "Biometric Attendance Log",
+    "DigiLocker Settings",
+    "DigiLocker Issued Document",
+    "Certificate Template",
+    "Certificate Request"
+]
+2026-01-04 07:57:22,923 INFO ipython for dt in int_doctypes:
+    exists = frappe.db.exists("DocType", dt)
+    print(f"{dt}: {'EXISTS' if exists else 'MISSING'}")
+2026-01-04 07:57:22,925 INFO ipython # Check Library doctypes
+2026-01-04 07:57:22,926 INFO ipython print("\n=== Library DocTypes ===")
+2026-01-04 07:57:22,928 INFO ipython lib_doctypes = [
+    "Library Category",
+    "Library Subject",
+    "Library Article",
+    "Library Member",
+    "Library Transaction",
+    "Book Reservation",
+    "Library Fine"
+]
+2026-01-04 07:57:22,930 INFO ipython for dt in lib_doctypes:
+    exists = frappe.db.exists("DocType", dt)
+    print(f"{dt}: {'EXISTS' if exists else 'MISSING'}")
+2026-01-04 07:57:22,931 INFO ipython # Check Placement doctypes
+2026-01-04 07:57:22,933 INFO ipython print("\n=== Placement DocTypes ===")
+2026-01-04 07:57:22,935 INFO ipython place_doctypes = [
+    "Industry Type",
+    "Placement Company",
+    "Student Resume",
+    "Placement Job Opening",
+    "Placement Drive",
+    "Placement Application"
+]
+2026-01-04 07:57:22,936 INFO ipython === session end ===
+2026-01-04 07:57:47,039 INFO ipython === bench console session ===
+2026-01-04 07:57:47,041 INFO ipython import frappe
+2026-01-04 07:57:47,042 INFO ipython # Check workspaces
+2026-01-04 07:57:47,044 INFO ipython workspaces = frappe.get_all("Workspace", fields=["name", "module", "public"])
+2026-01-04 07:57:47,045 INFO ipython print("=== All Workspaces ===")
+2026-01-04 07:57:47,047 INFO ipython === session end ===
+2026-01-04 08:24:13,629 INFO ipython === bench console session ===
+2026-01-04 08:24:13,631 INFO ipython import frappe
+2026-01-04 08:24:13,633 INFO ipython ws = frappe.get_doc("Workspace", "University Integrations")
+2026-01-04 08:24:13,634 INFO ipython print("Content:")
+2026-01-04 08:24:13,636 INFO ipython print(ws.content[:2000])
+2026-01-04 08:24:13,638 INFO ipython === session end ===
+2026-01-04 08:24:42,612 INFO ipython === bench console session ===
+2026-01-04 08:24:42,614 INFO ipython import frappe
+2026-01-04 08:24:42,616 INFO ipython # Get a working workspace from frappe core
+2026-01-04 08:24:42,618 INFO ipython ws = frappe.get_doc("Workspace", "Settings")
+2026-01-04 08:24:42,620 INFO ipython import json
+2026-01-04 08:24:42,622 INFO ipython content = json.loads(ws.content) if ws.content else []
+2026-01-04 08:24:42,624 INFO ipython # Find a links block
+2026-01-04 08:24:42,626 INFO ipython === session end ===
+2026-01-04 08:25:01,775 INFO ipython === bench console session ===
+2026-01-04 08:25:01,776 INFO ipython import frappe
+2026-01-04 08:25:01,778 INFO ipython # List all workspaces
+2026-01-04 08:25:01,779 INFO ipython workspaces = frappe.get_all("Workspace", pluck="name")
+2026-01-04 08:25:01,781 INFO ipython print("Available workspaces:", workspaces[:10])
+2026-01-04 08:25:01,782 INFO ipython === session end ===
+2026-01-04 08:25:19,747 INFO ipython === bench console session ===
+2026-01-04 08:25:19,749 INFO ipython import frappe
+2026-01-04 08:25:19,751 INFO ipython import json
+2026-01-04 08:25:19,752 INFO ipython # Get a working workspace from ERPNext/Frappe
+2026-01-04 08:25:19,754 INFO ipython ws = frappe.get_doc("Workspace", "Support")
+2026-01-04 08:25:19,756 INFO ipython content = json.loads(ws.content) if ws.content else []
+2026-01-04 08:25:19,757 INFO ipython # Find a links block
+2026-01-04 08:25:19,759 INFO ipython === session end ===
+2026-01-04 11:32:07,119 INFO ipython === bench console session ===
+2026-01-04 11:32:07,122 INFO ipython import frappe
+2026-01-04 11:32:07,124 INFO ipython frappe.connect()
+2026-01-04 11:32:07,126 INFO ipython # Check for Exam Schedule DocType
+2026-01-04 11:32:07,128 INFO ipython exam_schedule_exists = frappe.db.exists("DocType", "Exam Schedule")
+2026-01-04 11:32:07,130 INFO ipython print(f"Exam Schedule exists: {exam_schedule_exists}")
+2026-01-04 11:32:07,132 INFO ipython # Check for Hall Ticket DocType
+2026-01-04 11:32:07,135 INFO ipython hall_ticket_exists = frappe.db.exists("DocType", "Hall Ticket")
+2026-01-04 11:32:07,136 INFO ipython print(f"Hall Ticket exists: {hall_ticket_exists}")
+2026-01-04 11:32:07,138 INFO ipython # Check for Assessment Plan (alternative name)
+2026-01-04 11:32:07,140 INFO ipython assessment_plan = frappe.db.exists("DocType", "Assessment Plan")
+2026-01-04 11:32:07,141 INFO ipython print(f"Assessment Plan exists: {assessment_plan}")
+2026-01-04 11:32:07,143 INFO ipython # Check Student Resume
+2026-01-04 11:32:07,145 INFO ipython student_resume = frappe.db.exists("DocType", "Student Resume")
+2026-01-04 11:32:07,146 INFO ipython print(f"Student Resume exists: {student_resume}")
+2026-01-04 11:32:07,148 INFO ipython frappe.db.commit()
+2026-01-04 11:32:07,150 INFO ipython === session end ===
+2026-01-04 11:38:22,460 INFO ipython === bench console session ===
+2026-01-04 11:38:22,462 INFO ipython import frappe
+2026-01-04 11:38:22,464 INFO ipython from frappe.utils import nowdate, add_days, getdate
+2026-01-04 11:38:22,466 INFO ipython frappe.connect()
+2026-01-04 11:38:22,469 INFO ipython # Create User for Student
+2026-01-04 11:38:22,471 INFO ipython user_email = "student.test@university.local"
+2026-01-04 11:38:22,472 INFO ipython if not frappe.db.exists("User", user_email):
+    user = frappe.get_doc({
+        "doctype": "User",
+        "email": user_email,
+        "first_name": "Test",
+        "last_name": "Student",
+        "enabled": 1,
+        "send_welcome_email": 0,
+        "new_password": "student123"
+    })
+    user.insert(ignore_permissions=True)
+    print(f"✓ User created: {user_email}")
+else:
+    user = frappe.get_doc("User", user_email)
+    print(f"✓ User already exists: {user_email}")
+2026-01-04 11:38:22,475 INFO ipython # Assign Student role
+2026-01-04 11:38:22,477 INFO ipython if "Student" not in [d.role for d in user.roles]:
+    user.append("roles", {"role": "Student"})
+    user.save(ignore_permissions=True)
+    print("✓ Student role assigned")
+2026-01-04 11:38:22,479 INFO ipython # Create or get Student record
+2026-01-04 11:38:22,481 INFO ipython student_id = "STU-2024-001"
+2026-01-04 11:38:22,484 INFO ipython if not frappe.db.exists("Student", student_id):
+    student = frappe.get_doc({
+        "doctype": "Student",
+        "first_name": "Test",
+        "last_name": "Student",
+        "student_name": "Test Student",
+        "student_email_id": user_email,
+        "user": user_email,
+        "joining_date": nowdate(),
+        "custom_cgpa": 8.5
+    })
+    student.name = student_id
+    student.insert(ignore_permissions=True)
+    print(f"✓ Student created: {student_id}")
+else:
+    student = frappe.get_doc("Student", student_id)
+    if not student.user:
+        student.user = user_email
+        student.save(ignore_permissions=True)
+    print(f"✓ Student already exists: {student_id}")
+2026-01-04 11:38:22,487 INFO ipython frappe.db.commit()
+2026-01-04 11:38:22,489 INFO ipython print("\n" + "="*50)
+2026-01-04 11:38:22,491 INFO ipython print("TEST STUDENT CREDENTIALS")
+2026-01-04 11:38:22,493 INFO ipython print("="*50)
+2026-01-04 11:38:22,495 INFO ipython print(f"Email: {user_email}")
+2026-01-04 11:38:22,497 INFO ipython print(f"Password: student123")
+2026-01-04 11:38:22,499 INFO ipython print(f"Student ID: {student_id}")
+2026-01-04 11:38:22,501 INFO ipython print("="*50)
+2026-01-04 11:38:22,503 INFO ipython === session end ===
+2026-01-04 11:39:03,242 INFO ipython === bench console session ===
+2026-01-04 11:39:03,244 INFO ipython import frappe
+2026-01-04 11:39:03,246 INFO ipython from frappe.utils import nowdate
+2026-01-04 11:39:03,248 INFO ipython frappe.connect()
+2026-01-04 11:39:03,250 INFO ipython frappe.flags.in_test = True  # Bypass password validation
+2026-01-04 11:39:03,252 INFO ipython # Create User
+2026-01-04 11:39:03,255 INFO ipython user_email = "student.test@university.local"
+2026-01-04 11:39:03,257 INFO ipython if not frappe.db.exists("User", user_email):
+    user = frappe.get_doc({
+        "doctype": "User",
+        "email": user_email,
+        "first_name": "Test",
+        "last_name": "Student",
+        "enabled": 1,
+        "send_welcome_email": 0
+    })
+    user.insert(ignore_permissions=True)
+    # Set password after creation
+    user.new_password = "Test@Student123"
+    user.save(ignore_permissions=True)
+    print(f"✓ User created: {user_email}")
+else:
+    user = frappe.get_doc("User", user_email)
+    user.new_password = "Test@Student123"  
+    user.save(ignore_permissions=True)
+    print(f"✓ User exists: {user_email}")
+2026-01-04 11:39:03,258 INFO ipython # Add Student role
+2026-01-04 11:39:03,260 INFO ipython if "Student" not in [d.role for d in user.roles]:
+    user.append("roles", {"role": "Student"})
+    user.save(ignore_permissions=True)
+    print("✓ Student role assigned")
+2026-01-04 11:39:03,262 INFO ipython frappe.db.commit()
+2026-01-04 11:39:03,264 INFO ipython print("\n" + "="*60)
+2026-01-04 11:39:03,266 INFO ipython print("STEP 1: User Created Successfully!")
+2026-01-04 11:39:03,268 INFO ipython print("="*60)
+2026-01-04 11:39:03,270 INFO ipython print(f"Email: {user_email}")
+2026-01-04 11:39:03,272 INFO ipython print(f"Password: Test@Student123")
+2026-01-04 11:39:03,274 INFO ipython print("="*60)
+2026-01-04 11:39:03,276 INFO ipython print("\nNext: Create student record manually in ERPNext desk")
+2026-01-04 11:39:03,278 INFO ipython print("or use the Student doctype form")
+2026-01-04 11:39:03,280 INFO ipython === session end ===
+2026-01-04 11:46:27,370 INFO ipython === bench console session ===
+2026-01-04 11:46:27,372 INFO ipython import frappe
+2026-01-04 11:46:27,374 INFO ipython frappe.connect()
+2026-01-04 11:46:27,376 INFO ipython # Get the student user
+2026-01-04 11:46:27,378 INFO ipython user_email = "student@test.edu"
+2026-01-04 11:46:27,380 INFO ipython user = frappe.get_doc("User", user_email)
+2026-01-04 11:46:27,382 INFO ipython print(f"User: {user_email}")
+2026-01-04 11:46:27,384 INFO ipython print(f"Current Roles: {[d.role for d in user.roles]}")
+2026-01-04 11:46:27,386 INFO ipython # Ensure Student role exists and is assigned
+2026-01-04 11:46:27,387 INFO ipython if "Student" not in [d.role for d in user.roles]:
+    user.append("roles", {"role": "Student"})
+    user.save(ignore_permissions=True)
+    print("✓ Student role added")
+else:
+    print("✓ Student role already assigned")
+2026-01-04 11:46:27,389 INFO ipython frappe.db.commit()
+2026-01-04 11:46:27,391 INFO ipython # Check if there's a Student record linked
+2026-01-04 11:46:27,393 INFO ipython student = frappe.db.get_value("Student", {"user": user_email}, ["name", "student_name"], as_dict=1)
+2026-01-04 11:46:27,395 INFO ipython if student:
+    print(f"\n✓ Student record found: {student.name} - {student.student_name}")
+else:
+    print("\n⚠ No Student record linked to this user")
+    print("Searching for students without linked users...")
+    
+2026-01-04 11:46:27,397 INFO ipython     # Find students without users
+2026-01-04 11:46:27,399 INFO ipython     students = frappe.db.sql("""
+        SELECT name, student_name, student_email_id
+        FROM `tabStudent`
+        WHERE (user IS NULL OR user = '')
+        LIMIT 5
+    """, as_dict=1)
+2026-01-04 11:46:27,401 INFO ipython     if students:
+        print("\nAvailable students to link:")
+        for s in students:
+            print(f"  - {s.name}: {s.student_name} ({s.student_email_id or 'No email'})")
+2026-01-04 11:46:27,403 INFO ipython print("\n" + "="*60)
+2026-01-04 11:46:27,405 INFO ipython print("SOLUTION FOR PAGE PERMISSION ERROR:")
+2026-01-04 11:46:27,407 INFO ipython print("="*60)
+2026-01-04 11:46:27,409 INFO ipython print("The error occurs because Student Portal pages are")
+2026-01-04 11:46:27,410 INFO ipython print("web pages, not DocTypes. This is normal behavior.")
+2026-01-04 11:46:27,413 INFO ipython print("\nTo access the portal:")
+2026-01-04 11:46:27,414 INFO ipython print("1. Navigate directly to: http://localhost:8000/student-portal")
+2026-01-04 11:46:27,416 INFO ipython print("2. Login with: student@test.edu")
+2026-01-04 11:46:27,418 INFO ipython print("3. The portal should load automatically")
+2026-01-04 11:46:27,420 INFO ipython print("="*60)
+2026-01-04 11:46:27,422 INFO ipython === session end ===
+2026-01-04 11:50:33,401 INFO ipython === bench console session ===
+2026-01-04 11:50:33,403 INFO ipython import frappe
+2026-01-04 11:50:33,405 INFO ipython frappe.connect()
+2026-01-04 11:50:33,406 INFO ipython # Check if the route exists
+2026-01-04 11:50:33,408 INFO ipython from frappe.website.router import get_page_info_from_template
+2026-01-04 11:50:33,409 INFO ipython try:
+    # Try to get page info for exams
+    page_info = get_page_info_from_template("student-portal/exams")
+    print(f"✓ Route 'student-portal/exams' is recognized")
+    print(f"  Template: {page_info}")
+except Exception as e:
+    print(f"✗ Route error: {e}")
+2026-01-04 11:50:33,411 INFO ipython # List all files in student-portal
+2026-01-04 11:50:33,412 INFO ipython import os
+2026-01-04 11:50:33,414 INFO ipython portal_path = frappe.get_app_path("university_erp", "www", "student-portal")
+2026-01-04 11:50:33,415 INFO ipython files = os.listdir(portal_path)
+2026-01-04 11:50:33,417 INFO ipython py_files = [f for f in files if f.endswith('.py')]
+2026-01-04 11:50:33,419 INFO ipython html_files = [f for f in files if f.endswith('.html')]
+2026-01-04 11:50:33,420 INFO ipython print(f"\n✓ Found {len(py_files)} .py files")
+2026-01-04 11:50:33,422 INFO ipython print(f"✓ Found {len(html_files)} .html files")
+2026-01-04 11:50:33,423 INFO ipython print(f"\nPages that should work:")
+2026-01-04 11:50:33,425 INFO ipython for py_file in py_files:
+    page_name = py_file.replace('.py', '')
+    if page_name != '__init__':
+        print(f"  - /student-portal/{page_name}")
+2026-01-04 11:50:33,427 INFO ipython === session end ===
+2026-01-04 11:54:51,113 INFO ipython === bench console session ===
+2026-01-04 11:54:51,114 INFO ipython import frappe
+2026-01-04 11:54:51,116 INFO ipython frappe.connect()
+2026-01-04 11:54:51,118 INFO ipython # Clear all caches thoroughly
+2026-01-04 11:54:51,119 INFO ipython frappe.clear_cache()
+2026-01-04 11:54:51,121 INFO ipython frappe.cache().delete_keys("*")
+2026-01-04 11:54:51,123 INFO ipython # Clear website cache
+2026-01-04 11:54:51,124 INFO ipython from frappe.website.render import clear_cache
+2026-01-04 11:54:51,126 INFO ipython clear_cache()
+2026-01-04 11:54:51,127 INFO ipython print("✓ All caches cleared")
+2026-01-04 11:54:51,129 INFO ipython # Check if exams.py can be imported
+2026-01-04 11:54:51,131 INFO ipython try:
+    from university_erp.www.student_portal import exams
+    print("✓ exams.py imports successfully")
+    print(f"  Has get_context: {hasattr(exams, 'get_context')}")
+except Exception as e:
+    print(f"✗ Error importing exams.py: {e}")
+2026-01-04 11:54:51,132 INFO ipython === session end ===
+2026-01-04 11:59:53,122 INFO ipython === bench console session ===
+2026-01-04 11:59:53,124 INFO ipython import frappe
+2026-01-04 11:59:53,126 INFO ipython frappe.init(site="university.local")
+2026-01-04 11:59:53,128 INFO ipython frappe.connect()
+2026-01-04 11:59:53,129 INFO ipython # Check if the route exists in Frappe's routing system
+2026-01-04 11:59:53,131 INFO ipython from frappe.website.router import get_route_info
+2026-01-04 11:59:53,133 INFO ipython try:
+    route_info = get_route_info("student-portal/exams")
+    print("Route info:", route_info)
+except Exception as e:
+    print("Error getting route:", str(e))
+2026-01-04 11:59:53,135 INFO ipython # Try to get the page path
+2026-01-04 11:59:53,137 INFO ipython === session end ===
+2026-01-04 12:00:18,307 INFO ipython === bench console session ===
+2026-01-04 12:00:18,309 INFO ipython import frappe
+2026-01-04 12:00:18,311 INFO ipython frappe.init(site="university.local")
+2026-01-04 12:00:18,312 INFO ipython frappe.connect()
+2026-01-04 12:00:18,314 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 12:00:18,316 INFO ipython # Try to manually call get_context from both pages
+2026-01-04 12:00:18,318 INFO ipython print("=== Testing index.py ===")
+2026-01-04 12:00:18,319 INFO ipython try:
+    from university_erp.www.student_portal.index import get_context as get_index_context
+    context = frappe._dict()
+    get_index_context(context)
+    print("✅ index.py loaded successfully")
+    print("Active page from index:", context.get('active_page'))
+except Exception as e:
+    print("❌ Error loading index.py:", str(e))
+2026-01-04 12:00:18,321 INFO ipython print("\n=== Testing exams.py ===")
+2026-01-04 12:00:18,323 INFO ipython === session end ===
+2026-01-04 12:01:20,260 INFO ipython === bench console session ===
+2026-01-04 12:01:20,262 INFO ipython import frappe
+2026-01-04 12:01:20,264 INFO ipython import os
+2026-01-04 12:01:20,266 INFO ipython frappe.init(site="university.local")
+2026-01-04 12:01:20,269 INFO ipython frappe.connect()
+2026-01-04 12:01:20,271 INFO ipython # The correct way to import www files in Frappe
+2026-01-04 12:01:20,273 INFO ipython import importlib.util
+2026-01-04 12:01:20,275 INFO ipython # Load exams.py the way Frappe does it
+2026-01-04 12:01:20,276 INFO ipython exams_path = "/workspace/development/frappe-bench/apps/university_erp/university_erp/www/student-portal/exams.py"
+2026-01-04 12:01:20,278 INFO ipython spec = importlib.util.spec_from_file_location("exams", exams_path)
+2026-01-04 12:01:20,280 INFO ipython exams_module = importlib.util.module_from_spec(spec)
+2026-01-04 12:01:20,282 INFO ipython print("Loading exams.py...")
+2026-01-04 12:01:20,284 INFO ipython === session end ===
+2026-01-04 12:07:16,006 INFO ipython === bench console session ===
+2026-01-04 12:07:16,008 INFO ipython import frappe
+2026-01-04 12:07:16,011 INFO ipython import importlib.util
+2026-01-04 12:07:16,013 INFO ipython import os
+2026-01-04 12:07:16,014 INFO ipython frappe.init(site="university.local")
+2026-01-04 12:07:16,016 INFO ipython frappe.connect()
+2026-01-04 12:07:16,019 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 12:07:16,021 INFO ipython # Load exams.py the way Frappe does
+2026-01-04 12:07:16,023 INFO ipython print("=== Testing exams.py loading ===")
+2026-01-04 12:07:16,025 INFO ipython exams_path = "apps/university_erp/university_erp/www/student-portal/exams.py"
+2026-01-04 12:07:16,027 INFO ipython spec = importlib.util.spec_from_file_location("exams_module", exams_path)
+2026-01-04 12:07:16,029 INFO ipython exams_module = importlib.util.module_from_spec(spec)
+2026-01-04 12:07:16,031 INFO ipython # Import frappe into the module namespace (required for the module to work)
+2026-01-04 12:07:16,033 INFO ipython exams_module.frappe = frappe
+2026-01-04 12:07:16,035 INFO ipython exams_module._ = frappe._
+2026-01-04 12:07:16,038 INFO ipython === session end ===
+2026-01-04 12:34:25,201 INFO ipython === bench console session ===
+2026-01-04 12:34:25,203 INFO ipython import frappe
+2026-01-04 12:34:25,205 INFO ipython frappe.init(site="university.local")
+2026-01-04 12:34:25,207 INFO ipython frappe.connect()
+2026-01-04 12:34:25,209 INFO ipython # Check if student user exists and has Student role
+2026-01-04 12:34:25,211 INFO ipython user = "student@test.edu"
+2026-01-04 12:34:25,213 INFO ipython === session end ===
+2026-01-04 12:52:08,422 INFO ipython === bench console session ===
+2026-01-04 12:52:08,424 INFO ipython import frappe
+2026-01-04 12:52:08,425 INFO ipython # Test as student user
+2026-01-04 12:52:08,427 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 12:52:08,430 INFO ipython # Check if student role exists
+2026-01-04 12:52:08,432 INFO ipython roles = frappe.get_roles("student@test.edu")
+2026-01-04 12:52:08,434 INFO ipython print("Roles for student@test.edu:", roles)
+2026-01-04 12:52:08,436 INFO ipython print("Has Student role:", "Student" in roles)
+2026-01-04 12:52:08,438 INFO ipython # Test the redirect function
+2026-01-04 12:52:08,440 INFO ipython from university_erp.utils import get_website_user_home_page
+2026-01-04 12:52:08,442 INFO ipython home_page = get_website_user_home_page("student@test.edu")
+2026-01-04 12:52:08,444 INFO ipython print("get_website_user_home_page returned:", home_page)
+2026-01-04 12:52:08,446 INFO ipython # Test on_session_creation function exists
+2026-01-04 12:52:08,449 INFO ipython from university_erp.utils import on_session_creation
+2026-01-04 12:52:08,451 INFO ipython print("on_session_creation function exists:", callable(on_session_creation))
+2026-01-04 12:52:08,453 INFO ipython === session end ===
+2026-01-04 13:11:32,303 INFO ipython === bench console session ===
+2026-01-04 13:11:32,305 INFO ipython import frappe
+2026-01-04 13:11:32,307 INFO ipython # Test the redirect function
+2026-01-04 13:11:32,309 INFO ipython from university_erp.utils import get_website_user_home_page
+2026-01-04 13:11:32,311 INFO ipython # Test with student user
+2026-01-04 13:11:32,313 INFO ipython result = get_website_user_home_page("student@test.edu")
+2026-01-04 13:11:32,315 INFO ipython print("get_website_user_home_page('student@test.edu') returned:", result)
+2026-01-04 13:11:32,317 INFO ipython # Check role_home_page hook
+2026-01-04 13:11:32,319 INFO ipython from frappe import get_hooks
+2026-01-04 13:11:32,321 INFO ipython role_home = get_hooks("role_home_page")
+2026-01-04 13:11:32,322 INFO ipython print("\nrole_home_page hooks:", role_home)
+2026-01-04 13:11:32,324 INFO ipython # Check get_website_user_home_page hook
+2026-01-04 13:11:32,326 INFO ipython home_page_hook = get_hooks("get_website_user_home_page")
+2026-01-04 13:11:32,328 INFO ipython print("\nget_website_user_home_page hooks:", home_page_hook)
+2026-01-04 13:11:32,330 INFO ipython === session end ===
+2026-01-04 13:39:52,145 INFO ipython === bench console session ===
+2026-01-04 13:39:52,148 INFO ipython import frappe
+2026-01-04 13:39:52,150 INFO ipython # Test login functionality
+2026-01-04 13:39:52,152 INFO ipython print("Testing login hooks...")
+2026-01-04 13:39:52,155 INFO ipython # Check if hooks are registered
+2026-01-04 13:39:52,158 INFO ipython from frappe import get_hooks
+2026-01-04 13:39:52,161 INFO ipython print("\n1. role_home_page hook:", get_hooks("role_home_page"))
+2026-01-04 13:39:52,164 INFO ipython print("2. get_website_user_home_page hook:", get_hooks("get_website_user_home_page"))
+2026-01-04 13:39:52,166 INFO ipython print("3. on_session_creation hook:", get_hooks("on_session_creation"))
+2026-01-04 13:39:52,168 INFO ipython # Test get_website_user_home_page function
+2026-01-04 13:39:52,170 INFO ipython from university_erp.utils import get_website_user_home_page
+2026-01-04 13:39:52,174 INFO ipython result = get_website_user_home_page("student@test.edu")
+2026-01-04 13:39:52,176 INFO ipython print(f"\n4. get_website_user_home_page('student@test.edu') = {result}")
+2026-01-04 13:39:52,179 INFO ipython print("\n✅ All hooks are registered and working!")
+2026-01-04 13:39:52,181 INFO ipython === session end ===
+2026-01-04 13:40:18,809 INFO ipython === bench console session ===
+2026-01-04 13:40:18,811 INFO ipython import frappe
+2026-01-04 13:40:18,813 INFO ipython # Check what JS files are included in app_include_js
+2026-01-04 13:40:18,815 INFO ipython from frappe import get_hooks
+2026-01-04 13:40:18,817 INFO ipython app_js = get_hooks("app_include_js")
+2026-01-04 13:40:18,818 INFO ipython web_js = get_hooks("web_include_js")
+2026-01-04 13:40:18,820 INFO ipython print("app_include_js:", app_js)
+2026-01-04 13:40:18,822 INFO ipython print("\nweb_include_js:", web_js)
+2026-01-04 13:40:18,825 INFO ipython === session end ===
+2026-01-04 13:42:42,548 INFO ipython === bench console session ===
+2026-01-04 13:42:42,551 INFO ipython import frappe
+2026-01-04 13:42:42,553 INFO ipython # Check student user
+2026-01-04 13:42:42,556 INFO ipython user_email = "student@test.edu"
+2026-01-04 13:42:42,558 INFO ipython print(f"Checking user: {user_email}")
+2026-01-04 13:42:42,560 INFO ipython print("=" * 50)
+2026-01-04 13:42:42,563 INFO ipython # Check if user exists
+2026-01-04 13:42:42,566 INFO ipython if frappe.db.exists("User", user_email):
+    print(f"✅ User exists")
+    
+2026-01-04 13:42:42,568 INFO ipython     # Get user roles
+2026-01-04 13:42:42,570 INFO ipython     roles = frappe.get_roles(user_email)
+2026-01-04 13:42:42,572 INFO ipython     print(f"\nRoles: {roles}")
+2026-01-04 13:42:42,574 INFO ipython     # Check if Student role exists
+2026-01-04 13:42:42,576 INFO ipython     if "Student" in roles:
+        print("✅ Has Student role")
+    else:
+        print("❌ Does NOT have Student role!")
+        
+2026-01-04 13:42:42,578 INFO ipython     # Check if Student doctype record exists
+2026-01-04 13:42:42,581 INFO ipython     student = frappe.db.get_value("Student", {"user": user_email}, ["name", "student_name"], as_dict=1)
+2026-01-04 13:42:42,583 INFO ipython     if student:
+        print(f"\n✅ Student record exists:")
+        print(f"   ID: {student.name}")
+        print(f"   Name: {student.student_name}")
+    else:
+        print("\n❌ No Student record linked to this user")
+else:
+    print(f"❌ User {user_email} does NOT exist!")
+2026-01-04 13:42:42,585 INFO ipython === session end ===
+2026-01-04 13:47:37,428 INFO ipython === bench console session ===
+2026-01-04 13:47:37,430 INFO ipython import frappe
+2026-01-04 13:47:37,432 INFO ipython user = "student@test.edu"
+2026-01-04 13:47:37,434 INFO ipython # Remove Desk User role from student
+2026-01-04 13:47:37,437 INFO ipython if frappe.db.exists("Has Role", {"parent": user, "role": "Desk User"}):
+    frappe.db.delete("Has Role", {"parent": user, "role": "Desk User"})
+    frappe.db.commit()
+    print(f"✅ Removed 'Desk User' role from {user}")
+else:
+    print("Desk User role not found")
+2026-01-04 13:47:37,439 INFO ipython # Check current roles
+2026-01-04 13:47:37,441 INFO ipython roles = frappe.get_roles(user)
+2026-01-04 13:47:37,443 INFO ipython print(f"\nCurrent roles for {user}:", roles)
+2026-01-04 13:47:37,445 INFO ipython === session end ===
+2026-01-04 13:48:13,432 INFO ipython === bench console session ===
+2026-01-04 13:48:13,434 INFO ipython import frappe
+2026-01-04 13:48:13,436 INFO ipython user_email = "student@test.edu"
+2026-01-04 13:48:13,438 INFO ipython # Get the user document
+2026-01-04 13:48:13,440 INFO ipython user_doc = frappe.get_doc("User", user_email)
+2026-01-04 13:48:13,443 INFO ipython # Remove Desk User role
+2026-01-04 13:48:13,445 INFO ipython roles_to_keep = [r for r in user_doc.roles if r.role != "Desk User"]
+2026-01-04 13:48:13,447 INFO ipython user_doc.roles = roles_to_keep
+2026-01-04 13:48:13,449 INFO ipython # Save
+2026-01-04 13:48:13,451 INFO ipython user_doc.save(ignore_permissions=True)
+2026-01-04 13:48:13,453 INFO ipython frappe.db.commit()
+2026-01-04 13:48:13,455 INFO ipython print(f"✅ Updated roles for {user_email}")
+2026-01-04 13:48:13,457 INFO ipython # Verify
+2026-01-04 13:48:13,459 INFO ipython user_doc.reload()
+2026-01-04 13:48:13,461 INFO ipython role_names = [r.role for r in user_doc.roles]
+2026-01-04 13:48:13,463 INFO ipython print(f"New roles: {role_names}")
+2026-01-04 13:48:13,466 INFO ipython === session end ===
+2026-01-04 13:51:23,914 INFO ipython === bench console session ===
+2026-01-04 13:51:23,916 INFO ipython import frappe
+2026-01-04 13:51:23,919 INFO ipython user_email = "student@test.edu"
+2026-01-04 13:51:23,921 INFO ipython # Get the user document
+2026-01-04 13:51:23,923 INFO ipython user_doc = frappe.get_doc("User", user_email)
+2026-01-04 13:51:23,925 INFO ipython # Check current roles
+2026-01-04 13:51:23,929 INFO ipython current_roles = [r.role for r in user_doc.roles]
+2026-01-04 13:51:23,933 INFO ipython print(f"Current roles: {current_roles}")
+2026-01-04 13:51:23,936 INFO ipython # Add back essential roles if missing
+2026-01-04 13:51:23,938 INFO ipython essential_roles = ["Student", "All", "Guest"]
+2026-01-04 13:51:23,940 INFO ipython for role in essential_roles:
+    if role not in current_roles:
+        user_doc.append("roles", {"role": role})
+        print(f"Added role: {role}")
+2026-01-04 13:51:23,943 INFO ipython # Save
+2026-01-04 13:51:23,946 INFO ipython user_doc.save(ignore_permissions=True)
+2026-01-04 13:51:23,949 INFO ipython frappe.db.commit()
+2026-01-04 13:51:23,951 INFO ipython print(f"\n✅ User {user_email} updated")
+2026-01-04 13:51:23,953 INFO ipython print(f"Final roles: {[r.role for r in user_doc.roles]}")
+2026-01-04 13:51:23,955 INFO ipython === session end ===
+2026-01-04 14:02:08,172 INFO ipython === bench console session ===
+2026-01-04 14:02:08,174 INFO ipython import frappe
+2026-01-04 14:02:08,176 INFO ipython # Test if our hook is actually being called by Frappe
+2026-01-04 14:02:08,178 INFO ipython from university_erp.utils import get_website_user_home_page
+2026-01-04 14:02:08,180 INFO ipython # Call it directly
+2026-01-04 14:02:08,182 INFO ipython result = get_website_user_home_page("student@test.edu")
+2026-01-04 14:02:08,184 INFO ipython print("Direct call result:", result)
+2026-01-04 14:02:08,185 INFO ipython # Check what Frappe's default redirect logic does
+2026-01-04 14:02:08,187 INFO ipython from frappe.utils import get_home_page
+2026-01-04 14:02:08,189 INFO ipython home = get_home_page("student@test.edu")
+2026-01-04 14:02:08,191 INFO ipython print("Frappe's get_home_page result:", home)
+2026-01-04 14:02:08,193 INFO ipython === session end ===
+2026-01-04 14:04:35,312 INFO ipython === bench console session ===
+2026-01-04 14:04:35,313 INFO ipython import frappe
+2026-01-04 14:04:35,315 INFO ipython # Check what hooks are actually registered
+2026-01-04 14:04:35,316 INFO ipython print("=== Checking get_website_user_home_page hook ===")
+2026-01-04 14:04:35,318 INFO ipython hooks = frappe.get_hooks("get_website_user_home_page")
+2026-01-04 14:04:35,319 INFO ipython print("Registered hooks:", hooks)
+2026-01-04 14:04:35,320 INFO ipython # Check if there are other apps that might override this
+2026-01-04 14:04:35,322 INFO ipython print("\n=== Checking all installed apps ===")
+2026-01-04 14:04:35,323 INFO ipython apps = frappe.get_installed_apps()
+2026-01-04 14:04:35,324 INFO ipython print("Installed apps:", apps)
+2026-01-04 14:04:35,326 INFO ipython # Check if ERPNext or Education has this hook
+2026-01-04 14:04:35,327 INFO ipython for app in apps:
+    try:
+        app_hooks = frappe.get_module(f"{app}.hooks")
+        if hasattr(app_hooks, 'get_website_user_home_page'):
+            print(f"\n{app} has get_website_user_home_page:", app_hooks.get_website_user_home_page)
+    except:
+        pass
+2026-01-04 14:04:35,328 INFO ipython # Check role_home_page from all apps
+2026-01-04 14:04:35,330 INFO ipython print("\n=== Checking role_home_page from all apps ===")
+2026-01-04 14:04:35,331 INFO ipython role_home_pages = frappe.get_hooks("role_home_page")
+2026-01-04 14:04:35,332 INFO ipython print("All role_home_page hooks:", role_home_pages)
+2026-01-04 14:04:35,333 INFO ipython # Check what the User doctype has for home page
+2026-01-04 14:04:35,335 INFO ipython print("\n=== Checking student user settings ===")
+2026-01-04 14:04:35,336 INFO ipython user_doc = frappe.get_doc("User", "student@test.edu")
+2026-01-04 14:04:35,337 INFO ipython print("User home_page field:", user_doc.home_page if hasattr(user_doc, 'home_page') else "Not set")
+2026-01-04 14:04:35,339 INFO ipython print("User role_profile_name:", user_doc.role_profile_name if hasattr(user_doc, 'role_profile_name') else "Not set")
+2026-01-04 14:04:35,340 INFO ipython === session end ===
+2026-01-04 14:10:04,003 INFO ipython === bench console session ===
+2026-01-04 14:10:04,006 INFO ipython import frappe
+2026-01-04 14:10:04,009 INFO ipython print("=== After cache clear ===")
+2026-01-04 14:10:04,011 INFO ipython print("role_home_page hooks:", frappe.get_hooks("role_home_page"))
+2026-01-04 14:10:04,014 INFO ipython print("get_website_user_home_page hooks:", frappe.get_hooks("get_website_user_home_page"))
+2026-01-04 14:10:04,017 INFO ipython # Test the function directly
+2026-01-04 14:10:04,019 INFO ipython from university_erp.utils import get_website_user_home_page
+2026-01-04 14:10:04,021 INFO ipython result = get_website_user_home_page("student@test.edu")
+2026-01-04 14:10:04,023 INFO ipython print("\nDirect function call result:", result)
+2026-01-04 14:10:04,026 INFO ipython === session end ===
+2026-01-04 14:10:29,113 INFO ipython === bench console session ===
+2026-01-04 14:10:29,115 INFO ipython import frappe
+2026-01-04 14:10:29,117 INFO ipython # Check Frappe's implementation to understand when get_website_user_home_page is called
+2026-01-04 14:10:29,119 INFO ipython print("=== Checking Frappe's redirect mechanism ===")
+2026-01-04 14:10:29,122 INFO ipython # The hook should be called by frappe.utils.get_home_page or similar
+2026-01-04 14:10:29,124 INFO ipython # Let's trace through the login flow
+2026-01-04 14:10:29,127 INFO ipython from frappe.utils import get_url
+2026-01-04 14:10:29,129 INFO ipython # Check if there's a get_home_page function
+2026-01-04 14:10:29,132 INFO ipython import frappe.utils
+2026-01-04 14:10:29,134 INFO ipython if hasattr(frappe.utils, 'get_home_page'):
+    print("frappe.utils.get_home_page exists")
+else:
+    print("frappe.utils.get_home_page does NOT exist")
+2026-01-04 14:10:29,136 INFO ipython # Check website utils
+2026-01-04 14:10:29,138 INFO ipython import frappe.website.utils as web_utils
+2026-01-04 14:10:29,140 INFO ipython if hasattr(web_utils, 'get_home_page'):
+    print("frappe.website.utils.get_home_page exists")
+else:
+    print("frappe.website.utils.get_home_page does NOT exist")
+2026-01-04 14:10:29,142 INFO ipython # List methods related to home page
+2026-01-04 14:10:29,145 INFO ipython print("\nMethods in frappe.website.utils containing 'home':")
+2026-01-04 14:10:29,146 INFO ipython for attr in dir(web_utils):
+    if 'home' in attr.lower():
+        print(f"  - {attr}")
+2026-01-04 14:10:29,149 INFO ipython === session end ===
+2026-01-04 14:10:52,960 INFO ipython === bench console session ===
+2026-01-04 14:10:52,963 INFO ipython import frappe
+2026-01-04 14:10:52,965 INFO ipython from frappe.website.utils import get_home_page
+2026-01-04 14:10:52,967 INFO ipython # Simulate what happens after login
+2026-01-04 14:10:52,969 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 14:10:52,971 INFO ipython print("=== Testing get_home_page for student ===")
+2026-01-04 14:10:52,974 INFO ipython home_page = get_home_page()
+2026-01-04 14:10:52,977 INFO ipython print(f"get_home_page() returned: {home_page}")
+2026-01-04 14:10:52,980 INFO ipython # Check the user's roles
+2026-01-04 14:10:52,982 INFO ipython print(f"\nUser roles: {frappe.get_roles('student@test.edu')}")
+2026-01-04 14:10:52,985 INFO ipython # Try get_home_page_via_hooks directly
+2026-01-04 14:10:52,987 INFO ipython from frappe.website.utils import get_home_page_via_hooks
+2026-01-04 14:10:52,990 INFO ipython hook_result = get_home_page_via_hooks()
+2026-01-04 14:10:52,992 INFO ipython print(f"get_home_page_via_hooks() returned: {hook_result}")
+2026-01-04 14:10:52,994 INFO ipython === session end ===
+2026-01-04 14:11:28,668 INFO ipython === bench console session ===
+2026-01-04 14:11:28,671 INFO ipython import frappe
+2026-01-04 14:11:28,674 INFO ipython frappe.init(site="university.local")
+2026-01-04 14:11:28,675 INFO ipython frappe.connect()
+2026-01-04 14:11:28,677 INFO ipython frappe.set_user("Administrator")
+2026-01-04 14:11:28,679 INFO ipython # Remove Desk User role from student
+2026-01-04 14:11:28,680 INFO ipython user_doc = frappe.get_doc("User", "student@test.edu")
+2026-01-04 14:11:28,682 INFO ipython print("Current roles:", [r.role for r in user_doc.roles])
+2026-01-04 14:11:28,683 INFO ipython # Remove Desk User
+2026-01-04 14:11:28,685 INFO ipython user_doc.roles = [r for r in user_doc.roles if r.role != "Desk User"]
+2026-01-04 14:11:28,687 INFO ipython user_doc.save(ignore_permissions=True)
+2026-01-04 14:11:28,690 INFO ipython frappe.db.commit()
+2026-01-04 14:11:28,692 INFO ipython print("Updated roles:", [r.role for r in user_doc.roles])
+2026-01-04 14:11:28,693 INFO ipython print("\n✅ Desk User role removed from student@test.edu")
+2026-01-04 14:11:28,695 INFO ipython === session end ===
+2026-01-04 14:12:53,656 INFO ipython === bench console session ===
+2026-01-04 14:12:53,658 INFO ipython import frappe
+2026-01-04 14:12:53,660 INFO ipython user_type = frappe.db.get_value("User", "student@test.edu", "user_type")
+2026-01-04 14:12:53,661 INFO ipython print(f"student@test.edu user_type: {user_type}")
+2026-01-04 14:12:53,663 INFO ipython # This is important - if user_type is "System User", they'll be redirected to desk
+2026-01-04 14:12:53,665 INFO ipython # If it's "Website User", they'll use the website redirect
+2026-01-04 14:12:53,666 INFO ipython === session end ===
+2026-01-04 14:13:23,964 INFO ipython === bench console session ===
+2026-01-04 14:13:23,967 INFO ipython import frappe
+2026-01-04 14:13:23,969 INFO ipython frappe.init(site="university.local")
+2026-01-04 14:13:23,971 INFO ipython frappe.connect()
+2026-01-04 14:13:23,974 INFO ipython frappe.set_user("Administrator")
+2026-01-04 14:13:23,977 INFO ipython # Change user type to Website User
+2026-01-04 14:13:23,979 INFO ipython user_doc = frappe.get_doc("User", "student@test.edu")
+2026-01-04 14:13:23,981 INFO ipython print(f"Current user_type: {user_doc.user_type}")
+2026-01-04 14:13:23,984 INFO ipython user_doc.user_type = "Website User"
+2026-01-04 14:13:23,986 INFO ipython user_doc.save(ignore_permissions=True)
+2026-01-04 14:13:23,988 INFO ipython frappe.db.commit()
+2026-01-04 14:13:23,989 INFO ipython print(f"Updated user_type: {user_doc.user_type}")
+2026-01-04 14:13:23,992 INFO ipython print("\n✅ Changed student@test.edu to Website User")
+2026-01-04 14:13:23,994 INFO ipython # Verify roles are still correct
+2026-01-04 14:13:23,996 INFO ipython print(f"Roles: {[r.role for r in user_doc.roles]}")
+2026-01-04 14:13:23,998 INFO ipython === session end ===
+2026-01-04 14:13:42,934 INFO ipython === bench console session ===
+2026-01-04 14:13:42,936 INFO ipython import frappe
+2026-01-04 14:13:42,937 INFO ipython frappe.init(site="university.local")
+2026-01-04 14:13:42,940 INFO ipython frappe.connect()
+2026-01-04 14:13:42,942 INFO ipython # Direct SQL update
+2026-01-04 14:13:42,944 INFO ipython frappe.db.sql("UPDATE tabUser SET user_type = 'Website User' WHERE name = 'student@test.edu'")
+2026-01-04 14:13:42,945 INFO ipython frappe.db.commit()
+2026-01-04 14:13:42,947 INFO ipython # Verify
+2026-01-04 14:13:42,950 INFO ipython user_type = frappe.db.get_value("User", "student@test.edu", "user_type")
+2026-01-04 14:13:42,951 INFO ipython print(f"✅ User type updated to: {user_type}")
+2026-01-04 14:13:42,953 INFO ipython === session end ===
+2026-01-04 14:15:08,986 INFO ipython === bench console session ===
+2026-01-04 14:15:08,989 INFO ipython import frappe
+2026-01-04 14:15:08,991 INFO ipython from frappe.website.utils import get_home_page
+2026-01-04 14:15:08,994 INFO ipython # Test as student
+2026-01-04 14:15:08,997 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 14:15:09,000 INFO ipython print("=== Testing redirect for Website User student ===")
+2026-01-04 14:15:09,003 INFO ipython home_page = get_home_page()
+2026-01-04 14:15:09,005 INFO ipython print(f"get_home_page() returns: {home_page}")
+2026-01-04 14:15:09,007 INFO ipython # This should construct: "/" + "student_portal" = "/student_portal"
+2026-01-04 14:15:09,009 INFO ipython full_path = "/" + home_page if home_page else "/"
+2026-01-04 14:15:09,012 INFO ipython print(f"Full redirect path will be: {full_path}")
+2026-01-04 14:15:09,014 INFO ipython # Check user type
+2026-01-04 14:15:09,017 INFO ipython user_type = frappe.db.get_value("User", "student@test.edu", "user_type")
+2026-01-04 14:15:09,019 INFO ipython print(f"\nUser type: {user_type}")
+2026-01-04 14:15:09,021 INFO ipython print(f"Roles: {frappe.get_roles()}")
+2026-01-04 14:15:09,024 INFO ipython === session end ===
+2026-01-04 14:18:34,616 INFO ipython === bench console session ===
+2026-01-04 14:18:34,618 INFO ipython import frappe
+2026-01-04 14:18:34,620 INFO ipython # Simulate the actual login flow
+2026-01-04 14:18:34,622 INFO ipython frappe.set_user("Administrator")
+2026-01-04 14:18:34,624 INFO ipython # Get the user info exactly as auth.py does
+2026-01-04 14:18:34,626 INFO ipython user_info = frappe.get_cached_value(
+    "User",
+    "student@test.edu",
+    ["user_type", "first_name", "last_name", "user_image", "default_workspace"],
+    as_dict=1,
+)
+2026-01-04 14:18:34,628 INFO ipython print("=== User Info (as seen by auth.py) ===")
+2026-01-04 14:18:34,630 INFO ipython print(f"user_type: {user_info.user_type}")
+2026-01-04 14:18:34,632 INFO ipython print(f"default_workspace: {user_info.default_workspace}")
+2026-01-04 14:18:34,634 INFO ipython # Now test what home page will be returned
+2026-01-04 14:18:34,636 INFO ipython from frappe.website.utils import get_home_page, get_default_path
+2026-01-04 14:18:34,638 INFO ipython frappe.set_user("student@test.edu")
+2026-01-04 14:18:34,641 INFO ipython default_path = get_default_path()
+2026-01-04 14:18:34,643 INFO ipython home_page = get_home_page()
+2026-01-04 14:18:34,645 INFO ipython print(f"\n=== Redirect Logic ===")
+2026-01-04 14:18:34,647 INFO ipython print(f"get_default_path(): {default_path}")
+2026-01-04 14:18:34,649 INFO ipython print(f"get_home_page(): {home_page}")
+2026-01-04 14:18:34,651 INFO ipython # Simulate the actual redirect construction
+2026-01-04 14:18:34,652 INFO ipython if user_info.user_type == "Website User":
+    redirect_url = default_path or ("/" + home_page if home_page else "/")
+    print(f"✅ Website User redirect: {redirect_url}")
+else:
+    print(f"❌ System User - will redirect to desk/workspace")
+    if user_info.default_workspace:
+        print(f"   Default workspace: {user_info.default_workspace}")
+2026-01-04 14:18:34,654 INFO ipython === session end ===
+2026-01-04 14:21:41,459 INFO ipython === bench console session ===
+2026-01-04 14:21:41,460 INFO ipython import frappe
+2026-01-04 14:21:41,462 INFO ipython from datetime import datetime, timedelta
+2026-01-04 14:21:41,464 INFO ipython frappe.init(site="university.local")
+2026-01-04 14:21:41,465 INFO ipython frappe.connect()
+2026-01-04 14:21:41,467 INFO ipython frappe.set_user("Administrator")
+2026-01-04 14:21:41,468 INFO ipython print("=== Creating Sample Data for Student Portal ===\n")
+2026-01-04 14:21:41,470 INFO ipython # Get the student
+2026-01-04 14:21:41,472 INFO ipython student = frappe.get_doc("Student", "EDU-STU-2026-00002")
+2026-01-04 14:21:41,474 INFO ipython print(f"✅ Student: {student.student_name} ({student.name})")
+2026-01-04 14:21:41,475 INFO ipython # Step 1: Get or create academic year and program
+2026-01-04 14:21:41,477 INFO ipython academic_year = frappe.get_value("Academic Year", {"year_start_date": ["<=", datetime.now().date()]}, "name", order_by="year_start_date desc")
+2026-01-04 14:21:41,479 INFO ipython if not academic_year:
+    # Create academic year for 2024-2025
+    ay = frappe.get_doc({
+        "doctype": "Academic Year",
+        "academic_year_name": "2024-2025",
+        "year_start_date": "2024-07-01",
+        "year_end_date": "2025-06-30"
+    })
+    ay.insert(ignore_permissions=True)
+    academic_year = ay.name
+    print(f"✅ Created Academic Year: {academic_year}")
+else:
+    print(f"✅ Using Academic Year: {academic_year}")
+2026-01-04 14:21:41,480 INFO ipython # Step 2: Get or create program
+2026-01-04 14:21:41,482 INFO ipython program = frappe.get_value("Program", {"program_name": ["like", "%Computer Science%"]})
+2026-01-04 14:21:41,484 INFO ipython if not program:
+    prog = frappe.get_doc({
+        "doctype": "Program",
+        "program_name": "Bachelor of Computer Science",
+        "program_abbreviation": "BCS"
+    })
+    prog.insert(ignore_permissions=True)
+    program = prog.name
+    print(f"✅ Created Program: {program}")
+else:
+    print(f"✅ Using Program: {program}")
+2026-01-04 14:21:41,485 INFO ipython # Step 3: Create Program Enrollment if not exists
+2026-01-04 14:21:41,487 INFO ipython enrollment = frappe.get_value("Program Enrollment", {
+    "student": student.name,
+    "program": program
+})
+2026-01-04 14:21:41,489 INFO ipython if not enrollment:
+    pe = frappe.get_doc({
+        "doctype": "Program Enrollment",
+        "student": student.name,
+        "student_name": student.student_name,
+        "program": program,
+        "academic_year": academic_year,
+        "enrollment_date": "2024-07-15",
+        "docstatus": 1
+    })
+    pe.insert(ignore_permissions=True)
+    pe.submit()
+    print(f"✅ Created Program Enrollment")
+else:
+    print(f"✅ Program Enrollment exists: {enrollment}")
+2026-01-04 14:21:41,491 INFO ipython frappe.db.commit()
+2026-01-04 14:21:41,493 INFO ipython print("\n=== Basic setup complete ===")
+2026-01-04 14:21:41,495 INFO ipython === session end ===
+2026-01-04 14:22:25,264 INFO ipython === bench console session ===
+2026-01-04 14:22:25,267 INFO ipython import frappe
+2026-01-04 14:22:25,270 INFO ipython from datetime import datetime, timedelta
+2026-01-04 14:22:25,272 INFO ipython frappe.init(site="university.local")
+2026-01-04 14:22:25,274 INFO ipython frappe.connect()
+2026-01-04 14:22:25,276 INFO ipython frappe.set_user("Administrator")
+2026-01-04 14:22:25,278 INFO ipython print("=== Creating Courses and Student Groups ===\n")
+2026-01-04 14:22:25,279 INFO ipython student = frappe.get_doc("Student", "EDU-STU-2026-00002")
+2026-01-04 14:22:25,281 INFO ipython academic_year = "2025-26"
+2026-01-04 14:22:25,284 INFO ipython program = "B.Tech Computer Science"
+2026-01-04 14:22:25,286 INFO ipython # Create courses
+2026-01-04 14:22:25,288 INFO ipython courses = [
+    {"course_name": "Data Structures and Algorithms", "course_code": "CS301"},
+    {"course_name": "Database Management Systems", "course_code": "CS302"},
+    {"course_name": "Operating Systems", "course_code": "CS303"},
+    {"course_name": "Computer Networks", "course_code": "CS304"},
+    {"course_name": "Software Engineering", "course_code": "CS305"},
+]
+2026-01-04 14:22:25,290 INFO ipython created_courses = []
+2026-01-04 14:22:25,292 INFO ipython for course_data in courses:
+    course = frappe.get_value("Course", {"course_code": course_data["course_code"]})
+    if not course:
+        c = frappe.get_doc({
+            "doctype": "Course",
+            "course_name": course_data["course_name"],
+            "course_code": course_data["course_code"]
+        })
+        c.insert(ignore_permissions=True)
+        course = c.name
+        print(f"✅ Created Course: {course_data['course_name']}")
+    else:
+        print(f"✅ Course exists: {course}")
+    created_courses.append(course)
+2026-01-04 14:22:25,294 INFO ipython frappe.db.commit()
+2026-01-04 14:22:25,295 INFO ipython # Create a Student Group for the student
+2026-01-04 14:22:25,298 INFO ipython student_group = frappe.get_value("Student Group", {"group_name": "BCS-2024-Batch-A"})
+2026-01-04 14:22:25,300 INFO ipython if not student_group:
+    sg = frappe.get_doc({
+        "doctype": "Student Group",
+        "student_group_name": "BCS-2024-Batch-A",
+        "group_based_on": "Batch",
+        "academic_year": academic_year,
+        "program": program,
+        "students": [
+            {
+                "student": student.name,
+                "student_name": student.student_name,
+                "active": 1
+            }
+        ]
+    })
+    sg.insert(ignore_permissions=True)
+    student_group = sg.name
+    print(f"\n✅ Created Student Group: {student_group}")
+else:
+    # Add student to existing group if not already there
+    sg = frappe.get_doc("Student Group", student_group)
+    student_exists = any(s.student == student.name for s in sg.students)
+    if not student_exists:
+        sg.append("students", {
+            "student": student.name,
+            "student_name": student.student_name,
+            "active": 1
+        })
+        sg.save(ignore_permissions=True)
+        print(f"\n✅ Added student to group: {student_group}")
+    else:
+        print(f"\n✅ Student already in group: {student_group}")
+2026-01-04 14:22:25,302 INFO ipython frappe.db.commit()
+2026-01-04 14:22:25,304 INFO ipython print(f"\n✅ Created {len(created_courses)} courses")
+2026-01-04 14:22:25,306 INFO ipython print(f"✅ Student Group: {student_group}")
+2026-01-04 14:22:25,308 INFO ipython === session end ===
+2026-01-04 14:27:45,646 INFO ipython === bench console session ===
+2026-01-04 14:27:45,648 INFO ipython #!/usr/bin/env python3
+2026-01-04 14:27:45,649 INFO ipython """
+Comprehensive Student Portal Data Creation Script
+
+This script creates realistic sample data for ALL fields in the student portal:
+- Student Attendance records
+- Course Schedules (today's classes)
+- Exam Schedules (upcoming exams)
+- Assessment Results (for CGPA)
+- Fee records
+- Library Transactions (issued books)
+- Assignments
+- Announcements
+- Student Groups
+
+Usage:
+    cd /workspace/development/frappe-bench
+    bench --site university.local execute development/create_student_portal_data.py
+"""
+2026-01-04 14:27:45,651 INFO ipython import frappe
+2026-01-04 14:27:45,653 INFO ipython from datetime import datetime, timedelta
+2026-01-04 14:27:45,654 INFO ipython from frappe.utils import nowdate, getdate, add_days, now_datetime
+2026-01-04 14:27:45,656 INFO ipython def create_all_student_data():
+    """Create comprehensive student portal data"""
+2026-01-04 14:27:45,657 INFO ipython     frappe.init(site="university.local")
+2026-01-04 14:27:45,659 INFO ipython     frappe.connect()
+2026-01-04 14:27:45,660 INFO ipython     frappe.set_user("Administrator")
+2026-01-04 14:27:45,662 INFO ipython     print("\n" + "="*80)
+2026-01-04 14:27:45,663 INFO ipython     print("🎓 CREATING COMPREHENSIVE STUDENT PORTAL DATA")
+2026-01-04 14:27:45,665 INFO ipython     print("="*80 + "\n")
+2026-01-04 14:27:45,666 INFO ipython     student_id = "EDU-STU-2026-00002"
+2026-01-04 14:27:45,668 INFO ipython     student_name = "Test Student"
+2026-01-04 14:27:45,669 INFO ipython     academic_year = "2025-26"
+2026-01-04 14:27:45,671 INFO ipython     program_name = "B.Tech Computer Science"
+2026-01-04 14:27:45,672 INFO ipython     # Step 1: Create Courses
+2026-01-04 14:27:45,674 INFO ipython     print("📚 Step 1: Creating Courses...")
+2026-01-04 14:27:45,675 INFO ipython     courses = create_courses()
+2026-01-04 14:27:45,677 INFO ipython     # Step 2: Create Student Group
+2026-01-04 14:27:45,678 INFO ipython     print("\n👥 Step 2: Creating Student Group...")
+2026-01-04 14:27:45,680 INFO ipython     student_group = create_student_group(student_id, student_name, academic_year, program_name)
+2026-01-04 14:27:45,681 INFO ipython     # Step 3: Create Course Schedules (Today's Classes)
+2026-01-04 14:27:45,683 INFO ipython     print("\n🕐 Step 3: Creating Today's Class Schedule...")
+2026-01-04 14:27:45,685 INFO ipython     create_course_schedules(student_group, courses)
+2026-01-04 14:27:45,686 INFO ipython     # Step 4: Create Attendance Records
+2026-01-04 14:27:45,688 INFO ipython     print("\n✅ Step 4: Creating Attendance Records...")
+2026-01-04 14:27:45,689 INFO ipython     create_attendance_records(student_id, student_name)
+2026-01-04 14:27:45,691 INFO ipython     # Step 5: Create Exam Schedules
+2026-01-04 14:27:45,692 INFO ipython     print("\n📝 Step 5: Creating Exam Schedules...")
+2026-01-04 14:27:45,694 INFO ipython     create_exam_schedules(student_group, courses)
+2026-01-04 14:27:45,695 INFO ipython     # Step 6: Create Assessment Results (for CGPA)
+2026-01-04 14:27:45,697 INFO ipython     print("\n🎯 Step 6: Creating Assessment Results...")
+2026-01-04 14:27:45,698 INFO ipython     create_assessment_results(student_id, courses)
+2026-01-04 14:27:45,700 INFO ipython     # Step 7: Update Student CGPA
+2026-01-04 14:27:45,702 INFO ipython     print("\n📊 Step 7: Updating Student CGPA...")
+2026-01-04 14:27:45,704 INFO ipython     update_student_cgpa(student_id)
+2026-01-04 14:27:45,706 INFO ipython     # Step 8: Create Fee Records
+2026-01-04 14:27:45,708 INFO ipython     print("\n💰 Step 8: Creating Fee Records...")
+2026-01-04 14:27:45,710 INFO ipython     create_fee_records(student_id, student_name, program_name, academic_year)
+2026-01-04 14:27:45,712 INFO ipython     # Step 9: Create Library Transactions
+2026-01-04 14:27:45,713 INFO ipython     print("\n📖 Step 9: Creating Library Transactions...")
+2026-01-04 14:27:45,715 INFO ipython     create_library_transactions(student_id, student_name)
+2026-01-04 14:27:45,717 INFO ipython     # Step 10: Create Assignments
+2026-01-04 14:27:45,719 INFO ipython     print("\n📄 Step 10: Creating Assignments...")
+2026-01-04 14:27:45,721 INFO ipython     create_assignments(student_group, courses)
+2026-01-04 14:27:45,723 INFO ipython     # Step 11: Create Announcements
+2026-01-04 14:27:45,725 INFO ipython     print("\n📢 Step 11: Creating Announcements...")
+2026-01-04 14:27:45,727 INFO ipython     create_announcements()
+2026-01-04 14:27:45,729 INFO ipython     frappe.db.commit()
+2026-01-04 14:27:45,731 INFO ipython     print("\n" + "="*80)
+2026-01-04 14:27:45,733 INFO ipython     print("✅ ALL STUDENT PORTAL DATA CREATED SUCCESSFULLY!")
+2026-01-04 14:27:45,735 INFO ipython     print("="*80)
+2026-01-04 14:27:45,737 INFO ipython     print(f"\n📌 Student: {student_name} ({student_id})")
+2026-01-04 14:27:45,739 INFO ipython     print(f"📧 Login: student@test.edu")
+2026-01-04 14:27:45,741 INFO ipython     print(f"🌐 Portal: http://localhost:18000/student_portal")
+2026-01-04 14:27:45,743 INFO ipython     print("\n💡 Clear browser cookies and login to see all the data!")
+2026-01-04 14:27:45,744 INFO ipython     print("="*80 + "\n")
+2026-01-04 14:27:45,746 INFO ipython def create_courses():
+    """Create sample courses"""
+    courses_data = [
+        {"course_name": "Data Structures and Algorithms", "course_code": "CS301"},
+        {"course_name": "Database Management Systems", "course_code": "CS302"},
+        {"course_name": "Operating Systems", "course_code": "CS303"},
+        {"course_name": "Computer Networks", "course_code": "CS304"},
+        {"course_name": "Software Engineering", "course_code": "CS305"},
+    ]
+2026-01-04 14:27:45,748 INFO ipython     created_courses = []
+2026-01-04 14:27:45,750 INFO ipython     for course_data in courses_data:
+        # Check if course exists
+        course = frappe.db.get_value("Course", {"course_name": course_data["course_name"]})
+        if not course:
+            c = frappe.get_doc({
+                "doctype": "Course",
+                "course_name": course_data["course_name"],
+                "course_code": course_data["course_code"]
+            })
+            c.insert(ignore_permissions=True)
+            course = c.name
+            print(f"  ✅ Created: {course_data['course_name']}")
+        else:
+            print(f"  ℹ️  Exists: {course_data['course_name']}")
+        created_courses.append(course)
+2026-01-04 14:27:45,752 INFO ipython     return created_courses
+2026-01-04 14:27:45,754 INFO ipython def create_student_group(student_id, student_name, academic_year, program_name):
+    """Create or update student group"""
+    group_name = "BCS-2024-Batch-A"
+2026-01-04 14:27:45,756 INFO ipython     student_group = frappe.db.get_value("Student Group", {"student_group_name": group_name})
+2026-01-04 14:27:45,758 INFO ipython     if not student_group:
+        sg = frappe.get_doc({
+            "doctype": "Student Group",
+            "student_group_name": group_name,
+            "group_based_on": "Batch",
+            "academic_year": academic_year,
+            "program": program_name,
+            "students": [
+                {
+                    "student": student_id,
+                    "student_name": student_name,
+                    "active": 1
+                }
+            ]
+        })
+        sg.insert(ignore_permissions=True)
+        student_group = sg.name
+        print(f"  ✅ Created group: {group_name}")
+    else:
+        # Check if student is in group
+        sg = frappe.get_doc("Student Group", student_group)
+        student_exists = any(s.student == student_id for s in sg.students)
+        if not student_exists:
+            sg.append("students", {
+                "student": student_id,
+                "student_name": student_name,
+                "active": 1
+            })
+            sg.save(ignore_permissions=True)
+            print(f"  ✅ Added student to group: {group_name}")
+        else:
+            print(f"  ℹ️  Student already in group: {group_name}")
+2026-01-04 14:27:45,760 INFO ipython     return student_group
+2026-01-04 14:27:45,762 INFO ipython def create_course_schedules(student_group, courses):
+    """Create today's class schedule"""
+    today = getdate(nowdate())
+2026-01-04 14:27:45,764 INFO ipython     schedules = [
+        {"course": courses[0], "from_time": "09:00:00", "to_time": "10:30:00", "room": "Room 101"},
+        {"course": courses[1], "from_time": "11:00:00", "to_time": "12:30:00", "room": "Room 102"},
+        {"course": courses[2], "from_time": "14:00:00", "to_time": "15:30:00", "room": "Room 103"},
+    ]
+2026-01-04 14:27:45,765 INFO ipython     count = 0
+2026-01-04 14:27:45,767 INFO ipython     for schedule_data in schedules:
+        # Check if schedule exists
+        existing = frappe.db.exists("Course Schedule", {
+            "student_group": student_group,
+            "schedule_date": today,
+            "course": schedule_data["course"]
+        })
+2026-01-04 14:27:45,769 INFO ipython         if not existing:
+            cs = frappe.get_doc({
+                "doctype": "Course Schedule",
+                "student_group": student_group,
+                "course": schedule_data["course"],
+                "schedule_date": today,
+                "from_time": schedule_data["from_time"],
+                "to_time": schedule_data["to_time"],
+                "room": schedule_data["room"]
+            })
+            cs.insert(ignore_permissions=True)
+            count += 1
+2026-01-04 14:27:45,771 INFO ipython     print(f"  ✅ Created {count} classes for today ({today})")
+2026-01-04 14:27:45,773 INFO ipython def create_attendance_records(student_id, student_name):
+    """Create attendance records for the past 30 days"""
+    today = getdate(nowdate())
+2026-01-04 14:27:45,775 INFO ipython     # Create attendance for past 30 days (weekdays only)
+2026-01-04 14:27:45,777 INFO ipython     # 85% present, 15% absent
+2026-01-04 14:27:45,779 INFO ipython     import random
+2026-01-04 14:27:45,780 INFO ipython     count_present = 0
+2026-01-04 14:27:45,782 INFO ipython     count_absent = 0
+2026-01-04 14:27:45,784 INFO ipython     for days_ago in range(30, 0, -1):
+        date = add_days(today, -days_ago)
+2026-01-04 14:27:45,786 INFO ipython         # Skip weekends
+2026-01-04 14:27:45,788 INFO ipython         if date.weekday() >= 5:  # Saturday = 5, Sunday = 6
+            continue
+2026-01-04 14:27:45,790 INFO ipython         # Check if attendance exists
+2026-01-04 14:27:45,792 INFO ipython         existing = frappe.db.exists("Student Attendance", {
+            "student": student_id,
+            "date": date
+        })
+2026-01-04 14:27:45,794 INFO ipython         if not existing:
+            # 85% chance of being present
+            status = "Present" if random.random() < 0.85 else "Absent"
+2026-01-04 14:27:45,795 INFO ipython             att = frappe.get_doc({
+                "doctype": "Student Attendance",
+                "student": student_id,
+                "student_name": student_name,
+                "date": date,
+                "status": status
+            })
+2026-01-04 14:27:45,797 INFO ipython             att.insert(ignore_permissions=True)
+2026-01-04 14:27:45,799 INFO ipython             if status == "Present":
+                count_present += 1
+            else:
+                count_absent += 1
+2026-01-04 14:27:45,801 INFO ipython     total = count_present + count_absent
+2026-01-04 14:27:45,804 INFO ipython     percentage = round((count_present / total * 100), 1) if total > 0 else 0
+2026-01-04 14:27:45,806 INFO ipython     print(f"  ✅ Created {total} attendance records")
+2026-01-04 14:27:45,807 INFO ipython     print(f"     Present: {count_present}, Absent: {count_absent}")
+2026-01-04 14:27:45,809 INFO ipython     print(f"     Attendance: {percentage}%")
+2026-01-04 14:27:45,811 INFO ipython def create_exam_schedules(student_group, courses):
+    """Create upcoming and past exam schedules"""
+    today = getdate(nowdate())
+2026-01-04 14:27:45,813 INFO ipython     # Upcoming exams
+2026-01-04 14:27:45,815 INFO ipython     upcoming_exams = [
+        {"course": courses[0], "days_ahead": 2, "name": "Mid Semester Exam - DSA"},
+        {"course": courses[1], "days_ahead": 5, "name": "Mid Semester Exam - DBMS"},
+        {"course": courses[2], "days_ahead": 10, "name": "Mid Semester Exam - OS"},
+    ]
+2026-01-04 14:27:45,816 INFO ipython     # Past exams
+2026-01-04 14:27:45,818 INFO ipython     past_exams = [
+        {"course": courses[3], "days_ago": 15, "name": "Unit Test - Networks"},
+        {"course": courses[4], "days_ago": 30, "name": "Unit Test - Software Eng"},
+    ]
+2026-01-04 14:27:45,820 INFO ipython     count = 0
+2026-01-04 14:27:45,822 INFO ipython     # Create upcoming exams
+2026-01-04 14:27:45,824 INFO ipython     for exam_data in upcoming_exams:
+        exam_date = add_days(today, exam_data["days_ahead"])
+2026-01-04 14:27:45,826 INFO ipython         existing = frappe.db.exists("Exam Schedule", {
+            "student_group": student_group,
+            "schedule_date": exam_date,
+            "course": exam_data["course"]
+        })
+2026-01-04 14:27:45,828 INFO ipython         if not existing:
+            es = frappe.get_doc({
+                "doctype": "Exam Schedule",
+                "exam": exam_data["name"],
+                "student_group": student_group,
+                "course": exam_data["course"],
+                "schedule_date": exam_date,
+                "from_time": "10:00:00",
+                "to_time": "13:00:00",
+                "room": f"Exam Hall {count + 1}",
+                "docstatus": 1
+            })
+            es.insert(ignore_permissions=True)
+            es.submit()
+            count += 1
+            print(f"  ✅ Upcoming: {exam_data['name']} on {exam_date}")
+2026-01-04 14:27:45,830 INFO ipython     # Create past exams
+2026-01-04 14:27:45,832 INFO ipython     for exam_data in past_exams:
+        exam_date = add_days(today, -exam_data["days_ago"])
+2026-01-04 14:27:45,833 INFO ipython         existing = frappe.db.exists("Exam Schedule", {
+            "student_group": student_group,
+            "schedule_date": exam_date,
+            "course": exam_data["course"]
+        })
+2026-01-04 14:27:45,836 INFO ipython         if not existing:
+            es = frappe.get_doc({
+                "doctype": "Exam Schedule",
+                "exam": exam_data["name"],
+                "student_group": student_group,
+                "course": exam_data["course"],
+                "schedule_date": exam_date,
+                "from_time": "10:00:00",
+                "to_time": "13:00:00",
+                "room": f"Exam Hall {count + 1}",
+                "docstatus": 1
+            })
+            es.insert(ignore_permissions=True)
+            es.submit()
+            count += 1
+            print(f"  ✅ Past: {exam_data['name']} on {exam_date}")
+2026-01-04 14:27:45,838 INFO ipython     print(f"  📊 Total: {len(upcoming_exams)} upcoming, {len(past_exams)} past exams")
+2026-01-04 14:27:45,840 INFO ipython def create_assessment_results(student_id, courses):
+    """Create assessment results for CGPA calculation"""
+2026-01-04 14:27:45,842 INFO ipython     # Check if Assessment Plan exists
+2026-01-04 14:27:45,844 INFO ipython     plans = frappe.db.get_all("Assessment Plan", limit=5)
+2026-01-04 14:27:45,846 INFO ipython     if not plans:
+        print("  ⚠️  No Assessment Plans found, creating basic ones...")
+        plans = create_assessment_plans(courses)
+2026-01-04 14:27:45,848 INFO ipython     results_data = [
+        {"plan_idx": 0, "course": courses[0], "grade": "A+", "score": 92, "max_score": 100},
+        {"plan_idx": 1, "course": courses[1], "grade": "A", "score": 88, "max_score": 100},
+        {"plan_idx": 2, "course": courses[2], "grade": "B+", "score": 81, "max_score": 100},
+        {"plan_idx": 0, "course": courses[3], "grade": "A+", "score": 95, "max_score": 100},
+        {"plan_idx": 1, "course": courses[4], "grade": "A", "score": 86, "max_score": 100},
+    ]
+2026-01-04 14:27:45,849 INFO ipython     count = 0
+2026-01-04 14:27:45,851 INFO ipython     for result_data in results_data:
+        if result_data["plan_idx"] < len(plans):
+            plan = plans[result_data["plan_idx"]].name if hasattr(plans[result_data["plan_idx"]], 'name') else plans[result_data["plan_idx"]]
+2026-01-04 14:27:45,853 INFO ipython             existing = frappe.db.exists("Assessment Result", {
+                "student": student_id,
+                "assessment_plan": plan,
+                "course": result_data["course"]
+            })
+2026-01-04 14:27:45,855 INFO ipython             if not existing:
+                ar = frappe.get_doc({
+                    "doctype": "Assessment Result",
+                    "student": student_id,
+                    "assessment_plan": plan,
+                    "course": result_data["course"],
+                    "grade": result_data["grade"],
+                    "total_score": result_data["score"],
+                    "maximum_score": result_data["max_score"],
+                    "docstatus": 1
+                })
+                ar.insert(ignore_permissions=True)
+                ar.submit()
+                count += 1
+                print(f"  ✅ Created result: {result_data['course'][:30]}... - Grade: {result_data['grade']}")
+2026-01-04 14:27:45,857 INFO ipython     print(f"  📊 Total: {count} assessment results created")
+2026-01-04 14:27:45,859 INFO ipython def create_assessment_plans(courses):
+    """Create basic assessment plans"""
+    plans = []
+    plan_types = ["Mid Semester", "End Semester"]
+2026-01-04 14:27:45,861 INFO ipython     for plan_type in plan_types:
+        for course in courses[:2]:  # Create for first 2 courses only
+            ap = frappe.get_doc({
+                "doctype": "Assessment Plan",
+                "assessment_name": f"{plan_type} - {course[:20]}",
+                "course": course,
+                "assessment_criteria": [
+                    {"assessment_criteria": "Written Exam", "maximum_score": 100}
+                ]
+            })
+            ap.insert(ignore_permissions=True)
+            plans.append(ap.name)
+2026-01-04 14:27:45,863 INFO ipython     return plans
+2026-01-04 14:27:45,864 INFO ipython def update_student_cgpa(student_id):
+    """Update student's CGPA field"""
+    # Calculate CGPA: A+ = 9.0, A = 8.5, B+ = 8.0
+    cgpa = 8.64  # Average of above grades
+2026-01-04 14:27:45,866 INFO ipython     frappe.db.set_value("Student", student_id, "custom_cgpa", cgpa)
+2026-01-04 14:27:45,867 INFO ipython     print(f"  ✅ Updated CGPA: {cgpa}")
+2026-01-04 14:27:45,869 INFO ipython def create_fee_records(student_id, student_name, program_name, academic_year):
+    """Create fee records (both paid and pending)"""
+2026-01-04 14:27:45,871 INFO ipython     # Semester 1 - Paid
+2026-01-04 14:27:45,872 INFO ipython     fee1 = frappe.db.exists("Fees", {
+        "student": student_id,
+        "academic_year": academic_year,
+        "fee_structure": ["like", "%Semester 1%"]
+    })
+2026-01-04 14:27:45,874 INFO ipython     if not fee1:
+        f1 = frappe.get_doc({
+            "doctype": "Fees",
+            "student": student_id,
+            "student_name": student_name,
+            "program": program_name,
+            "academic_year": academic_year,
+            "due_date": add_days(nowdate(), -60),
+            "grand_total": 50000,
+            "outstanding_amount": 0,  # Fully paid
+            "docstatus": 1
+        })
+        f1.insert(ignore_permissions=True)
+        f1.submit()
+        print(f"  ✅ Created Semester 1 fee: ₹50,000 (Paid)")
+2026-01-04 14:27:45,875 INFO ipython     # Semester 2 - Partially paid
+2026-01-04 14:27:45,877 INFO ipython     fee2 = frappe.db.exists("Fees", {
+        "student": student_id,
+        "academic_year": academic_year,
+        "outstanding_amount": [">", 0]
+    })
+2026-01-04 14:27:45,878 INFO ipython     if not fee2:
+        f2 = frappe.get_doc({
+            "doctype": "Fees",
+            "student": student_id,
+            "student_name": student_name,
+            "program": program_name,
+            "academic_year": academic_year,
+            "due_date": add_days(nowdate(), 15),  # Due in 15 days
+            "grand_total": 50000,
+            "outstanding_amount": 15000,  # ₹15,000 pending
+            "docstatus": 1
+        })
+        f2.insert(ignore_permissions=True)
+        f2.submit()
+        print(f"  ✅ Created Semester 2 fee: ₹50,000 (₹15,000 pending)")
+2026-01-04 14:27:45,880 INFO ipython def create_library_transactions(student_id, student_name):
+    """Create library book issue transactions"""
+2026-01-04 14:27:45,881 INFO ipython     # Create Library Member if not exists
+2026-01-04 14:27:45,883 INFO ipython     member = frappe.db.get_value("Library Member", {
+        "library_member_type": "Student",
+        "library_member_name": student_id
+    })
+2026-01-04 14:27:45,884 INFO ipython     if not member:
+        lm = frappe.get_doc({
+            "doctype": "Library Member",
+            "library_member_type": "Student",
+            "library_member_name": student_id,
+            "first_name": student_name
+        })
+        lm.insert(ignore_permissions=True)
+        member = lm.name
+        print(f"  ✅ Created Library Member: {member}")
+2026-01-04 14:27:45,885 INFO ipython     # Create some library items (books)
+2026-01-04 14:27:45,887 INFO ipython     books = create_library_items()
+2026-01-04 14:27:45,889 INFO ipython     # Issue 3 books
+2026-01-04 14:27:45,890 INFO ipython     issued_count = 0
+2026-01-04 14:27:45,891 INFO ipython     for i, book in enumerate(books[:3]):
+        existing = frappe.db.exists("Library Transaction", {
+            "library_member": member,
+            "item": book,
+            "type": "Issue"
+        })
+2026-01-04 14:27:45,893 INFO ipython         if not existing:
+            lt = frappe.get_doc({
+                "doctype": "Library Transaction",
+                "library_member": member,
+                "item": book,
+                "type": "Issue",
+                "date": add_days(nowdate(), -(10 - i*3)),  # Issued at different dates
+                "docstatus": 1
+            })
+            lt.insert(ignore_permissions=True)
+            lt.submit()
+            issued_count += 1
+2026-01-04 14:27:45,894 INFO ipython     print(f"  ✅ Issued {issued_count} books to student")
+2026-01-04 14:27:45,896 INFO ipython def create_library_items():
+    """Create sample library book items"""
+    books_data = [
+        "Introduction to Algorithms",
+        "Database System Concepts",
+        "Operating System Concepts",
+        "Computer Networks",
+        "Software Engineering",
+    ]
+2026-01-04 14:27:45,897 INFO ipython     created_books = []
+2026-01-04 14:27:45,899 INFO ipython     for book_name in books_data:
+        item = frappe.db.get_value("Item", {"item_name": book_name})
+        if not item:
+            # Create item
+            it = frappe.get_doc({
+                "doctype": "Item",
+                "item_code": book_name.replace(" ", "-").lower(),
+                "item_name": book_name,
+                "item_group": "Library Books",
+                "is_stock_item": 1
+            })
+            it.insert(ignore_permissions=True)
+            item = it.name
+2026-01-04 14:27:45,900 INFO ipython         created_books.append(item)
+2026-01-04 14:27:45,902 INFO ipython     return created_books
+2026-01-04 14:27:45,904 INFO ipython def create_assignments(student_group, courses):
+    """Create assignments (both pending and completed)"""
+    today = getdate(nowdate())
+2026-01-04 14:27:45,905 INFO ipython     assignments_data = [
+        {"course": courses[0], "title": "Data Structures Assignment 1", "days_ahead": 7},
+        {"course": courses[1], "title": "DBMS Project", "days_ahead": 14},
+        {"course": courses[2], "title": "OS Lab Assignment", "days_ahead": 5},
+    ]
+2026-01-04 14:27:45,907 INFO ipython     count = 0
+2026-01-04 14:27:45,908 INFO ipython     for assign_data in assignments_data:
+        due_date = add_days(today, assign_data["days_ahead"])

@@ -1,0 +1,12 @@
+{
+    "actions": [], "creation": "2026-01-01 00:00:00.000000", "doctype": "DocType", "editable_grid": 1, "engine": "InnoDB",
+    "field_order": ["round_number", "round_name", "round_date", "venue", "status"],
+    "fields": [
+        {"fieldname": "round_number", "fieldtype": "Int", "in_list_view": 1, "label": "Round #", "reqd": 1},
+        {"fieldname": "round_name", "fieldtype": "Data", "in_list_view": 1, "label": "Round Name", "reqd": 1},
+        {"fieldname": "round_date", "fieldtype": "Date", "in_list_view": 1, "label": "Date"},
+        {"fieldname": "venue", "fieldtype": "Data", "in_list_view": 1, "label": "Venue"},
+        {"default": "Scheduled", "fieldname": "status", "fieldtype": "Select", "in_list_view": 1, "label": "Status", "options": "Scheduled\nIn Progress\nCompleted\nCancelled"}
+    ],
+    "index_web_pages_for_search": 1, "istable": 1, "links": [], "modified": "2026-01-01 00:00:00.000000", "modified_by": "Administrator", "module": "University Placement", "name": "Placement Round", "owner": "Administrator", "permissions": [], "sort_field": "round_number", "sort_order": "ASC", "states": [], "track_changes": 1
+}

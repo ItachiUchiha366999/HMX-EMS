@@ -1,0 +1,281 @@
+{
+  "actions": [],
+  "autoname": "format:VIS-{YYYY}-{#####}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "visitor_section",
+    "visitor_name",
+    "visitor_mobile",
+    "relationship",
+    "column_break_visitor",
+    "visitor_id_type",
+    "visitor_id_number",
+    "photo",
+    "student_section",
+    "student",
+    "student_name",
+    "student_mobile",
+    "column_break_student",
+    "building",
+    "building_name",
+    "room",
+    "visit_details_section",
+    "visit_date",
+    "check_in_time",
+    "expected_checkout_time",
+    "column_break_visit",
+    "check_out_time",
+    "duration",
+    "purpose",
+    "approval_section",
+    "approved_by",
+    "approval_remarks",
+    "column_break_approval",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "visitor_section",
+      "fieldtype": "Section Break",
+      "label": "Visitor Information"
+    },
+    {
+      "fieldname": "visitor_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Visitor Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "visitor_mobile",
+      "fieldtype": "Data",
+      "label": "Visitor Mobile",
+      "options": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "relationship",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Relationship",
+      "options": "\nParent\nGuardian\nSibling\nRelative\nFriend\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_visitor",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "visitor_id_type",
+      "fieldtype": "Select",
+      "label": "ID Type",
+      "options": "\nAadhar\nPAN\nDriving License\nVoter ID\nPassport"
+    },
+    {
+      "fieldname": "visitor_id_number",
+      "fieldtype": "Data",
+      "label": "ID Number"
+    },
+    {
+      "fieldname": "photo",
+      "fieldtype": "Attach Image",
+      "label": "Photo"
+    },
+    {
+      "fieldname": "student_section",
+      "fieldtype": "Section Break",
+      "label": "Student Details"
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.student_mobile_number",
+      "fieldname": "student_mobile",
+      "fieldtype": "Data",
+      "label": "Student Mobile",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_student",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "building",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Hostel Building",
+      "options": "Hostel Building",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "building.building_name",
+      "fieldname": "building_name",
+      "fieldtype": "Data",
+      "label": "Building Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "room",
+      "fieldtype": "Link",
+      "label": "Room",
+      "options": "Hostel Room",
+      "read_only": 1
+    },
+    {
+      "fieldname": "visit_details_section",
+      "fieldtype": "Section Break",
+      "label": "Visit Details"
+    },
+    {
+      "default": "Today",
+      "fieldname": "visit_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Visit Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "check_in_time",
+      "fieldtype": "Time",
+      "in_list_view": 1,
+      "label": "Check In Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "expected_checkout_time",
+      "fieldtype": "Time",
+      "label": "Expected Checkout Time"
+    },
+    {
+      "fieldname": "column_break_visit",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "check_out_time",
+      "fieldtype": "Time",
+      "label": "Check Out Time"
+    },
+    {
+      "fieldname": "duration",
+      "fieldtype": "Data",
+      "label": "Duration",
+      "read_only": 1
+    },
+    {
+      "fieldname": "purpose",
+      "fieldtype": "Small Text",
+      "label": "Purpose of Visit"
+    },
+    {
+      "fieldname": "approval_section",
+      "fieldtype": "Section Break",
+      "label": "Approval"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User"
+    },
+    {
+      "fieldname": "approval_remarks",
+      "fieldtype": "Small Text",
+      "label": "Approval Remarks"
+    },
+    {
+      "fieldname": "column_break_approval",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Checked In",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Checked In\nChecked Out\nDenied"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Visitor",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "visitor_name, student_name, building",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "visitor_name",
+  "track_changes": 1
+}

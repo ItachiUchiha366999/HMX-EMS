@@ -1,0 +1,196 @@
+{
+  "actions": [],
+  "autoname": "format:DISC-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "lms_course",
+    "title",
+    "created_by_type",
+    "column_break_1",
+    "student",
+    "instructor",
+    "is_pinned",
+    "is_locked",
+    "section_content",
+    "content",
+    "attachments",
+    "section_replies",
+    "replies",
+    "section_stats",
+    "reply_count",
+    "view_count",
+    "last_reply_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "lms_course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "LMS Course",
+      "options": "LMS Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Topic Title",
+      "reqd": 1
+    },
+    {
+      "default": "Student",
+      "fieldname": "created_by_type",
+      "fieldtype": "Select",
+      "label": "Created By",
+      "options": "Student\nInstructor"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.created_by_type=='Student'",
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student"
+    },
+    {
+      "depends_on": "eval:doc.created_by_type=='Instructor'",
+      "fieldname": "instructor",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Employee"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_pinned",
+      "fieldtype": "Check",
+      "label": "Pinned"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_locked",
+      "fieldtype": "Check",
+      "label": "Locked"
+    },
+    {
+      "fieldname": "section_content",
+      "fieldtype": "Section Break",
+      "label": "Discussion Content"
+    },
+    {
+      "fieldname": "content",
+      "fieldtype": "Text Editor",
+      "label": "Content",
+      "reqd": 1
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Attach",
+      "label": "Attachments"
+    },
+    {
+      "fieldname": "section_replies",
+      "fieldtype": "Section Break",
+      "label": "Replies"
+    },
+    {
+      "fieldname": "replies",
+      "fieldtype": "Table",
+      "label": "Replies",
+      "options": "Discussion Reply"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_stats",
+      "fieldtype": "Section Break",
+      "label": "Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "reply_count",
+      "fieldtype": "Int",
+      "label": "Replies",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "view_count",
+      "fieldtype": "Int",
+      "label": "Views",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_reply_on",
+      "fieldtype": "Datetime",
+      "label": "Last Reply",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "LMS Discussion",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,295 @@
+{
+  "doctype": "DocType",
+  "name": "Question Bank",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "QB-.YYYY.-.#####",
+  "fields": [
+    {
+      "fieldname": "question_text",
+      "fieldtype": "Text Editor",
+      "label": "Question",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "question_type",
+      "fieldtype": "Select",
+      "label": "Question Type",
+      "options": "\nMultiple Choice (MCQ)\nMultiple Select (MSQ)\nTrue/False\nShort Answer\nLong Answer\nNumerical\nFill in the Blanks\nMatch the Following\nCase Study\nDiagram Based",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "label": "Unit/Topic",
+      "options": "Topic",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "section_break_difficulty",
+      "fieldtype": "Section Break",
+      "label": "Classification"
+    },
+    {
+      "fieldname": "difficulty_level",
+      "fieldtype": "Select",
+      "label": "Difficulty Level",
+      "options": "\nEasy\nMedium\nHard\nVery Hard",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "blooms_taxonomy",
+      "fieldtype": "Select",
+      "label": "Bloom's Taxonomy Level",
+      "options": "\nRemember (L1)\nUnderstand (L2)\nApply (L3)\nAnalyze (L4)\nEvaluate (L5)\nCreate (L6)",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "course_outcome",
+      "fieldtype": "Link",
+      "label": "Course Outcome (CO)",
+      "options": "Course Outcome"
+    },
+    {
+      "fieldname": "program_outcome",
+      "fieldtype": "Link",
+      "label": "Program Outcome (PO)",
+      "options": "Program Outcome"
+    },
+    {
+      "fieldname": "marks",
+      "fieldtype": "Int",
+      "label": "Default Marks",
+      "reqd": 1,
+      "default": "1"
+    },
+    {
+      "fieldname": "section_break_options",
+      "fieldtype": "Section Break",
+      "label": "Answer Options",
+      "depends_on": "eval:in_list(['Multiple Choice (MCQ)', 'Multiple Select (MSQ)', 'True/False', 'Match the Following'], doc.question_type)"
+    },
+    {
+      "fieldname": "options",
+      "fieldtype": "Table",
+      "label": "Options",
+      "options": "Question Option"
+    },
+    {
+      "fieldname": "section_break_answer",
+      "fieldtype": "Section Break",
+      "label": "Answer/Solution"
+    },
+    {
+      "fieldname": "correct_answer",
+      "fieldtype": "Text Editor",
+      "label": "Correct Answer/Model Answer"
+    },
+    {
+      "fieldname": "answer_explanation",
+      "fieldtype": "Text Editor",
+      "label": "Answer Explanation"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "negative_marking",
+      "fieldtype": "Check",
+      "label": "Enable Negative Marking"
+    },
+    {
+      "fieldname": "negative_marks",
+      "fieldtype": "Float",
+      "label": "Negative Marks",
+      "depends_on": "negative_marking",
+      "description": "Marks to deduct for wrong answer"
+    },
+    {
+      "fieldname": "partial_marking",
+      "fieldtype": "Check",
+      "label": "Allow Partial Marking",
+      "description": "For MSQ - allow partial marks for partially correct answers"
+    },
+    {
+      "fieldname": "section_break_media",
+      "fieldtype": "Section Break",
+      "label": "Media & Attachments"
+    },
+    {
+      "fieldname": "question_image",
+      "fieldtype": "Attach Image",
+      "label": "Question Image"
+    },
+    {
+      "fieldname": "question_diagram",
+      "fieldtype": "Attach",
+      "label": "Diagram/Figure"
+    },
+    {
+      "fieldname": "audio_file",
+      "fieldtype": "Attach",
+      "label": "Audio File",
+      "description": "For listening tests or audio-based questions"
+    },
+    {
+      "fieldname": "section_break_meta",
+      "fieldtype": "Section Break",
+      "label": "Metadata"
+    },
+    {
+      "fieldname": "created_by_faculty",
+      "fieldtype": "Link",
+      "label": "Created By",
+      "options": "Instructor",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewed_by",
+      "fieldtype": "Link",
+      "label": "Reviewed By",
+      "options": "Instructor"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nPending Review\nApproved\nRejected\nRetired",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "times_used",
+      "fieldtype": "Int",
+      "label": "Times Used",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "last_used_date",
+      "fieldtype": "Date",
+      "label": "Last Used Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "average_score_percentage",
+      "fieldtype": "Percent",
+      "label": "Average Score %",
+      "read_only": 1,
+      "description": "Average percentage of students who answered correctly"
+    },
+    {
+      "fieldname": "section_break_tags",
+      "fieldtype": "Section Break",
+      "label": "Tags & Keywords"
+    },
+    {
+      "fieldname": "tags",
+      "fieldtype": "Table MultiSelect",
+      "label": "Tags",
+      "options": "Question Tag Link"
+    },
+    {
+      "fieldname": "keywords",
+      "fieldtype": "Small Text",
+      "label": "Keywords",
+      "description": "Comma separated keywords for search"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "question_text",
+  "search_fields": "question_type,course,difficulty_level,status,keywords",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

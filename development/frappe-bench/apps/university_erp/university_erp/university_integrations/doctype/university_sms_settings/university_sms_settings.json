@@ -1,0 +1,257 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "sms_gateway",
+    "sender_id",
+    "column_break_basic",
+    "daily_limit",
+    "sms_sent_today",
+    "dlt_section",
+    "dlt_enabled",
+    "dlt_entity_id",
+    "column_break_dlt",
+    "dlt_template_id",
+    "dlt_header",
+    "msg91_section",
+    "msg91_auth_key",
+    "msg91_template_id",
+    "column_break_msg91",
+    "msg91_route",
+    "twilio_section",
+    "twilio_account_sid",
+    "twilio_auth_token",
+    "column_break_twilio",
+    "twilio_phone_number",
+    "textlocal_section",
+    "textlocal_api_key",
+    "column_break_textlocal",
+    "textlocal_sender",
+    "fast2sms_section",
+    "fast2sms_api_key",
+    "column_break_fast2sms",
+    "fast2sms_sender_id",
+    "templates_section",
+    "sms_templates"
+  ],
+  "fields": [
+    {
+      "default": "0",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enable SMS Gateway"
+    },
+    {
+      "fieldname": "sms_gateway",
+      "fieldtype": "Select",
+      "label": "SMS Gateway",
+      "options": "\nMSG91\nTwilio\nTextLocal\nFast2SMS",
+      "reqd": 1
+    },
+    {
+      "description": "6 character alphanumeric sender ID",
+      "fieldname": "sender_id",
+      "fieldtype": "Data",
+      "label": "Sender ID"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1000",
+      "fieldname": "daily_limit",
+      "fieldtype": "Int",
+      "label": "Daily SMS Limit"
+    },
+    {
+      "default": "0",
+      "fieldname": "sms_sent_today",
+      "fieldtype": "Int",
+      "label": "SMS Sent Today",
+      "read_only": 1
+    },
+    {
+      "fieldname": "dlt_section",
+      "fieldtype": "Section Break",
+      "label": "DLT Compliance (India)"
+    },
+    {
+      "default": "0",
+      "description": "Enable DLT compliance for India telecom regulations",
+      "fieldname": "dlt_enabled",
+      "fieldtype": "Check",
+      "label": "Enable DLT Compliance"
+    },
+    {
+      "depends_on": "dlt_enabled",
+      "description": "Principal Entity ID registered with DLT platform",
+      "fieldname": "dlt_entity_id",
+      "fieldtype": "Data",
+      "label": "DLT Entity ID"
+    },
+    {
+      "fieldname": "column_break_dlt",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "dlt_enabled",
+      "description": "Default DLT Template ID for SMS",
+      "fieldname": "dlt_template_id",
+      "fieldtype": "Data",
+      "label": "DLT Template ID"
+    },
+    {
+      "depends_on": "dlt_enabled",
+      "description": "Registered header/sender for DLT",
+      "fieldname": "dlt_header",
+      "fieldtype": "Data",
+      "label": "DLT Header"
+    },
+    {
+      "depends_on": "eval:doc.sms_gateway=='MSG91'",
+      "fieldname": "msg91_section",
+      "fieldtype": "Section Break",
+      "label": "MSG91 Settings"
+    },
+    {
+      "fieldname": "msg91_auth_key",
+      "fieldtype": "Password",
+      "label": "MSG91 Auth Key"
+    },
+    {
+      "fieldname": "msg91_template_id",
+      "fieldtype": "Data",
+      "label": "Default Template ID"
+    },
+    {
+      "fieldname": "column_break_msg91",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "4",
+      "description": "1=Promotional, 4=Transactional",
+      "fieldname": "msg91_route",
+      "fieldtype": "Select",
+      "label": "Route",
+      "options": "1\n4"
+    },
+    {
+      "depends_on": "eval:doc.sms_gateway=='Twilio'",
+      "fieldname": "twilio_section",
+      "fieldtype": "Section Break",
+      "label": "Twilio Settings"
+    },
+    {
+      "fieldname": "twilio_account_sid",
+      "fieldtype": "Data",
+      "label": "Twilio Account SID"
+    },
+    {
+      "fieldname": "twilio_auth_token",
+      "fieldtype": "Password",
+      "label": "Twilio Auth Token"
+    },
+    {
+      "fieldname": "column_break_twilio",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "twilio_phone_number",
+      "fieldtype": "Data",
+      "label": "Twilio Phone Number"
+    },
+    {
+      "depends_on": "eval:doc.sms_gateway=='TextLocal'",
+      "fieldname": "textlocal_section",
+      "fieldtype": "Section Break",
+      "label": "TextLocal Settings"
+    },
+    {
+      "fieldname": "textlocal_api_key",
+      "fieldtype": "Password",
+      "label": "TextLocal API Key"
+    },
+    {
+      "fieldname": "column_break_textlocal",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "textlocal_sender",
+      "fieldtype": "Data",
+      "label": "TextLocal Sender"
+    },
+    {
+      "depends_on": "eval:doc.sms_gateway=='Fast2SMS'",
+      "fieldname": "fast2sms_section",
+      "fieldtype": "Section Break",
+      "label": "Fast2SMS Settings"
+    },
+    {
+      "fieldname": "fast2sms_api_key",
+      "fieldtype": "Password",
+      "label": "Fast2SMS API Key"
+    },
+    {
+      "fieldname": "column_break_fast2sms",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fast2sms_sender_id",
+      "fieldtype": "Data",
+      "label": "Fast2SMS Sender ID"
+    },
+    {
+      "fieldname": "templates_section",
+      "fieldtype": "Section Break",
+      "label": "SMS Templates"
+    },
+    {
+      "fieldname": "sms_templates",
+      "fieldtype": "Table",
+      "label": "Templates",
+      "options": "SMS Template"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "University SMS Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

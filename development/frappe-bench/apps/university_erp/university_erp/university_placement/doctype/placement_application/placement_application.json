@@ -1,0 +1,219 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "job_opening",
+    "job_title",
+    "company",
+    "column_break_1",
+    "application_date",
+    "status",
+    "current_round",
+    "offer_section",
+    "offered_ctc",
+    "offer_letter",
+    "placement_date",
+    "joining_date",
+    "remarks_section",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "PA-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "job_opening",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Job Opening",
+      "options": "Placement Job Opening",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "job_opening.job_title",
+      "fieldname": "job_title",
+      "fieldtype": "Data",
+      "label": "Job Title",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "job_opening.company",
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Company",
+      "options": "Placement Company",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "application_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Application Date",
+      "reqd": 1
+    },
+    {
+      "default": "Applied",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Applied\nShortlisted\nIn Progress\nSelected\nPlaced\nRejected\nWithdrawn"
+    },
+    {
+      "fieldname": "current_round",
+      "fieldtype": "Data",
+      "label": "Current Round"
+    },
+    {
+      "depends_on": "eval:doc.status=='Placed' || doc.status=='Selected'",
+      "fieldname": "offer_section",
+      "fieldtype": "Section Break",
+      "label": "Offer Details"
+    },
+    {
+      "fieldname": "offered_ctc",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Offered CTC (LPA)"
+    },
+    {
+      "fieldname": "offer_letter",
+      "fieldtype": "Attach",
+      "label": "Offer Letter"
+    },
+    {
+      "fieldname": "placement_date",
+      "fieldtype": "Date",
+      "label": "Placement Date"
+    },
+    {
+      "fieldname": "joining_date",
+      "fieldtype": "Date",
+      "label": "Joining Date"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "remarks_section",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Placement",
+  "name": "Placement Application",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Placement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "student, student_name, job_opening, company",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

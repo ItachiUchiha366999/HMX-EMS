@@ -1,0 +1,155 @@
+{
+  "actions": [],
+  "creation": "2025-12-31 14:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "admission_cycle",
+    "program",
+    "column_break_2",
+    "category",
+    "list_number",
+    "section_break_5",
+    "generation_date",
+    "valid_till",
+    "column_break_7",
+    "status",
+    "applicants_section",
+    "applicants"
+  ],
+  "fields": [
+    {
+      "fieldname": "admission_cycle",
+      "fieldtype": "Link",
+      "label": "Admission Cycle",
+      "options": "Admission Cycle",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "General\\nOBC\\nSC\\nST\\nEWS\\nPWD"
+    },
+    {
+      "fieldname": "list_number",
+      "fieldtype": "Int",
+      "label": "Merit List Number",
+      "default": "1"
+    },
+    {
+      "fieldname": "section_break_5",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "generation_date",
+      "fieldtype": "Date",
+      "label": "Generation Date"
+    },
+    {
+      "fieldname": "valid_till",
+      "fieldtype": "Date",
+      "label": "Valid Till"
+    },
+    {
+      "fieldname": "column_break_7",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\\nPublished\\nExpired",
+      "default": "Draft"
+    },
+    {
+      "fieldname": "applicants_section",
+      "fieldtype": "Section Break",
+      "label": "Applicants"
+    },
+    {
+      "fieldname": "applicants",
+      "fieldtype": "Table",
+      "label": "Applicants",
+      "options": "Merit List Applicant"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-12-31 14:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Admissions",
+  "name": "Merit List",
+  "owner": "Administrator",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "autoname": "hash",
+  "naming_rule": "Random",
+  "is_submittable": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "track_changes": 1
+}

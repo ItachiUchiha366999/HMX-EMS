@@ -1,0 +1,249 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "feedback_form",
+    "respondent_type",
+    "column_break_1",
+    "student",
+    "faculty",
+    "is_anonymous",
+    "section_break_context",
+    "course",
+    "instructor",
+    "section_break_answers",
+    "answers",
+    "section_break_scores",
+    "overall_score",
+    "section_scores",
+    "column_break_2",
+    "nps_score",
+    "nps_category",
+    "section_break_meta",
+    "submission_datetime",
+    "time_taken_seconds",
+    "ip_address",
+    "device_info",
+    "column_break_3",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "FR-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "feedback_form",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Feedback Form",
+      "options": "Feedback Form",
+      "reqd": 1
+    },
+    {
+      "fieldname": "respondent_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Respondent Type",
+      "options": "\nStudent\nFaculty\nParent\nAlumni\nStaff\nAnonymous",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.respondent_type == 'Student'",
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student"
+    },
+    {
+      "depends_on": "eval:doc.respondent_type == 'Faculty'",
+      "fieldname": "faculty",
+      "fieldtype": "Link",
+      "label": "Faculty",
+      "options": "Instructor"
+    },
+    {
+      "default": 0,
+      "fieldname": "is_anonymous",
+      "fieldtype": "Check",
+      "label": "Anonymous Response",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_context",
+      "fieldtype": "Section Break",
+      "label": "Context"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course"
+    },
+    {
+      "fieldname": "instructor",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Instructor"
+    },
+    {
+      "fieldname": "section_break_answers",
+      "fieldtype": "Section Break",
+      "label": "Responses"
+    },
+    {
+      "fieldname": "answers",
+      "fieldtype": "Table",
+      "label": "Answers",
+      "options": "Feedback Answer"
+    },
+    {
+      "fieldname": "section_break_scores",
+      "fieldtype": "Section Break",
+      "label": "Calculated Scores"
+    },
+    {
+      "fieldname": "overall_score",
+      "fieldtype": "Float",
+      "label": "Overall Score",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_scores",
+      "fieldtype": "Table",
+      "label": "Section Scores",
+      "options": "Feedback Section Score",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "nps_score",
+      "fieldtype": "Int",
+      "label": "NPS Score",
+      "read_only": 1
+    },
+    {
+      "fieldname": "nps_category",
+      "fieldtype": "Data",
+      "label": "NPS Category",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_meta",
+      "fieldtype": "Section Break",
+      "label": "Metadata"
+    },
+    {
+      "fieldname": "submission_datetime",
+      "fieldtype": "Datetime",
+      "label": "Submitted At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "time_taken_seconds",
+      "fieldtype": "Int",
+      "label": "Time Taken (seconds)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ip_address",
+      "fieldtype": "Data",
+      "label": "IP Address",
+      "read_only": 1
+    },
+    {
+      "fieldname": "device_info",
+      "fieldtype": "Small Text",
+      "label": "Device Info",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "In Progress",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "In Progress\nSubmitted\nValid\nInvalid"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Feedback",
+  "name": "Feedback Response",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

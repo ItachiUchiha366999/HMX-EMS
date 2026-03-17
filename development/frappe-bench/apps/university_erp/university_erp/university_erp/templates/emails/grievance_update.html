@@ -1,0 +1,54 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block content %}
+<p>Dear {{ complainant_name or "Student" }},</p>
+
+<p>There has been an update on your grievance. Please find the details below:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 40%;">Grievance ID</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ grievance_id }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Subject</td>
+        <td style="padding: 10px;">{{ subject }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Previous Status</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ previous_status }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; font-weight: bold;">Current Status</td>
+        <td style="padding: 10px;"><strong style="color: #007bff;">{{ current_status }}</strong></td>
+    </tr>
+    {% if assigned_to %}
+    <tr>
+        <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">Assigned To</td>
+        <td style="padding: 10px; background: #f5f5f5;">{{ assigned_to }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+{% if update_message %}
+<div style="background: #e8f4fd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>Update Message:</strong>
+    <p style="margin: 10px 0 0 0;">{{ update_message }}</p>
+</div>
+{% endif %}
+
+{% if action_required %}
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #ffc107;">
+    <strong>Action Required:</strong>
+    <p style="margin: 10px 0 0 0;">{{ action_required }}</p>
+</div>
+{% endif %}
+
+<p>You can view the full details and respond through the <a href="{{ portal_link or '/student-portal/grievances' }}">Student Portal</a>.</p>
+
+<p>
+    Best regards,<br>
+    Grievance Redressal Cell<br>
+    {{ university_name or "University" }}
+</p>
+{% endblock %}

@@ -1,0 +1,237 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"hostel_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>University Hostel Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_building\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hostel Building\",\"col\":3}},{\"id\":\"shortcut_room\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hostel Room\",\"col\":3}},{\"id\":\"shortcut_allocation\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hostel Allocation\",\"col\":3}},{\"id\":\"shortcut_attendance\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hostel Bulk Attendance\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_master\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"card_transactions\",\"type\":\"card\",\"data\":{\"card_name\":\"Transactions\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-01 00:00:00.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "building",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University Hostel",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Master Data",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Building",
+      "link_count": 0,
+      "link_to": "Hostel Building",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Room",
+      "link_count": 0,
+      "link_to": "Hostel Room",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Mess",
+      "link_count": 0,
+      "link_to": "Hostel Mess",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transactions",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Allocation",
+      "link_count": 0,
+      "link_to": "Hostel Allocation",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Attendance",
+      "link_count": 0,
+      "link_to": "Hostel Attendance",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Bulk Attendance",
+      "link_count": 0,
+      "link_to": "Hostel Bulk Attendance",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Visitor",
+      "link_count": 0,
+      "link_to": "Hostel Visitor",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Hostel Maintenance Request",
+      "link_count": 0,
+      "link_to": "Hostel Maintenance Request",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Mess Menu",
+      "link_count": 0,
+      "link_to": "Mess Menu",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Hostel Occupancy",
+      "link_count": 0,
+      "link_to": "Hostel Occupancy",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Room Availability",
+      "link_count": 0,
+      "link_to": "Room Availability",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Hostel Attendance Report",
+      "link_count": 0,
+      "link_to": "Hostel Attendance Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Maintenance Summary",
+      "link_count": 0,
+      "link_to": "Maintenance Summary",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Visitor Log",
+      "link_count": 0,
+      "link_to": "Visitor Log",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2026-01-04 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "University Hostel",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 7.0,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Hostel Building",
+      "link_to": "Hostel Building",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Hostel Room",
+      "link_to": "Hostel Room",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Hostel Allocation",
+      "link_to": "Hostel Allocation",
+      "type": "DocType"
+    },
+    {
+      "color": "Yellow",
+      "doc_view": "List",
+      "label": "Hostel Bulk Attendance",
+      "link_to": "Hostel Bulk Attendance",
+      "type": "DocType"
+    }
+  ],
+  "title": "University Hostel"
+}

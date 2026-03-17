@@ -1,0 +1,310 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "gender",
+    "program",
+    "column_break_1",
+    "academic_year",
+    "from_date",
+    "to_date",
+    "duration_months",
+    "status",
+    "room_details_section",
+    "hostel_building",
+    "room",
+    "room_type",
+    "bed_number",
+    "column_break_room",
+    "hostel_type",
+    "floor",
+    "rent_per_month",
+    "fee_section",
+    "generate_fee",
+    "total_rent",
+    "security_deposit",
+    "column_break_fee",
+    "mess_charges",
+    "total_amount",
+    "fee_reference",
+    "remarks_section",
+    "remarks",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "HA-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.gender",
+      "fieldname": "gender",
+      "fieldtype": "Data",
+      "label": "Gender",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "from_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "From Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "to_date",
+      "fieldtype": "Date",
+      "label": "To Date"
+    },
+    {
+      "fieldname": "duration_months",
+      "fieldtype": "Int",
+      "label": "Duration (Months)"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Active\nVacated\nTransferred\nCancelled"
+    },
+    {
+      "fieldname": "room_details_section",
+      "fieldtype": "Section Break",
+      "label": "Room Details"
+    },
+    {
+      "fieldname": "hostel_building",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Hostel Building",
+      "options": "Hostel Building",
+      "reqd": 1
+    },
+    {
+      "fieldname": "room",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Room",
+      "options": "Hostel Room",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "room.room_type",
+      "fieldname": "room_type",
+      "fieldtype": "Data",
+      "label": "Room Type",
+      "read_only": 1
+    },
+    {
+      "fieldname": "bed_number",
+      "fieldtype": "Int",
+      "label": "Bed Number"
+    },
+    {
+      "fieldname": "column_break_room",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "hostel_building.hostel_type",
+      "fieldname": "hostel_type",
+      "fieldtype": "Data",
+      "label": "Hostel Type",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "room.floor",
+      "fieldname": "floor",
+      "fieldtype": "Int",
+      "label": "Floor",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "room.rent_per_month",
+      "fieldname": "rent_per_month",
+      "fieldtype": "Currency",
+      "label": "Rent per Month",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fee_section",
+      "fieldtype": "Section Break",
+      "label": "Fee Details"
+    },
+    {
+      "default": "1",
+      "fieldname": "generate_fee",
+      "fieldtype": "Check",
+      "label": "Generate Fee on Submit"
+    },
+    {
+      "fieldname": "total_rent",
+      "fieldtype": "Currency",
+      "label": "Total Rent",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "room.security_deposit",
+      "fieldname": "security_deposit",
+      "fieldtype": "Currency",
+      "label": "Security Deposit",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_fee",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "mess_charges",
+      "fieldtype": "Currency",
+      "label": "Mess Charges"
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "label": "Total Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fee_reference",
+      "fieldtype": "Link",
+      "label": "Fee Reference",
+      "options": "Fees",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "remarks_section",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Hostel Allocation",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Allocation",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "student, student_name, room, hostel_building",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

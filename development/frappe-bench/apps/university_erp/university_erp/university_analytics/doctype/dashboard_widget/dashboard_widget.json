@@ -1,0 +1,162 @@
+{
+  "actions": [],
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "widget_title",
+    "widget_type",
+    "data_source",
+    "column_break_1",
+    "report_name",
+    "custom_query",
+    "method_path",
+    "section_break_chart",
+    "chart_type",
+    "color",
+    "icon",
+    "section_break_position",
+    "position_row",
+    "position_col",
+    "column_break_2",
+    "width",
+    "height",
+    "section_break_options",
+    "drill_down_link",
+    "comparison_period"
+  ],
+  "fields": [
+    {
+      "fieldname": "widget_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Widget Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "widget_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Widget Type",
+      "options": "\nNumber Card\nProgress Card\nChart\nTable\nList\nCalendar\nMap\nGauge\nTrend\nComparison",
+      "reqd": 1
+    },
+    {
+      "fieldname": "data_source",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Data Source",
+      "options": "\nReport\nQuery\nMethod\nStatic",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.data_source == 'Report'",
+      "fieldname": "report_name",
+      "fieldtype": "Link",
+      "label": "Report",
+      "options": "Report"
+    },
+    {
+      "depends_on": "eval:doc.data_source == 'Query'",
+      "fieldname": "custom_query",
+      "fieldtype": "Code",
+      "label": "SQL Query",
+      "options": "SQL"
+    },
+    {
+      "depends_on": "eval:doc.data_source == 'Method'",
+      "fieldname": "method_path",
+      "fieldtype": "Data",
+      "label": "Method Path"
+    },
+    {
+      "fieldname": "section_break_chart",
+      "fieldtype": "Section Break",
+      "label": "Visualization"
+    },
+    {
+      "depends_on": "eval:doc.widget_type == 'Chart'",
+      "fieldname": "chart_type",
+      "fieldtype": "Select",
+      "label": "Chart Type",
+      "options": "\nBar\nLine\nPie\nDonut\nArea\nScatter\nHeatmap\nFunnel"
+    },
+    {
+      "fieldname": "color",
+      "fieldtype": "Color",
+      "label": "Primary Color"
+    },
+    {
+      "description": "FontAwesome icon class",
+      "fieldname": "icon",
+      "fieldtype": "Data",
+      "label": "Icon"
+    },
+    {
+      "fieldname": "section_break_position",
+      "fieldtype": "Section Break",
+      "label": "Position"
+    },
+    {
+      "default": "1",
+      "fieldname": "position_row",
+      "fieldtype": "Int",
+      "label": "Row"
+    },
+    {
+      "default": "1",
+      "fieldname": "position_col",
+      "fieldtype": "Int",
+      "label": "Column"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "width",
+      "fieldtype": "Int",
+      "label": "Width (columns)"
+    },
+    {
+      "default": "1",
+      "fieldname": "height",
+      "fieldtype": "Int",
+      "label": "Height (rows)"
+    },
+    {
+      "fieldname": "section_break_options",
+      "fieldtype": "Section Break",
+      "label": "Options"
+    },
+    {
+      "description": "URL to navigate when widget is clicked",
+      "fieldname": "drill_down_link",
+      "fieldtype": "Data",
+      "label": "Drill Down Link"
+    },
+    {
+      "fieldname": "comparison_period",
+      "fieldtype": "Select",
+      "label": "Comparison Period",
+      "options": "\nNone\nPrevious Day\nPrevious Week\nPrevious Month\nPrevious Year\nSame Period Last Year"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "Dashboard Widget",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

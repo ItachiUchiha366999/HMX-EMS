@@ -1,0 +1,173 @@
+{
+  "actions": [],
+  "autoname": "format:{mess}-{week_start_date}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "mess",
+    "mess_name",
+    "mess_type",
+    "column_break_1",
+    "week_start_date",
+    "week_end_date",
+    "status",
+    "menu_section",
+    "menu_items",
+    "notes_section",
+    "special_notes",
+    "prepared_by",
+    "approved_by"
+  ],
+  "fields": [
+    {
+      "fieldname": "mess",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Mess",
+      "options": "Hostel Mess",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "mess.mess_name",
+      "fieldname": "mess_name",
+      "fieldtype": "Data",
+      "label": "Mess Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "mess.mess_type",
+      "fieldname": "mess_type",
+      "fieldtype": "Data",
+      "label": "Mess Type",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "week_start_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Week Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "week_end_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Week End Date",
+      "read_only": 1
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nPublished\nArchived"
+    },
+    {
+      "fieldname": "menu_section",
+      "fieldtype": "Section Break",
+      "label": "Weekly Menu"
+    },
+    {
+      "fieldname": "menu_items",
+      "fieldtype": "Table",
+      "label": "Menu Items",
+      "options": "Mess Menu Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "special_notes",
+      "fieldtype": "Small Text",
+      "label": "Special Notes"
+    },
+    {
+      "fieldname": "prepared_by",
+      "fieldtype": "Link",
+      "label": "Prepared By",
+      "options": "User"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Mess Menu",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "mess_name",
+  "track_changes": 1
+}

@@ -1,0 +1,225 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:FREF-{YYYY}-{#####}",
+  "creation": "2025-12-31 00:00:00",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "fee",
+    "student",
+    "student_name",
+    "column_break_1",
+    "refund_date",
+    "refund_reason",
+    "section_amounts",
+    "gross_refund_amount",
+    "deductions",
+    "section_totals",
+    "total_deductions",
+    "column_break_2",
+    "net_refund_amount",
+    "section_payment",
+    "payment_mode",
+    "reference_number",
+    "column_break_3",
+    "journal_entry",
+    "section_remarks",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "fee",
+      "fieldtype": "Link",
+      "label": "Fee",
+      "options": "Fees",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "fetch_from": "student.student_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "refund_date",
+      "fieldtype": "Date",
+      "label": "Refund Date",
+      "reqd": 1,
+      "default": "Today"
+    },
+    {
+      "fieldname": "refund_reason",
+      "fieldtype": "Select",
+      "label": "Refund Reason",
+      "options": "Course Withdrawal\nAdmission Cancellation\nDuplicate Payment\nOverpayment\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_amounts",
+      "fieldtype": "Section Break",
+      "label": "Refund Calculation"
+    },
+    {
+      "fieldname": "gross_refund_amount",
+      "fieldtype": "Currency",
+      "label": "Gross Refund Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "deductions",
+      "fieldtype": "Table",
+      "label": "Deductions",
+      "options": "Fee Refund Deduction"
+    },
+    {
+      "fieldname": "section_totals",
+      "fieldtype": "Section Break",
+      "label": "Totals"
+    },
+    {
+      "fieldname": "total_deductions",
+      "fieldtype": "Currency",
+      "label": "Total Deductions",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "net_refund_amount",
+      "fieldtype": "Currency",
+      "label": "Net Refund Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_payment",
+      "fieldtype": "Section Break",
+      "label": "Payment Details"
+    },
+    {
+      "fieldname": "payment_mode",
+      "fieldtype": "Select",
+      "label": "Payment Mode",
+      "options": "\nCash\nCheque\nBank Transfer\nDD",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reference_number",
+      "fieldtype": "Data",
+      "label": "Reference Number"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "journal_entry",
+      "fieldtype": "Link",
+      "label": "Journal Entry",
+      "options": "Journal Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_remarks",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "2025-12-31 00:00:00",
+  "modified_by": "Administrator",
+  "module": "University Finance",
+  "name": "Fee Refund",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

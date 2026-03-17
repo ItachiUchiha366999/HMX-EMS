@@ -1,0 +1,32 @@
+{
+  "doctype": "DocType",
+  "name": "Proctoring Snapshot",
+  "module": "University ERP",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "timestamp",
+      "fieldtype": "Datetime",
+      "label": "Timestamp",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "snapshot_image",
+      "fieldtype": "Attach Image",
+      "label": "Snapshot Image"
+    },
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "label": "Event Type",
+      "in_list_view": 1,
+      "description": "Random Capture, Tab Switch, Violation, etc."
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "engine": "InnoDB"
+}

@@ -1,0 +1,205 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:FPAY-{YYYY}-{#####}",
+  "creation": "2025-12-31 00:00:00",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "fee",
+    "student",
+    "student_name",
+    "column_break_1",
+    "amount",
+    "payment_date",
+    "section_payment",
+    "payment_mode",
+    "transaction_id",
+    "column_break_2",
+    "receipt_number",
+    "reference_number",
+    "section_scholarship",
+    "scholarship_applied",
+    "scholarship_details",
+    "section_remarks",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "fee",
+      "fieldtype": "Link",
+      "label": "Fee",
+      "options": "Fees",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "fetch_from": "student.student_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "payment_date",
+      "fieldtype": "Date",
+      "label": "Payment Date",
+      "reqd": 1,
+      "default": "Today"
+    },
+    {
+      "fieldname": "section_payment",
+      "fieldtype": "Section Break",
+      "label": "Payment Details"
+    },
+    {
+      "fieldname": "payment_mode",
+      "fieldtype": "Select",
+      "label": "Payment Mode",
+      "options": "\nCash\nCheque\nBank Transfer\nOnline Payment\nDD",
+      "reqd": 1
+    },
+    {
+      "fieldname": "transaction_id",
+      "fieldtype": "Data",
+      "label": "Transaction ID"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "receipt_number",
+      "fieldtype": "Data",
+      "label": "Receipt Number",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reference_number",
+      "fieldtype": "Data",
+      "label": "Reference Number"
+    },
+    {
+      "fieldname": "section_scholarship",
+      "fieldtype": "Section Break",
+      "label": "Scholarship/Concession"
+    },
+    {
+      "fieldname": "scholarship_applied",
+      "fieldtype": "Currency",
+      "label": "Scholarship Applied",
+      "read_only": 1
+    },
+    {
+      "fieldname": "scholarship_details",
+      "fieldtype": "Small Text",
+      "label": "Scholarship Details",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_remarks",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "2025-12-31 00:00:00",
+  "modified_by": "Administrator",
+  "module": "University Finance",
+  "name": "Fee Payment",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

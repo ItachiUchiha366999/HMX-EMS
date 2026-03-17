@@ -1,0 +1,210 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "kpi",
+    "period_type",
+    "column_break_basic",
+    "period_start",
+    "period_end",
+    "section_break_values",
+    "value",
+    "target",
+    "column_break_values",
+    "variance",
+    "status",
+    "section_break_context",
+    "department",
+    "program",
+    "academic_year",
+    "section_break_meta",
+    "calculated_on",
+    "calculation_source",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Series",
+      "options": "KPI-VAL-.YYYY.-",
+      "print_hide": 1
+    },
+    {
+      "fieldname": "kpi",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "KPI",
+      "options": "KPI Definition",
+      "reqd": 1
+    },
+    {
+      "fieldname": "period_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Period Type",
+      "options": "Daily\nWeekly\nMonthly\nQuarterly\nYearly",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "period_start",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Period Start",
+      "reqd": 1
+    },
+    {
+      "fieldname": "period_end",
+      "fieldtype": "Date",
+      "label": "Period End",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_values",
+      "fieldtype": "Section Break",
+      "label": "Values"
+    },
+    {
+      "fieldname": "value",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Value",
+      "reqd": 1
+    },
+    {
+      "fieldname": "target",
+      "fieldtype": "Float",
+      "label": "Target"
+    },
+    {
+      "fieldname": "column_break_values",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "variance",
+      "fieldtype": "Float",
+      "label": "Variance (%)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "\nGreen\nYellow\nRed",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_context",
+      "fieldtype": "Section Break",
+      "label": "Context"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year"
+    },
+    {
+      "fieldname": "section_break_meta",
+      "fieldtype": "Section Break",
+      "label": "Metadata"
+    },
+    {
+      "fieldname": "calculated_on",
+      "fieldtype": "Datetime",
+      "label": "Calculated On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "calculation_source",
+      "fieldtype": "Select",
+      "label": "Calculation Source",
+      "options": "\nAuto Calculated\nManual Entry\nImported",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "KPI Value",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

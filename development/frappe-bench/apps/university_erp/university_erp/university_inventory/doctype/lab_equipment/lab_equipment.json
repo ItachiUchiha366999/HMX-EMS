@@ -1,0 +1,273 @@
+{
+  "actions": [],
+  "autoname": "field:equipment_code",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "equipment_name",
+    "equipment_code",
+    "equipment_type",
+    "column_break_1",
+    "lab",
+    "asset",
+    "status",
+    "details_section",
+    "manufacturer",
+    "model",
+    "serial_number",
+    "column_break_details",
+    "purchase_date",
+    "warranty_end",
+    "purchase_value",
+    "current_value",
+    "calibration_section",
+    "requires_calibration",
+    "calibration_frequency",
+    "last_calibration_date",
+    "column_break_calibration",
+    "next_calibration_date",
+    "calibration_certificate",
+    "usage_section",
+    "booking_required",
+    "requires_training",
+    "column_break_usage",
+    "total_usage_hours",
+    "max_usage_hours",
+    "instructions_section",
+    "safety_precautions",
+    "operating_instructions"
+  ],
+  "fields": [
+    {
+      "fieldname": "equipment_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Equipment Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "equipment_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Equipment Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "equipment_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Equipment Type",
+      "options": "Scientific\nComputing\nElectrical\nMechanical\nChemical\nBiological\nGeneral",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "lab",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Laboratory",
+      "options": "University Laboratory",
+      "reqd": 1
+    },
+    {
+      "fieldname": "asset",
+      "fieldtype": "Link",
+      "label": "Linked Asset",
+      "options": "Asset"
+    },
+    {
+      "default": "Available",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Available\nIn Use\nUnder Maintenance\nOut of Order\nDecommissioned"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Equipment Details"
+    },
+    {
+      "fieldname": "manufacturer",
+      "fieldtype": "Data",
+      "label": "Manufacturer"
+    },
+    {
+      "fieldname": "model",
+      "fieldtype": "Data",
+      "label": "Model"
+    },
+    {
+      "fieldname": "serial_number",
+      "fieldtype": "Data",
+      "label": "Serial Number"
+    },
+    {
+      "fieldname": "column_break_details",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "purchase_date",
+      "fieldtype": "Date",
+      "label": "Purchase Date"
+    },
+    {
+      "fieldname": "warranty_end",
+      "fieldtype": "Date",
+      "label": "Warranty End Date"
+    },
+    {
+      "default": "0",
+      "fieldname": "purchase_value",
+      "fieldtype": "Currency",
+      "label": "Purchase Value"
+    },
+    {
+      "default": "0",
+      "fieldname": "current_value",
+      "fieldtype": "Currency",
+      "label": "Current Value"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "calibration_section",
+      "fieldtype": "Section Break",
+      "label": "Calibration"
+    },
+    {
+      "default": "0",
+      "fieldname": "requires_calibration",
+      "fieldtype": "Check",
+      "label": "Requires Calibration"
+    },
+    {
+      "depends_on": "requires_calibration",
+      "fieldname": "calibration_frequency",
+      "fieldtype": "Select",
+      "label": "Calibration Frequency",
+      "options": "\nMonthly\nQuarterly\nHalf-yearly\nYearly"
+    },
+    {
+      "depends_on": "requires_calibration",
+      "fieldname": "last_calibration_date",
+      "fieldtype": "Date",
+      "label": "Last Calibration Date"
+    },
+    {
+      "fieldname": "column_break_calibration",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "requires_calibration",
+      "fieldname": "next_calibration_date",
+      "fieldtype": "Date",
+      "label": "Next Calibration Date"
+    },
+    {
+      "depends_on": "requires_calibration",
+      "fieldname": "calibration_certificate",
+      "fieldtype": "Attach",
+      "label": "Calibration Certificate"
+    },
+    {
+      "fieldname": "usage_section",
+      "fieldtype": "Section Break",
+      "label": "Usage Settings"
+    },
+    {
+      "default": "0",
+      "fieldname": "booking_required",
+      "fieldtype": "Check",
+      "label": "Booking Required"
+    },
+    {
+      "default": "0",
+      "fieldname": "requires_training",
+      "fieldtype": "Check",
+      "label": "Requires Training"
+    },
+    {
+      "fieldname": "column_break_usage",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_usage_hours",
+      "fieldtype": "Float",
+      "label": "Total Usage Hours",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Maximum hours before maintenance is required (0 for unlimited)",
+      "fieldname": "max_usage_hours",
+      "fieldtype": "Float",
+      "label": "Max Usage Hours"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "instructions_section",
+      "fieldtype": "Section Break",
+      "label": "Instructions"
+    },
+    {
+      "fieldname": "safety_precautions",
+      "fieldtype": "Small Text",
+      "label": "Safety Precautions"
+    },
+    {
+      "fieldname": "operating_instructions",
+      "fieldtype": "Text Editor",
+      "label": "Operating Instructions"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Lab Equipment",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "equipment_name, lab, equipment_type, status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "equipment_name",
+  "track_changes": 1
+}

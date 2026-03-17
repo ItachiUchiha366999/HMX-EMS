@@ -1,0 +1,138 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "program_outcome",
+    "po_code",
+    "po_title",
+    "is_pso",
+    "section_break_attain",
+    "contributing_courses",
+    "weighted_attainment",
+    "column_break_level",
+    "attainment_level",
+    "attainment_percent",
+    "section_break_target",
+    "target_attainment",
+    "column_break_achieved",
+    "achieved",
+    "gap"
+  ],
+  "fields": [
+    {
+      "fieldname": "program_outcome",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Program Outcome",
+      "options": "Program Outcome",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "program_outcome.po_code",
+      "fieldname": "po_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "PO Code",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "program_outcome.po_title",
+      "fieldname": "po_title",
+      "fieldtype": "Data",
+      "label": "PO Title",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fetch_from": "program_outcome.is_pso",
+      "fieldname": "is_pso",
+      "fieldtype": "Check",
+      "label": "Is PSO",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_attain",
+      "fieldtype": "Section Break",
+      "label": "Attainment Details"
+    },
+    {
+      "default": "0",
+      "description": "Number of courses contributing to this PO",
+      "fieldname": "contributing_courses",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Contributing Courses"
+    },
+    {
+      "default": "0",
+      "description": "Weighted average from CO attainments",
+      "fieldname": "weighted_attainment",
+      "fieldtype": "Float",
+      "label": "Weighted Attainment",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_level",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "attainment_level",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Attainment Level (0-3)",
+      "precision": "2"
+    },
+    {
+      "default": "0",
+      "fieldname": "attainment_percent",
+      "fieldtype": "Percent",
+      "label": "Attainment %"
+    },
+    {
+      "fieldname": "section_break_target",
+      "fieldtype": "Section Break",
+      "label": "Target Comparison"
+    },
+    {
+      "default": "60",
+      "fieldname": "target_attainment",
+      "fieldtype": "Percent",
+      "label": "Target Attainment"
+    },
+    {
+      "fieldname": "column_break_achieved",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "achieved",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Target Achieved",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "gap",
+      "fieldtype": "Float",
+      "label": "Gap",
+      "precision": "2",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "PO Attainment Entry",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
+}

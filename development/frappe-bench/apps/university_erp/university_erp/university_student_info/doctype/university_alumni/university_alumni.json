@@ -1,0 +1,192 @@
+{
+  "actions": [],
+  "creation": "2025-12-31 14:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "student",
+    "student_name",
+    "email",
+    "column_break_3",
+    "program",
+    "graduation_year",
+    "professional_section",
+    "current_employer",
+    "designation",
+    "column_break_8",
+    "industry",
+    "location",
+    "engagement_section",
+    "willing_to_mentor",
+    "available_for_placement",
+    "linkedin_profile"
+  ],
+  "fields": [
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Name",
+      "fetch_from": "student.student_name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "graduation_year",
+      "fieldtype": "Int",
+      "label": "Graduation Year",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "professional_section",
+      "fieldtype": "Section Break",
+      "label": "Professional Details"
+    },
+    {
+      "fieldname": "current_employer",
+      "fieldtype": "Data",
+      "label": "Current Employer"
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Data",
+      "label": "Designation"
+    },
+    {
+      "fieldname": "column_break_8",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "industry",
+      "fieldtype": "Data",
+      "label": "Industry"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "label": "Location"
+    },
+    {
+      "fieldname": "engagement_section",
+      "fieldtype": "Section Break",
+      "label": "Engagement"
+    },
+    {
+      "fieldname": "willing_to_mentor",
+      "fieldtype": "Check",
+      "label": "Willing to Mentor",
+      "default": "0"
+    },
+    {
+      "fieldname": "available_for_placement",
+      "fieldtype": "Check",
+      "label": "Available for Placement Support",
+      "default": "0"
+    },
+    {
+      "fieldname": "linkedin_profile",
+      "fieldtype": "Data",
+      "label": "LinkedIn Profile"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-12-31 14:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Student Info",
+  "name": "University Alumni",
+  "owner": "Administrator",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "autoname": "hash",
+  "naming_rule": "Random",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "track_changes": 1
+}

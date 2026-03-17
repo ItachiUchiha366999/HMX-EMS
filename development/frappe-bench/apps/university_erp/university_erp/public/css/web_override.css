@@ -1,0 +1,217 @@
+/**
+ * University ERP - Web Portal Override Styles
+ * Enhances default Frappe web portal with modern styling
+ */
+
+/* Import theme variables */
+@import url('/assets/university_erp/css/theme/variables.css');
+
+/* ==================== Navbar Dropdown Fix ==================== */
+
+/* Fix for default Frappe navbar avatar dropdown */
+.navbar .dropdown-menu,
+.navbar .navbar-nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  z-index: 1050;
+  margin-top: 8px;
+}
+
+.navbar .dropdown-menu.show,
+.navbar .dropdown.show .dropdown-menu,
+.navbar .nav-item.dropdown.show .dropdown-menu {
+  display: block !important;
+}
+
+.navbar .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #374151;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.navbar .dropdown-item:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.navbar .dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px 0;
+  border: none;
+}
+
+/* Avatar button in navbar */
+.navbar .nav-link.avatar-link,
+.navbar .avatar-medium {
+  cursor: pointer;
+}
+
+/* ==================== Modern Styling for Default Portal ==================== */
+
+/* Navbar styling */
+.navbar {
+  background: #fff !important;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: none;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #1f2937 !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #4b5563;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #1f2937;
+  background: #f3f4f6;
+}
+
+/* Avatar in navbar */
+.avatar-frame,
+.avatar-medium,
+.avatar-small {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Cards */
+.frappe-card,
+.card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.frappe-card:hover,
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Buttons */
+.btn-primary {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+/* Links */
+a {
+  color: #6366f1;
+}
+
+a:hover {
+  color: #4f46e5;
+}
+
+/* Form inputs */
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  border-radius: 8px;
+  border-color: #d1d5db;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Page container */
+.web-container {
+  max-width: 1200px;
+}
+
+/* Footer */
+footer,
+.web-footer {
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ==================== User Menu Dropdown Fix ==================== */
+
+/* Ensure avatar dropdown works */
+.navbar .dropdown-toggle::after {
+  display: none;
+}
+
+.navbar .nav-item.dropdown {
+  position: relative;
+}
+
+/* Make the entire avatar clickable area larger */
+.navbar .dropdown-toggle {
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+  background: #f3f4f6;
+}
+
+/* Fix Bootstrap dropdown behavior */
+.dropdown-menu[data-bs-popper] {
+  margin-top: 8px;
+}
+
+/* Ensure dropdowns appear above other content */
+.navbar {
+  z-index: 1030;
+}
+
+.navbar .dropdown-menu {
+  z-index: 1050;
+}
+
+/* Add logout link styling */
+.dropdown-item[href*="logout"],
+.dropdown-item[href*="web_logout"] {
+  color: #dc2626;
+}
+
+.dropdown-item[href*="logout"]:hover,
+.dropdown-item[href*="web_logout"]:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}

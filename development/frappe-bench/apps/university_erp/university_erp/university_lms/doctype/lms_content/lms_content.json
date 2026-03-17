@@ -1,0 +1,217 @@
+{
+  "actions": [],
+  "autoname": "format:LC-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "lms_course",
+    "module",
+    "sequence",
+    "column_break_1",
+    "content_type",
+    "duration_minutes",
+    "is_mandatory",
+    "status",
+    "section_content",
+    "video_url",
+    "video_provider",
+    "document_file",
+    "external_link",
+    "text_content",
+    "scorm_package",
+    "section_settings",
+    "available_from",
+    "available_until",
+    "prerequisite_content"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Content Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "lms_course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "LMS Course",
+      "options": "LMS Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "module",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Module"
+    },
+    {
+      "default": "0",
+      "fieldname": "sequence",
+      "fieldtype": "Int",
+      "label": "Sequence"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "content_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Content Type",
+      "options": "Video\nDocument\nSlides\nLink\nText\nScorm",
+      "reqd": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration (minutes)"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_mandatory",
+      "fieldtype": "Check",
+      "label": "Mandatory"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nPublished\nArchived"
+    },
+    {
+      "fieldname": "section_content",
+      "fieldtype": "Section Break",
+      "label": "Content"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Video'",
+      "fieldname": "video_url",
+      "fieldtype": "Data",
+      "label": "Video URL"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Video'",
+      "fieldname": "video_provider",
+      "fieldtype": "Select",
+      "label": "Video Provider",
+      "options": "\nYouTube\nVimeo\nCustom"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Document' || doc.content_type=='Slides'",
+      "fieldname": "document_file",
+      "fieldtype": "Attach",
+      "label": "Document/File"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Link'",
+      "fieldname": "external_link",
+      "fieldtype": "Data",
+      "label": "External Link"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Text'",
+      "fieldname": "text_content",
+      "fieldtype": "Text Editor",
+      "label": "Text Content"
+    },
+    {
+      "depends_on": "eval:doc.content_type=='Scorm'",
+      "fieldname": "scorm_package",
+      "fieldtype": "Attach",
+      "label": "SCORM Package"
+    },
+    {
+      "fieldname": "section_settings",
+      "fieldtype": "Section Break",
+      "label": "Availability Settings"
+    },
+    {
+      "fieldname": "available_from",
+      "fieldtype": "Datetime",
+      "label": "Available From"
+    },
+    {
+      "fieldname": "available_until",
+      "fieldtype": "Datetime",
+      "label": "Available Until"
+    },
+    {
+      "fieldname": "prerequisite_content",
+      "fieldtype": "Link",
+      "label": "Prerequisite Content",
+      "options": "LMS Content"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "LMS Content",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "sequence",
+  "sort_order": "ASC",
+  "states": [],
+  "track_changes": 1
+}

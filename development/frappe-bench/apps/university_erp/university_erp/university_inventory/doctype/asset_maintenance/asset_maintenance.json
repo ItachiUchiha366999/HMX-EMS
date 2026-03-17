@@ -1,0 +1,234 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "asset",
+    "asset_name",
+    "maintenance_type",
+    "column_break_1",
+    "maintenance_status",
+    "priority",
+    "schedule_section",
+    "planned_date",
+    "completion_date",
+    "column_break_schedule",
+    "assigned_to",
+    "maintenance_team",
+    "work_section",
+    "description",
+    "work_done",
+    "parts_section",
+    "parts_replaced",
+    "costs_section",
+    "labor_cost",
+    "parts_cost",
+    "column_break_costs",
+    "other_cost",
+    "total_cost",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "AMNT-.YYYY.-.#####",
+      "reqd": 1,
+      "set_only_once": 1
+    },
+    {
+      "fieldname": "asset",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Asset",
+      "options": "Asset",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "asset.asset_name",
+      "fieldname": "asset_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Asset Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "maintenance_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Maintenance Type",
+      "options": "Preventive\nCorrective\nEmergency\nCalibration",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Planned",
+      "fieldname": "maintenance_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Maintenance Status",
+      "options": "Planned\nIn Progress\nCompleted\nCancelled"
+    },
+    {
+      "default": "Medium",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent"
+    },
+    {
+      "fieldname": "schedule_section",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "default": "Today",
+      "fieldname": "planned_date",
+      "fieldtype": "Date",
+      "label": "Planned Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "completion_date",
+      "fieldtype": "Date",
+      "label": "Completion Date"
+    },
+    {
+      "fieldname": "column_break_schedule",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "maintenance_team",
+      "fieldtype": "Link",
+      "label": "Maintenance Team",
+      "options": "Maintenance Team"
+    },
+    {
+      "fieldname": "work_section",
+      "fieldtype": "Section Break",
+      "label": "Work Details"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "work_done",
+      "fieldtype": "Text Editor",
+      "label": "Work Done"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "parts_section",
+      "fieldtype": "Section Break",
+      "label": "Parts Replaced"
+    },
+    {
+      "fieldname": "parts_replaced",
+      "fieldtype": "Table",
+      "label": "Parts Replaced",
+      "options": "Asset Maintenance Part"
+    },
+    {
+      "fieldname": "costs_section",
+      "fieldtype": "Section Break",
+      "label": "Costs"
+    },
+    {
+      "default": "0",
+      "fieldname": "labor_cost",
+      "fieldtype": "Currency",
+      "label": "Labor Cost"
+    },
+    {
+      "default": "0",
+      "fieldname": "parts_cost",
+      "fieldtype": "Currency",
+      "label": "Parts Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_costs",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "other_cost",
+      "fieldtype": "Currency",
+      "label": "Other Cost"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_cost",
+      "fieldtype": "Currency",
+      "label": "Total Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Asset Maintenance",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Asset Maintenance",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "asset, maintenance_type, maintenance_status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

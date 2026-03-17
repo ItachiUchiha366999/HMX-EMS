@@ -1,0 +1,5 @@
+frappe
+education
+erpnext
+hrms
+university_erp

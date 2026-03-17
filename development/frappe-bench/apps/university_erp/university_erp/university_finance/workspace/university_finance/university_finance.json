@@ -1,0 +1,165 @@
+{
+  "name": "University Finance",
+  "doctype": "Workspace",
+  "module": "University Finance",
+  "label": "University Finance",
+  "icon": "money",
+  "public": 1,
+  "title": "University Finance",
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>University Finance</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Category\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Payment\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Refund\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Razorpay Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Fees\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Scholarships\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Payments\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+  "links": [
+    {
+      "type": "Card Break",
+      "label": "Fees"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Category",
+      "link_type": "DocType",
+      "label": "Fee Category"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Payment",
+      "link_type": "DocType",
+      "label": "Fee Payment"
+    },
+    {
+      "type": "Link",
+      "link_to": "Bulk Fee Generator",
+      "link_type": "DocType",
+      "label": "Bulk Fee Generator"
+    },
+    {
+      "type": "Card Break",
+      "label": "Scholarships"
+    },
+    {
+      "type": "Link",
+      "link_to": "Scholarship Type",
+      "link_type": "DocType",
+      "label": "Scholarship Type"
+    },
+    {
+      "type": "Link",
+      "link_to": "Student Scholarship",
+      "link_type": "DocType",
+      "label": "Student Scholarship"
+    },
+    {
+      "type": "Card Break",
+      "label": "Payments"
+    },
+    {
+      "type": "Link",
+      "link_to": "Razorpay Settings",
+      "link_type": "DocType",
+      "label": "Razorpay Settings"
+    },
+    {
+      "type": "Link",
+      "link_to": "PayU Settings",
+      "link_type": "DocType",
+      "label": "PayU Settings"
+    },
+    {
+      "type": "Link",
+      "link_to": "University Accounts Settings",
+      "link_type": "DocType",
+      "label": "Accounts Settings"
+    },
+    {
+      "type": "Link",
+      "link_to": "Payment Order",
+      "link_type": "DocType",
+      "label": "Payment Order"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Refund",
+      "link_type": "DocType",
+      "label": "Fee Refund"
+    },
+    {
+      "type": "Link",
+      "link_to": "Bank Transaction",
+      "link_type": "DocType",
+      "label": "Bank Transaction"
+    },
+    {
+      "type": "Link",
+      "link_to": "Webhook Log",
+      "link_type": "DocType",
+      "label": "Webhook Log"
+    },
+    {
+      "type": "Card Break",
+      "label": "Reports"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Collection Summary",
+      "link_type": "Report",
+      "label": "Fee Collection Summary",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Defaulters",
+      "link_type": "Report",
+      "label": "Fee Defaulters",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Daily Collection Report",
+      "link_type": "Report",
+      "label": "Daily Collection Report",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Gateway Reconciliation Report",
+      "link_type": "Report",
+      "label": "Gateway Reconciliation Report",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Refund Report",
+      "link_type": "Report",
+      "label": "Refund Report",
+      "is_query_report": 1
+    }
+  ],
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Fee Category",
+      "link_to": "Fee Category",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Fee Payment",
+      "link_to": "Fee Payment",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Fee Refund",
+      "link_to": "Fee Refund",
+      "type": "DocType"
+    },
+    {
+      "color": "Grey",
+      "doc_view": "List",
+      "label": "Razorpay Settings",
+      "link_to": "Razorpay Settings",
+      "type": "DocType"
+    }
+  ]
+}

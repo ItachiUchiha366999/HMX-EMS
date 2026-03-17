@@ -1,0 +1,21 @@
+University ERP
+University Academics
+University Admissions
+University Student Info
+University Examinations
+University Finance
+Faculty Management
+University Hostel
+University Transport
+University Library
+University Placement
+University LMS
+University Research
+University OBE
+University Integrations
+University Portals
+University Payments
+University Inventory
+University Grievance
+University Analytics
+University Feedback

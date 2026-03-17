@@ -1,0 +1,180 @@
+{
+  "actions": [],
+  "creation": "2025-12-31 14:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "admission_cycle",
+    "program",
+    "column_break_2",
+    "total_seats",
+    "section_break_4",
+    "general_seats",
+    "obc_seats",
+    "sc_seats",
+    "column_break_7",
+    "st_seats",
+    "ews_seats",
+    "pwd_seats",
+    "section_break_10",
+    "filled_seats",
+    "available_seats"
+  ],
+  "fields": [
+    {
+      "fieldname": "admission_cycle",
+      "fieldtype": "Link",
+      "label": "Admission Cycle",
+      "options": "Admission Cycle",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_seats",
+      "fieldtype": "Int",
+      "label": "Total Seats",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_break_4",
+      "fieldtype": "Section Break",
+      "label": "Category-wise Allocation"
+    },
+    {
+      "fieldname": "general_seats",
+      "fieldtype": "Int",
+      "label": "General Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "obc_seats",
+      "fieldtype": "Int",
+      "label": "OBC Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "sc_seats",
+      "fieldtype": "Int",
+      "label": "SC Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "column_break_7",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "st_seats",
+      "fieldtype": "Int",
+      "label": "ST Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "ews_seats",
+      "fieldtype": "Int",
+      "label": "EWS Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "pwd_seats",
+      "fieldtype": "Int",
+      "label": "PWD Seats",
+      "default": "0"
+    },
+    {
+      "fieldname": "section_break_10",
+      "fieldtype": "Section Break",
+      "label": "Filled Seats"
+    },
+    {
+      "fieldname": "filled_seats",
+      "fieldtype": "Int",
+      "label": "Total Filled",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "available_seats",
+      "fieldtype": "Int",
+      "label": "Available Seats",
+      "read_only": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-12-31 14:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Admissions",
+  "name": "Seat Matrix",
+  "owner": "Administrator",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "autoname": "hash",
+  "naming_rule": "Random",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Registrar",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "track_changes": 1
+}

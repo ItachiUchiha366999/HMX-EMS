@@ -1,0 +1,297 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:vehicle_number",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "vehicle_number",
+    "vehicle_name",
+    "vehicle_type",
+    "make",
+    "model",
+    "column_break_1",
+    "seating_capacity",
+    "fuel_type",
+    "is_active",
+    "ownership",
+    "registration_section",
+    "registration_date",
+    "registration_expiry",
+    "column_break_reg",
+    "insurance_expiry",
+    "fitness_expiry",
+    "permit_expiry",
+    "driver_section",
+    "driver",
+    "driver_name",
+    "driver_contact",
+    "column_break_driver",
+    "conductor",
+    "conductor_name",
+    "conductor_contact",
+    "maintenance_section",
+    "last_service_date",
+    "next_service_due",
+    "current_odometer",
+    "column_break_maint",
+    "average_mileage",
+    "status",
+    "maintenance_remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "vehicle_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Vehicle Number",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "vehicle_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Vehicle Name"
+    },
+    {
+      "default": "Bus",
+      "fieldname": "vehicle_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Vehicle Type",
+      "options": "Bus\nMini Bus\nVan\nCar"
+    },
+    {
+      "fieldname": "make",
+      "fieldtype": "Data",
+      "label": "Make"
+    },
+    {
+      "fieldname": "model",
+      "fieldtype": "Data",
+      "label": "Model"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "seating_capacity",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Seating Capacity",
+      "reqd": 1
+    },
+    {
+      "default": "Diesel",
+      "fieldname": "fuel_type",
+      "fieldtype": "Select",
+      "label": "Fuel Type",
+      "options": "Diesel\nPetrol\nCNG\nElectric"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "default": "Owned",
+      "fieldname": "ownership",
+      "fieldtype": "Select",
+      "label": "Ownership",
+      "options": "Owned\nLeased\nContracted"
+    },
+    {
+      "fieldname": "registration_section",
+      "fieldtype": "Section Break",
+      "label": "Registration & Documents"
+    },
+    {
+      "fieldname": "registration_date",
+      "fieldtype": "Date",
+      "label": "Registration Date"
+    },
+    {
+      "fieldname": "registration_expiry",
+      "fieldtype": "Date",
+      "label": "Registration Expiry"
+    },
+    {
+      "fieldname": "column_break_reg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "insurance_expiry",
+      "fieldtype": "Date",
+      "label": "Insurance Expiry"
+    },
+    {
+      "fieldname": "fitness_expiry",
+      "fieldtype": "Date",
+      "label": "Fitness Certificate Expiry"
+    },
+    {
+      "fieldname": "permit_expiry",
+      "fieldtype": "Date",
+      "label": "Permit Expiry"
+    },
+    {
+      "fieldname": "driver_section",
+      "fieldtype": "Section Break",
+      "label": "Driver & Conductor"
+    },
+    {
+      "fieldname": "driver",
+      "fieldtype": "Link",
+      "label": "Driver",
+      "options": "Employee"
+    },
+    {
+      "fetch_from": "driver.employee_name",
+      "fieldname": "driver_name",
+      "fieldtype": "Data",
+      "label": "Driver Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "driver_contact",
+      "fieldtype": "Data",
+      "label": "Driver Contact",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "column_break_driver",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "conductor",
+      "fieldtype": "Link",
+      "label": "Conductor",
+      "options": "Employee"
+    },
+    {
+      "fetch_from": "conductor.employee_name",
+      "fieldname": "conductor_name",
+      "fieldtype": "Data",
+      "label": "Conductor Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conductor_contact",
+      "fieldtype": "Data",
+      "label": "Conductor Contact",
+      "options": "Phone"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "maintenance_section",
+      "fieldtype": "Section Break",
+      "label": "Maintenance"
+    },
+    {
+      "fieldname": "last_service_date",
+      "fieldtype": "Date",
+      "label": "Last Service Date"
+    },
+    {
+      "fieldname": "next_service_due",
+      "fieldtype": "Date",
+      "label": "Next Service Due"
+    },
+    {
+      "fieldname": "current_odometer",
+      "fieldtype": "Float",
+      "label": "Current Odometer (km)"
+    },
+    {
+      "fieldname": "column_break_maint",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "average_mileage",
+      "fieldtype": "Float",
+      "label": "Average Mileage (km/l)"
+    },
+    {
+      "default": "Available",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Available\nIn Service\nUnder Maintenance\nOut of Service"
+    },
+    {
+      "fieldname": "maintenance_remarks",
+      "fieldtype": "Small Text",
+      "label": "Maintenance Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Transport Route",
+      "link_fieldname": "assigned_vehicle"
+    },
+    {
+      "link_doctype": "Transport Trip Log",
+      "link_fieldname": "vehicle"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Transport",
+  "name": "Transport Vehicle",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "quick_entry": 1,
+  "search_fields": "vehicle_number, vehicle_name, vehicle_type",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "vehicle_number",
+  "track_changes": 1
+}

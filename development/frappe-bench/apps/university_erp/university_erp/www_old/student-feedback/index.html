@@ -1,0 +1,441 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Student Feedback Portal") }}{% endblock %}
+
+{% block page_content %}
+<div class="student-feedback-container">
+	<!-- Header Section -->
+	<div class="portal-header mb-5">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>{{ _("Student Feedback Portal") }}</h2>
+				<p class="text-muted">
+					{{ student.student_name }} | {{ student.program }} | {{ student.student_batch_name }}
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Pending Feedback Alert -->
+	{% if pending_feedback %}
+	<div class="alert alert-warning mb-4">
+		<i class="fa fa-exclamation-triangle"></i>
+		<strong>{{ _("Pending Feedback") }}:</strong>
+		{{ _("You have {0} course(s) pending feedback").format(pending_feedback|length) }}
+	</div>
+	{% endif %}
+
+	<!-- Tabs -->
+	<ul class="nav nav-tabs mb-4" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#pending">
+				{{ _("Pending Feedback") }}
+				{% if pending_feedback %}
+					<span class="badge badge-warning">{{ pending_feedback|length }}</span>
+				{% endif %}
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#all-courses">
+				{{ _("All Courses") }}
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#submitted">
+				{{ _("Submitted Feedback") }}
+			</a>
+		</li>
+	</ul>
+
+	<!-- Tab Content -->
+	<div class="tab-content">
+		<!-- Pending Feedback Tab -->
+		<div id="pending" class="tab-pane fade show active">
+			{% if pending_feedback %}
+				<div class="row">
+					{% for course in pending_feedback %}
+					<div class="col-md-6 mb-4">
+						<div class="card">
+							<div class="card-header bg-warning text-white">
+								<h6 class="mb-0">{{ course.course_name }}</h6>
+							</div>
+							<div class="card-body">
+								<p class="mb-2">
+									<strong>{{ _("Instructor") }}:</strong> {{ course.instructor_name }}
+								</p>
+								<p class="mb-2">
+									<strong>{{ _("Program") }}:</strong> {{ course.program }}
+								</p>
+								<p class="mb-3">
+									<strong>{{ _("Term") }}:</strong> {{ course.academic_term }}, {{ course.academic_year }}
+								</p>
+								<button
+									class="btn btn-primary btn-sm btn-submit-feedback"
+									data-course="{{ course.course }}"
+									data-course-name="{{ course.course_name }}"
+									data-instructor="{{ course.instructor }}"
+									data-instructor-name="{{ course.instructor_name }}"
+								>
+									{{ _("Submit Feedback") }}
+								</button>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="alert alert-success">
+					<i class="fa fa-check-circle"></i>
+					{{ _("Great! You have submitted feedback for all your courses.") }}
+				</div>
+			{% endif %}
+		</div>
+
+		<!-- All Courses Tab -->
+		<div id="all-courses" class="tab-pane fade">
+			{% if enrolled_courses %}
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>{{ _("Course") }}</th>
+								<th>{{ _("Instructor") }}</th>
+								<th>{{ _("Program") }}</th>
+								<th>{{ _("Term") }}</th>
+								<th>{{ _("Status") }}</th>
+								<th>{{ _("Action") }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for course in enrolled_courses %}
+							<tr>
+								<td>{{ course.course_name }}</td>
+								<td>{{ course.instructor_name }}</td>
+								<td>{{ course.program }}</td>
+								<td>{{ course.academic_term }}</td>
+								<td>
+									{% set feedback_exists = submitted_feedbacks|selectattr("course", "equalto", course.course)|selectattr("faculty", "equalto", course.instructor)|list|length > 0 %}
+									{% if feedback_exists %}
+										<span class="badge badge-success">{{ _("Submitted") }}</span>
+									{% else %}
+										<span class="badge badge-warning">{{ _("Pending") }}</span>
+									{% endif %}
+								</td>
+								<td>
+									{% set feedback_exists = submitted_feedbacks|selectattr("course", "equalto", course.course)|selectattr("faculty", "equalto", course.instructor)|list|length > 0 %}
+									{% if not feedback_exists %}
+										<button
+											class="btn btn-xs btn-primary btn-submit-feedback"
+											data-course="{{ course.course }}"
+											data-course-name="{{ course.course_name }}"
+											data-instructor="{{ course.instructor }}"
+											data-instructor-name="{{ course.instructor_name }}"
+										>
+											{{ _("Submit") }}
+										</button>
+									{% else %}
+										<span class="text-muted">-</span>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% else %}
+				<p class="text-muted">{{ _("No enrolled courses found") }}</p>
+			{% endif %}
+		</div>
+
+		<!-- Submitted Feedback Tab -->
+		<div id="submitted" class="tab-pane fade">
+			{% if submitted_feedbacks %}
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>{{ _("Course") }}</th>
+								<th>{{ _("Faculty") }}</th>
+								<th>{{ _("Overall Rating") }}</th>
+								<th>{{ _("Submitted On") }}</th>
+								<th>{{ _("Status") }}</th>
+								<th>{{ _("Actions") }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for feedback in submitted_feedbacks %}
+							<tr>
+								<td>{{ feedback.course_name }}</td>
+								<td>{{ feedback.faculty_name }}</td>
+								<td>
+									<strong class="text-{{ 'success' if feedback.overall_rating >= 4 else 'warning' if feedback.overall_rating >= 3 else 'danger' }}">
+										{{ feedback.overall_rating }}/5
+									</strong>
+								</td>
+								<td>{{ feedback.creation.strftime("%d-%m-%Y") }}</td>
+								<td>
+									<span class="badge badge-{{ 'success' if feedback.docstatus == 1 else 'warning' }}">
+										{{ _("Submitted") if feedback.docstatus == 1 else _("Draft") }}
+									</span>
+								</td>
+								<td>
+									<a href="/app/student-feedback/{{ feedback.name }}" class="btn btn-xs btn-secondary">
+										{{ _("View") }}
+									</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% else %}
+				<p class="text-muted">{{ _("No feedback submitted yet") }}</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{ _("Submit Feedback") }}</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="feedback-form">
+					<input type="hidden" id="student" value="{{ student.name }}">
+					<input type="hidden" id="student-name" value="{{ student.student_name }}">
+					<input type="hidden" id="course">
+					<input type="hidden" id="course-name">
+					<input type="hidden" id="faculty">
+					<input type="hidden" id="faculty-name">
+
+					<div class="form-group">
+						<label>{{ _("Course") }}</label>
+						<input type="text" class="form-control" id="display-course" readonly>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Faculty") }}</label>
+						<input type="text" class="form-control" id="display-faculty" readonly>
+					</div>
+
+					<hr>
+
+					<div class="form-group">
+						<label>{{ _("Teaching Effectiveness") }} <span class="text-danger">*</span></label>
+						<select class="form-control" id="teaching-effectiveness" required>
+							<option value="">{{ _("Select Rating") }}</option>
+							<option value="5">5 - {{ _("Excellent") }}</option>
+							<option value="4">4 - {{ _("Very Good") }}</option>
+							<option value="3">3 - {{ _("Good") }}</option>
+							<option value="2">2 - {{ _("Fair") }}</option>
+							<option value="1">1 - {{ _("Poor") }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Subject Knowledge") }} <span class="text-danger">*</span></label>
+						<select class="form-control" id="subject-knowledge" required>
+							<option value="">{{ _("Select Rating") }}</option>
+							<option value="5">5 - {{ _("Excellent") }}</option>
+							<option value="4">4 - {{ _("Very Good") }}</option>
+							<option value="3">3 - {{ _("Good") }}</option>
+							<option value="2">2 - {{ _("Fair") }}</option>
+							<option value="1">1 - {{ _("Poor") }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Communication Skills") }} <span class="text-danger">*</span></label>
+						<select class="form-control" id="communication-skills" required>
+							<option value="">{{ _("Select Rating") }}</option>
+							<option value="5">5 - {{ _("Excellent") }}</option>
+							<option value="4">4 - {{ _("Very Good") }}</option>
+							<option value="3">3 - {{ _("Good") }}</option>
+							<option value="2">2 - {{ _("Fair") }}</option>
+							<option value="1">1 - {{ _("Poor") }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Course Content Delivery") }} <span class="text-danger">*</span></label>
+						<select class="form-control" id="course-delivery" required>
+							<option value="">{{ _("Select Rating") }}</option>
+							<option value="5">5 - {{ _("Excellent") }}</option>
+							<option value="4">4 - {{ _("Very Good") }}</option>
+							<option value="3">3 - {{ _("Good") }}</option>
+							<option value="2">2 - {{ _("Fair") }}</option>
+							<option value="1">1 - {{ _("Poor") }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Overall Rating") }} <span class="text-danger">*</span></label>
+						<select class="form-control" id="overall-rating" required>
+							<option value="">{{ _("Select Rating") }}</option>
+							<option value="5">5 - {{ _("Excellent") }}</option>
+							<option value="4">4 - {{ _("Very Good") }}</option>
+							<option value="3">3 - {{ _("Good") }}</option>
+							<option value="2">2 - {{ _("Fair") }}</option>
+							<option value="1">1 - {{ _("Poor") }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Comments") }}</label>
+						<textarea class="form-control" id="comments" rows="4" placeholder="{{ _('Optional: Share your detailed feedback...') }}"></textarea>
+					</div>
+
+					<div class="form-group">
+						<label>{{ _("Suggestions for Improvement") }}</label>
+						<textarea class="form-control" id="suggestions" rows="3" placeholder="{{ _('Optional: How can the teaching be improved?') }}"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _("Cancel") }}</button>
+				<button type="button" class="btn btn-primary" id="submit-feedback-btn">{{ _("Submit Feedback") }}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.student-feedback-container {
+		padding: 2rem;
+	}
+
+	.portal-header {
+		padding-bottom: 1.5rem;
+		border-bottom: 2px solid #e9ecef;
+	}
+
+	.card {
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		border: none;
+	}
+
+	.nav-tabs .nav-link {
+		color: #495057;
+	}
+
+	.nav-tabs .nav-link.active {
+		color: #007bff;
+		font-weight: 600;
+	}
+
+	.badge {
+		font-size: 0.75rem;
+		padding: 0.25rem 0.5rem;
+	}
+
+	.table thead th {
+		background-color: #f8f9fa;
+		font-weight: 600;
+		font-size: 0.875rem;
+	}
+</style>
+
+<script>
+	$(document).ready(function() {
+		// Handle submit feedback button click
+		$('.btn-submit-feedback').on('click', function() {
+			const course = $(this).data('course');
+			const courseName = $(this).data('course-name');
+			const instructor = $(this).data('instructor');
+			const instructorName = $(this).data('instructor-name');
+
+			$('#course').val(course);
+			$('#course-name').val(courseName);
+			$('#faculty').val(instructor);
+			$('#faculty-name').val(instructorName);
+			$('#display-course').val(courseName);
+			$('#display-faculty').val(instructorName);
+
+			// Reset form
+			$('#feedback-form')[0].reset();
+			$('#display-course').val(courseName);
+			$('#display-faculty').val(instructorName);
+
+			$('#feedbackModal').modal('show');
+		});
+
+		// Handle feedback submission
+		$('#submit-feedback-btn').on('click', function() {
+			// Validate form
+			if (!$('#teaching-effectiveness').val() || !$('#subject-knowledge').val() ||
+				!$('#communication-skills').val() || !$('#course-delivery').val() ||
+				!$('#overall-rating').val()) {
+				frappe.msgprint({
+					title: __('Missing Information'),
+					indicator: 'red',
+					message: __('Please fill all required fields')
+				});
+				return;
+			}
+
+			// Prepare feedback data
+			const feedbackData = {
+				doctype: 'Student Feedback',
+				student: $('#student').val(),
+				student_name: $('#student-name').val(),
+				course: $('#course').val(),
+				course_name: $('#course-name').val(),
+				faculty: $('#faculty').val(),
+				faculty_name: $('#faculty-name').val(),
+				teaching_effectiveness: parseInt($('#teaching-effectiveness').val()),
+				subject_knowledge: parseInt($('#subject-knowledge').val()),
+				communication_skills: parseInt($('#communication-skills').val()),
+				course_content_delivery: parseInt($('#course-delivery').val()),
+				overall_rating: parseInt($('#overall-rating').val()),
+				comments: $('#comments').val(),
+				suggestions: $('#suggestions').val()
+			};
+
+			// Submit feedback
+			frappe.call({
+				method: 'frappe.client.insert',
+				args: {
+					doc: feedbackData
+				},
+				freeze: true,
+				freeze_message: __('Submitting feedback...'),
+				callback: function(r) {
+					if (r.message) {
+						// Submit the document
+						frappe.call({
+							method: 'frappe.client.submit',
+							args: {
+								doc: r.message
+							},
+							callback: function() {
+								frappe.msgprint({
+									title: __('Success'),
+									indicator: 'green',
+									message: __('Feedback submitted successfully')
+								});
+								$('#feedbackModal').modal('hide');
+								setTimeout(function() {
+									window.location.reload();
+								}, 1500);
+							}
+						});
+					}
+				},
+				error: function(r) {
+					frappe.msgprint({
+						title: __('Error'),
+						indicator: 'red',
+						message: __('Failed to submit feedback. Please try again.')
+					});
+				}
+			});
+		});
+	});
+</script>
+{% endblock %}

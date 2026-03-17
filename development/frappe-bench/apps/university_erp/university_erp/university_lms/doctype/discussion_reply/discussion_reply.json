@@ -1,0 +1,89 @@
+{
+    "actions": [],
+    "creation": "2026-01-02 00:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "reply_by_type",
+        "student",
+        "instructor",
+        "reply_date",
+        "column_break_1",
+        "is_answer",
+        "upvotes",
+        "section_content",
+        "reply_content"
+    ],
+    "fields": [
+        {
+            "default": "Student",
+            "fieldname": "reply_by_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Reply By",
+            "options": "Student\nInstructor"
+        },
+        {
+            "depends_on": "eval:doc.reply_by_type=='Student'",
+            "fieldname": "student",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Student",
+            "options": "Student"
+        },
+        {
+            "depends_on": "eval:doc.reply_by_type=='Instructor'",
+            "fieldname": "instructor",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Instructor",
+            "options": "Employee"
+        },
+        {
+            "default": "Now",
+            "fieldname": "reply_date",
+            "fieldtype": "Datetime",
+            "in_list_view": 1,
+            "label": "Reply Date"
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "is_answer",
+            "fieldtype": "Check",
+            "label": "Marked as Answer"
+        },
+        {
+            "default": "0",
+            "fieldname": "upvotes",
+            "fieldtype": "Int",
+            "label": "Upvotes"
+        },
+        {
+            "fieldname": "section_content",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "reply_content",
+            "fieldtype": "Text Editor",
+            "in_list_view": 1,
+            "label": "Reply",
+            "reqd": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-02 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University LMS",
+    "name": "Discussion Reply",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "reply_date",
+    "sort_order": "ASC",
+    "states": []
+}

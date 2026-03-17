@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include university_erp/modules.txt
+include university_erp/patches.txt
+recursive-include university_erp *.py
+recursive-include university_erp *.js
+recursive-include university_erp *.json
+recursive-include university_erp *.html
+recursive-include university_erp *.css
+recursive-include university_erp *.md
+recursive-include university_erp *.txt

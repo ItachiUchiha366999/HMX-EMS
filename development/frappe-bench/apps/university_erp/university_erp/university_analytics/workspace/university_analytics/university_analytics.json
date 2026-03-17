@@ -1,0 +1,182 @@
+{
+  "charts": [
+    {
+      "chart_name": "Student Enrollment Trend",
+      "chart_type": "Line"
+    },
+    {
+      "chart_name": "Fee Collection Overview",
+      "chart_type": "Bar"
+    }
+  ],
+  "content": "[{\"id\": \"shortcuts_section\", \"type\": \"header\", \"data\": {\"text\": \"Quick Access\", \"level\": 3, \"col\": 12}}, {\"id\": \"shortcut_dashboard\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Custom Dashboard\", \"col\": 3}}, {\"id\": \"shortcut_kpi\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"KPI Definition\", \"col\": 3}}, {\"id\": \"shortcut_scheduled\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Scheduled Report\", \"col\": 3}}, {\"id\": \"shortcut_custom_report\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Custom Report Definition\", \"col\": 3}}, {\"id\": \"dashboards_section\", \"type\": \"header\", \"data\": {\"text\": \"Dashboards\", \"level\": 4, \"col\": 12}}, {\"id\": \"dashboard_links\", \"type\": \"card\", \"data\": {\"card_name\": \"Dashboard Management\", \"col\": 4}}, {\"id\": \"kpi_section\", \"type\": \"header\", \"data\": {\"text\": \"KPI Management\", \"level\": 4, \"col\": 12}}, {\"id\": \"kpi_links\", \"type\": \"card\", \"data\": {\"card_name\": \"KPI Tracking\", \"col\": 4}}, {\"id\": \"reports_section\", \"type\": \"header\", \"data\": {\"text\": \"Reports\", \"level\": 4, \"col\": 12}}, {\"id\": \"report_links\", \"type\": \"card\", \"data\": {\"card_name\": \"Reporting Tools\", \"col\": 4}}, {\"id\": \"analytics_links\", \"type\": \"card\", \"data\": {\"card_name\": \"Analytics Reports\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+  "creation": "2026-01-15 10:00:00.000000",
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "chart-line",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University Analytics",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Custom Dashboard",
+      "link_count": 0,
+      "link_to": "Custom Dashboard",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "KPI Definition",
+      "link_count": 0,
+      "link_to": "KPI Definition",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "KPI Value",
+      "link_count": 0,
+      "link_to": "KPI Value",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Scheduled Report",
+      "link_count": 0,
+      "link_to": "Scheduled Report",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Custom Report Definition",
+      "link_count": 0,
+      "link_to": "Custom Report Definition",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Student Performance Analysis",
+      "link_count": 0,
+      "link_to": "Student Performance Analysis",
+      "link_type": "Report",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Grievance Summary",
+      "link_count": 0,
+      "link_to": "Grievance Summary",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Faculty Feedback Report",
+      "link_count": 0,
+      "link_to": "Faculty Feedback Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Feedback Analysis",
+      "link_count": 0,
+      "link_to": "Feedback Analysis",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "SLA Compliance Report",
+      "link_count": 0,
+      "link_to": "SLA Compliance Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "type": "Card Break",
+      "label": "Reports"
+    },
+    {
+      "type": "Link",
+      "link_to": "Communication Analytics",
+      "link_type": "Report",
+      "label": "Communication Analytics",
+      "is_query_report": 1
+    }
+  ],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "University Analytics",
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "Academic Admin"
+    }
+  ],
+  "sequence_id": 19,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Custom Dashboard",
+      "link_to": "Custom Dashboard",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "KPI Definition",
+      "link_to": "KPI Definition",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Scheduled Report",
+      "link_to": "Scheduled Report",
+      "type": "DocType"
+    },
+    {
+      "color": "Purple",
+      "doc_view": "",
+      "label": "Student Performance",
+      "link_to": "Student Performance Analysis",
+      "type": "Report"
+    }
+  ],
+  "title": "University Analytics"
+}

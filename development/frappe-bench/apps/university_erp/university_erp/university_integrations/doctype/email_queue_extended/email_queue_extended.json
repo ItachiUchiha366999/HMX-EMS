@@ -1,0 +1,287 @@
+{
+  "actions": [],
+  "autoname": "format:EQ-{######}",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "recipient_section",
+    "recipient",
+    "recipient_name",
+    "column_break_recipient",
+    "cc",
+    "bcc",
+    "email_section",
+    "subject",
+    "template_name",
+    "column_break_email",
+    "priority",
+    "category",
+    "content_section",
+    "message",
+    "attachments",
+    "scheduling_section",
+    "scheduled_time",
+    "retry_count",
+    "column_break_scheduling",
+    "max_retries",
+    "retry_after",
+    "status_section",
+    "status",
+    "sent_at",
+    "column_break_status",
+    "error_message",
+    "email_queue_reference",
+    "tracking_section",
+    "opened",
+    "opened_at",
+    "column_break_tracking",
+    "clicked",
+    "clicked_at",
+    "bounced",
+    "bounce_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "recipient_section",
+      "fieldtype": "Section Break",
+      "label": "Recipient"
+    },
+    {
+      "fieldname": "recipient",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Recipient Email",
+      "options": "Email",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recipient_name",
+      "fieldtype": "Data",
+      "label": "Recipient Name"
+    },
+    {
+      "fieldname": "column_break_recipient",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cc",
+      "fieldtype": "Small Text",
+      "label": "CC"
+    },
+    {
+      "fieldname": "bcc",
+      "fieldtype": "Small Text",
+      "label": "BCC"
+    },
+    {
+      "fieldname": "email_section",
+      "fieldtype": "Section Break",
+      "label": "Email Details"
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Subject",
+      "reqd": 1
+    },
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Link",
+      "label": "Template",
+      "options": "Notification Template"
+    },
+    {
+      "fieldname": "column_break_email",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Normal",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Priority",
+      "options": "Low\nNormal\nHigh\nUrgent"
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "\nFee\nAcademic\nLibrary\nPlacement\nHostel\nEmergency\nGeneral"
+    },
+    {
+      "fieldname": "content_section",
+      "fieldtype": "Section Break",
+      "label": "Content"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Text Editor",
+      "label": "Message"
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Small Text",
+      "label": "Attachments (JSON)"
+    },
+    {
+      "fieldname": "scheduling_section",
+      "fieldtype": "Section Break",
+      "label": "Scheduling"
+    },
+    {
+      "fieldname": "scheduled_time",
+      "fieldtype": "Datetime",
+      "label": "Scheduled Time"
+    },
+    {
+      "default": "0",
+      "fieldname": "retry_count",
+      "fieldtype": "Int",
+      "label": "Retry Count",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_scheduling",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "3",
+      "fieldname": "max_retries",
+      "fieldtype": "Int",
+      "label": "Max Retries"
+    },
+    {
+      "default": "10",
+      "description": "Minutes to wait before retry",
+      "fieldname": "retry_after",
+      "fieldtype": "Int",
+      "label": "Retry After (minutes)"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Queued",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Queued\nScheduled\nProcessing\nSent\nFailed\nBounced\nCancelled"
+    },
+    {
+      "fieldname": "sent_at",
+      "fieldtype": "Datetime",
+      "label": "Sent At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message",
+      "read_only": 1
+    },
+    {
+      "fieldname": "email_queue_reference",
+      "fieldtype": "Link",
+      "label": "Email Queue Reference",
+      "options": "Email Queue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_section",
+      "fieldtype": "Section Break",
+      "label": "Tracking"
+    },
+    {
+      "default": "0",
+      "fieldname": "opened",
+      "fieldtype": "Check",
+      "label": "Opened",
+      "read_only": 1
+    },
+    {
+      "fieldname": "opened_at",
+      "fieldtype": "Datetime",
+      "label": "Opened At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_tracking",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "clicked",
+      "fieldtype": "Check",
+      "label": "Link Clicked",
+      "read_only": 1
+    },
+    {
+      "fieldname": "clicked_at",
+      "fieldtype": "Datetime",
+      "label": "Clicked At",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "bounced",
+      "fieldtype": "Check",
+      "label": "Bounced",
+      "read_only": 1
+    },
+    {
+      "fieldname": "bounce_reason",
+      "fieldtype": "Small Text",
+      "label": "Bounce Reason",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Email Queue Extended",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

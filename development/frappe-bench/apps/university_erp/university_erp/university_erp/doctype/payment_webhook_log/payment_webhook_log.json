@@ -1,0 +1,159 @@
+{
+  "actions": [],
+  "autoname": "format:PWL-{####}",
+  "creation": "2026-01-01 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "gateway",
+    "event_type",
+    "payment_id",
+    "column_break_1",
+    "status",
+    "creation_time",
+    "section_break_reference",
+    "reference_doctype",
+    "reference_name",
+    "column_break_ref",
+    "amount",
+    "currency",
+    "section_break_payload",
+    "payload",
+    "section_break_error",
+    "error_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "gateway",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Gateway",
+      "options": "Razorpay\nPayU\nPaytm\nStripe\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Event Type"
+    },
+    {
+      "fieldname": "payment_id",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Payment ID"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Received\nProcessed\nFailed\nError\nIgnored"
+    },
+    {
+      "default": "Now",
+      "fieldname": "creation_time",
+      "fieldtype": "Datetime",
+      "label": "Creation Time",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_reference",
+      "fieldtype": "Section Break",
+      "label": "Reference"
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Reference DocType",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Name",
+      "options": "reference_doctype"
+    },
+    {
+      "fieldname": "column_break_ref",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount"
+    },
+    {
+      "default": "INR",
+      "fieldname": "currency",
+      "fieldtype": "Link",
+      "label": "Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "section_break_payload",
+      "fieldtype": "Section Break",
+      "label": "Payload"
+    },
+    {
+      "fieldname": "payload",
+      "fieldtype": "Code",
+      "label": "Payload",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "section_break_error",
+      "fieldtype": "Section Break",
+      "label": "Error Details"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Payment Webhook Log",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

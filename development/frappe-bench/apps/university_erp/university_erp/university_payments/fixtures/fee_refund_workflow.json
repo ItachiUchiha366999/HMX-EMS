@@ -1,0 +1,172 @@
+[
+    {
+        "doctype": "Workflow",
+        "name": "Fee Refund Approval Workflow",
+        "document_type": "Fee Refund",
+        "is_active": 1,
+        "override_status": 1,
+        "send_email_alert": 1,
+        "workflow_state_field": "workflow_state",
+        "states": [
+            {
+                "state": "Pending",
+                "doc_status": "0",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts User",
+                "update_field": "status",
+                "update_value": "Pending"
+            },
+            {
+                "state": "Pending Approval",
+                "doc_status": "0",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts Manager",
+                "update_field": "status",
+                "update_value": "Pending"
+            },
+            {
+                "state": "Approved",
+                "doc_status": "0",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts Manager",
+                "update_field": "status",
+                "update_value": "Approved"
+            },
+            {
+                "state": "Rejected",
+                "doc_status": "0",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts Manager",
+                "update_field": "status",
+                "update_value": "Rejected"
+            },
+            {
+                "state": "Processed",
+                "doc_status": "1",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts Manager",
+                "update_field": "status",
+                "update_value": "Processed"
+            },
+            {
+                "state": "Cancelled",
+                "doc_status": "2",
+                "is_optional_state": 0,
+                "allow_edit": "Accounts Manager",
+                "update_field": "status",
+                "update_value": "Cancelled"
+            }
+        ],
+        "transitions": [
+            {
+                "state": "Pending",
+                "action": "Submit for Approval",
+                "next_state": "Pending Approval",
+                "allowed": "Accounts User",
+                "allow_self_approval": 1,
+                "condition": "doc.refund_amount > 0"
+            },
+            {
+                "state": "Pending Approval",
+                "action": "Approve",
+                "next_state": "Approved",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 0
+            },
+            {
+                "state": "Pending Approval",
+                "action": "Reject",
+                "next_state": "Rejected",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 1
+            },
+            {
+                "state": "Pending Approval",
+                "action": "Return to Draft",
+                "next_state": "Pending",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 1
+            },
+            {
+                "state": "Approved",
+                "action": "Process Refund",
+                "next_state": "Processed",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 1,
+                "condition": "doc.refund_mode"
+            },
+            {
+                "state": "Approved",
+                "action": "Cancel",
+                "next_state": "Cancelled",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 1
+            },
+            {
+                "state": "Rejected",
+                "action": "Reconsider",
+                "next_state": "Pending Approval",
+                "allowed": "Accounts Manager",
+                "allow_self_approval": 1
+            }
+        ]
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Submit for Approval"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Approve"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Reject"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Return to Draft"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Process Refund"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Cancel"
+    },
+    {
+        "doctype": "Workflow Action Master",
+        "name": "Reconsider"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Pending",
+        "style": "Warning"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Pending Approval",
+        "style": "Warning"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Approved",
+        "style": "Primary"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Rejected",
+        "style": "Danger"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Processed",
+        "style": "Success"
+    },
+    {
+        "doctype": "Workflow State",
+        "name": "Cancelled",
+        "style": ""
+    }
+]

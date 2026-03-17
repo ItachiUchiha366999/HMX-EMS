@@ -1,0 +1,376 @@
+{
+  "doctype": "DocType",
+  "name": "Online Examination",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "OE-.YYYY.-.#####",
+  "is_submittable": 1,
+  "fields": [
+    {
+      "fieldname": "exam_title",
+      "fieldtype": "Data",
+      "label": "Examination Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "exam_type",
+      "fieldtype": "Select",
+      "label": "Exam Type",
+      "options": "\nMidterm\nEnd Semester\nQuiz\nClass Test\nPractice Test\nMock Test",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "question_paper",
+      "fieldtype": "Link",
+      "label": "Question Paper",
+      "options": "Generated Question Paper",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "fetch_from": "question_paper.course",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "student_group",
+      "fieldtype": "Link",
+      "label": "Student Group",
+      "options": "Student Group"
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "section_break_schedule",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "start_datetime",
+      "fieldtype": "Datetime",
+      "label": "Start Date & Time",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "end_datetime",
+      "fieldtype": "Datetime",
+      "label": "End Date & Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration (Minutes)",
+      "reqd": 1,
+      "fetch_from": "question_paper.duration_minutes"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "late_submission_minutes",
+      "fieldtype": "Int",
+      "label": "Grace Period (Minutes)",
+      "default": "0",
+      "description": "Extra time allowed after duration ends"
+    },
+    {
+      "fieldname": "auto_submit",
+      "fieldtype": "Check",
+      "label": "Auto Submit on Time Expiry",
+      "default": "1"
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Exam Settings"
+    },
+    {
+      "fieldname": "shuffle_questions",
+      "fieldtype": "Check",
+      "label": "Shuffle Questions for Each Student"
+    },
+    {
+      "fieldname": "shuffle_options",
+      "fieldtype": "Check",
+      "label": "Shuffle Options"
+    },
+    {
+      "fieldname": "one_question_per_page",
+      "fieldtype": "Check",
+      "label": "One Question Per Page"
+    },
+    {
+      "fieldname": "allow_back_navigation",
+      "fieldtype": "Check",
+      "label": "Allow Back Navigation",
+      "default": "1"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "show_timer",
+      "fieldtype": "Check",
+      "label": "Show Timer",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_question_palette",
+      "fieldtype": "Check",
+      "label": "Show Question Palette",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_review_marking",
+      "fieldtype": "Check",
+      "label": "Allow Mark for Review",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_calculator",
+      "fieldtype": "Check",
+      "label": "Show Calculator"
+    },
+    {
+      "fieldname": "section_break_proctoring",
+      "fieldtype": "Section Break",
+      "label": "Proctoring Settings",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "enable_proctoring",
+      "fieldtype": "Check",
+      "label": "Enable Proctoring"
+    },
+    {
+      "fieldname": "webcam_required",
+      "fieldtype": "Check",
+      "label": "Webcam Required",
+      "depends_on": "enable_proctoring"
+    },
+    {
+      "fieldname": "capture_snapshots",
+      "fieldtype": "Check",
+      "label": "Capture Random Snapshots",
+      "depends_on": "enable_proctoring"
+    },
+    {
+      "fieldname": "snapshot_interval_seconds",
+      "fieldtype": "Int",
+      "label": "Snapshot Interval (Seconds)",
+      "depends_on": "capture_snapshots",
+      "default": "60"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "full_screen_mode",
+      "fieldtype": "Check",
+      "label": "Force Full Screen Mode"
+    },
+    {
+      "fieldname": "disable_copy_paste",
+      "fieldtype": "Check",
+      "label": "Disable Copy/Paste",
+      "default": "1"
+    },
+    {
+      "fieldname": "disable_right_click",
+      "fieldtype": "Check",
+      "label": "Disable Right Click",
+      "default": "1"
+    },
+    {
+      "fieldname": "tab_switch_warning",
+      "fieldtype": "Check",
+      "label": "Warn on Tab Switch",
+      "default": "1"
+    },
+    {
+      "fieldname": "max_tab_switches",
+      "fieldtype": "Int",
+      "label": "Max Tab Switches Allowed",
+      "default": "3"
+    },
+    {
+      "fieldname": "section_break_access",
+      "fieldtype": "Section Break",
+      "label": "Access Control",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "requires_password",
+      "fieldtype": "Check",
+      "label": "Requires Password"
+    },
+    {
+      "fieldname": "exam_password",
+      "fieldtype": "Password",
+      "label": "Exam Password",
+      "depends_on": "requires_password"
+    },
+    {
+      "fieldname": "ip_restriction",
+      "fieldtype": "Check",
+      "label": "Restrict by IP"
+    },
+    {
+      "fieldname": "allowed_ip_ranges",
+      "fieldtype": "Small Text",
+      "label": "Allowed IP Ranges",
+      "depends_on": "ip_restriction",
+      "description": "One IP or range per line (e.g., 192.168.1.0/24)"
+    },
+    {
+      "fieldname": "column_break_5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "max_attempts",
+      "fieldtype": "Int",
+      "label": "Maximum Attempts",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_result_immediately",
+      "fieldtype": "Check",
+      "label": "Show Result Immediately"
+    },
+    {
+      "fieldname": "show_correct_answers",
+      "fieldtype": "Check",
+      "label": "Show Correct Answers After Submit"
+    },
+    {
+      "fieldname": "section_break_eligible",
+      "fieldtype": "Section Break",
+      "label": "Eligible Students"
+    },
+    {
+      "fieldname": "eligible_students",
+      "fieldtype": "Table",
+      "label": "Eligible Students",
+      "options": "Online Exam Student"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nScheduled\nLive\nCompleted\nCancelled",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "total_registered",
+      "fieldtype": "Int",
+      "label": "Total Registered",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_appeared",
+      "fieldtype": "Int",
+      "label": "Total Appeared",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_submitted",
+      "fieldtype": "Int",
+      "label": "Total Submitted",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "start_datetime",
+  "sort_order": "DESC",
+  "title_field": "exam_title",
+  "search_fields": "exam_title,course,exam_type",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

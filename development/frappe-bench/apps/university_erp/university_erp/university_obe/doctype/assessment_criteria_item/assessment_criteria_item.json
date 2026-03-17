@@ -1,0 +1,55 @@
+{
+  "doctype": "DocType",
+  "name": "Assessment Criteria Item",
+  "module": "University OBE",
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "criteria_name",
+      "fieldtype": "Data",
+      "label": "Criteria Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "max_marks",
+      "fieldtype": "Float",
+      "label": "Maximum Marks",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "weightage",
+      "fieldtype": "Percent",
+      "label": "Weightage",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rubric",
+      "fieldtype": "Link",
+      "label": "Rubric",
+      "options": "Assessment Rubric"
+    },
+    {
+      "fieldname": "evaluation_type",
+      "fieldtype": "Select",
+      "label": "Evaluation Type",
+      "options": "\nNumeric\nGrade\nPass/Fail\nRubric Based",
+      "default": "Numeric"
+    },
+    {
+      "fieldname": "co_mapping",
+      "fieldtype": "Link",
+      "label": "Course Outcome",
+      "options": "Course Outcome"
+    }
+  ],
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

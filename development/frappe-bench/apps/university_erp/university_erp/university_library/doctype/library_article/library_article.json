@@ -1,0 +1,275 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "title",
+    "isbn",
+    "author",
+    "publisher",
+    "column_break_1",
+    "category",
+    "subject",
+    "edition",
+    "year_of_publication",
+    "status",
+    "details_section",
+    "total_copies",
+    "available_copies",
+    "issued_copies",
+    "reserved_copies",
+    "column_break_details",
+    "price",
+    "accession_number",
+    "shelf_location",
+    "barcode",
+    "description_section",
+    "description",
+    "keywords",
+    "image"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "LIB-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "isbn",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "ISBN"
+    },
+    {
+      "fieldname": "author",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Author",
+      "reqd": 1
+    },
+    {
+      "fieldname": "publisher",
+      "fieldtype": "Data",
+      "label": "Publisher"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Category",
+      "options": "Library Category",
+      "reqd": 1
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Subject",
+      "options": "Library Subject"
+    },
+    {
+      "fieldname": "edition",
+      "fieldtype": "Data",
+      "label": "Edition"
+    },
+    {
+      "fieldname": "year_of_publication",
+      "fieldtype": "Int",
+      "label": "Year of Publication"
+    },
+    {
+      "default": "Available",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Available\nPartially Available\nAll Issued\nReserved\nLost\nWritten Off"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Availability"
+    },
+    {
+      "default": "1",
+      "fieldname": "total_copies",
+      "fieldtype": "Int",
+      "label": "Total Copies",
+      "reqd": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "available_copies",
+      "fieldtype": "Int",
+      "label": "Available Copies",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "issued_copies",
+      "fieldtype": "Int",
+      "label": "Issued Copies",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "reserved_copies",
+      "fieldtype": "Int",
+      "label": "Reserved Copies",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_details",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "price",
+      "fieldtype": "Currency",
+      "label": "Price"
+    },
+    {
+      "fieldname": "accession_number",
+      "fieldtype": "Data",
+      "label": "Accession Number"
+    },
+    {
+      "fieldname": "shelf_location",
+      "fieldtype": "Data",
+      "label": "Shelf Location"
+    },
+    {
+      "fieldname": "barcode",
+      "fieldtype": "Data",
+      "label": "Barcode"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "description_section",
+      "fieldtype": "Section Break",
+      "label": "Description"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "keywords",
+      "fieldtype": "Small Text",
+      "label": "Keywords (for search)"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Cover Image"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Library Transaction",
+      "link_fieldname": "article"
+    },
+    {
+      "link_doctype": "Book Reservation",
+      "link_fieldname": "article"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Library",
+  "name": "Library Article",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Librarian",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "title, author, isbn, category",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "title",
+  "track_changes": 1
+}

@@ -1,0 +1,36 @@
+{
+  "doctype": "DocType",
+  "name": "Unit Distribution Rule",
+  "module": "University OBE",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "label": "Unit",
+      "options": "Topic",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "percentage",
+      "fieldtype": "Percent",
+      "label": "Percentage",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "min_questions",
+      "fieldtype": "Int",
+      "label": "Min Questions",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "max_questions",
+      "fieldtype": "Int",
+      "label": "Max Questions",
+      "in_list_view": 1
+    }
+  ],
+  "engine": "InnoDB"
+}

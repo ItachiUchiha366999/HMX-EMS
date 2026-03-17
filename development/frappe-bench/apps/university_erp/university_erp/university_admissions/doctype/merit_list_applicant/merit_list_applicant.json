@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "creation": "2025-12-31 14:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "applicant",
+  "applicant_name",
+  "merit_rank",
+  "merit_score",
+  "category",
+  "seat_allotted"
+ ],
+ "fields": [
+  {
+   "fieldname": "applicant",
+   "fieldtype": "Link",
+   "label": "Applicant",
+   "options": "Student Applicant",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "label": "Applicant Name",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "merit_rank",
+   "fieldtype": "Int",
+   "label": "Merit Rank",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "merit_score",
+   "fieldtype": "Float",
+   "label": "Merit Score",
+   "in_list_view": 1,
+   "precision": 2,
+   "read_only": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "General\\nOBC\\nSC\\nST\\nEWS\\nPWD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "seat_allotted",
+   "fieldtype": "Check",
+   "label": "Seat Allotted",
+   "default": "0"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-31 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "University Admissions",
+ "name": "Merit List Applicant",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "permissions": []
+}

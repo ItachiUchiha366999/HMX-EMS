@@ -1,0 +1,254 @@
+{
+  "doctype": "DocType",
+  "name": "Generated Question Paper",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "QP-.YYYY.-.#####",
+  "is_submittable": 1,
+  "fields": [
+    {
+      "fieldname": "paper_title",
+      "fieldtype": "Data",
+      "label": "Paper Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "examination",
+      "fieldtype": "Link",
+      "label": "Examination",
+      "options": "Exam Schedule",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "template",
+      "fieldtype": "Link",
+      "label": "Template Used",
+      "options": "Question Paper Template"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "label": "Academic Term",
+      "options": "Academic Term"
+    },
+    {
+      "fieldname": "section_break_details",
+      "fieldtype": "Section Break",
+      "label": "Paper Details"
+    },
+    {
+      "fieldname": "total_marks",
+      "fieldtype": "Int",
+      "label": "Total Marks",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration (Minutes)",
+      "reqd": 1
+    },
+    {
+      "fieldname": "exam_date",
+      "fieldtype": "Date",
+      "label": "Exam Date"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "set_code",
+      "fieldtype": "Data",
+      "label": "Set Code",
+      "description": "A, B, C, D for multiple sets",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nReady for Review\nApproved\nLocked\nUsed",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "total_questions",
+      "fieldtype": "Int",
+      "label": "Total Questions",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_questions",
+      "fieldtype": "Section Break",
+      "label": "Questions"
+    },
+    {
+      "fieldname": "paper_questions",
+      "fieldtype": "Table",
+      "label": "Paper Questions",
+      "options": "Question Paper Question Item"
+    },
+    {
+      "fieldname": "section_break_approval",
+      "fieldtype": "Section Break",
+      "label": "Approval"
+    },
+    {
+      "fieldname": "created_by",
+      "fieldtype": "Link",
+      "label": "Created By",
+      "options": "Instructor",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewed_by",
+      "fieldtype": "Link",
+      "label": "Reviewed By",
+      "options": "Instructor"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "review_date",
+      "fieldtype": "Datetime",
+      "label": "Review Date"
+    },
+    {
+      "fieldname": "approval_date",
+      "fieldtype": "Datetime",
+      "label": "Approval Date"
+    },
+    {
+      "fieldname": "review_comments",
+      "fieldtype": "Text",
+      "label": "Review Comments"
+    },
+    {
+      "fieldname": "section_break_print",
+      "fieldtype": "Section Break",
+      "label": "Print Settings",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "header_logo",
+      "fieldtype": "Attach Image",
+      "label": "Header Logo"
+    },
+    {
+      "fieldname": "university_name",
+      "fieldtype": "Data",
+      "label": "University Name"
+    },
+    {
+      "fieldname": "department_name",
+      "fieldtype": "Data",
+      "label": "Department Name"
+    },
+    {
+      "fieldname": "instructions",
+      "fieldtype": "Text Editor",
+      "label": "Instructions"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "paper_title",
+  "search_fields": "paper_title,course,exam_date,set_code",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

@@ -1,0 +1,439 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Online Examination") }}{% endblock %}
+
+{% block page_content %}
+<div class="container" id="exam-container">
+    <div v-if="!exam_started" class="exam-intro text-center py-5">
+        <h2>{{ _("Online Examination Portal") }}</h2>
+        <p class="lead text-muted">{{ _("Enter your examination details to begin") }}</p>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>{{ _("Examination") }}</label>
+                            <select class="form-control" v-model="selected_exam" @change="load_exam_details">
+                                <option value="">{{ _("Select Examination") }}</option>
+                                <option v-for="exam in available_exams" :value="exam.name">
+                                    [[ exam.examination_name ]]
+                                </option>
+                            </select>
+                        </div>
+
+                        <div v-if="exam_details" class="exam-details mt-4 text-left">
+                            <h5>[[ exam_details.examination_name ]]</h5>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td>{{ _("Course") }}</td>
+                                    <td><strong>[[ exam_details.course_name ]]</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ _("Duration") }}</td>
+                                    <td>[[ exam_details.duration_minutes ]] {{ _("minutes") }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ _("Total Questions") }}</td>
+                                    <td>[[ exam_details.total_questions ]]</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ _("Maximum Marks") }}</td>
+                                    <td>[[ exam_details.total_marks ]]</td>
+                                </tr>
+                            </table>
+
+                            <div v-if="exam_details.requires_password" class="form-group">
+                                <label>{{ _("Exam Password") }}</label>
+                                <input type="password" class="form-control" v-model="exam_password"
+                                       placeholder="{{ _('Enter exam password') }}">
+                            </div>
+
+                            <div class="alert alert-info">
+                                <strong>{{ _("Instructions:") }}</strong>
+                                <ul class="mb-0">
+                                    <li>{{ _("Ensure stable internet connection") }}</li>
+                                    <li>{{ _("Do not refresh or close the browser during exam") }}</li>
+                                    <li v-if="exam_details.enable_proctoring">{{ _("Webcam access is required") }}</li>
+                                    <li v-if="exam_details.full_screen_mode">{{ _("Full screen mode is mandatory") }}</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-block" @click="start_exam" :disabled="starting">
+                                <span v-if="starting">{{ _("Starting...") }}</span>
+                                <span v-else>{{ _("Start Examination") }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-else class="exam-interface">
+        <!-- Exam Header -->
+        <div class="exam-header bg-light p-3 mb-3 sticky-top">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <h5 class="mb-0">[[ exam_details.examination_name ]]</h5>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="timer" :class="{'text-danger': remaining_time < 300}">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="h4">[[ formatted_time ]]</span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-right">
+                    <span class="badge badge-info mr-2">
+                        {{ _("Attempted") }}: [[ attempted_count ]]/[[ questions.length ]]
+                    </span>
+                    <button class="btn btn-danger" @click="confirm_submit">
+                        {{ _("Submit Exam") }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Question Panel -->
+            <div class="col-md-9">
+                <div class="question-panel card">
+                    <div class="card-header">
+                        <span class="badge badge-primary">{{ _("Question") }} [[ current_index + 1 ]]</span>
+                        <span class="badge badge-secondary ml-2">[[ current_question.marks ]] {{ _("marks") }}</span>
+                        <span v-if="current_question.negative_marking" class="badge badge-warning ml-2">
+                            {{ _("Negative Marking") }}: -[[ current_question.negative_marks ]]
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-text" v-html="current_question.text"></div>
+
+                        <div v-if="current_question.image" class="question-image my-3">
+                            <img :src="current_question.image" class="img-fluid" alt="Question Image">
+                        </div>
+
+                        <!-- MCQ Options -->
+                        <div v-if="current_question.type === 'Multiple Choice (MCQ)'" class="options mt-4">
+                            <div v-for="option in current_question.options" :key="option.id"
+                                 class="option-item p-2 mb-2 border rounded"
+                                 :class="{'bg-primary text-white': answers[current_question.id] === option.id}"
+                                 @click="select_answer(option.id)">
+                                <strong>[[ option.id ]].</strong> [[ option.text ]]
+                            </div>
+                        </div>
+
+                        <!-- MSQ Options -->
+                        <div v-if="current_question.type === 'Multiple Select (MSQ)'" class="options mt-4">
+                            <div v-for="option in current_question.options" :key="option.id"
+                                 class="option-item p-2 mb-2 border rounded"
+                                 :class="{'bg-primary text-white': is_option_selected(option.id)}"
+                                 @click="toggle_option(option.id)">
+                                <input type="checkbox" :checked="is_option_selected(option.id)" class="mr-2">
+                                <strong>[[ option.id ]].</strong> [[ option.text ]]
+                            </div>
+                        </div>
+
+                        <!-- Text Answer -->
+                        <div v-if="['Short Answer', 'Long Answer'].includes(current_question.type)" class="mt-4">
+                            <textarea class="form-control" v-model="answers[current_question.id]"
+                                      :rows="current_question.type === 'Long Answer' ? 10 : 3"
+                                      placeholder="{{ _('Enter your answer') }}"></textarea>
+                        </div>
+
+                        <!-- Numerical Answer -->
+                        <div v-if="current_question.type === 'Numerical'" class="mt-4">
+                            <input type="number" class="form-control" v-model="answers[current_question.id]"
+                                   placeholder="{{ _('Enter numerical value') }}" step="any">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-outline-secondary" @click="prev_question"
+                                        :disabled="current_index === 0">
+                                    <i class="fa fa-arrow-left"></i> {{ _("Previous") }}
+                                </button>
+                            </div>
+                            <div class="col text-center">
+                                <button class="btn btn-outline-info" @click="mark_for_review">
+                                    <i class="fa fa-flag"></i>
+                                    [[ marked_for_review[current_question.id] ? '{{ _("Unmark Review") }}' : '{{ _("Mark for Review") }}' ]]
+                                </button>
+                                <button class="btn btn-outline-warning ml-2" @click="clear_answer">
+                                    {{ _("Clear Response") }}
+                                </button>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn btn-primary" @click="save_and_next">
+                                    {{ _("Save & Next") }} <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Palette -->
+            <div class="col-md-3" v-if="exam_details.show_question_palette">
+                <div class="card question-palette">
+                    <div class="card-header">
+                        <strong>{{ _("Question Palette") }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="palette-grid">
+                            <button v-for="(q, idx) in questions" :key="q.id"
+                                    class="btn btn-sm m-1"
+                                    :class="get_palette_class(q, idx)"
+                                    @click="go_to_question(idx)">
+                                [[ idx + 1 ]]
+                            </button>
+                        </div>
+                        <hr>
+                        <div class="legend small">
+                            <p><span class="badge badge-secondary">&nbsp;</span> {{ _("Not Visited") }}</p>
+                            <p><span class="badge badge-danger">&nbsp;</span> {{ _("Not Answered") }}</p>
+                            <p><span class="badge badge-success">&nbsp;</span> {{ _("Answered") }}</p>
+                            <p><span class="badge badge-warning">&nbsp;</span> {{ _("Marked for Review") }}</p>
+                            <p><span class="badge badge-info">&nbsp;</span> {{ _("Answered & Marked") }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timer {
+    font-family: monospace;
+}
+.option-item {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.option-item:hover {
+    background-color: #f8f9fa;
+}
+.palette-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.question-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+</style>
+
+<script>
+frappe.ready(function() {
+    new Vue({
+        el: '#exam-container',
+        delimiters: ['[[', ']]'],
+        data: {
+            available_exams: [],
+            selected_exam: '',
+            exam_details: null,
+            exam_password: '',
+            exam_started: false,
+            starting: false,
+            attempt_id: null,
+            questions: [],
+            answers: {},
+            marked_for_review: {},
+            visited: {},
+            current_index: 0,
+            remaining_time: 0,
+            timer_interval: null
+        },
+        computed: {
+            current_question() {
+                return this.questions[this.current_index] || {};
+            },
+            formatted_time() {
+                const mins = Math.floor(this.remaining_time / 60);
+                const secs = this.remaining_time % 60;
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            },
+            attempted_count() {
+                return Object.keys(this.answers).filter(k => this.answers[k]).length;
+            }
+        },
+        mounted() {
+            this.load_available_exams();
+        },
+        methods: {
+            load_available_exams() {
+                frappe.call({
+                    method: 'university_erp.university_erp.examination.online_exam_controller.get_student_exams',
+                    callback: (r) => {
+                        if (r.message) {
+                            this.available_exams = r.message;
+                        }
+                    }
+                });
+            },
+            load_exam_details() {
+                if (!this.selected_exam) {
+                    this.exam_details = null;
+                    return;
+                }
+                frappe.call({
+                    method: 'frappe.client.get',
+                    args: {
+                        doctype: 'Online Examination',
+                        name: this.selected_exam
+                    },
+                    callback: (r) => {
+                        if (r.message) {
+                            this.exam_details = r.message;
+                        }
+                    }
+                });
+            },
+            start_exam() {
+                this.starting = true;
+                frappe.call({
+                    method: 'university_erp.university_erp.examination.online_exam_controller.start_examination',
+                    args: {
+                        exam_name: this.selected_exam,
+                        password: this.exam_password
+                    },
+                    callback: (r) => {
+                        this.starting = false;
+                        if (r.message && r.message.status === 'success') {
+                            this.attempt_id = r.message.attempt_id;
+                            this.questions = r.message.questions;
+                            this.remaining_time = r.message.duration_minutes * 60;
+                            this.exam_started = true;
+                            this.start_timer();
+
+                            // Load saved answers if resuming
+                            if (r.message.saved_answers) {
+                                this.answers = {};
+                                for (let [qid, data] of Object.entries(r.message.saved_answers)) {
+                                    this.answers[qid] = data.answer;
+                                    if (data.marked_for_review) {
+                                        this.marked_for_review[qid] = true;
+                                    }
+                                }
+                            }
+                        } else {
+                            frappe.msgprint(r.message.message || 'Error starting exam');
+                        }
+                    }
+                });
+            },
+            start_timer() {
+                this.timer_interval = setInterval(() => {
+                    this.remaining_time--;
+                    if (this.remaining_time <= 0) {
+                        this.auto_submit();
+                    }
+                }, 1000);
+            },
+            select_answer(option_id) {
+                this.$set(this.answers, this.current_question.id, option_id);
+            },
+            is_option_selected(option_id) {
+                const answer = this.answers[this.current_question.id];
+                return answer && answer.includes(option_id);
+            },
+            toggle_option(option_id) {
+                let current = this.answers[this.current_question.id] || [];
+                if (typeof current === 'string') current = [current];
+
+                const idx = current.indexOf(option_id);
+                if (idx > -1) {
+                    current.splice(idx, 1);
+                } else {
+                    current.push(option_id);
+                }
+                this.$set(this.answers, this.current_question.id, current);
+            },
+            save_answer() {
+                const answer = this.answers[this.current_question.id];
+                frappe.call({
+                    method: 'university_erp.university_erp.examination.online_exam_controller.save_exam_answer',
+                    args: {
+                        attempt_id: this.attempt_id,
+                        question_id: this.current_question.id,
+                        answer: JSON.stringify(answer),
+                        marked_for_review: this.marked_for_review[this.current_question.id] || false
+                    }
+                });
+            },
+            save_and_next() {
+                this.save_answer();
+                this.$set(this.visited, this.current_question.id, true);
+                if (this.current_index < this.questions.length - 1) {
+                    this.current_index++;
+                }
+            },
+            prev_question() {
+                if (this.current_index > 0) {
+                    this.current_index--;
+                }
+            },
+            go_to_question(idx) {
+                this.current_index = idx;
+                this.$set(this.visited, this.questions[idx].id, true);
+            },
+            mark_for_review() {
+                this.$set(this.marked_for_review, this.current_question.id,
+                          !this.marked_for_review[this.current_question.id]);
+            },
+            clear_answer() {
+                this.$set(this.answers, this.current_question.id, null);
+            },
+            get_palette_class(question, idx) {
+                const answered = this.answers[question.id];
+                const reviewed = this.marked_for_review[question.id];
+                const visited = this.visited[question.id];
+                const current = idx === this.current_index;
+
+                if (current) return 'btn-primary';
+                if (answered && reviewed) return 'btn-info';
+                if (reviewed) return 'btn-warning';
+                if (answered) return 'btn-success';
+                if (visited) return 'btn-danger';
+                return 'btn-secondary';
+            },
+            confirm_submit() {
+                const unanswered = this.questions.length - this.attempted_count;
+                frappe.confirm(
+                    `You have ${unanswered} unanswered questions. Are you sure you want to submit?`,
+                    () => this.submit_exam()
+                );
+            },
+            submit_exam() {
+                clearInterval(this.timer_interval);
+                frappe.call({
+                    method: 'university_erp.university_erp.examination.online_exam_controller.submit_examination',
+                    args: {
+                        attempt_id: this.attempt_id
+                    },
+                    callback: (r) => {
+                        if (r.message) {
+                            frappe.msgprint({
+                                title: 'Exam Submitted',
+                                message: `Your exam has been submitted successfully.
+                                          Score: ${r.message.score_obtained}/${r.message.total_marks}`,
+                                indicator: 'green'
+                            });
+                            setTimeout(() => {
+                                window.location.href = '/student-portal';
+                            }, 3000);
+                        }
+                    }
+                });
+            },
+            auto_submit() {
+                clearInterval(this.timer_interval);
+                frappe.msgprint('Time is up! Your exam is being auto-submitted.');
+                this.submit_exam();
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

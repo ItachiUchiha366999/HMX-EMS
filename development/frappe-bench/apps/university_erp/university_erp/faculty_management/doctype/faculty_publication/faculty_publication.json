@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{name}",
+ "creation": "2026-01-01 00:00:00",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "type",
+  "journal_conference",
+  "publication_date",
+  "doi_isbn",
+  "scopus_indexed",
+  "impact_factor"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Journal\nConference\nBook\nBook Chapter\nPatent",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "journal_conference",
+   "fieldtype": "Data",
+   "label": "Journal/Conference"
+  },
+  {
+   "fieldname": "publication_date",
+   "fieldtype": "Date",
+   "label": "Publication Date",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "doi_isbn",
+   "fieldtype": "Data",
+   "label": "DOI/ISBN"
+  },
+  {
+   "fieldname": "scopus_indexed",
+   "fieldtype": "Check",
+   "label": "Scopus Indexed"
+  },
+  {
+   "fieldname": "impact_factor",
+   "fieldtype": "Float",
+   "label": "Impact Factor",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Faculty Management",
+ "name": "Faculty Publication",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "University Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "University Faculty",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

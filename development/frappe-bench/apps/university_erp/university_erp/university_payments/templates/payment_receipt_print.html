@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Payment Receipt - {{ payment_entry.name }}</title>
+    <style>
+        /* Print-optimized styles */
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #000;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+
+        .receipt-container {
+            max-width: 180mm;
+            margin: 0 auto;
+            padding: 10mm;
+        }
+
+        /* Header with university branding */
+        .header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .university-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 11pt;
+            font-weight: normal;
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .header .address {
+            font-size: 9pt;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        /* Receipt number banner */
+        .receipt-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            color: #fff;
+            padding: 8px 15px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .receipt-banner .title {
+            font-size: 14pt;
+            text-transform: uppercase;
+        }
+
+        .receipt-banner .receipt-no {
+            font-size: 11pt;
+        }
+
+        /* Two-column layout for details */
+        .details-grid {
+            display: table;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .details-row {
+            display: table-row;
+        }
+
+        .details-cell {
+            display: table-cell;
+            width: 50%;
+            padding: 3px 10px 3px 0;
+            vertical-align: top;
+        }
+
+        .detail-item {
+            margin-bottom: 8px;
+        }
+
+        .detail-label {
+            font-size: 9pt;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        /* Fee breakdown table */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .fee-table th,
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .fee-table th {
+            background: #f0f0f0;
+            font-size: 10pt;
+            text-transform: uppercase;
+        }
+
+        .fee-table td {
+            font-size: 11pt;
+        }
+
+        .fee-table .amount-col {
+            text-align: right;
+            width: 30%;
+        }
+
+        .fee-table tfoot td {
+            font-weight: bold;
+            font-size: 12pt;
+            border-top: 2px solid #000;
+        }
+
+        /* Amount in words */
+        .amount-words {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            font-style: italic;
+        }
+
+        .amount-words strong {
+            font-style: normal;
+        }
+
+        /* Status stamp */
+        .status-stamp {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .stamp-paid {
+            display: inline-block;
+            border: 3px solid #2e7d32;
+            color: #2e7d32;
+            padding: 5px 30px;
+            font-size: 20pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            transform: rotate(-5deg);
+            letter-spacing: 3px;
+        }
+
+        /* Signature section */
+        .signature-section {
+            margin-top: 40px;
+            display: table;
+            width: 100%;
+        }
+
+        .signature-box {
+            display: table-cell;
+            width: 33%;
+            text-align: center;
+            vertical-align: bottom;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            margin: 0 20px;
+            padding-top: 5px;
+            font-size: 9pt;
+        }
+
+        .signature-space {
+            height: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 8pt;
+            color: #555;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 3px 0;
+        }
+
+        /* QR Code placeholder */
+        .qr-section {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            text-align: center;
+        }
+
+        .qr-placeholder {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8pt;
+            color: #999;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .receipt-banner {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            .stamp-paid {
+                border-color: #2e7d32 !important;
+                color: #2e7d32 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Duplicate copy indicator */
+        .copy-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 9pt;
+            color: #666;
+            text-transform: uppercase;
+            border: 1px solid #ccc;
+            padding: 2px 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container" style="position: relative;">
+        <span class="copy-type">Original</span>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>{{ company or "University Name" }}</h1>
+            <h2>Fee Payment Receipt</h2>
+            {% if company_address %}
+            <div class="address">{{ company_address }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Receipt Banner -->
+        <div class="receipt-banner">
+            <span class="title">Official Receipt</span>
+            <span class="receipt-no">No: {{ payment_entry.name }}</span>
+        </div>
+
+        <!-- Student & Payment Details -->
+        <div class="details-grid">
+            <div class="details-row">
+                <div class="details-cell">
+                    <div class="detail-item">
+                        <div class="detail-label">Receipt Date</div>
+                        <div class="detail-value">{{ frappe.utils.format_date(payment_entry.posting_date) }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Student ID</div>
+                        <div class="detail-value">{{ student.name }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Student Name</div>
+                        <div class="detail-value">{{ student.student_name }}</div>
+                    </div>
+                    {% if fees.program %}
+                    <div class="detail-item">
+                        <div class="detail-label">Program</div>
+                        <div class="detail-value">{{ fees.program }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="details-cell">
+                    <div class="detail-item">
+                        <div class="detail-label">Fee Reference</div>
+                        <div class="detail-value">{{ fees.name }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Payment Mode</div>
+                        <div class="detail-value">Online - {{ payment_order.payment_gateway }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Transaction ID</div>
+                        <div class="detail-value">{{ payment_order.gateway_payment_id }}</div>
+                    </div>
+                    {% if payment_order.gateway_order_id %}
+                    <div class="detail-item">
+                        <div class="detail-label">Order ID</div>
+                        <div class="detail-value">{{ payment_order.gateway_order_id }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Fee Breakdown Table -->
+        <table class="fee-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th class="amount-col">Amount (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if fees.components %}
+                    {% for component in fees.components %}
+                    <tr>
+                        <td>{{ component.fees_category }}</td>
+                        <td class="amount-col">{{ frappe.utils.fmt_money(component.amount, currency="INR") }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td>Fee Payment</td>
+                    <td class="amount-col">{{ frappe.utils.fmt_money(payment_order.amount, currency="INR") }}</td>
+                </tr>
+                {% endif %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total Amount Paid</td>
+                    <td class="amount-col">{{ frappe.utils.fmt_money(payment_order.amount, currency="INR") }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Amount in Words -->
+        <div class="amount-words">
+            <strong>Amount in Words:</strong> {{ amount_in_words or "Rupees " + (payment_order.amount | int | string) + " Only" }}
+        </div>
+
+        <!-- Outstanding Balance (if any) -->
+        {% if fees.outstanding_amount and fees.outstanding_amount > 0 %}
+        <div style="background: #fff3cd; padding: 10px 15px; margin: 15px 0; border: 1px solid #ffc107;">
+            <strong>Note:</strong> Outstanding balance of {{ frappe.utils.fmt_money(fees.outstanding_amount, currency="INR") }} is pending.
+        </div>
+        {% endif %}
+
+        <!-- Paid Stamp -->
+        <div class="status-stamp">
+            <span class="stamp-paid">PAID</span>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="signature-space"></div>
+                <div class="signature-line">Received By</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-space"></div>
+                <div class="signature-line">Verified By</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-space"></div>
+                <div class="signature-line">Authorized Signatory</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>This is a computer-generated receipt. Physical signature is not required for online payments.</p>
+            <p>Please retain this receipt for your records. For queries, contact the Accounts Department.</p>
+            <p>Generated: {{ frappe.utils.now_datetime().strftime('%d-%m-%Y %H:%M:%S') }} | Ref: {{ payment_entry.name }}</p>
+        </div>
+    </div>
+</body>
+</html>

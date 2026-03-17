@@ -1,0 +1,28 @@
+{
+    "actions": [],
+    "creation": "2026-01-01 00:00:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": ["skill_name", "skill_category", "proficiency_level", "years_of_experience", "is_certified"],
+    "fields": [
+        {"fieldname": "skill_name", "fieldtype": "Data", "in_list_view": 1, "label": "Skill Name", "reqd": 1},
+        {"default": "Technical", "fieldname": "skill_category", "fieldtype": "Select", "in_list_view": 1, "label": "Category", "options": "Technical\nProgramming Language\nFramework\nDatabase\nTool\nSoft Skill\nLanguage\nOther"},
+        {"default": "Intermediate", "fieldname": "proficiency_level", "fieldtype": "Select", "in_list_view": 1, "label": "Proficiency", "options": "Beginner\nIntermediate\nAdvanced\nExpert"},
+        {"fieldname": "years_of_experience", "fieldtype": "Float", "label": "Years of Experience", "precision": "1"},
+        {"default": "0", "fieldname": "is_certified", "fieldtype": "Check", "in_list_view": 1, "label": "Certified"}
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-01 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University Placement",
+    "name": "Resume Skill",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

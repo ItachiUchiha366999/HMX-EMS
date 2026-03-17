@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bench:*)",
+      "Bash(1 <<'EOF'\nimport frappe\nimport importlib.util\nimport os\n\nfrappe.init\\(site=\"university.local\"\\)\nfrappe.connect\\(\\)\nfrappe.set_user\\(\"student@test.edu\"\\)\n\n# Load exams.py the way Frappe does\nprint\\(\"=== Testing exams.py loading ===\"\\)\nexams_path = \"apps/university_erp/university_erp/www/student-portal/exams.py\"\n\nspec = importlib.util.spec_from_file_location\\(\"exams_module\", exams_path\\)\nexams_module = importlib.util.module_from_spec\\(spec\\)\n\n# Import frappe into the module namespace \\(required for the module to work\\)\nexams_module.frappe = frappe\nexams_module._ = frappe._\n\ntry:\n    spec.loader.exec_module\\(exams_module\\)\n    print\\(\"✅ Module loaded successfully\"\\)\n    print\\(\"Has get_context:\", hasattr\\(exams_module, 'get_context'\\)\\)\n    print\\(\"Has get_current_student:\", hasattr\\(exams_module, 'get_current_student'\\)\\)\n    \n    # Try calling get_context\n    context = frappe._dict\\(\\)\n    result = exams_module.get_context\\(context\\)\n    print\\(\"\\\\n✅ get_context\\(\\) executed successfully!\"\\)\n    print\\(\"Active page:\", context.get\\('active_page'\\)\\)\n    print\\(\"Has student:\", 'student' in context\\)\n    print\\(\"Has stats:\", 'stats' in context\\)\n    if 'stats' in context:\n        print\\(\"Stats:\", context.stats\\)\n        \nexcept Exception as e:\n    print\\(\"❌ Error:\", str\\(e\\)\\)\n    import traceback\n    traceback.print_exc\\(\\)\nEOF)",
+      "Bash(python3 -m py_compile:*)"
+    ]
+  }
+}

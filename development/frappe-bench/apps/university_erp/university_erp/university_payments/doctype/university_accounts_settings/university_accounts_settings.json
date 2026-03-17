@@ -1,0 +1,264 @@
+{
+  "doctype": "DocType",
+  "name": "University Accounts Settings",
+  "module": "University Payments",
+  "issingle": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "company",
+    "auto_post_gl",
+    "column_break_1",
+    "default_cost_center",
+    "default_payment_gateway",
+    "fee_accounts_section",
+    "fee_collection_account",
+    "fee_income_account",
+    "fee_receivable_account",
+    "column_break_fee",
+    "late_fee_income_account",
+    "fee_discount_account",
+    "fee_category_accounts_section",
+    "fee_category_accounts",
+    "scholarship_section",
+    "scholarship_expense_account",
+    "column_break_scholarship",
+    "scholarship_liability_account",
+    "hostel_section",
+    "hostel_receivable_account",
+    "hostel_income_account",
+    "column_break_hostel",
+    "mess_income_account",
+    "hostel_deposit_account",
+    "transport_section",
+    "transport_income_account",
+    "column_break_transport",
+    "transport_receivable_account",
+    "library_section",
+    "library_fine_income_account",
+    "column_break_library",
+    "library_deposit_account"
+  ],
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "auto_post_gl",
+      "fieldtype": "Check",
+      "label": "Auto Post GL Entries",
+      "default": "1",
+      "description": "Automatically create GL entries on fee submission"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_cost_center",
+      "fieldtype": "Link",
+      "label": "Default Cost Center",
+      "options": "Cost Center"
+    },
+    {
+      "fieldname": "default_payment_gateway",
+      "fieldtype": "Select",
+      "label": "Default Payment Gateway",
+      "options": "\nRazorpay\nPayU",
+      "default": "Razorpay"
+    },
+    {
+      "fieldname": "fee_accounts_section",
+      "fieldtype": "Section Break",
+      "label": "Fee Accounts"
+    },
+    {
+      "fieldname": "fee_collection_account",
+      "fieldtype": "Link",
+      "label": "Fee Collection Account",
+      "options": "Account",
+      "description": "Bank/Cash account for fee collection"
+    },
+    {
+      "fieldname": "fee_income_account",
+      "fieldtype": "Link",
+      "label": "Default Fee Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "fee_receivable_account",
+      "fieldtype": "Link",
+      "label": "Fee Receivable Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_fee",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "late_fee_income_account",
+      "fieldtype": "Link",
+      "label": "Late Fee Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "fee_discount_account",
+      "fieldtype": "Link",
+      "label": "Fee Discount Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "fee_category_accounts_section",
+      "fieldtype": "Section Break",
+      "label": "Fee Category Accounts",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "fee_category_accounts",
+      "fieldtype": "Table",
+      "label": "Fee Category Accounts",
+      "options": "Fee Category Account",
+      "description": "Map fee categories to specific income accounts"
+    },
+    {
+      "fieldname": "scholarship_section",
+      "fieldtype": "Section Break",
+      "label": "Scholarship Accounts"
+    },
+    {
+      "fieldname": "scholarship_expense_account",
+      "fieldtype": "Link",
+      "label": "Scholarship Expense Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_scholarship",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "scholarship_liability_account",
+      "fieldtype": "Link",
+      "label": "Scholarship Liability Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "hostel_section",
+      "fieldtype": "Section Break",
+      "label": "Hostel Accounts"
+    },
+    {
+      "fieldname": "hostel_receivable_account",
+      "fieldtype": "Link",
+      "label": "Hostel Receivable Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "hostel_income_account",
+      "fieldtype": "Link",
+      "label": "Hostel Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_hostel",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "mess_income_account",
+      "fieldtype": "Link",
+      "label": "Mess Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "hostel_deposit_account",
+      "fieldtype": "Link",
+      "label": "Hostel Deposit Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "transport_section",
+      "fieldtype": "Section Break",
+      "label": "Transport Accounts"
+    },
+    {
+      "fieldname": "transport_income_account",
+      "fieldtype": "Link",
+      "label": "Transport Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_transport",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "transport_receivable_account",
+      "fieldtype": "Link",
+      "label": "Transport Receivable Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "library_section",
+      "fieldtype": "Section Break",
+      "label": "Library Accounts"
+    },
+    {
+      "fieldname": "library_fine_income_account",
+      "fieldtype": "Link",
+      "label": "Library Fine Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_library",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "library_deposit_account",
+      "fieldtype": "Link",
+      "label": "Library Deposit Account",
+      "options": "Account"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "track_changes": 1,
+  "modified_by": "Administrator",
+  "owner": "Administrator"
+}

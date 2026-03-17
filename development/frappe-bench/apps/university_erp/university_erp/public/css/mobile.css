@@ -1,0 +1,595 @@
+/**
+ * University ERP Mobile Styles
+ * Responsive styles for mobile and tablet devices
+ */
+
+/* ============================================
+   CSS Variables for Mobile
+   ============================================ */
+:root {
+    --mobile-padding: 15px;
+    --mobile-border-radius: 8px;
+    --mobile-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --mobile-nav-height: 60px;
+    --mobile-bottom-nav-height: 65px;
+}
+
+/* ============================================
+   Mobile Breakpoint (<768px)
+   ============================================ */
+@media (max-width: 767px) {
+    /* General Layout */
+    .container {
+        padding-left: var(--mobile-padding);
+        padding-right: var(--mobile-padding);
+    }
+
+    .page-container {
+        padding: 10px;
+    }
+
+    /* Navigation */
+    .navbar {
+        height: var(--mobile-nav-height);
+        padding: 0 10px;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .navbar-nav {
+        display: none;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    /* Mobile Sidebar */
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        background: #fff;
+        z-index: 1050;
+        transition: left 0.3s ease;
+        box-shadow: var(--mobile-shadow);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    /* Cards */
+    .card {
+        margin-bottom: 15px;
+        border-radius: var(--mobile-border-radius);
+    }
+
+    .card-header {
+        padding: 12px 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    /* Dashboard Stats */
+    .stat-card {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .stat-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .stat-card p {
+        font-size: 0.85rem;
+    }
+
+    .stat-card i {
+        font-size: 1.5rem;
+    }
+
+    /* Charts */
+    .chart-container {
+        height: 250px !important;
+    }
+
+    /* Tables - Horizontal Scroll */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .frappe-list {
+        overflow-x: auto;
+    }
+
+    .frappe-list .list-row {
+        min-width: 600px;
+    }
+
+    /* List View Compact */
+    .list-row-container {
+        padding: 10px;
+    }
+
+    .list-row .level-left {
+        flex-wrap: wrap;
+    }
+
+    /* Forms */
+    .frappe-control {
+        margin-bottom: 15px;
+    }
+
+    .frappe-control .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-column {
+        width: 100% !important;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+
+    .form-section .section-head {
+        font-size: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .btn-group-sm > .btn {
+        padding: 6px 12px;
+    }
+
+    .page-actions .btn {
+        margin: 5px 0;
+    }
+
+    .page-actions {
+        flex-wrap: wrap;
+    }
+
+    /* Modal */
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    /* Workspace */
+    .workspace-sidebar {
+        display: none;
+    }
+
+    .workspace-sidebar.show {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        z-index: 1050;
+        background: #fff;
+    }
+
+    /* Student Portal */
+    .student-portal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .student-info-card .student-image {
+        margin-bottom: 15px;
+    }
+
+    /* Fee Payment Interface */
+    .fee-card {
+        padding: 15px;
+    }
+
+    .fee-card .fee-amount {
+        font-size: 1.25rem;
+    }
+
+    .payment-buttons {
+        flex-direction: column;
+    }
+
+    .payment-buttons .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Timetable View */
+    .timetable-grid {
+        display: block;
+    }
+
+    .timetable-day {
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+    }
+
+    .timetable-slot {
+        display: flex;
+        padding: 10px;
+        margin: 5px 0;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+
+    .timetable-slot .time {
+        min-width: 80px;
+        font-weight: 600;
+    }
+
+    /* Notifications */
+    .notification-item {
+        padding: 12px;
+    }
+
+    .notification-item .notification-title {
+        font-size: 0.95rem;
+    }
+
+    /* Search */
+    .search-bar {
+        width: 100%;
+    }
+
+    .global-search {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--mobile-nav-height);
+        z-index: 1060;
+        background: #fff;
+        padding: 10px;
+    }
+
+    /* Bottom Navigation */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--mobile-bottom-nav-height);
+        background: #fff;
+        border-top: 1px solid #e9ecef;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1030;
+    }
+
+    .mobile-bottom-nav .nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        color: #6c757d;
+        text-decoration: none;
+        font-size: 0.75rem;
+    }
+
+    .mobile-bottom-nav .nav-item.active {
+        color: var(--primary);
+    }
+
+    .mobile-bottom-nav .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 4px;
+    }
+
+    /* Add padding to body for bottom nav */
+    body.has-bottom-nav {
+        padding-bottom: calc(var(--mobile-bottom-nav-height) + 20px);
+    }
+
+    /* Library OPAC */
+    .library-search-form {
+        flex-direction: column;
+    }
+
+    .library-search-form .form-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .book-card {
+        flex-direction: column;
+    }
+
+    .book-card .book-cover {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    /* Placement Portal */
+    .job-card {
+        padding: 15px;
+    }
+
+    .job-card .job-header {
+        flex-direction: column;
+    }
+
+    .job-card .company-logo {
+        margin-bottom: 10px;
+    }
+
+    /* Calendar */
+    .calendar-view {
+        font-size: 0.85rem;
+    }
+
+    .calendar-day {
+        padding: 5px;
+    }
+
+    /* Attendance */
+    .attendance-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    /* Print - Hide on mobile */
+    .print-only {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   Tablet Breakpoint (768px - 1024px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Navigation */
+    .navbar-nav .nav-item {
+        padding: 0 8px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+    }
+
+    /* Dashboard */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-cards-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Charts */
+    .chart-container {
+        height: 300px;
+    }
+
+    /* Forms */
+    .form-column {
+        width: 50% !important;
+    }
+
+    /* Cards */
+    .card-columns {
+        column-count: 2;
+    }
+
+    /* Tables */
+    .table th,
+    .table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Student Portal */
+    .student-portal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Library */
+    .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================
+   Touch-Friendly Enhancements
+   ============================================ */
+@media (pointer: coarse) {
+    /* Larger touch targets */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    a {
+        padding: 5px 0;
+    }
+
+    .dropdown-item {
+        padding: 12px 16px;
+    }
+
+    .nav-link {
+        padding: 12px 16px;
+    }
+
+    /* Remove hover effects on touch */
+    .btn:hover {
+        transform: none;
+    }
+
+    /* Disable long-press context menu on buttons */
+    button, .btn {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* ============================================
+   Dark Mode Support
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .mobile-bottom-nav {
+        background: #1a1a1a;
+        border-top-color: #333;
+    }
+
+    .mobile-bottom-nav .nav-item {
+        color: #aaa;
+    }
+
+    .mobile-bottom-nav .nav-item.active {
+        color: #fff;
+    }
+
+    .sidebar {
+        background: #1a1a1a;
+    }
+}
+
+/* ============================================
+   Landscape Orientation
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-bottom-nav {
+        height: 50px;
+    }
+
+    .mobile-bottom-nav .nav-item {
+        flex-direction: row;
+    }
+
+    .mobile-bottom-nav .nav-item i {
+        margin-bottom: 0;
+        margin-right: 8px;
+    }
+
+    .modal-body {
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .mobile-bottom-nav,
+    .sidebar,
+    .navbar,
+    .page-actions {
+        display: none !important;
+    }
+
+    body {
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* ============================================
+   Utility Classes for Mobile
+   ============================================ */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-hidden {
+        display: none !important;
+    }
+
+    .mobile-full-width {
+        width: 100% !important;
+    }
+
+    .mobile-text-center {
+        text-align: center !important;
+    }
+
+    .mobile-mb-15 {
+        margin-bottom: 15px !important;
+    }
+
+    .mobile-p-10 {
+        padding: 10px !important;
+    }
+}
+
+/* ============================================
+   Safe Area for Notched Devices
+   ============================================ */
+@supports (padding: max(0px)) {
+    .mobile-bottom-nav {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    .page-container {
+        padding-left: max(var(--mobile-padding), env(safe-area-inset-left));
+        padding-right: max(var(--mobile-padding), env(safe-area-inset-right));
+    }
+}

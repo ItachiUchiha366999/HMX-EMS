@@ -1,0 +1,62 @@
+{
+    "actions": [],
+    "creation": "2026-01-01 00:00:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "day",
+        "meal_type",
+        "column_break_1",
+        "menu_items",
+        "special_item"
+    ],
+    "fields": [
+        {
+            "fieldname": "day",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Day",
+            "options": "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday",
+            "reqd": 1
+        },
+        {
+            "fieldname": "meal_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Meal Type",
+            "options": "Breakfast\nLunch\nSnacks\nDinner",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "menu_items",
+            "fieldtype": "Small Text",
+            "in_list_view": 1,
+            "label": "Menu Items",
+            "reqd": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "special_item",
+            "fieldtype": "Check",
+            "label": "Special Item"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-01 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University Hostel",
+    "name": "Mess Menu Item",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

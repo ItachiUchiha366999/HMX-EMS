@@ -1,0 +1,180 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 12:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "job_title",
+    "company",
+    "status",
+    "column_break_1",
+    "location",
+    "job_type",
+    "expiry_date",
+    "details_section",
+    "description",
+    "requirements",
+    "posting_section",
+    "posted_by",
+    "is_alumni_posting",
+    "column_break_2",
+    "contact_email",
+    "apply_url"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "JOB-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "job_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Job Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Company",
+      "reqd": 1
+    },
+    {
+      "default": "Open",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Open\nClosed"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Location"
+    },
+    {
+      "fieldname": "job_type",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Job Type",
+      "options": "\nFull Time\nPart Time\nInternship\nContract"
+    },
+    {
+      "fieldname": "expiry_date",
+      "fieldtype": "Date",
+      "label": "Expiry Date"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Job Details"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "requirements",
+      "fieldtype": "Text",
+      "label": "Requirements"
+    },
+    {
+      "fieldname": "posting_section",
+      "fieldtype": "Section Break",
+      "label": "Posting Information"
+    },
+    {
+      "fieldname": "posted_by",
+      "fieldtype": "Link",
+      "label": "Posted By",
+      "options": "Alumni"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_alumni_posting",
+      "fieldtype": "Check",
+      "label": "Is Alumni Posting"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "apply_url",
+      "fieldtype": "Data",
+      "label": "Apply URL"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Portals",
+  "name": "Job Posting",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "job_title",
+  "track_changes": 1
+}

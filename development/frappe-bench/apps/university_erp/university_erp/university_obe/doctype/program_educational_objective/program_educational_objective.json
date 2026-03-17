@@ -1,0 +1,193 @@
+{
+  "actions": [],
+  "autoname": "format:{program}-PEO-{peo_number}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "program",
+    "peo_number",
+    "column_break_1",
+    "academic_year",
+    "status",
+    "section_peo",
+    "peo_statement",
+    "description",
+    "section_bloom",
+    "bloom_level",
+    "column_break_2",
+    "knowledge_dimension",
+    "section_keywords",
+    "keywords",
+    "section_stakeholder",
+    "industry_relevance",
+    "column_break_3",
+    "societal_need"
+  ],
+  "fields": [
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fieldname": "peo_number",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "PEO Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Effective From",
+      "options": "Academic Year"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Active\nRevised\nArchived"
+    },
+    {
+      "fieldname": "section_peo",
+      "fieldtype": "Section Break",
+      "label": "PEO Statement"
+    },
+    {
+      "fieldname": "peo_statement",
+      "fieldtype": "Text",
+      "in_list_view": 1,
+      "label": "PEO Statement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Detailed Description"
+    },
+    {
+      "fieldname": "section_bloom",
+      "fieldtype": "Section Break",
+      "label": "Bloom's Taxonomy"
+    },
+    {
+      "fieldname": "bloom_level",
+      "fieldtype": "Select",
+      "label": "Primary Bloom's Level",
+      "options": "\nRemember\nUnderstand\nApply\nAnalyze\nEvaluate\nCreate"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "knowledge_dimension",
+      "fieldtype": "Select",
+      "label": "Knowledge Dimension",
+      "options": "\nFactual\nConceptual\nProcedural\nMetacognitive"
+    },
+    {
+      "fieldname": "section_keywords",
+      "fieldtype": "Section Break",
+      "label": "Keywords"
+    },
+    {
+      "fieldname": "keywords",
+      "fieldtype": "Small Text",
+      "label": "Keywords"
+    },
+    {
+      "fieldname": "section_stakeholder",
+      "fieldtype": "Section Break",
+      "label": "Stakeholder Alignment"
+    },
+    {
+      "fieldname": "industry_relevance",
+      "fieldtype": "Small Text",
+      "label": "Industry Relevance"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "societal_need",
+      "fieldtype": "Small Text",
+      "label": "Societal Need Addressed"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Program Educational Objective",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "peo_statement",
+  "track_changes": 1
+}

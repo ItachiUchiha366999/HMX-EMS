@@ -1,0 +1,302 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "form_title",
+    "form_type",
+    "description",
+    "column_break_1",
+    "target_audience",
+    "academic_year",
+    "academic_term",
+    "section_break_schedule",
+    "start_date",
+    "end_date",
+    "column_break_2",
+    "is_mandatory",
+    "allow_anonymous",
+    "allow_multiple_responses",
+    "section_break_questions",
+    "sections",
+    "questions",
+    "section_break_filters",
+    "programs",
+    "departments",
+    "courses",
+    "section_break_settings",
+    "show_progress",
+    "randomize_questions",
+    "show_section_scores",
+    "column_break_3",
+    "thank_you_message",
+    "reminder_days",
+    "section_break_status",
+    "status",
+    "total_responses",
+    "response_rate"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "FF-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "form_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Form Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "form_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Form Type",
+      "options": "\nCourse Feedback\nFaculty Feedback\nFacility Feedback\nEvent Feedback\nService Feedback\nGeneral Survey\nExit Survey\nAlumni Survey",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "target_audience",
+      "fieldtype": "Select",
+      "label": "Target Audience",
+      "options": "\nStudents\nFaculty\nParents\nAlumni\nStaff\nAll",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Academic Year",
+      "options": "Academic Year"
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "label": "Academic Term",
+      "options": "Academic Term"
+    },
+    {
+      "fieldname": "section_break_schedule",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Datetime",
+      "label": "Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Datetime",
+      "label": "End Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": 0,
+      "fieldname": "is_mandatory",
+      "fieldtype": "Check",
+      "label": "Is Mandatory"
+    },
+    {
+      "default": 0,
+      "fieldname": "allow_anonymous",
+      "fieldtype": "Check",
+      "label": "Allow Anonymous Responses"
+    },
+    {
+      "default": 0,
+      "fieldname": "allow_multiple_responses",
+      "fieldtype": "Check",
+      "label": "Allow Multiple Responses"
+    },
+    {
+      "fieldname": "section_break_questions",
+      "fieldtype": "Section Break",
+      "label": "Questions"
+    },
+    {
+      "fieldname": "sections",
+      "fieldtype": "Table",
+      "label": "Form Sections",
+      "options": "Feedback Form Section"
+    },
+    {
+      "fieldname": "questions",
+      "fieldtype": "Table",
+      "label": "Questions",
+      "options": "Feedback Question"
+    },
+    {
+      "fieldname": "section_break_filters",
+      "fieldtype": "Section Break",
+      "label": "Target Filters"
+    },
+    {
+      "fieldname": "programs",
+      "fieldtype": "Table MultiSelect",
+      "label": "Programs",
+      "options": "Feedback Program Filter"
+    },
+    {
+      "fieldname": "departments",
+      "fieldtype": "Table MultiSelect",
+      "label": "Departments",
+      "options": "Feedback Department Filter"
+    },
+    {
+      "description": "For course/faculty feedback",
+      "fieldname": "courses",
+      "fieldtype": "Table MultiSelect",
+      "label": "Courses",
+      "options": "Feedback Course Filter"
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Settings"
+    },
+    {
+      "default": 1,
+      "fieldname": "show_progress",
+      "fieldtype": "Check",
+      "label": "Show Progress Bar"
+    },
+    {
+      "default": 0,
+      "fieldname": "randomize_questions",
+      "fieldtype": "Check",
+      "label": "Randomize Question Order"
+    },
+    {
+      "default": 0,
+      "fieldname": "show_section_scores",
+      "fieldtype": "Check",
+      "label": "Show Section Scores to Admin"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "thank_you_message",
+      "fieldtype": "Text Editor",
+      "label": "Thank You Message"
+    },
+    {
+      "default": "3",
+      "fieldname": "reminder_days",
+      "fieldtype": "Int",
+      "label": "Send Reminder After (Days)"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nScheduled\nActive\nPaused\nClosed\nArchived"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_responses",
+      "fieldtype": "Int",
+      "label": "Total Responses",
+      "read_only": 1
+    },
+    {
+      "fieldname": "response_rate",
+      "fieldtype": "Percent",
+      "label": "Response Rate",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Feedback",
+  "name": "Feedback Form",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "form_title,form_type,status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "form_title",
+  "track_changes": 1
+}

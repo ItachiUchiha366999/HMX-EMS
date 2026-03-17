@@ -1,0 +1,45 @@
+{
+  "doctype": "DocType",
+  "name": "Student Answer",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "question",
+      "fieldtype": "Link",
+      "label": "Question",
+      "options": "Question Bank",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "answer",
+      "fieldtype": "Text",
+      "label": "Answer",
+      "description": "JSON encoded for MCQ/MSQ, plain text for others"
+    },
+    {
+      "fieldname": "marked_for_review",
+      "fieldtype": "Check",
+      "label": "Marked for Review",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "answer_time",
+      "fieldtype": "Datetime",
+      "label": "Answer Time"
+    },
+    {
+      "fieldname": "marks_obtained",
+      "fieldtype": "Float",
+      "label": "Marks Obtained",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_correct",
+      "fieldtype": "Check",
+      "label": "Is Correct"
+    }
+  ],
+  "engine": "InnoDB"
+}

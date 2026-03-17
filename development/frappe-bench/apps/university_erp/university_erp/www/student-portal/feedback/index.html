@@ -1,0 +1,763 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block head_include %}
+<style>
+    .feedback-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    .page-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 5px;
+    }
+    .stat-card.pending .stat-value { color: #d97706; }
+    .stat-card.submitted .stat-value { color: #059669; }
+    .section-header {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 30px 0 15px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    .feedback-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: box-shadow 0.2s;
+    }
+    .feedback-card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .feedback-card.pending {
+        border-left: 4px solid #d97706;
+    }
+    .feedback-card.mandatory {
+        border-left: 4px solid #dc2626;
+    }
+    .feedback-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    .feedback-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+    .feedback-type {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        background: var(--control-bg);
+        border-radius: 20px;
+        color: var(--text-muted);
+    }
+    .feedback-meta {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 15px;
+    }
+    .feedback-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .feedback-description {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        color: white;
+        text-decoration: none;
+    }
+    .mandatory-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        background: #fee2e2;
+        color: #dc2626;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        margin-left: 8px;
+    }
+    .deadline-warning {
+        color: #d97706;
+        font-weight: 500;
+    }
+    .deadline-critical {
+        color: #dc2626;
+        font-weight: 600;
+    }
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-muted);
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+    .empty-state svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+    .completed-card {
+        opacity: 0.7;
+    }
+    .completed-card .feedback-title::after {
+        content: " ✓";
+        color: #059669;
+    }
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    .back-link:hover {
+        color: var(--primary);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    .modal-overlay.active {
+        display: flex;
+    }
+    .modal-content {
+        background: var(--card-bg);
+        border-radius: 12px;
+        max-width: 700px;
+        width: 100%;
+        margin: 40px auto;
+        padding: 25px;
+    }
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .modal-header h2 {
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+    }
+    .question-section {
+        margin-bottom: 25px;
+    }
+    .section-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: var(--text-color);
+    }
+    .section-description {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 15px;
+    }
+    .question-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: var(--control-bg);
+        border-radius: 8px;
+    }
+    .question-text {
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: var(--text-color);
+    }
+    .question-text .required {
+        color: #dc2626;
+    }
+    .question-help {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+    }
+    .rating-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .rating-option {
+        padding: 10px 20px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: var(--card-bg);
+    }
+    .rating-option:hover {
+        border-color: var(--primary);
+    }
+    .rating-option.selected {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+    .scale-options {
+        display: flex;
+        gap: 5px;
+    }
+    .scale-option {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--border-color);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    .scale-option:hover {
+        border-color: var(--primary);
+    }
+    .scale-option.selected {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+    .text-answer {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--card-bg);
+        color: var(--text-color);
+        min-height: 80px;
+        resize: vertical;
+    }
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+    .btn-secondary {
+        background: var(--control-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .anonymous-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        background: var(--control-bg);
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+    .anonymous-toggle input {
+        width: 18px;
+        height: 18px;
+    }
+    .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: var(--control-bg);
+        border-radius: 3px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .progress-fill {
+        height: 100%;
+        background: var(--primary);
+        transition: width 0.3s;
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="feedback-container">
+    <a href="/student-portal" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to Portal
+    </a>
+
+    <div class="page-header">
+        <h1>Course & Faculty Feedback</h1>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+        <div class="stat-card pending">
+            <div class="stat-value">{{ pending_count }}</div>
+            <div class="stat-label">Pending Feedback</div>
+        </div>
+        <div class="stat-card submitted">
+            <div class="stat-value">{{ submitted_count }}</div>
+            <div class="stat-label">Submitted</div>
+        </div>
+    </div>
+
+    <!-- Pending Feedback Section -->
+    {% if pending_forms %}
+    <h2 class="section-header">Pending Feedback</h2>
+    {% for form in pending_forms %}
+    <div class="feedback-card pending {% if form.is_mandatory %}mandatory{% endif %}">
+        <div class="feedback-card-header">
+            <div>
+                <span class="feedback-title">{{ form.title }}</span>
+                {% if form.is_mandatory %}
+                <span class="mandatory-badge">Mandatory</span>
+                {% endif %}
+            </div>
+            <span class="feedback-type">{{ form.form_type }}</span>
+        </div>
+        <div class="feedback-meta">
+            {% if form.course %}
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                </svg>
+                {{ form.course }}
+            </span>
+            {% endif %}
+            {% if form.instructor %}
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+                {{ form.instructor }}
+            </span>
+            {% endif %}
+            <span class="{% if form.end_date and (form.end_date - frappe.utils.getdate()).days <= 3 %}deadline-critical{% elif form.end_date and (form.end_date - frappe.utils.getdate()).days <= 7 %}deadline-warning{% endif %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+                Due: {{ frappe.format_date(form.end_date, 'dd MMM yyyy') }}
+            </span>
+        </div>
+        {% if form.description %}
+        <div class="feedback-description">{{ form.description }}</div>
+        {% endif %}
+        <button class="btn-primary" onclick="openFeedbackForm('{{ form.name }}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+            Give Feedback
+        </button>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h2 class="section-header">Pending Feedback</h2>
+    <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3>All Caught Up!</h3>
+        <p>You have no pending feedback forms at this time.</p>
+    </div>
+    {% endif %}
+
+    <!-- Submitted Feedback Section -->
+    {% if submitted_responses %}
+    <h2 class="section-header">Submitted Feedback</h2>
+    {% for response in submitted_responses %}
+    <div class="feedback-card completed-card">
+        <div class="feedback-card-header">
+            <div>
+                <span class="feedback-title">{{ response.form_title }}</span>
+            </div>
+            <span class="feedback-type">{{ response.form_type }}</span>
+        </div>
+        <div class="feedback-meta">
+            {% if response.course %}
+            <span>Course: {{ response.course }}</span>
+            {% endif %}
+            {% if response.instructor %}
+            <span>Faculty: {{ response.instructor }}</span>
+            {% endif %}
+            <span>Submitted: {{ frappe.format_date(response.creation, 'dd MMM yyyy') }}</span>
+            {% if response.overall_score %}
+            <span>Score Given: {{ response.overall_score | round(1) }}%</span>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<!-- Feedback Form Modal -->
+<div class="modal-overlay" id="feedbackModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="feedbackFormTitle">Loading...</h2>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div id="feedbackFormContent">Loading questions...</div>
+    </div>
+</div>
+
+<script>
+    let currentForm = null;
+    let answers = {};
+    let totalQuestions = 0;
+
+    async function openFeedbackForm(formName) {
+        document.getElementById('feedbackModal').classList.add('active');
+        document.getElementById('feedbackFormContent').innerHTML = 'Loading questions...';
+        answers = {};
+
+        try {
+            const response = await frappe.call({
+                method: 'university_erp.www.student-portal.feedback.index.get_feedback_form_questions',
+                args: { form_name: formName }
+            });
+
+            if (response.message.success) {
+                currentForm = response.message.form;
+                renderFeedbackForm(response.message);
+            } else {
+                document.getElementById('feedbackFormContent').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        <p>${response.message.message}</p>
+                        <button class="btn-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            document.getElementById('feedbackFormContent').innerHTML = `
+                <div style="text-align: center; padding: 40px; color: red;">
+                    <p>Error loading feedback form. Please try again.</p>
+                    <button class="btn-secondary" onclick="closeModal()">Close</button>
+                </div>
+            `;
+        }
+    }
+
+    function renderFeedbackForm(data) {
+        document.getElementById('feedbackFormTitle').textContent = data.form.title;
+
+        let html = '';
+
+        // Form info
+        if (data.form.description) {
+            html += `<p style="color: var(--text-muted); margin-bottom: 20px;">${data.form.description}</p>`;
+        }
+
+        // Anonymous option
+        if (data.form.allow_anonymous) {
+            html += `
+                <div class="anonymous-toggle">
+                    <input type="checkbox" id="anonymousCheck">
+                    <label for="anonymousCheck">Submit this feedback anonymously</label>
+                </div>
+            `;
+        }
+
+        // Sections and questions
+        totalQuestions = 0;
+        data.sections.forEach((section, sIdx) => {
+            html += `
+                <div class="question-section">
+                    <div class="section-title">${section.title}</div>
+                    ${section.description ? `<div class="section-description">${section.description}</div>` : ''}
+            `;
+
+            section.questions.forEach((q, qIdx) => {
+                totalQuestions++;
+                html += renderQuestion(q, `${sIdx}_${qIdx}`);
+            });
+
+            html += '</div>';
+        });
+
+        // Comments
+        html += `
+            <div class="question-item">
+                <div class="question-text">Additional Comments (Optional)</div>
+                <textarea class="text-answer" id="additionalComments" placeholder="Any additional feedback or suggestions..."></textarea>
+            </div>
+        `;
+
+        // Actions
+        html += `
+            <div class="form-actions">
+                <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn-primary" onclick="submitFeedback()">Submit Feedback</button>
+            </div>
+        `;
+
+        document.getElementById('feedbackFormContent').innerHTML = html;
+        updateProgress();
+    }
+
+    function renderQuestion(q, id) {
+        let inputHtml = '';
+        const questionKey = `q_${id}`;
+
+        switch (q.type) {
+            case 'Rating':
+                inputHtml = `<div class="rating-options">`;
+                const ratings = q.options.length > 0 ? q.options : ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+                ratings.forEach((opt, idx) => {
+                    inputHtml += `
+                        <div class="rating-option" onclick="selectRating('${questionKey}', ${idx + 1}, this)">
+                            ${opt}
+                        </div>
+                    `;
+                });
+                inputHtml += `</div>`;
+                break;
+
+            case 'Scale':
+                inputHtml = `<div class="scale-options">`;
+                for (let i = 1; i <= 10; i++) {
+                    inputHtml += `
+                        <div class="scale-option" onclick="selectScale('${questionKey}', ${i}, this)">
+                            ${i}
+                        </div>
+                    `;
+                }
+                inputHtml += `</div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">
+                        <span>Not at all likely</span>
+                        <span>Extremely likely</span>
+                    </div>`;
+                break;
+
+            case 'Text':
+            case 'Long Text':
+                inputHtml = `<textarea class="text-answer" onchange="setTextAnswer('${questionKey}', this.value, '${q.text}')" placeholder="Your answer..."></textarea>`;
+                break;
+
+            case 'Yes/No':
+                inputHtml = `
+                    <div class="rating-options">
+                        <div class="rating-option" onclick="selectRating('${questionKey}', 1, this)">Yes</div>
+                        <div class="rating-option" onclick="selectRating('${questionKey}', 0, this)">No</div>
+                    </div>
+                `;
+                break;
+
+            case 'Multiple Choice':
+                inputHtml = `<div class="rating-options">`;
+                q.options.forEach((opt, idx) => {
+                    inputHtml += `
+                        <div class="rating-option" onclick="selectRating('${questionKey}', '${opt}', this)">
+                            ${opt}
+                        </div>
+                    `;
+                });
+                inputHtml += `</div>`;
+                break;
+
+            default:
+                inputHtml = `<textarea class="text-answer" onchange="setTextAnswer('${questionKey}', this.value, '${q.text}')" placeholder="Your answer..."></textarea>`;
+        }
+
+        return `
+            <div class="question-item" data-question-key="${questionKey}">
+                <div class="question-text">
+                    ${q.text}
+                    ${q.required ? '<span class="required">*</span>' : ''}
+                </div>
+                ${q.help_text ? `<div class="question-help">${q.help_text}</div>` : ''}
+                ${inputHtml}
+            </div>
+        `;
+    }
+
+    function selectRating(key, value, element) {
+        // Clear previous selection
+        element.parentNode.querySelectorAll('.rating-option').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+
+        const parts = key.split('_');
+        const questionIdx = parseInt(parts[2]) + 1;
+        const questionText = element.closest('.question-item').querySelector('.question-text').textContent.replace('*', '').trim();
+
+        answers[key] = {
+            question_idx: questionIdx,
+            question_text: questionText,
+            answer: value
+        };
+        updateProgress();
+    }
+
+    function selectScale(key, value, element) {
+        element.parentNode.querySelectorAll('.scale-option').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+
+        const parts = key.split('_');
+        const questionIdx = parseInt(parts[2]) + 1;
+        const questionText = element.closest('.question-item').querySelector('.question-text').textContent.replace('*', '').trim();
+
+        answers[key] = {
+            question_idx: questionIdx,
+            question_text: questionText,
+            answer: value
+        };
+        updateProgress();
+    }
+
+    function setTextAnswer(key, value, questionText) {
+        const parts = key.split('_');
+        const questionIdx = parseInt(parts[2]) + 1;
+
+        if (value.trim()) {
+            answers[key] = {
+                question_idx: questionIdx,
+                question_text: questionText,
+                answer: value
+            };
+        } else {
+            delete answers[key];
+        }
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const answered = Object.keys(answers).length;
+        const percentage = totalQuestions > 0 ? (answered / totalQuestions) * 100 : 0;
+        document.getElementById('progressFill').style.width = percentage + '%';
+    }
+
+    async function submitFeedback() {
+        if (!currentForm) return;
+
+        const isAnonymous = document.getElementById('anonymousCheck')?.checked || false;
+        const comments = document.getElementById('additionalComments')?.value || '';
+
+        try {
+            const response = await frappe.call({
+                method: 'university_erp.www.student-portal.feedback.index.submit_feedback',
+                args: {
+                    form_name: currentForm.name,
+                    answers: JSON.stringify(Object.values(answers)),
+                    is_anonymous: isAnonymous ? 1 : 0,
+                    comments: comments
+                }
+            });
+
+            if (response.message.success) {
+                frappe.msgprint({
+                    title: 'Thank You!',
+                    message: response.message.message,
+                    indicator: 'green'
+                });
+                closeModal();
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                frappe.msgprint({
+                    title: 'Error',
+                    message: response.message.message,
+                    indicator: 'red'
+                });
+            }
+        } catch (error) {
+            frappe.msgprint({
+                title: 'Error',
+                message: 'An error occurred. Please try again.',
+                indicator: 'red'
+            });
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('feedbackModal').classList.remove('active');
+        currentForm = null;
+        answers = {};
+    }
+
+    // Close modal on outside click
+    document.getElementById('feedbackModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+</script>
+{% endblock %}

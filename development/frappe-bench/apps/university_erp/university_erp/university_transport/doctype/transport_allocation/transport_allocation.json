@@ -1,0 +1,263 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "program",
+    "column_break_1",
+    "academic_year",
+    "from_date",
+    "to_date",
+    "status",
+    "route_section",
+    "route",
+    "pickup_stop",
+    "drop_stop",
+    "column_break_route",
+    "vehicle",
+    "pickup_time",
+    "drop_time",
+    "fee_section",
+    "generate_fee",
+    "monthly_fare",
+    "total_months",
+    "column_break_fee",
+    "total_fare",
+    "fee_reference",
+    "remarks_section",
+    "remarks",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "TA-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "from_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "From Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "to_date",
+      "fieldtype": "Date",
+      "label": "To Date"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Active\nSuspended\nCancelled"
+    },
+    {
+      "fieldname": "route_section",
+      "fieldtype": "Section Break",
+      "label": "Route Details"
+    },
+    {
+      "fieldname": "route",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Route",
+      "options": "Transport Route",
+      "reqd": 1
+    },
+    {
+      "fieldname": "pickup_stop",
+      "fieldtype": "Data",
+      "label": "Pickup Stop"
+    },
+    {
+      "fieldname": "drop_stop",
+      "fieldtype": "Data",
+      "label": "Drop Stop"
+    },
+    {
+      "fieldname": "column_break_route",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "route.assigned_vehicle",
+      "fieldname": "vehicle",
+      "fieldtype": "Link",
+      "label": "Vehicle",
+      "options": "Transport Vehicle",
+      "read_only": 1
+    },
+    {
+      "fieldname": "pickup_time",
+      "fieldtype": "Time",
+      "label": "Pickup Time"
+    },
+    {
+      "fieldname": "drop_time",
+      "fieldtype": "Time",
+      "label": "Drop Time"
+    },
+    {
+      "fieldname": "fee_section",
+      "fieldtype": "Section Break",
+      "label": "Fee Details"
+    },
+    {
+      "default": "1",
+      "fieldname": "generate_fee",
+      "fieldtype": "Check",
+      "label": "Generate Fee on Submit"
+    },
+    {
+      "fetch_from": "route.monthly_fare",
+      "fieldname": "monthly_fare",
+      "fieldtype": "Currency",
+      "label": "Monthly Fare"
+    },
+    {
+      "fieldname": "total_months",
+      "fieldtype": "Int",
+      "label": "Total Months"
+    },
+    {
+      "fieldname": "column_break_fee",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_fare",
+      "fieldtype": "Currency",
+      "label": "Total Fare",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fee_reference",
+      "fieldtype": "Link",
+      "label": "Fee Reference",
+      "options": "Fees",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "remarks_section",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Transport Allocation",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Transport",
+  "name": "Transport Allocation",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "student, student_name, route",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

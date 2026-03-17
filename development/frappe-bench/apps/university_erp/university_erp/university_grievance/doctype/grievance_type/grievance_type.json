@@ -1,0 +1,157 @@
+{
+  "actions": [],
+  "autoname": "field:grievance_type_name",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "grievance_type_name",
+    "category",
+    "description",
+    "column_break_1",
+    "default_priority",
+    "sla_days",
+    "allow_anonymous",
+    "section_break_routing",
+    "default_assignee",
+    "default_committee",
+    "escalation_matrix",
+    "section_break_settings",
+    "is_active",
+    "requires_evidence",
+    "confidential_handling"
+  ],
+  "fields": [
+    {
+      "fieldname": "grievance_type_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Type Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Category",
+      "options": "\nAcademic\nAdministrative\nFinancial\nInfrastructure\nHostel\nTransport\nLibrary\nExamination\nFaculty Related\nRagging\nHarassment\nDiscrimination\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Medium",
+      "fieldname": "default_priority",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Default Priority",
+      "options": "\nLow\nMedium\nHigh\nUrgent"
+    },
+    {
+      "default": "7",
+      "description": "Maximum days for resolution",
+      "fieldname": "sla_days",
+      "fieldtype": "Int",
+      "label": "SLA (Days)"
+    },
+    {
+      "default": 0,
+      "fieldname": "allow_anonymous",
+      "fieldtype": "Check",
+      "label": "Allow Anonymous Submission"
+    },
+    {
+      "fieldname": "section_break_routing",
+      "fieldtype": "Section Break",
+      "label": "Auto-Routing"
+    },
+    {
+      "fieldname": "default_assignee",
+      "fieldtype": "Link",
+      "label": "Default Assignee",
+      "options": "User"
+    },
+    {
+      "fieldname": "default_committee",
+      "fieldtype": "Link",
+      "label": "Default Committee",
+      "options": "Grievance Committee"
+    },
+    {
+      "fieldname": "escalation_matrix",
+      "fieldtype": "Table",
+      "label": "Escalation Matrix",
+      "options": "Grievance Escalation Rule"
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Settings"
+    },
+    {
+      "default": 1,
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "default": 0,
+      "fieldname": "requires_evidence",
+      "fieldtype": "Check",
+      "label": "Requires Supporting Evidence"
+    },
+    {
+      "default": 0,
+      "fieldname": "confidential_handling",
+      "fieldtype": "Check",
+      "label": "Requires Confidential Handling"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Grievance",
+  "name": "Grievance Type",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

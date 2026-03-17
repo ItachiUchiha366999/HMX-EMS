@@ -1,0 +1,171 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Library Catalog") }}{% endblock %}
+
+{% block page_content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-3">{{ _("Library Catalog") }}</h1>
+            {% if member %}
+            <div class="alert alert-info">
+                <strong>{{ _("Welcome") }}, {{ member.member_name }}!</strong>
+                {{ _("Books borrowed") }}: {{ books_borrowed }} / {{ member.max_books }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="q"
+                           placeholder="{{ _('Search by title, author, or ISBN...') }}"
+                           value="{{ search_query or '' }}">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="category">
+                        <option value="">{{ _("All Categories") }}</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat.name }}" {% if selected_category == cat.name %}selected{% endif %}>
+                            {{ cat.category_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="subject">
+                        <option value="">{{ _("All Subjects") }}</option>
+                        {% for sub in subjects %}
+                        <option value="{{ sub.name }}" {% if selected_subject == sub.name %}selected{% endif %}>
+                            {{ sub.subject_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">{{ _("Search") }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="row">
+        {% if articles %}
+            {% for article in articles %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    {% if article.cover_image %}
+                    <img src="{{ article.cover_image }}" class="card-img-top" alt="{{ article.title }}"
+                         style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                         style="height: 200px;">
+                        <i class="fa fa-book fa-3x text-muted"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text text-muted mb-1">
+                            {% if article.authors %}{{ article.authors }}{% endif %}
+                        </p>
+                        <p class="card-text small">
+                            {% if article.category_name %}
+                            <span class="badge bg-secondary">{{ article.category_name }}</span>
+                            {% endif %}
+                            {% if article.subject_name %}
+                            <span class="badge bg-info">{{ article.subject_name }}</span>
+                            {% endif %}
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {{ article.article_type }}
+                                {% if article.publication_year %}({{ article.publication_year }}){% endif %}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="{% if article.available_count > 0 %}text-success{% else %}text-danger{% endif %}">
+                                {% if article.available_count > 0 %}
+                                    {{ article.available_count }} {{ _("available") }}
+                                {% else %}
+                                    {{ _("Not available") }}
+                                {% endif %}
+                            </span>
+                            {% if is_logged_in and member and article.available_count == 0 %}
+                            <button class="btn btn-sm btn-outline-primary reserve-btn"
+                                    data-article="{{ article.name }}">
+                                {{ _("Reserve") }}
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    {{ _("No books found matching your search criteria.") }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Pagination -->
+    {% if total_pages > 1 %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not has_prev %}disabled{% endif %}">
+                <a class="page-link" href="?q={{ search_query }}&category={{ selected_category }}&subject={{ selected_subject }}&page={{ current_page - 1 }}">
+                    {{ _("Previous") }}
+                </a>
+            </li>
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == current_page %}active{% endif %}">
+                <a class="page-link" href="?q={{ search_query }}&category={{ selected_category }}&subject={{ selected_subject }}&page={{ p }}">
+                    {{ p }}
+                </a>
+            </li>
+            {% endfor %}
+            <li class="page-item {% if not has_next %}disabled{% endif %}">
+                <a class="page-link" href="?q={{ search_query }}&category={{ selected_category }}&subject={{ selected_subject }}&page={{ current_page + 1 }}">
+                    {{ _("Next") }}
+                </a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% if not is_logged_in %}
+    <div class="text-center mt-4">
+        <p class="text-muted">{{ _("Login to reserve books and view your borrowing history.") }}</p>
+        <a href="/login" class="btn btn-primary">{{ _("Login") }}</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.reserve-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var article = this.dataset.article;
+            frappe.call({
+                method: 'university_erp.www.library.index.reserve_book',
+                args: { article: article },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.msgprint(r.message.message);
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

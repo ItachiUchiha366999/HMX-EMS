@@ -1,0 +1,87 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block title %}EMERGENCY: {{ alert.alert_type }}{% endblock %}
+
+{% block content %}
+<table class="content-table" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td style="padding: 0;">
+            <!-- Emergency Banner -->
+            <div style="background-color: {{ severity_color }}; color: white; padding: 20px; text-align: center;">
+                <h1 style="margin: 0; font-size: 24px; text-transform: uppercase;">
+                    EMERGENCY ALERT
+                </h1>
+                <p style="margin: 10px 0 0 0; font-size: 18px;">
+                    {{ alert.alert_type }} - {{ alert.severity }} Severity
+                </p>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 25px;">
+            {% if recipient_name %}
+            <p style="margin-bottom: 15px;">Dear {{ recipient_name }},</p>
+            {% endif %}
+
+            <h2 style="color: #1a1a2e; margin-bottom: 15px; border-bottom: 2px solid {{ severity_color }}; padding-bottom: 10px;">
+                {{ alert.title }}
+            </h2>
+
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+                <p style="color: #333; line-height: 1.6; margin: 0; font-size: 16px;">
+                    {{ alert.message }}
+                </p>
+            </div>
+
+            {% if alert.instructions %}
+            <div style="background-color: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                <h3 style="color: #856404; margin: 0 0 10px 0;">
+                    Safety Instructions
+                </h3>
+                <p style="color: #856404; margin: 0; line-height: 1.6;">
+                    {{ alert.instructions }}
+                </p>
+            </div>
+            {% endif %}
+
+            {% if alert.affected_buildings or alert.affected_zones %}
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #1a1a2e; margin-bottom: 10px;">Affected Areas</h3>
+                {% if alert.affected_buildings %}
+                <p style="margin: 5px 0;"><strong>Buildings:</strong> {{ alert.affected_buildings }}</p>
+                {% endif %}
+                {% if alert.affected_zones %}
+                <p style="margin: 5px 0;"><strong>Zones:</strong> {{ alert.affected_zones }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if alert.require_acknowledgment %}
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ acknowledge_link }}" style="display: inline-block; padding: 15px 40px; background-color: {{ severity_color }}; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                    ACKNOWLEDGE RECEIPT
+                </a>
+                <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                    Please acknowledge that you have received this alert
+                </p>
+            </div>
+            {% endif %}
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                <p style="font-size: 14px; color: #666; margin: 0;">
+                    <strong>Alert Time:</strong> {{ frappe.utils.format_datetime(alert.broadcast_time) }}<br>
+                    <strong>Alert ID:</strong> {{ alert.name }}
+                </p>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background-color: #f8d7da; border-radius: 5px;">
+                <p style="margin: 0; font-size: 12px; color: #721c24;">
+                    <strong>IMPORTANT:</strong> This is an official emergency notification from the university.
+                    Follow all safety instructions and stay updated through official channels.
+                    If you need immediate assistance, contact campus security.
+                </p>
+            </div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

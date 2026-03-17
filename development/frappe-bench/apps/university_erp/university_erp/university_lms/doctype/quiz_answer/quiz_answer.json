@@ -1,0 +1,89 @@
+{
+    "actions": [],
+    "creation": "2026-01-02 00:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "question_idx",
+        "question_text",
+        "question_type",
+        "column_break_1",
+        "student_answer",
+        "correct_answer",
+        "is_correct",
+        "marks_obtained",
+        "time_taken_seconds"
+    ],
+    "fields": [
+        {
+            "fieldname": "question_idx",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "label": "Question #",
+            "reqd": 1
+        },
+        {
+            "fieldname": "question_text",
+            "fieldtype": "Text",
+            "label": "Question",
+            "read_only": 1
+        },
+        {
+            "fieldname": "question_type",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Type",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "student_answer",
+            "fieldtype": "Text",
+            "in_list_view": 1,
+            "label": "Student Answer"
+        },
+        {
+            "fieldname": "correct_answer",
+            "fieldtype": "Text",
+            "label": "Correct Answer",
+            "read_only": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "is_correct",
+            "fieldtype": "Check",
+            "in_list_view": 1,
+            "label": "Correct",
+            "read_only": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "marks_obtained",
+            "fieldtype": "Float",
+            "in_list_view": 1,
+            "label": "Marks",
+            "read_only": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "time_taken_seconds",
+            "fieldtype": "Int",
+            "label": "Time (sec)"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-02 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University LMS",
+    "name": "Quiz Answer",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "question_idx",
+    "sort_order": "ASC",
+    "states": []
+}

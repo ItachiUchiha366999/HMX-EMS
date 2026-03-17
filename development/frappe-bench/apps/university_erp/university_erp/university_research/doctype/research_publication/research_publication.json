@@ -1,0 +1,280 @@
+{
+  "actions": [],
+  "autoname": "format:PUB-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "publication_type",
+    "column_break_1",
+    "publication_date",
+    "status",
+    "section_authors",
+    "authors",
+    "corresponding_author",
+    "section_journal",
+    "journal_name",
+    "publisher",
+    "volume",
+    "issue",
+    "column_break_2",
+    "pages",
+    "issn_isbn",
+    "doi",
+    "url",
+    "section_indexing",
+    "is_scopus_indexed",
+    "is_wos_indexed",
+    "is_ugc_listed",
+    "column_break_3",
+    "impact_factor",
+    "h_index",
+    "citations",
+    "section_abstract",
+    "abstract",
+    "keywords",
+    "section_files",
+    "manuscript_file",
+    "published_file"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Publication Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "publication_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Publication Type",
+      "options": "Journal Article\nConference Paper\nBook Chapter\nBook\nPatent\nThesis\nTechnical Report\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "publication_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Publication Date"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nSubmitted\nUnder Review\nAccepted\nPublished\nRejected"
+    },
+    {
+      "fieldname": "section_authors",
+      "fieldtype": "Section Break",
+      "label": "Authors"
+    },
+    {
+      "fieldname": "authors",
+      "fieldtype": "Table",
+      "label": "Authors",
+      "options": "Publication Author"
+    },
+    {
+      "fieldname": "corresponding_author",
+      "fieldtype": "Link",
+      "label": "Corresponding Author",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "section_journal",
+      "fieldtype": "Section Break",
+      "label": "Journal/Conference Details"
+    },
+    {
+      "fieldname": "journal_name",
+      "fieldtype": "Data",
+      "label": "Journal/Conference Name"
+    },
+    {
+      "fieldname": "publisher",
+      "fieldtype": "Data",
+      "label": "Publisher"
+    },
+    {
+      "fieldname": "volume",
+      "fieldtype": "Data",
+      "label": "Volume"
+    },
+    {
+      "fieldname": "issue",
+      "fieldtype": "Data",
+      "label": "Issue"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pages",
+      "fieldtype": "Data",
+      "label": "Pages"
+    },
+    {
+      "fieldname": "issn_isbn",
+      "fieldtype": "Data",
+      "label": "ISSN/ISBN"
+    },
+    {
+      "fieldname": "doi",
+      "fieldtype": "Data",
+      "label": "DOI"
+    },
+    {
+      "fieldname": "url",
+      "fieldtype": "Data",
+      "label": "URL"
+    },
+    {
+      "fieldname": "section_indexing",
+      "fieldtype": "Section Break",
+      "label": "Indexing & Impact"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_scopus_indexed",
+      "fieldtype": "Check",
+      "label": "Scopus Indexed"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_wos_indexed",
+      "fieldtype": "Check",
+      "label": "Web of Science Indexed"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_ugc_listed",
+      "fieldtype": "Check",
+      "label": "UGC Listed"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "impact_factor",
+      "fieldtype": "Float",
+      "label": "Impact Factor"
+    },
+    {
+      "default": "0",
+      "fieldname": "h_index",
+      "fieldtype": "Int",
+      "label": "H-Index"
+    },
+    {
+      "default": "0",
+      "fieldname": "citations",
+      "fieldtype": "Int",
+      "label": "Citation Count"
+    },
+    {
+      "fieldname": "section_abstract",
+      "fieldtype": "Section Break",
+      "label": "Abstract"
+    },
+    {
+      "fieldname": "abstract",
+      "fieldtype": "Text Editor",
+      "label": "Abstract"
+    },
+    {
+      "fieldname": "keywords",
+      "fieldtype": "Small Text",
+      "label": "Keywords"
+    },
+    {
+      "fieldname": "section_files",
+      "fieldtype": "Section Break",
+      "label": "Files"
+    },
+    {
+      "fieldname": "manuscript_file",
+      "fieldtype": "Attach",
+      "label": "Manuscript File"
+    },
+    {
+      "fieldname": "published_file",
+      "fieldtype": "Attach",
+      "label": "Published Version"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Research",
+  "name": "Research Publication",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

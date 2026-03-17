@@ -1,0 +1,153 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:template_name",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "subject",
+    "enabled",
+    "column_break_1",
+    "category",
+    "event_type",
+    "channels_section",
+    "send_email",
+    "send_sms",
+    "send_push",
+    "send_in_app",
+    "template_section",
+    "template",
+    "available_fields",
+    "sms_template"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Subject",
+      "reqd": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Category",
+      "options": "Fee\nExamination\nAttendance\nPlacement\nLibrary\nHostel\nLeave\nGeneral"
+    },
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "label": "Event Type"
+    },
+    {
+      "fieldname": "channels_section",
+      "fieldtype": "Section Break",
+      "label": "Channels"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_email",
+      "fieldtype": "Check",
+      "label": "Send Email"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_sms",
+      "fieldtype": "Check",
+      "label": "Send SMS"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_push",
+      "fieldtype": "Check",
+      "label": "Send Push"
+    },
+    {
+      "default": "1",
+      "fieldname": "send_in_app",
+      "fieldtype": "Check",
+      "label": "Send In-App"
+    },
+    {
+      "fieldname": "template_section",
+      "fieldtype": "Section Break",
+      "label": "Template Content"
+    },
+    {
+      "fieldname": "template",
+      "fieldtype": "Text Editor",
+      "label": "Email Template",
+      "reqd": 1
+    },
+    {
+      "fieldname": "available_fields",
+      "fieldtype": "Small Text",
+      "label": "Available Fields",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sms_template",
+      "fieldtype": "Small Text",
+      "label": "SMS Template (160 chars max)"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Notification Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,205 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Certificates") }} - {{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <div class="portal-header">
+        <a href="/student-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("Certificates") }}</h2>
+    </div>
+
+    <!-- Request New Certificate -->
+    <div class="portal-section">
+        <div class="section-header">
+            <h3 class="section-title">{{ _("Request New Certificate") }}</h3>
+            <button class="btn btn-primary btn-sm" onclick="showRequestModal()">
+                <svg class="icon icon-sm"><use href="#icon-plus"></use></svg>
+                {{ _("New Request") }}
+            </button>
+        </div>
+
+        {% if available_certificates %}
+        <div class="certificate-types">
+            {% for cert in available_certificates %}
+            <div class="certificate-type-card" onclick="requestCertificate('{{ cert.name }}')">
+                <div class="cert-icon">
+                    <svg class="icon icon-md"><use href="#icon-award"></use></svg>
+                </div>
+                <div class="cert-details">
+                    <h4>{{ cert.certificate_name }}</h4>
+                    <p>{{ cert.description or '' }}</p>
+                    <div class="cert-meta">
+                        {% if cert.processing_days %}
+                        <span>{{ _("Processing") }}: {{ cert.processing_days }} {{ _("days") }}</span>
+                        {% endif %}
+                        {% if cert.fee_amount %}
+                        <span>{{ _("Fee") }}: {{ frappe.format_value(cert.fee_amount, {"fieldtype": "Currency"}) }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted">{{ _("No certificate types available for request") }}</p>
+        {% endif %}
+    </div>
+
+    <!-- My Requests -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("My Requests") }}</h3>
+
+        {% if certificate_requests %}
+        <div class="request-list">
+            {% for req in certificate_requests %}
+            <div class="request-card status-{{ req.status | lower }}">
+                <div class="request-header">
+                    <h4>{{ req.certificate_name }}</h4>
+                    <span class="status-badge {{ req.status | lower }}">{{ req.status }}</span>
+                </div>
+                <div class="request-details">
+                    <p><strong>{{ _("Request ID") }}:</strong> {{ req.name }}</p>
+                    <p><strong>{{ _("Request Date") }}:</strong> {{ frappe.format_date(req.request_date) }}</p>
+                    {% if req.purpose %}
+                    <p><strong>{{ _("Purpose") }}:</strong> {{ req.purpose }}</p>
+                    {% endif %}
+                    {% if req.certificate_number %}
+                    <p><strong>{{ _("Certificate No") }}:</strong> {{ req.certificate_number }}</p>
+                    {% endif %}
+                    {% if req.issue_date %}
+                    <p><strong>{{ _("Issued On") }}:</strong> {{ frappe.format_date(req.issue_date) }}</p>
+                    {% endif %}
+                    {% if req.remarks %}
+                    <p class="remarks"><strong>{{ _("Remarks") }}:</strong> {{ req.remarks }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted empty-message">{{ _("No certificate requests found") }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Issued Certificates -->
+    {% if issued_certificates %}
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Download Certificates") }}</h3>
+
+        <div class="issued-list">
+            {% for cert in issued_certificates %}
+            <div class="issued-card">
+                <div class="issued-info">
+                    <h4>{{ cert.certificate_name }}</h4>
+                    <p>{{ _("Certificate No") }}: {{ cert.certificate_number }}</p>
+                    <p>{{ _("Issued On") }}: {{ frappe.format_date(cert.issue_date) }}</p>
+                </div>
+                <div class="issued-actions">
+                    {% if cert.certificate_file %}
+                    <a href="{{ cert.certificate_file }}" class="btn btn-primary btn-sm" target="_blank">
+                        <svg class="icon icon-sm"><use href="#icon-download"></use></svg>
+                        {{ _("Download") }}
+                    </a>
+                    {% endif %}
+                    <a href="/api/method/university_erp.university_integrations.doctype.certificate_request.certificate_request.verify_certificate?certificate_number={{ cert.certificate_number }}"
+                       class="btn btn-default btn-sm" target="_blank">
+                        {{ _("Verify") }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Request Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ _("Request Certificate") }}</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="certificateRequestForm">
+                    <div class="form-group">
+                        <label>{{ _("Certificate Type") }}</label>
+                        <select class="form-control" id="certificateType" required>
+                            <option value="">{{ _("Select Certificate Type") }}</option>
+                            {% for cert in available_certificates %}
+                            <option value="{{ cert.name }}">{{ cert.certificate_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ _("Purpose") }}</label>
+                        <textarea class="form-control" id="purpose" rows="3" required
+                                  placeholder="{{ _('State the purpose for requesting this certificate') }}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ _("Number of Copies") }}</label>
+                        <input type="number" class="form-control" id="copies" value="1" min="1" max="5">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _("Cancel") }}</button>
+                <button type="button" class="btn btn-primary" onclick="submitRequest()">{{ _("Submit Request") }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+function showRequestModal() {
+    $('#requestModal').modal('show');
+}
+
+function requestCertificate(template) {
+    $('#certificateType').val(template);
+    showRequestModal();
+}
+
+function submitRequest() {
+    const template = $('#certificateType').val();
+    const purpose = $('#purpose').val();
+    const copies = $('#copies').val();
+
+    if (!template || !purpose) {
+        frappe.msgprint(__('Please fill in all required fields'));
+        return;
+    }
+
+    frappe.call({
+        method: 'university_erp.university_portals.www.student-portal.certificates.request_certificate',
+        args: {
+            certificate_template: template,
+            purpose: purpose,
+            copies: copies
+        },
+        callback: function(r) {
+            if (r.message && r.message.success) {
+                $('#requestModal').modal('hide');
+                frappe.msgprint({
+                    title: __('Success'),
+                    message: r.message.message,
+                    indicator: 'green'
+                });
+                setTimeout(() => location.reload(), 1500);
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

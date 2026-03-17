@@ -1,0 +1,60 @@
+{
+  "actions": [],
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "communication_type",
+    "timestamp",
+    "sent_by",
+    "column_break_1",
+    "message"
+  ],
+  "fields": [
+    {
+      "default": "Response",
+      "fieldname": "communication_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Type",
+      "options": "System\nResponse\nQuery\nNote\nEmail\nCall"
+    },
+    {
+      "fieldname": "timestamp",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Timestamp"
+    },
+    {
+      "fieldname": "sent_by",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Sent By",
+      "options": "User"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Text Editor",
+      "in_list_view": 1,
+      "label": "Message",
+      "reqd": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Grievance",
+  "name": "Grievance Communication",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

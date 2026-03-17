@@ -1,0 +1,61 @@
+{
+  "doctype": "DocType",
+  "name": "Practical Exam Examiner",
+  "module": "University Examinations",
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "examiner_type",
+      "fieldtype": "Select",
+      "label": "Examiner Type",
+      "options": "\nInternal\nExternal",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "faculty_member",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Instructor",
+      "depends_on": "eval:doc.examiner_type=='Internal'",
+      "mandatory_depends_on": "eval:doc.examiner_type=='Internal'",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "external_examiner",
+      "fieldtype": "Link",
+      "label": "External Examiner",
+      "options": "External Examiner",
+      "depends_on": "eval:doc.examiner_type=='External'",
+      "mandatory_depends_on": "eval:doc.examiner_type=='External'",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "examiner_name",
+      "fieldtype": "Data",
+      "label": "Examiner Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "role",
+      "fieldtype": "Select",
+      "label": "Role",
+      "options": "\nChief Examiner\nExaminer\nSupervisor\nLab Assistant",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "can_evaluate",
+      "fieldtype": "Check",
+      "label": "Can Evaluate",
+      "default": "1"
+    },
+    {
+      "fieldname": "remuneration",
+      "fieldtype": "Currency",
+      "label": "Remuneration"
+    }
+  ],
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

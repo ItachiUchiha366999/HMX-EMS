@@ -1,0 +1,202 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:company_name",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "company_name",
+    "industry_type",
+    "company_website",
+    "column_break_1",
+    "company_size",
+    "headquarters",
+    "is_active",
+    "contact_section",
+    "contact_person",
+    "contact_email",
+    "contact_phone",
+    "stats_section",
+    "total_hires",
+    "avg_package",
+    "highest_package"
+  ],
+  "fields": [
+    {
+      "fieldname": "company_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Company Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "industry_type",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Industry Type",
+      "options": "Industry Type"
+    },
+    {
+      "fieldname": "company_website",
+      "fieldtype": "Data",
+      "label": "Website",
+      "options": "URL"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company_size",
+      "fieldtype": "Select",
+      "label": "Company Size",
+      "options": "1-50\n51-200\n201-500\n501-1000\n1000+"
+    },
+    {
+      "fieldname": "headquarters",
+      "fieldtype": "Data",
+      "label": "Headquarters"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact Details"
+    },
+    {
+      "fieldname": "contact_person",
+      "fieldtype": "Data",
+      "label": "Contact Person"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "stats_section",
+      "fieldtype": "Section Break",
+      "label": "Placement Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_hires",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Total Hires",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "avg_package",
+      "fieldtype": "Currency",
+      "label": "Average Package (LPA)",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "highest_package",
+      "fieldtype": "Currency",
+      "label": "Highest Package (LPA)",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Placement Job Opening",
+      "link_fieldname": "company"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Placement",
+  "name": "Placement Company",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Placement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "company_name, industry_type",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "company_name",
+  "track_changes": 1
+}

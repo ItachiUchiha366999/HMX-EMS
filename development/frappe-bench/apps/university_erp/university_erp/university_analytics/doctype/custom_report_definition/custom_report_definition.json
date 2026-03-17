@@ -1,0 +1,238 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:report_title",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "report_title",
+    "report_type",
+    "description",
+    "column_break_basic",
+    "primary_doctype",
+    "is_public",
+    "section_break_columns",
+    "columns",
+    "section_break_joins",
+    "joins",
+    "section_break_filters",
+    "filters",
+    "section_break_grouping",
+    "group_by_fields",
+    "having_clause",
+    "column_break_grouping",
+    "sort_by",
+    "sort_order",
+    "row_limit",
+    "section_break_chart",
+    "include_chart",
+    "chart_type",
+    "chart_config",
+    "section_break_access",
+    "allowed_roles"
+  ],
+  "fields": [
+    {
+      "fieldname": "report_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Report Title",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "report_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Report Type",
+      "options": "\nTabular\nSummary\nMatrix\nPivot\nChart Only",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "primary_doctype",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Primary DocType",
+      "options": "DocType",
+      "reqd": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "is_public",
+      "fieldtype": "Check",
+      "label": "Is Public"
+    },
+    {
+      "fieldname": "section_break_columns",
+      "fieldtype": "Section Break",
+      "label": "Columns"
+    },
+    {
+      "fieldname": "columns",
+      "fieldtype": "Table",
+      "label": "Columns",
+      "options": "Report Column Definition"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_joins",
+      "fieldtype": "Section Break",
+      "label": "Table Joins"
+    },
+    {
+      "fieldname": "joins",
+      "fieldtype": "Table",
+      "label": "Joins",
+      "options": "Report Join Definition"
+    },
+    {
+      "fieldname": "section_break_filters",
+      "fieldtype": "Section Break",
+      "label": "Filters"
+    },
+    {
+      "fieldname": "filters",
+      "fieldtype": "Table",
+      "label": "Filters",
+      "options": "Report Filter Definition"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_grouping",
+      "fieldtype": "Section Break",
+      "label": "Grouping & Sorting"
+    },
+    {
+      "description": "Comma-separated field names",
+      "fieldname": "group_by_fields",
+      "fieldtype": "Small Text",
+      "label": "Group By Fields"
+    },
+    {
+      "fieldname": "having_clause",
+      "fieldtype": "Data",
+      "label": "Having Clause"
+    },
+    {
+      "fieldname": "column_break_grouping",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sort_by",
+      "fieldtype": "Data",
+      "label": "Sort By"
+    },
+    {
+      "default": "ASC",
+      "fieldname": "sort_order",
+      "fieldtype": "Select",
+      "label": "Sort Order",
+      "options": "ASC\nDESC"
+    },
+    {
+      "fieldname": "row_limit",
+      "fieldtype": "Int",
+      "label": "Row Limit"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_chart",
+      "fieldtype": "Section Break",
+      "label": "Chart Configuration"
+    },
+    {
+      "default": "0",
+      "fieldname": "include_chart",
+      "fieldtype": "Check",
+      "label": "Include Chart"
+    },
+    {
+      "depends_on": "eval:doc.include_chart",
+      "fieldname": "chart_type",
+      "fieldtype": "Select",
+      "label": "Chart Type",
+      "options": "\nBar\nLine\nPie\nDonut\nArea"
+    },
+    {
+      "depends_on": "eval:doc.include_chart",
+      "description": "JSON configuration for chart",
+      "fieldname": "chart_config",
+      "fieldtype": "Code",
+      "label": "Chart Config",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "section_break_access",
+      "fieldtype": "Section Break",
+      "label": "Access Control"
+    },
+    {
+      "fieldname": "allowed_roles",
+      "fieldtype": "Table MultiSelect",
+      "label": "Allowed Roles",
+      "options": "Report Access Role"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "Custom Report Definition",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

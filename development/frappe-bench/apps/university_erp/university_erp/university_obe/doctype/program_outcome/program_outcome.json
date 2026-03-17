@@ -1,0 +1,235 @@
+{
+  "actions": [],
+  "autoname": "format:{program}-{po_code}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "program",
+    "po_number",
+    "po_code",
+    "column_break_1",
+    "is_pso",
+    "academic_year",
+    "status",
+    "section_po",
+    "po_title",
+    "po_statement",
+    "description",
+    "section_nba",
+    "nba_attribute",
+    "section_bloom",
+    "bloom_level",
+    "column_break_2",
+    "action_verbs",
+    "section_peo_mapping",
+    "peo_mapping",
+    "section_attainment",
+    "target_attainment",
+    "column_break_3",
+    "current_attainment"
+  ],
+  "fields": [
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fieldname": "po_number",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "PO Number",
+      "reqd": 1
+    },
+    {
+      "description": "e.g., PO1, PO2, PSO1",
+      "fieldname": "po_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "PO Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "description": "Check if this is a Program Specific Outcome",
+      "fieldname": "is_pso",
+      "fieldtype": "Check",
+      "label": "Program Specific Outcome (PSO)"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Effective From",
+      "options": "Academic Year"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Active\nRevised\nArchived"
+    },
+    {
+      "fieldname": "section_po",
+      "fieldtype": "Section Break",
+      "label": "PO Statement"
+    },
+    {
+      "fieldname": "po_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "PO Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "po_statement",
+      "fieldtype": "Text",
+      "label": "PO Statement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Detailed Description"
+    },
+    {
+      "fieldname": "section_nba",
+      "fieldtype": "Section Break",
+      "label": "NBA Graduate Attributes"
+    },
+    {
+      "description": "Map to NBA Graduate Attribute (for Engineering programs)",
+      "fieldname": "nba_attribute",
+      "fieldtype": "Select",
+      "label": "NBA Graduate Attribute",
+      "options": "\nEngineering Knowledge\nProblem Analysis\nDesign/Development of Solutions\nConduct Investigations\nModern Tool Usage\nEngineer and Society\nEnvironment and Sustainability\nEthics\nIndividual and Team Work\nCommunication\nProject Management and Finance\nLife-long Learning"
+    },
+    {
+      "fieldname": "section_bloom",
+      "fieldtype": "Section Break",
+      "label": "Bloom's Taxonomy"
+    },
+    {
+      "fieldname": "bloom_level",
+      "fieldtype": "Select",
+      "label": "Bloom's Level",
+      "options": "\nRemember\nUnderstand\nApply\nAnalyze\nEvaluate\nCreate"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Action verbs used in the PO statement",
+      "fieldname": "action_verbs",
+      "fieldtype": "Small Text",
+      "label": "Action Verbs"
+    },
+    {
+      "fieldname": "section_peo_mapping",
+      "fieldtype": "Section Break",
+      "label": "PEO Mapping"
+    },
+    {
+      "fieldname": "peo_mapping",
+      "fieldtype": "Table",
+      "label": "PEO Mapping",
+      "options": "PO PEO Mapping"
+    },
+    {
+      "fieldname": "section_attainment",
+      "fieldtype": "Section Break",
+      "label": "Attainment"
+    },
+    {
+      "default": "60",
+      "fieldname": "target_attainment",
+      "fieldtype": "Percent",
+      "label": "Target Attainment %"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "current_attainment",
+      "fieldtype": "Percent",
+      "label": "Current Attainment %",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Program Outcome",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "po_title",
+  "track_changes": 1
+}

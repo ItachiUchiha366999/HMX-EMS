@@ -1,0 +1,189 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "member",
+    "member_name",
+    "article",
+    "transaction",
+    "column_break_1",
+    "fine_date",
+    "fine_amount",
+    "status",
+    "reason",
+    "payment_section",
+    "paid_date",
+    "fee_reference"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "LF-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "member",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Member",
+      "options": "Library Member",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "member.member_name",
+      "fieldname": "member_name",
+      "fieldtype": "Data",
+      "label": "Member Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "article",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Article",
+      "options": "Library Article"
+    },
+    {
+      "fieldname": "transaction",
+      "fieldtype": "Link",
+      "label": "Transaction",
+      "options": "Library Transaction"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "fine_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Fine Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "fine_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Fine Amount",
+      "reqd": 1
+    },
+    {
+      "default": "Unpaid",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Unpaid\nPaid\nWaived"
+    },
+    {
+      "fieldname": "reason",
+      "fieldtype": "Small Text",
+      "label": "Reason"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "payment_section",
+      "fieldtype": "Section Break",
+      "label": "Payment"
+    },
+    {
+      "fieldname": "paid_date",
+      "fieldtype": "Date",
+      "label": "Paid Date"
+    },
+    {
+      "fieldname": "fee_reference",
+      "fieldtype": "Link",
+      "label": "Fee Reference",
+      "options": "Fees",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Library",
+  "name": "Library Fine",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Librarian",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "member, article, status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,271 @@
+{
+  "actions": [],
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "provider",
+    "column_break_basic",
+    "test_mode",
+    "api_section",
+    "phone_number_id",
+    "business_account_id",
+    "column_break_api",
+    "access_token",
+    "api_version",
+    "webhook_section",
+    "webhook_verify_token",
+    "webhook_url",
+    "column_break_webhook",
+    "last_webhook_received",
+    "twilio_section",
+    "twilio_account_sid",
+    "twilio_auth_token",
+    "column_break_twilio",
+    "twilio_whatsapp_number",
+    "gupshup_section",
+    "gupshup_api_key",
+    "gupshup_app_name",
+    "column_break_gupshup",
+    "gupshup_source_number",
+    "wati_section",
+    "wati_api_endpoint",
+    "wati_api_token",
+    "settings_section",
+    "default_country_code",
+    "rate_limit_per_minute",
+    "column_break_settings",
+    "daily_message_limit",
+    "messages_sent_today"
+  ],
+  "fields": [
+    {
+      "default": "0",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enable WhatsApp Integration"
+    },
+    {
+      "fieldname": "provider",
+      "fieldtype": "Select",
+      "label": "Provider",
+      "options": "\nMeta Business API\nTwilio WhatsApp\nGupshup\nWATI",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "description": "When enabled, messages are logged but not sent",
+      "fieldname": "test_mode",
+      "fieldtype": "Check",
+      "label": "Test Mode"
+    },
+    {
+      "depends_on": "eval:doc.provider=='Meta Business API'",
+      "fieldname": "api_section",
+      "fieldtype": "Section Break",
+      "label": "Meta Business API Configuration"
+    },
+    {
+      "description": "WhatsApp Business Phone Number ID",
+      "fieldname": "phone_number_id",
+      "fieldtype": "Data",
+      "label": "Phone Number ID"
+    },
+    {
+      "description": "WhatsApp Business Account ID",
+      "fieldname": "business_account_id",
+      "fieldtype": "Data",
+      "label": "Business Account ID"
+    },
+    {
+      "fieldname": "column_break_api",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Permanent access token from Meta Business Suite",
+      "fieldname": "access_token",
+      "fieldtype": "Password",
+      "label": "Access Token"
+    },
+    {
+      "default": "v18.0",
+      "fieldname": "api_version",
+      "fieldtype": "Data",
+      "label": "API Version"
+    },
+    {
+      "fieldname": "webhook_section",
+      "fieldtype": "Section Break",
+      "label": "Webhook Configuration"
+    },
+    {
+      "description": "Token for webhook verification",
+      "fieldname": "webhook_verify_token",
+      "fieldtype": "Data",
+      "label": "Webhook Verify Token"
+    },
+    {
+      "description": "Auto-generated webhook URL",
+      "fieldname": "webhook_url",
+      "fieldtype": "Data",
+      "label": "Webhook URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_webhook",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "last_webhook_received",
+      "fieldtype": "Datetime",
+      "label": "Last Webhook Received",
+      "read_only": 1
+    },
+    {
+      "depends_on": "eval:doc.provider=='Twilio WhatsApp'",
+      "fieldname": "twilio_section",
+      "fieldtype": "Section Break",
+      "label": "Twilio WhatsApp Configuration"
+    },
+    {
+      "fieldname": "twilio_account_sid",
+      "fieldtype": "Data",
+      "label": "Twilio Account SID"
+    },
+    {
+      "fieldname": "twilio_auth_token",
+      "fieldtype": "Password",
+      "label": "Twilio Auth Token"
+    },
+    {
+      "fieldname": "column_break_twilio",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "WhatsApp-enabled Twilio number (format: whatsapp:+1234567890)",
+      "fieldname": "twilio_whatsapp_number",
+      "fieldtype": "Data",
+      "label": "Twilio WhatsApp Number"
+    },
+    {
+      "depends_on": "eval:doc.provider=='Gupshup'",
+      "fieldname": "gupshup_section",
+      "fieldtype": "Section Break",
+      "label": "Gupshup Configuration"
+    },
+    {
+      "fieldname": "gupshup_api_key",
+      "fieldtype": "Password",
+      "label": "Gupshup API Key"
+    },
+    {
+      "fieldname": "gupshup_app_name",
+      "fieldtype": "Data",
+      "label": "App Name"
+    },
+    {
+      "fieldname": "column_break_gupshup",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "gupshup_source_number",
+      "fieldtype": "Data",
+      "label": "Source Phone Number"
+    },
+    {
+      "depends_on": "eval:doc.provider=='WATI'",
+      "fieldname": "wati_section",
+      "fieldtype": "Section Break",
+      "label": "WATI Configuration"
+    },
+    {
+      "description": "e.g., https://live-server-xxxxx.wati.io",
+      "fieldname": "wati_api_endpoint",
+      "fieldtype": "Data",
+      "label": "WATI API Endpoint"
+    },
+    {
+      "fieldname": "wati_api_token",
+      "fieldtype": "Password",
+      "label": "WATI API Token"
+    },
+    {
+      "fieldname": "settings_section",
+      "fieldtype": "Section Break",
+      "label": "General Settings"
+    },
+    {
+      "default": "+91",
+      "fieldname": "default_country_code",
+      "fieldtype": "Data",
+      "label": "Default Country Code"
+    },
+    {
+      "default": "60",
+      "description": "Messages per minute rate limit",
+      "fieldname": "rate_limit_per_minute",
+      "fieldtype": "Int",
+      "label": "Rate Limit (per minute)"
+    },
+    {
+      "fieldname": "column_break_settings",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1000",
+      "fieldname": "daily_message_limit",
+      "fieldtype": "Int",
+      "label": "Daily Message Limit"
+    },
+    {
+      "default": "0",
+      "fieldname": "messages_sent_today",
+      "fieldtype": "Int",
+      "label": "Messages Sent Today",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "WhatsApp Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

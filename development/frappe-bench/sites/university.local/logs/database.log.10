@@ -1,0 +1,755 @@
+2026-03-16 12:54:33,061 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 12:54:33,350 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0
+2026-03-16 12:54:33,458 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0
+2026-03-16 12:54:33,615 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:33,733 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:33,852 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:33,963 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:34,071 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:34,183 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:34,297 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:34,410 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0
+2026-03-16 12:54:34,520 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:34,636 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:34,748 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:34,853 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:34,962 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 12:54:35,069 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,176 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,289 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,399 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,514 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,622 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,737 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:35,846 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 12:54:35,957 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,069 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 12:54:36,178 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,290 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,405 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,515 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,627 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 12:54:36,737 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,850 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:36,962 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:37,072 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 12:54:37,179 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 12:54:37,292 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0
+2026-03-16 12:54:37,406 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 12:54:37,513 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 12:54:37,618 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 12:54:37,725 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 12:54:37,900 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 12:54:38,039 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 12:54:38,178 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 12:54:38,313 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 12:54:38,468 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:38,559 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:38,653 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:38,751 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:38,847 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:38,991 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Component` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `custom_category_variations` json
+2026-03-16 12:54:39,082 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Component` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `custom_category_variations` json
+2026-03-16 12:54:39,191 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:39,302 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:39,413 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 2.0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:39,528 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:39,639 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:39,749 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:39,863 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:39,973 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,080 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,193 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,301 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,412 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:40,523 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,631 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 12:54:40,740 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 12:54:40,845 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:10:01,592 WARNING database DDL Query made to DB:
+alter table `tabDocType` add column if not exists migration_hash varchar(140)
+2026-03-16 14:10:11,394 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPrint Heading` DROP INDEX `print_heading`
+2026-03-16 14:10:17,728 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBank Transaction` MODIFY `withdrawal` decimal(21,9) not null default 0, MODIFY `deposit` decimal(21,9) not null default 0, MODIFY `allocated_amount` decimal(21,9) not null default 0, MODIFY `excluded_fee` decimal(21,9) not null default 0, MODIFY `description` text, MODIFY `unallocated_amount` decimal(21,9) not null default 0, MODIFY `included_fee` decimal(21,9) not null default 0, MODIFY `reference_number` text
+2026-03-16 14:10:20,397 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Taxes and Charges` MODIFY `base_tax_amount` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `description` text, MODIFY `base_tax_amount_after_discount_amount` decimal(21,9) not null default 0, MODIFY `tax_amount` decimal(21,9) not null default 0, MODIFY `tax_amount_after_discount_amount` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0
+2026-03-16 14:10:23,336 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` MODIFY `rounding_adjustment` decimal(21,9) not null default 0, MODIFY `base_net_total` decimal(21,9) not null default 0, MODIFY `base_taxes_and_charges_added` decimal(21,9) not null default 0, MODIFY `base_taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `total_qty` decimal(21,9) not null default 0, MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `base_grand_total` decimal(21,9) not null default 0, MODIFY `conversion_rate` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0, MODIFY `plc_conversion_rate` decimal(21,9) not null default 0, MODIFY `additional_discount_percentage` decimal(21,9) not null default 0, MODIFY `advance_paid` decimal(21,9) not null default 0, MODIFY `taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `base_total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `net_total` decimal(21,9) not null default 0, MODIFY `base_rounded_total` decimal(21,9) not null default 0, MODIFY `base_rounding_adjustment` decimal(21,9) not null default 0, MODIFY `per_received` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `per_billed` decimal(21,9) not null default 0, MODIFY `currency` varchar(140), MODIFY `total` decimal(21,9) not null default 0, MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `base_discount_amount` decimal(21,9) not null default 0, MODIFY `base_tax_withholding_net_total` decimal(21,9) not null default 0, MODIFY `taxes_and_charges_added` decimal(21,9) not null default 0
+2026-03-16 14:10:23,351 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` ADD INDEX `supplier_index`(`supplier`), ADD INDEX `transaction_date_index`(`transaction_date`), ADD INDEX `status_index`(`status`)
+2026-03-16 14:10:25,676 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` MODIFY `qty` decimal(21,9) not null default 0, MODIFY `rate_with_margin` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `received_qty` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 0, MODIFY `weight_per_unit` decimal(21,9) not null default 0, MODIFY `base_price_list_rate` decimal(21,9) not null default 0, MODIFY `total_weight` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `price_list_rate` decimal(21,9) not null default 0, MODIFY `blanket_order_rate` decimal(21,9) not null default 0, MODIFY `base_rate` decimal(21,9) not null default 0, MODIFY `company_total_stock` decimal(21,9) not null default 0, MODIFY `billed_amt` decimal(21,9) not null default 0, MODIFY `stock_uom_rate` decimal(21,9) not null default 0, MODIFY `net_amount` decimal(21,9) not null default 0, MODIFY `description` longtext, MODIFY `discount_percentage` decimal(21,9) not null default 0, MODIFY `base_net_rate` decimal(21,9) not null default 0, MODIFY `base_rate_with_margin` decimal(21,9) not null default 0, MODIFY `subcontracted_quantity` decimal(21,9) not null default 0, MODIFY `base_amount` decimal(21,9) not null default 0, MODIFY `base_net_amount` decimal(21,9) not null default 0, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `stock_qty` decimal(21,9) not null default 0, MODIFY `last_purchase_rate` decimal(21,9) not null default 0, MODIFY `net_rate` decimal(21,9) not null default 0, MODIFY `returned_qty` decimal(21,9) not null default 0, MODIFY `distributed_discount_amount` decimal(21,9) not null default 0, MODIFY `margin_rate_or_amount` decimal(21,9) not null default 0
+2026-03-16 14:10:25,694 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` ADD INDEX `material_request_index`(`material_request`), ADD INDEX `material_request_item_index`(`material_request_item`)
+2026-03-16 14:10:26,080 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSupplier` MODIFY `supplier_type` varchar(140) default 'Company', MODIFY `default_currency` varchar(140)
+2026-03-16 14:10:28,543 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPrint Heading` ADD UNIQUE INDEX IF NOT EXISTS print_heading (`print_heading`)
+2026-03-16 14:10:30,689 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBatch` MODIFY `batch_qty` decimal(21,9) not null default 0, MODIFY `produced_qty` decimal(21,9) not null default 0, MODIFY `qty_to_produce` decimal(21,9) not null default 0
+2026-03-16 14:10:31,383 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` MODIFY `per_ordered` decimal(21,9) not null default 0, MODIFY `status` varchar(140), MODIFY `per_received` decimal(21,9) not null default 0, MODIFY `material_request_type` varchar(140)
+2026-03-16 14:10:31,398 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` ADD INDEX `transaction_date_index`(`transaction_date`), ADD INDEX `status_index`(`status`)
+2026-03-16 14:10:31,856 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` MODIFY `min_order_qty` decimal(21,9) not null default 0, MODIFY `description` longtext, MODIFY `projected_qty` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `received_qty` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 0, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `ordered_qty` decimal(21,9) not null default 0, MODIFY `price_list_rate` decimal(21,9) not null default 0, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `stock_qty` decimal(21,9) not null default 0
+2026-03-16 14:10:31,873 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` ADD INDEX `item_name_index`(`item_name`)
+2026-03-16 14:10:32,872 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt` MODIFY `base_taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `base_total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `net_total` decimal(21,9) not null default 0, MODIFY `total_qty` decimal(21,9) not null default 0, MODIFY `supplier_address` varchar(140), MODIFY `taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `base_discount_amount` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `rounding_adjustment` decimal(21,9) not null default 0, MODIFY `tax_withholding_net_total` decimal(21,9) not null default 0, MODIFY `base_grand_total` decimal(21,9) not null default 0, MODIFY `taxes_and_charges_added` decimal(21,9) not null default 0, MODIFY `plc_conversion_rate` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0, MODIFY `base_net_total` decimal(21,9) not null default 0, MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `additional_discount_percentage` decimal(21,9) not null default 0, MODIFY `conversion_rate` decimal(21,9) not null default 0, MODIFY `base_rounded_total` decimal(21,9) not null default 0, MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `naming_series` varchar(140), MODIFY `base_tax_withholding_net_total` decimal(21,9) not null default 0, MODIFY `base_taxes_and_charges_added` decimal(21,9) not null default 0, MODIFY `per_returned` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `base_rounding_adjustment` decimal(21,9) not null default 0, MODIFY `per_billed` decimal(21,9) not null default 0
+2026-03-16 14:10:32,898 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt` ADD INDEX `supplier_index`(`supplier`), ADD INDEX `posting_date_index`(`posting_date`), ADD INDEX `return_against_index`(`return_against`), ADD INDEX `status_index`(`status`)
+2026-03-16 14:10:33,481 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt Item` MODIFY `qty` decimal(21,9) not null default 0, MODIFY `base_price_list_rate` decimal(21,9) not null default 0, MODIFY `billed_amt` decimal(21,9) not null default 0, MODIFY `received_stock_qty` decimal(21,9) not null default 0, MODIFY `rate_with_margin` decimal(21,9) not null default 0, MODIFY `discount_percentage` decimal(21,9) not null default 0, MODIFY `base_rate_with_margin` decimal(21,9) not null default 0, MODIFY `base_net_amount` decimal(21,9) not null default 0, MODIFY `weight_per_unit` decimal(21,9) not null default 0, MODIFY `total_weight` decimal(21,9) not null default 0, MODIFY `stock_uom_rate` decimal(21,9) not null default 0, MODIFY `base_amount` decimal(21,9) not null default 0, MODIFY `rejected_qty` decimal(21,9) not null default 0, MODIFY `returned_qty` decimal(21,9) not null default 0, MODIFY `base_rate` decimal(21,9) not null default 0, MODIFY `net_rate` decimal(21,9) not null default 0, MODIFY `distributed_discount_amount` decimal(21,9) not null default 0, MODIFY `rm_supp_cost` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `valuation_rate` decimal(21,6) not null default 0, MODIFY `net_amount` decimal(21,9) not null default 0, MODIFY `landed_cost_voucher_amount` decimal(21,9) not null default 0, MODIFY `amount_difference_with_purchase_invoice` decimal(21,9) not null default 0, MODIFY `base_net_rate` decimal(21,9) not null default 0, MODIFY `sales_incoming_rate` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `stock_qty` decimal(21,9) not null default 0, MODIFY `item_tax_amount` decimal(21,9) not null default 0, MODIFY `margin_rate_or_amount` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `price_list_rate` decimal(21,9) not null default 0, MODIFY `description` longtext
+2026-03-16 14:10:33,513 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt Item` ADD INDEX `item_code_index`(`item_code`), ADD INDEX `purchase_order_index`(`purchase_order`), ADD INDEX `material_request_item_index`(`material_request_item`), ADD INDEX `purchase_order_item_index`(`purchase_order_item`), ADD INDEX `batch_no_index`(`batch_no`)
+2026-03-16 14:10:34,089 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Entry` MODIFY `total_additional_costs` decimal(21,9) not null default 0, MODIFY `process_loss_qty` decimal(21,9) not null default 0, MODIFY `total_outgoing_value` decimal(21,9) not null default 0, MODIFY `process_loss_percentage` decimal(21,9) not null default 0, MODIFY `value_difference` decimal(21,9) not null default 0, MODIFY `per_transferred` decimal(21,9) not null default 0, MODIFY `fg_completed_qty` decimal(21,9) not null default 0, MODIFY `total_amount` decimal(21,9) not null default 0, MODIFY `total_incoming_value` decimal(21,9) not null default 0
+2026-03-16 14:10:34,104 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Entry` ADD INDEX `purpose_index`(`purpose`), ADD INDEX `posting_date_index`(`posting_date`)
+2026-03-16 14:10:34,490 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Ledger Entry` MODIFY `stock_value` decimal(21,9) not null default 0, MODIFY `qty_after_transaction` decimal(21,9) not null default 0, MODIFY `incoming_rate` decimal(21,9) not null default 0, MODIFY `serial_no` longtext, MODIFY `stock_value_difference` decimal(21,9) not null default 0, MODIFY `valuation_rate` decimal(21,9) not null default 0, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `outgoing_rate` decimal(21,9) not null default 0
+2026-03-16 14:10:34,506 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Ledger Entry` ADD INDEX `voucher_type_index`(`voucher_type`)
+2026-03-16 14:10:34,798 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation` MODIFY `purpose` varchar(140), MODIFY `naming_series` varchar(140), MODIFY `difference_amount` decimal(21,9) not null default 0
+2026-03-16 14:10:35,012 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation Item` MODIFY `serial_no` longtext, MODIFY `current_amount` decimal(21,9) not null default 0, MODIFY `current_valuation_rate` decimal(21,9) not null default 0, MODIFY `amount_difference` decimal(21,9) not null default 0, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `valuation_rate` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0
+2026-03-16 14:10:35,028 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation Item` ADD INDEX `batch_no_index`(`batch_no`)
+2026-03-16 14:10:35,355 WARNING database DDL Query made to DB:
+ALTER TABLE `tabWarehouse` ADD INDEX `parent_warehouse_index`(`parent_warehouse`)
+2026-03-16 14:10:35,368 WARNING database DDL Query made to DB:
+ALTER TABLE `tabWarehouse` DROP INDEX `warehouse_name`
+2026-03-16 14:10:36,762 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSMS Log` MODIFY `sent_on` date
+2026-03-16 14:10:37,151 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset` MODIFY `value_after_depreciation` decimal(21,9) not null default 0, MODIFY `opening_accumulated_depreciation` decimal(21,9) not null default 0, MODIFY `gross_purchase_amount` decimal(21,9) not null default 0, MODIFY `purchase_amount` decimal(21,9) not null default 0, MODIFY `frequency_of_depreciation` int(11) not null default 0, MODIFY `total_asset_cost` decimal(21,9) not null default 0
+2026-03-16 14:10:37,628 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset Maintenance` ADD UNIQUE INDEX IF NOT EXISTS asset_name (`asset_name`)
+2026-03-16 14:10:37,908 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset Movement` MODIFY `transaction_date` datetime(6)
+2026-03-16 14:10:38,409 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDepreciation Schedule` MODIFY `depreciation_amount` decimal(21,9) not null default 0, MODIFY `accumulated_depreciation_amount` decimal(21,9) not null default 0
+2026-03-16 14:10:50,806 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse Registration` MODIFY `total_credits` decimal(21,1) not null default 0
+2026-03-16 14:10:51,024 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse Registration Item` MODIFY `credits` decimal(21,1) not null default 0
+2026-03-16 14:10:51,415 WARNING database DDL Query made to DB:
+ALTER TABLE `tabElective Course Group Item` MODIFY `credits` decimal(21,1) not null default 0
+2026-03-16 14:10:51,621 WARNING database DDL Query made to DB:
+ALTER TABLE `tabTeaching Assignment` MODIFY `weekly_hours` decimal(21,1) not null default 0
+2026-03-16 14:10:52,248 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAdmission Criteria` MODIFY `min_percentage` decimal(21,2) not null default 0, MODIFY `min_entrance_score` decimal(21,9) not null default 0
+2026-03-16 14:10:53,131 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMerit List Applicant` MODIFY `merit_score` decimal(21,2) not null default 0
+2026-03-16 14:10:54,195 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAnswer Sheet` MODIFY `marks_after_moderation` decimal(21,9) not null default 0, MODIFY `marks_obtained` decimal(21,9) not null default 0, MODIFY `percentage` decimal(21,9) not null default 0, MODIFY `total_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:54,413 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAnswer Sheet Score` MODIFY `max_marks` decimal(21,9) not null default 0, MODIFY `marks_obtained` decimal(21,9) not null default 0
+2026-03-16 14:10:55,202 WARNING database DDL Query made to DB:
+ALTER TABLE `tabExternal Examiner` MODIFY `average_rating` decimal(3,2)
+2026-03-16 14:10:56,103 WARNING database DDL Query made to DB:
+ALTER TABLE `tabInternal Assessment` MODIFY `maximum_marks` decimal(21,9) not null default 0, MODIFY `weightage` decimal(21,9) not null default 0, MODIFY `late_penalty_percentage` decimal(21,9) not null default 0, MODIFY `average_marks` decimal(21,9) not null default 0, MODIFY `lowest_marks` decimal(21,9) not null default 0, MODIFY `highest_marks` decimal(21,9) not null default 0, MODIFY `passing_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:56,321 WARNING database DDL Query made to DB:
+ALTER TABLE `tabInternal Assessment Score` MODIFY `percentage` decimal(21,9) not null default 0, MODIFY `attendance_percentage` decimal(21,9) not null default 0, MODIFY `criteria_scores` json, MODIFY `total_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:56,977 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPractical Evaluation Criteria` MODIFY `weightage` decimal(21,9) not null default 0, MODIFY `max_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:57,245 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPractical Examination` MODIFY `maximum_marks` decimal(21,9) not null default 0, MODIFY `average_marks` decimal(21,9) not null default 0, MODIFY `highest_marks` decimal(21,9) not null default 0, MODIFY `lowest_marks` decimal(21,9) not null default 0, MODIFY `record_marks` decimal(21,9) not null default 0, MODIFY `experiment_marks` decimal(21,9) not null default 0, MODIFY `passing_marks` decimal(21,9) not null default 0, MODIFY `viva_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:57,470 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPractical Exam Examiner` MODIFY `remuneration` decimal(21,9) not null default 0
+2026-03-16 14:10:57,879 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPractical Exam Student Score` MODIFY `experiment_marks` decimal(21,9) not null default 0, MODIFY `total_marks` decimal(21,9) not null default 0, MODIFY `criteria_scores` json, MODIFY `percentage` decimal(21,9) not null default 0, MODIFY `record_marks` decimal(21,9) not null default 0, MODIFY `viva_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:58,127 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuestion Bank` MODIFY `negative_marks` decimal(21,9) not null default 0, MODIFY `average_score_percentage` decimal(21,9) not null default 0
+2026-03-16 14:10:58,351 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuestion Option` MODIFY `partial_marks_percentage` decimal(21,9) not null default 0
+2026-03-16 14:10:58,727 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuestion Paper Question Item` MODIFY `marks` decimal(21,9) not null default 0
+2026-03-16 14:10:58,931 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuestion Paper Section` MODIFY `marks_per_question` decimal(21,9) not null default 0, MODIFY `section_marks` decimal(21,9) not null default 0, MODIFY `negative_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:59,774 WARNING database DDL Query made to DB:
+ALTER TABLE `tabRevaluation Request` MODIFY `revaluation_marks` decimal(21,9) not null default 0, MODIFY `marks_difference` decimal(21,9) not null default 0, MODIFY `fee_amount` decimal(21,9) not null default 0, MODIFY `original_marks` decimal(21,9) not null default 0
+2026-03-16 14:10:59,996 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Answer` MODIFY `marks_obtained` decimal(21,9) not null default 0
+2026-03-16 14:11:00,241 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Exam Attempt` MODIFY `percentage` decimal(21,9) not null default 0, MODIFY `total_marks` decimal(21,9) not null default 0, MODIFY `negative_marks_applied` decimal(21,9) not null default 0, MODIFY `marks_obtained` decimal(21,9) not null default 0
+2026-03-16 14:11:00,506 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Transcript` MODIFY `total_credits_earned` decimal(21,1) not null default 0, MODIFY `cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:00,730 WARNING database DDL Query made to DB:
+ALTER TABLE `tabTranscript Semester Result` MODIFY `cgpa` decimal(21,2) not null default 0, MODIFY `sgpa` decimal(21,2) not null default 0, MODIFY `credits_earned` decimal(21,1) not null default 0
+2026-03-16 14:11:01,555 WARNING database DDL Query made to DB:
+create table `tabBulk Fee Generator` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`program` varchar(140),
+`academic_year` varchar(140),
+`semester` varchar(140),
+`fee_structure` varchar(140),
+`student_batch` varchar(140),
+`admission_category` varchar(140),
+`due_date` date,
+`auto_submit` int(1) not null default 0,
+`total_students` int(11) not null default 0,
+`fees_to_generate` int(11) not null default 0,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:01,828 WARNING database DDL Query made to DB:
+create table `tabBulk Fee Generator Student` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`student` varchar(140),
+`student_name` varchar(140),
+`batch` varchar(140),
+`admission_category` varchar(140),
+`has_existing_fee` int(1) not null default 0,
+`generate` int(1) not null default 1,
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:02,090 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Category` ADD COLUMN `category_code` varchar(140), ADD COLUMN `fee_type` varchar(140), ADD COLUMN `refundable` int(1) not null default 0, ADD COLUMN `income_account` varchar(140)
+2026-03-16 14:11:02,105 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Category` ADD UNIQUE INDEX IF NOT EXISTS category_name (`category_name`)
+2026-03-16 14:11:02,353 WARNING database DDL Query made to DB:
+create table `tabFee Payment` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`fee` varchar(140),
+`student` varchar(140),
+`student_name` varchar(140),
+`amount` decimal(21,9) not null default 0,
+`payment_date` date,
+`payment_mode` varchar(140),
+`transaction_id` varchar(140),
+`receipt_number` varchar(140),
+`reference_number` varchar(140),
+`scholarship_applied` decimal(21,9) not null default 0,
+`scholarship_details` text,
+`remarks` text,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:02,738 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Refund` ADD COLUMN `fee` varchar(140), ADD COLUMN `gross_refund_amount` decimal(21,9) not null default 0, ADD COLUMN `total_deductions` decimal(21,9) not null default 0, ADD COLUMN `net_refund_amount` decimal(21,9) not null default 0, ADD COLUMN `reference_number` varchar(140), ADD COLUMN `journal_entry` varchar(140), ADD COLUMN `remarks` text
+2026-03-16 14:11:03,027 WARNING database DDL Query made to DB:
+create table `tabFee Refund Deduction` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`description` varchar(140),
+`amount` decimal(21,9) not null default 0,
+`income_account` varchar(140),
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:03,281 WARNING database DDL Query made to DB:
+create table `tabScholarship Type` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`scholarship_name` varchar(140) unique,
+`scholarship_code` varchar(140),
+`type` varchar(140),
+`min_cgpa` decimal(21,9) not null default 0,
+`max_annual_income` decimal(21,9) not null default 0,
+`applicable_categories` text,
+`discount_percentage` decimal(21,9) not null default 0,
+`discount_amount` decimal(21,9) not null default 0,
+`applicable_fee_categories` text,
+`description` text,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:03,617 WARNING database DDL Query made to DB:
+create table `tabStudent Scholarship` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`student` varchar(140),
+`student_name` varchar(140),
+`scholarship_type` varchar(140),
+`status` varchar(140) default 'Active',
+`valid_from` date,
+`valid_till` date,
+`discount_percentage` decimal(21,9) not null default 0,
+`discount_amount` decimal(21,9) not null default 0,
+`fee_category` varchar(140),
+`total_benefit_given` decimal(21,9) not null default 0,
+`max_benefit_amount` decimal(21,9) not null default 0,
+`remarks` text,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2026-03-16 14:11:04,129 WARNING database DDL Query made to DB:
+ALTER TABLE `tabTeaching Assignment` MODIFY `practical_hours` decimal(21,2) not null default 0, MODIFY `tutorial_hours` decimal(21,2) not null default 0, MODIFY `lecture_hours` decimal(21,2) not null default 0, MODIFY `total_weekly_hours` decimal(21,2) not null default 0
+2026-03-16 14:11:05,264 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPlacement Application` MODIFY `application_date` date, MODIFY `offered_ctc` decimal(21,9) not null default 0
+2026-03-16 14:11:05,563 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPlacement Drive` MODIFY `status` varchar(140) default 'Scheduled', MODIFY `package_offered` decimal(21,9) not null default 0
+2026-03-16 14:11:06,781 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAccreditation Criterion` MODIFY `score` decimal(21,2) not null default 0, MODIFY `weightage` decimal(21,9) not null default 0, MODIFY `max_score` decimal(21,2) not null default 0
+2026-03-16 14:11:07,049 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAccreditation Cycle` MODIFY `cgpa_obtained` decimal(21,2) not null default 0, MODIFY `overall_progress` decimal(21,9) not null default 0
+2026-03-16 14:11:07,790 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment CO Link` MODIFY `max_marks_for_co` decimal(21,9) not null default 0, MODIFY `weightage` decimal(21,9) not null default 0
+2026-03-16 14:11:07,991 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Criteria Item` MODIFY `weightage` decimal(21,9) not null default 0, MODIFY `max_marks` decimal(21,9) not null default 0
+2026-03-16 14:11:08,433 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBloom Distribution Rule` MODIFY `percentage` decimal(21,9) not null default 0
+2026-03-16 14:11:09,265 WARNING database DDL Query made to DB:
+ALTER TABLE `tabUnit Distribution Rule` MODIFY `percentage` decimal(21,9) not null default 0
+2026-03-16 14:11:10,057 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSMS Log` MODIFY `sent_on` datetime(6)
+2026-03-16 14:11:10,573 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPlacement Application` MODIFY `package_offered` decimal(21,9) not null default 0, MODIFY `application_date` datetime(6)
+2026-03-16 14:11:10,762 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPlacement Drive` MODIFY `status` varchar(140) default 'Draft', MODIFY `package_offered` decimal(21,9) not null default 0
+2026-03-16 14:11:10,987 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBank Transaction` MODIFY `closing_balance` decimal(21,9) not null default 0, MODIFY `withdrawal` decimal(21,9) not null default 0, MODIFY `description` varchar(140), MODIFY `deposit` decimal(21,9) not null default 0, MODIFY `reference_number` varchar(140)
+2026-03-16 14:11:11,284 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Refund` MODIFY `net_refund` decimal(21,9) not null default 0, MODIFY `original_amount` decimal(21,9) not null default 0, MODIFY `refund_amount` decimal(21,9) not null default 0, MODIFY `paid_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:11,505 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPayment Order` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `refund_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:11,948 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset` MODIFY `rate_of_depreciation` decimal(21,9) not null default 0, MODIFY `frequency_of_depreciation` int(11) not null default 12
+2026-03-16 14:11:12,459 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset Maintenance` DROP INDEX `asset_name`
+2026-03-16 14:11:12,886 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAsset Movement` MODIFY `transaction_date` date
+2026-03-16 14:11:13,566 WARNING database DDL Query made to DB:
+ALTER TABLE `tabInventory Item` MODIFY `total_stock_value` decimal(21,9) not null default 0, MODIFY `valuation_rate` decimal(21,9) not null default 0, MODIFY `last_purchase_rate` decimal(21,9) not null default 0, MODIFY `current_stock` decimal(21,9) not null default 0
+2026-03-16 14:11:14,089 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` MODIFY `material_request_type` varchar(140) default 'Purchase', MODIFY `status` varchar(140) default 'Draft'
+2026-03-16 14:11:14,102 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` DROP INDEX `transaction_date_index`, DROP INDEX `status_index`
+2026-03-16 14:11:14,373 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `description` text
+2026-03-16 14:11:14,386 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` DROP INDEX `item_name_index`
+2026-03-16 14:11:14,704 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` MODIFY `currency` varchar(140) default 'INR', MODIFY `conversion_rate` decimal(21,9) not null default 1.0
+2026-03-16 14:11:14,718 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` DROP INDEX `transaction_date_index`, DROP INDEX `supplier_index`, DROP INDEX `status_index`
+2026-03-16 14:11:15,018 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` MODIFY `description` text, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0
+2026-03-16 14:11:15,031 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` DROP INDEX `material_request_item_index`, DROP INDEX `material_request_index`
+2026-03-16 14:11:15,376 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt` MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `supplier_address` text, MODIFY `naming_series` varchar(140) default 'PR-.YYYY.-.#####', MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `total_qty` decimal(21,9) not null default 0, MODIFY `total_rejected_qty` decimal(21,9) not null default 0, MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0
+2026-03-16 14:11:15,390 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt` DROP INDEX `return_against_index`, DROP INDEX `posting_date_index`, DROP INDEX `status_index`, DROP INDEX `supplier_index`
+2026-03-16 14:11:15,710 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt Item` MODIFY `rate` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 1.0, MODIFY `description` text
+2026-03-16 14:11:15,725 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Receipt Item` DROP INDEX `purchase_order_item_index`, DROP INDEX `item_code_index`, DROP INDEX `batch_no_index`, DROP INDEX `purchase_order_index`, DROP INDEX `material_request_item_index`
+2026-03-16 14:11:15,944 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Taxes and Charges` MODIFY `description` varchar(140)
+2026-03-16 14:11:16,229 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Entry` DROP INDEX `posting_date_index`, DROP INDEX `purpose_index`
+2026-03-16 14:11:16,466 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Entry Item` MODIFY `qty` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0
+2026-03-16 14:11:16,726 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Ledger Entry` MODIFY `serial_no` text, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `qty_after_transaction` decimal(21,9) not null default 0
+2026-03-16 14:11:16,740 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Ledger Entry` DROP INDEX `voucher_type_index`
+2026-03-16 14:11:16,994 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation` MODIFY `purpose` varchar(140) default 'Stock Reconciliation', MODIFY `naming_series` varchar(140) default 'SR-.YYYY.-.#####', MODIFY `difference_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:17,243 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation Item` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `serial_no` text, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `valuation_rate` decimal(21,9) not null default 0, MODIFY `qty_difference` decimal(21,9) not null default 0, MODIFY `amount_difference` decimal(21,9) not null default 0
+2026-03-16 14:11:17,257 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStock Reconciliation Item` DROP INDEX `batch_no_index`
+2026-03-16 14:11:17,539 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSupplier` MODIFY `supplier_type` varchar(140), MODIFY `default_currency` varchar(140) default 'INR', MODIFY `supplier_rating` decimal(3,2)
+2026-03-16 14:11:18,230 WARNING database DDL Query made to DB:
+ALTER TABLE `tabWarehouse` ADD UNIQUE INDEX IF NOT EXISTS warehouse_name (`warehouse_name`)
+2026-03-16 14:11:18,243 WARNING database DDL Query made to DB:
+ALTER TABLE `tabWarehouse` DROP INDEX `parent_warehouse_index`
+2026-03-16 14:11:18,663 WARNING database DDL Query made to DB:
+ALTER TABLE `tabGrievance` MODIFY `satisfaction_rating` decimal(3,2)
+2026-03-16 14:11:21,459 WARNING database DDL Query made to DB:
+ALTER TABLE `tabKPI Definition` MODIFY `green_threshold` decimal(21,9) not null default 0, MODIFY `target_value` decimal(21,9) not null default 0, MODIFY `yellow_threshold` decimal(21,9) not null default 0, MODIFY `benchmark_value` decimal(21,9) not null default 0, MODIFY `stretch_target` decimal(21,9) not null default 0, MODIFY `minimum_acceptable` decimal(21,9) not null default 0, MODIFY `red_threshold` decimal(21,9) not null default 0
+2026-03-16 14:11:21,718 WARNING database DDL Query made to DB:
+ALTER TABLE `tabKPI Value` MODIFY `value` decimal(21,9) not null default 0, MODIFY `variance` decimal(21,9) not null default 0, MODIFY `target` decimal(21,9) not null default 0
+2026-03-16 14:11:22,741 WARNING database DDL Query made to DB:
+ALTER TABLE `tabScheduled Report` MODIFY `time_of_day` time(6) default '08:00'
+2026-03-16 14:11:23,942 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFeedback Form` MODIFY `response_rate` decimal(21,9) not null default 0
+2026-03-16 14:11:24,782 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFeedback Response` MODIFY `overall_score` decimal(21,9) not null default 0
+2026-03-16 14:11:25,011 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFeedback Section Score` MODIFY `score` decimal(21,9) not null default 0
+2026-03-16 14:11:39,995 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,102 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,209 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,321 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,432 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,541 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,652 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,766 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,877 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:40,973 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,070 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,166 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,262 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,359 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,453 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,551 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,642 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,738 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,832 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProgram` MODIFY `custom_total_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,926 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:42,022 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:42,119 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:42,213 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:42,309 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,697 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,793 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,889 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,054 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,151 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,244 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,339 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,440 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,535 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,630 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCourse` MODIFY `custom_credits` decimal(21,2) not null default 0
+2026-03-16 14:11:41,721 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0
+2026-03-16 14:11:41,815 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0
+2026-03-16 14:11:41,912 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0
+2026-03-16 14:11:42,007 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0
+2026-03-16 14:11:42,102 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0
+2026-03-16 14:11:42,201 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0
+2026-03-16 14:11:42,296 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAssessment Result` MODIFY `custom_credits` decimal(21,2) not null default 0, MODIFY `custom_credit_points` decimal(21,2) not null default 0, MODIFY `custom_percentage` decimal(21,2) not null default 0, MODIFY `custom_grade_points` decimal(21,2) not null default 0, MODIFY `maximum_score` decimal(21,9) not null default 0, MODIFY `total_score` decimal(21,9) not null default 0
+2026-03-16 14:11:42,447 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 14:11:42,565 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 14:11:42,738 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:42,904 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 14:11:43,014 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:43,122 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0
+2026-03-16 14:11:43,234 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0
+2026-03-16 14:11:43,348 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0
+2026-03-16 14:11:43,461 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:43,567 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0
+2026-03-16 14:11:43,677 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:43,784 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:43,896 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:44,005 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:44,114 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:44,223 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:44,329 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0
+2026-03-16 14:11:44,436 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0
+2026-03-16 14:11:44,556 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 14:11:44,663 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0
+2026-03-16 14:11:44,772 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:44,880 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 14:11:44,995 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:45,108 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:45,228 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:45,340 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:45,448 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:45,559 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:45,672 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:45,779 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0
+2026-03-16 14:11:45,886 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_12th` decimal(21,2) not null default 0
+2026-03-16 14:11:45,996 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:46,109 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0
+2026-03-16 14:11:46,217 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent Applicant` MODIFY `custom_percentage_12th` decimal(21,2) not null default 0, MODIFY `custom_entrance_exam_score` decimal(21,2) not null default 0, MODIFY `custom_merit_score` decimal(21,2) not null default 0, MODIFY `custom_percentage_10th` decimal(21,2) not null default 0
+2026-03-16 14:11:46,320 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:46,428 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:46,535 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:46,641 WARNING database DDL Query made to DB:
+ALTER TABLE `tabStudent` MODIFY `custom_cgpa` decimal(21,2) not null default 0
+2026-03-16 14:11:46,804 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 14:11:46,938 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 14:11:47,077 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 14:11:47,222 WARNING database DDL Query made to DB:
+ALTER TABLE `tabEmployee` MODIFY `ctc` decimal(21,9) not null default 0
+2026-03-16 14:11:47,381 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:47,476 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:47,570 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:47,662 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:47,756 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Structure` MODIFY `total_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:47,902 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Component` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `custom_category_variations` json
+2026-03-16 14:11:47,991 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFee Component` MODIFY `amount` decimal(21,9) not null default 0, MODIFY `custom_category_variations` json
+2026-03-16 14:11:48,098 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,206 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_percentage` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,318 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_percentage` decimal(21,9) not null default 2.0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,426 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,533 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,642 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,749 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,856 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:48,964 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,071 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,178 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,292 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,401 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,514 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,619 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0
+2026-03-16 14:11:49,729 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFees` MODIFY `custom_scholarship_amount` decimal(21,9) not null default 0, MODIFY `custom_net_amount` decimal(21,9) not null default 0, MODIFY `custom_refund_amount` decimal(21,9) not null default 0, MODIFY `custom_grand_total_with_penalty` decimal(21,9) not null default 0, MODIFY `custom_penalty_amount` decimal(21,9) not null default 0
+2026-03-16 14:46:38,414 WARNING database DDL Query made to DB:
+alter table `tabDocType` add column if not exists migration_hash varchar(140)
+2026-03-16 14:46:47,914 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPrint Heading` DROP INDEX `print_heading`
+2026-03-16 14:46:55,075 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBank Transaction` MODIFY `deposit` decimal(21,9) not null default 0, MODIFY `reference_number` text, MODIFY `withdrawal` decimal(21,9) not null default 0, MODIFY `excluded_fee` decimal(21,9) not null default 0, MODIFY `unallocated_amount` decimal(21,9) not null default 0, MODIFY `included_fee` decimal(21,9) not null default 0, MODIFY `allocated_amount` decimal(21,9) not null default 0, MODIFY `description` text
+2026-03-16 14:46:57,871 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Taxes and Charges` MODIFY `total` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `tax_amount` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `base_tax_amount_after_discount_amount` decimal(21,9) not null default 0, MODIFY `tax_amount_after_discount_amount` decimal(21,9) not null default 0, MODIFY `base_tax_amount` decimal(21,9) not null default 0, MODIFY `description` text
+2026-03-16 14:47:00,755 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` MODIFY `total_qty` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `taxes_and_charges_added` decimal(21,9) not null default 0, MODIFY `base_grand_total` decimal(21,9) not null default 0, MODIFY `per_received` decimal(21,9) not null default 0, MODIFY `net_total` decimal(21,9) not null default 0, MODIFY `additional_discount_percentage` decimal(21,9) not null default 0, MODIFY `taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `base_net_total` decimal(21,9) not null default 0, MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `currency` varchar(140), MODIFY `advance_paid` decimal(21,9) not null default 0, MODIFY `base_taxes_and_charges_deducted` decimal(21,9) not null default 0, MODIFY `base_discount_amount` decimal(21,9) not null default 0, MODIFY `base_taxes_and_charges_added` decimal(21,9) not null default 0, MODIFY `base_total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `per_billed` decimal(21,9) not null default 0, MODIFY `plc_conversion_rate` decimal(21,9) not null default 0, MODIFY `rounding_adjustment` decimal(21,9) not null default 0, MODIFY `base_rounded_total` decimal(21,9) not null default 0, MODIFY `base_tax_withholding_net_total` decimal(21,9) not null default 0, MODIFY `conversion_rate` decimal(21,9) not null default 0, MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `base_rounding_adjustment` decimal(21,9) not null default 0
+2026-03-16 14:47:00,770 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order` ADD INDEX `supplier_index`(`supplier`), ADD INDEX `transaction_date_index`(`transaction_date`), ADD INDEX `status_index`(`status`)
+2026-03-16 14:47:03,290 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `returned_qty` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `margin_rate_or_amount` decimal(21,9) not null default 0, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `base_rate` decimal(21,9) not null default 0, MODIFY `received_qty` decimal(21,9) not null default 0, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `distributed_discount_amount` decimal(21,9) not null default 0, MODIFY `company_total_stock` decimal(21,9) not null default 0, MODIFY `base_amount` decimal(21,9) not null default 0, MODIFY `stock_qty` decimal(21,9) not null default 0, MODIFY `rate_with_margin` decimal(21,9) not null default 0, MODIFY `stock_uom_rate` decimal(21,9) not null default 0, MODIFY `blanket_order_rate` decimal(21,9) not null default 0, MODIFY `discount_percentage` decimal(21,9) not null default 0, MODIFY `net_rate` decimal(21,9) not null default 0, MODIFY `price_list_rate` decimal(21,9) not null default 0, MODIFY `base_rate_with_margin` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 0, MODIFY `subcontracted_quantity` decimal(21,9) not null default 0, MODIFY `base_net_amount` decimal(21,9) not null default 0, MODIFY `description` longtext, MODIFY `total_weight` decimal(21,9) not null default 0, MODIFY `net_amount` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `base_net_rate` decimal(21,9) not null default 0, MODIFY `billed_amt` decimal(21,9) not null default 0, MODIFY `weight_per_unit` decimal(21,9) not null default 0, MODIFY `base_price_list_rate` decimal(21,9) not null default 0, MODIFY `last_purchase_rate` decimal(21,9) not null default 0
+2026-03-16 14:47:03,317 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPurchase Order Item` ADD INDEX `material_request_index`(`material_request`), ADD INDEX `material_request_item_index`(`material_request_item`)
+2026-03-16 14:47:03,752 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSupplier` MODIFY `default_currency` varchar(140), MODIFY `supplier_type` varchar(140) default 'Company'
+2026-03-16 14:47:06,291 WARNING database DDL Query made to DB:
+ALTER TABLE `tabPrint Heading` ADD UNIQUE INDEX IF NOT EXISTS print_heading (`print_heading`)
+2026-03-16 14:47:06,658 WARNING database DDL Query made to DB:
+ALTER TABLE `tabBatch` MODIFY `qty_to_produce` decimal(21,9) not null default 0, MODIFY `batch_qty` decimal(21,9) not null default 0, MODIFY `produced_qty` decimal(21,9) not null default 0
+2026-03-16 14:47:07,308 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` MODIFY `per_received` decimal(21,9) not null default 0, MODIFY `status` varchar(140), MODIFY `material_request_type` varchar(140), MODIFY `per_ordered` decimal(21,9) not null default 0
+2026-03-16 14:47:07,322 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` ADD INDEX `transaction_date_index`(`transaction_date`), ADD INDEX `status_index`(`status`)
+2026-03-16 14:47:07,758 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` MODIFY `min_order_qty` decimal(21,9) not null default 0, MODIFY `projected_qty` decimal(21,9) not null default 0, MODIFY `rate` decimal(21,9) not null default 0, MODIFY `amount` decimal(21,9) not null default 0, MODIFY `actual_qty` decimal(21,9) not null default 0, MODIFY `ordered_qty` decimal(21,9) not null default 0, MODIFY `conversion_factor` decimal(21,9) not null default 0, MODIFY `description` longtext, MODIFY `stock_qty` decimal(21,9) not null default 0, MODIFY `qty` decimal(21,9) not null default 0, MODIFY `received_qty` decimal(21,9) not null default 0, MODIFY `price_list_rate` decimal(21,9) not null default 0
+2026-03-16 14:47:07,773 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request Item` ADD INDEX `item_name_index`(`item_name`)

@@ -1,0 +1,40 @@
+{
+  "doctype": "DocType",
+  "name": "Online Exam Student",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "fetch_from": "student.student_name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "roll_number",
+      "fieldtype": "Data",
+      "label": "Roll Number",
+      "fetch_from": "student.roll_number",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "fetch_from": "student.user",
+      "read_only": 1
+    }
+  ],
+  "engine": "InnoDB"
+}

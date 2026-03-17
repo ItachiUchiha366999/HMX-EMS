@@ -1,30 +1,22 @@
-# Environment Variables
-.env
-
-# mounted volume
-sites
-
-development/*
-!development/README.md
-!development/installer.py
-!development/apps-example.json
-!development/vscode-example/
-
 # Pycharm
 .idea
 
-# VS Code
-.vscode/**
-!.vscode/extensions.json
+# Python venv (Linux-only, recreated by bench inside container)
+development/frappe-bench/env/
 
-# VS Code devcontainer
-.devcontainer
-*.code-workspace
+# Node modules (contain Linux symlinks, recreated by yarn/npm inside container)
+**/node_modules/
+
+# Sites assets symlinks (recreated by bench build inside container)
+development/frappe-bench/sites/assets/frappe
+development/frappe-bench/sites/assets/erpnext
+development/frappe-bench/sites/assets/education
+development/frappe-bench/sites/assets/hrms
+development/frappe-bench/sites/assets/university_erp
 
 # Python
 *.pyc
 __pycache__
-venv
 
-# NodeJS
-node_modules
+# Misc
+*.code-workspace

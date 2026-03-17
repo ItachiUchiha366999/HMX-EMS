@@ -1,0 +1,262 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "student_email",
+    "column_break_basic",
+    "reference_doctype",
+    "reference_name",
+    "transaction_date",
+    "status",
+    "payment_section",
+    "amount",
+    "currency",
+    "payment_gateway",
+    "column_break_payment",
+    "gateway_order_id",
+    "gateway_payment_id",
+    "gateway_signature",
+    "payment_method",
+    "bank_reference",
+    "response_section",
+    "gateway_response",
+    "error_message",
+    "refund_section",
+    "refund_id",
+    "refund_amount",
+    "column_break_refund",
+    "refund_date",
+    "refund_reason",
+    "refund_status",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "PAY-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "student.student_email_id",
+      "fieldname": "student_email",
+      "fieldtype": "Data",
+      "label": "Student Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Reference DocType",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Document",
+      "options": "reference_doctype"
+    },
+    {
+      "default": "Now",
+      "fieldname": "transaction_date",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Transaction Date"
+    },
+    {
+      "default": "Initiated",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Initiated\nPending\nSuccess\nFailed\nRefunded\nPartially Refunded\nCancelled"
+    },
+    {
+      "fieldname": "payment_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Details"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Amount",
+      "reqd": 1
+    },
+    {
+      "default": "INR",
+      "fieldname": "currency",
+      "fieldtype": "Link",
+      "label": "Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "payment_gateway",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Payment Gateway",
+      "options": "\nRazorpay\nPayU\nPaytm\nCCAvenue\nStripe"
+    },
+    {
+      "fieldname": "column_break_payment",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "gateway_order_id",
+      "fieldtype": "Data",
+      "label": "Gateway Order ID"
+    },
+    {
+      "fieldname": "gateway_payment_id",
+      "fieldtype": "Data",
+      "label": "Gateway Payment ID"
+    },
+    {
+      "fieldname": "gateway_signature",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "label": "Gateway Signature"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "\nCard\nDebit Card\nCredit Card\nNetBanking\nUPI\nWallet\nEMI\nBank Transfer"
+    },
+    {
+      "fieldname": "bank_reference",
+      "fieldtype": "Data",
+      "label": "Bank Reference"
+    },
+    {
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "Gateway Response"
+    },
+    {
+      "fieldname": "gateway_response",
+      "fieldtype": "Code",
+      "label": "Full Response",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    },
+    {
+      "collapsible": 1,
+      "depends_on": "eval:['Refunded', 'Partially Refunded'].includes(doc.status)",
+      "fieldname": "refund_section",
+      "fieldtype": "Section Break",
+      "label": "Refund Details"
+    },
+    {
+      "fieldname": "refund_id",
+      "fieldtype": "Data",
+      "label": "Refund ID"
+    },
+    {
+      "fieldname": "refund_amount",
+      "fieldtype": "Currency",
+      "label": "Refund Amount"
+    },
+    {
+      "fieldname": "column_break_refund",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "refund_date",
+      "fieldtype": "Datetime",
+      "label": "Refund Date"
+    },
+    {
+      "fieldname": "refund_reason",
+      "fieldtype": "Small Text",
+      "label": "Refund Reason"
+    },
+    {
+      "fieldname": "refund_status",
+      "fieldtype": "Select",
+      "label": "Refund Status",
+      "options": "\nPending\nProcessed\nFailed"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Payment Transaction",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Payment Transaction",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "student_name",
+  "track_changes": 1
+}

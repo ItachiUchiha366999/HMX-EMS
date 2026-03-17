@@ -1,0 +1,353 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:building_code",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "building_name",
+    "building_code",
+    "hostel_type",
+    "status",
+    "column_break_1",
+    "warden",
+    "assistant_warden",
+    "contact_number",
+    "capacity_section",
+    "total_floors",
+    "total_rooms",
+    "total_capacity",
+    "column_break_capacity",
+    "occupied",
+    "available",
+    "occupancy_rate",
+    "address_section",
+    "address",
+    "column_break_address",
+    "city",
+    "state",
+    "latitude",
+    "longitude",
+    "facilities_section",
+    "has_wifi",
+    "has_laundry",
+    "has_mess",
+    "has_common_room",
+    "column_break_facilities",
+    "has_gym",
+    "has_parking",
+    "mess",
+    "fee_section",
+    "annual_fee",
+    "security_deposit",
+    "column_break_fee",
+    "mess_fee_monthly",
+    "description_section",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "building_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Building Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "building_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Building Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "hostel_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Hostel Type",
+      "options": "Boys\nGirls\nCo-Ed",
+      "reqd": 1
+    },
+    {
+      "fieldname": "warden",
+      "fieldtype": "Link",
+      "label": "Warden",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Active\nUnder Maintenance\nClosed",
+      "default": "Active",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assistant_warden",
+      "fieldtype": "Link",
+      "label": "Assistant Warden",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "contact_number",
+      "fieldtype": "Data",
+      "label": "Contact Number",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "capacity_section",
+      "fieldtype": "Section Break",
+      "label": "Capacity Details"
+    },
+    {
+      "fieldname": "total_floors",
+      "fieldtype": "Int",
+      "label": "Total Floors"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_rooms",
+      "fieldtype": "Int",
+      "label": "Total Rooms",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_capacity",
+      "fieldtype": "Int",
+      "label": "Total Capacity",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_capacity",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "occupied",
+      "fieldtype": "Int",
+      "label": "Occupied Beds",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "available",
+      "fieldtype": "Int",
+      "label": "Available Beds",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "occupancy_rate",
+      "fieldtype": "Percent",
+      "label": "Occupancy Rate",
+      "read_only": 1
+    },
+    {
+      "fieldname": "address_section",
+      "fieldtype": "Section Break",
+      "label": "Address"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Small Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "column_break_address",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "city",
+      "fieldtype": "Data",
+      "label": "City"
+    },
+    {
+      "fieldname": "state",
+      "fieldtype": "Data",
+      "label": "State"
+    },
+    {
+      "fieldname": "latitude",
+      "fieldtype": "Float",
+      "label": "Latitude",
+      "precision": "6"
+    },
+    {
+      "fieldname": "longitude",
+      "fieldtype": "Float",
+      "label": "Longitude",
+      "precision": "6"
+    },
+    {
+      "fieldname": "facilities_section",
+      "fieldtype": "Section Break",
+      "label": "Facilities"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_wifi",
+      "fieldtype": "Check",
+      "label": "WiFi Available"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_laundry",
+      "fieldtype": "Check",
+      "label": "Laundry Facility"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_mess",
+      "fieldtype": "Check",
+      "label": "Mess Attached"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_common_room",
+      "fieldtype": "Check",
+      "label": "Common Room"
+    },
+    {
+      "fieldname": "column_break_facilities",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_gym",
+      "fieldtype": "Check",
+      "label": "Gym Available"
+    },
+    {
+      "default": "0",
+      "fieldname": "has_parking",
+      "fieldtype": "Check",
+      "label": "Parking Available"
+    },
+    {
+      "depends_on": "has_mess",
+      "fieldname": "mess",
+      "fieldtype": "Link",
+      "label": "Mess",
+      "options": "Hostel Mess"
+    },
+    {
+      "fieldname": "fee_section",
+      "fieldtype": "Section Break",
+      "label": "Fee Structure"
+    },
+    {
+      "fieldname": "annual_fee",
+      "fieldtype": "Currency",
+      "label": "Annual Hostel Fee"
+    },
+    {
+      "fieldname": "security_deposit",
+      "fieldtype": "Currency",
+      "label": "Security Deposit"
+    },
+    {
+      "fieldname": "column_break_fee",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "mess_fee_monthly",
+      "fieldtype": "Currency",
+      "label": "Monthly Mess Fee"
+    },
+    {
+      "fieldname": "description_section",
+      "fieldtype": "Section Break",
+      "label": "Description",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Hostel Room",
+      "link_fieldname": "hostel_building"
+    },
+    {
+      "link_doctype": "Hostel Allocation",
+      "link_fieldname": "hostel_building"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Building",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "quick_entry": 1,
+  "search_fields": "building_name, building_code, hostel_type",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "building_name",
+  "track_changes": 1
+}

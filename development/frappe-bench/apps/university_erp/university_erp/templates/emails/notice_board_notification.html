@@ -1,0 +1,46 @@
+{% extends "templates/emails/email_template.html" %}
+
+{% block title %}{{ notice.title }}{% endblock %}
+
+{% block content %}
+<table class="content-table" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td style="padding: 20px;">
+            <h2 style="color: #1a1a2e; margin-bottom: 15px;">{{ notice.title }}</h2>
+
+            <div style="margin-bottom: 15px;">
+                <span style="background-color: #f0f0f0; padding: 4px 10px; border-radius: 3px; font-size: 12px; color: #666;">
+                    {{ notice.notice_type }}
+                </span>
+                {% if notice.priority == "High" or notice.priority == "Urgent" %}
+                <span style="background-color: #e74c3c; color: white; padding: 4px 10px; border-radius: 3px; font-size: 12px; margin-left: 5px;">
+                    {{ notice.priority }}
+                </span>
+                {% endif %}
+            </div>
+
+            <div style="color: #333; line-height: 1.6; margin-bottom: 20px;">
+                {{ notice.content | safe }}
+            </div>
+
+            {% if notice.attachment %}
+            <div style="margin-bottom: 20px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+                <strong>Attachment:</strong>
+                <a href="{{ frappe.utils.get_url(notice.attachment) }}" style="color: #3498db;">Download Attachment</a>
+            </div>
+            {% endif %}
+
+            <div style="margin-top: 20px;">
+                <a href="{{ link }}" style="display: inline-block; padding: 12px 24px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px;">View Notice</a>
+            </div>
+
+            <div style="margin-top: 20px; font-size: 12px; color: #888;">
+                Published on: {{ frappe.utils.format_date(notice.publish_date) }}
+                {% if notice.expiry_date %}
+                | Valid until: {{ frappe.utils.format_date(notice.expiry_date) }}
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

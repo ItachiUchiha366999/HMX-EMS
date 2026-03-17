@@ -1,0 +1,108 @@
+{
+  "doctype": "DocType",
+  "name": "Practical Exam Student Score",
+  "module": "University Examinations",
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "fetch_from": "student.student_name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "roll_number",
+      "fieldtype": "Data",
+      "label": "Roll Number",
+      "fetch_from": "student.roll_number",
+      "read_only": 1
+    },
+    {
+      "fieldname": "slot",
+      "fieldtype": "Data",
+      "label": "Exam Slot"
+    },
+    {
+      "fieldname": "experiment_marks",
+      "fieldtype": "Float",
+      "label": "Experiment Marks",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "viva_marks",
+      "fieldtype": "Float",
+      "label": "Viva Marks",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "record_marks",
+      "fieldtype": "Float",
+      "label": "Record Marks"
+    },
+    {
+      "fieldname": "criteria_scores",
+      "fieldtype": "JSON",
+      "label": "Criteria Scores",
+      "description": "JSON with criteria-wise marks"
+    },
+    {
+      "fieldname": "total_marks",
+      "fieldtype": "Float",
+      "label": "Total Marks",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "percentage",
+      "fieldtype": "Percent",
+      "label": "Percentage",
+      "read_only": 1
+    },
+    {
+      "fieldname": "grade",
+      "fieldtype": "Data",
+      "label": "Grade"
+    },
+    {
+      "fieldname": "internal_examiner",
+      "fieldtype": "Link",
+      "label": "Internal Examiner",
+      "options": "Instructor"
+    },
+    {
+      "fieldname": "external_examiner",
+      "fieldtype": "Link",
+      "label": "External Examiner",
+      "options": "External Examiner"
+    },
+    {
+      "fieldname": "evaluation_date",
+      "fieldtype": "Date",
+      "label": "Evaluation Date"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "attendance_status",
+      "fieldtype": "Select",
+      "label": "Attendance",
+      "options": "\nPresent\nAbsent\nMedical Leave",
+      "default": "Present"
+    }
+  ],
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

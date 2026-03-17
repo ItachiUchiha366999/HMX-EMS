@@ -1,0 +1,209 @@
+{
+  "actions": [],
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "provider",
+    "column_break_basic",
+    "test_mode",
+    "firebase_section",
+    "firebase_project_id",
+    "firebase_server_key",
+    "column_break_firebase",
+    "firebase_service_account",
+    "onesignal_section",
+    "onesignal_app_id",
+    "onesignal_api_key",
+    "column_break_onesignal",
+    "onesignal_user_key",
+    "web_push_section",
+    "vapid_public_key",
+    "vapid_private_key",
+    "column_break_vapid",
+    "vapid_subject",
+    "settings_section",
+    "default_icon_url",
+    "default_badge_url",
+    "column_break_settings",
+    "notification_sound",
+    "ttl_seconds"
+  ],
+  "fields": [
+    {
+      "default": "0",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enable Push Notifications"
+    },
+    {
+      "fieldname": "provider",
+      "fieldtype": "Select",
+      "label": "Provider",
+      "options": "\nFirebase Cloud Messaging\nOneSignal",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "description": "Log notifications but don't send",
+      "fieldname": "test_mode",
+      "fieldtype": "Check",
+      "label": "Test Mode"
+    },
+    {
+      "depends_on": "eval:doc.provider=='Firebase Cloud Messaging'",
+      "fieldname": "firebase_section",
+      "fieldtype": "Section Break",
+      "label": "Firebase Cloud Messaging"
+    },
+    {
+      "fieldname": "firebase_project_id",
+      "fieldtype": "Data",
+      "label": "Firebase Project ID"
+    },
+    {
+      "description": "Legacy Server Key (for FCM Legacy API)",
+      "fieldname": "firebase_server_key",
+      "fieldtype": "Password",
+      "label": "Server Key"
+    },
+    {
+      "fieldname": "column_break_firebase",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Service Account JSON (for FCM v1 API)",
+      "fieldname": "firebase_service_account",
+      "fieldtype": "Code",
+      "label": "Service Account JSON",
+      "options": "JSON"
+    },
+    {
+      "depends_on": "eval:doc.provider=='OneSignal'",
+      "fieldname": "onesignal_section",
+      "fieldtype": "Section Break",
+      "label": "OneSignal"
+    },
+    {
+      "fieldname": "onesignal_app_id",
+      "fieldtype": "Data",
+      "label": "OneSignal App ID"
+    },
+    {
+      "fieldname": "onesignal_api_key",
+      "fieldtype": "Password",
+      "label": "REST API Key"
+    },
+    {
+      "fieldname": "column_break_onesignal",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "onesignal_user_key",
+      "fieldtype": "Password",
+      "label": "User Auth Key"
+    },
+    {
+      "fieldname": "web_push_section",
+      "fieldtype": "Section Break",
+      "label": "Web Push (VAPID)"
+    },
+    {
+      "description": "Public key for web push subscriptions",
+      "fieldname": "vapid_public_key",
+      "fieldtype": "Data",
+      "label": "VAPID Public Key"
+    },
+    {
+      "fieldname": "vapid_private_key",
+      "fieldtype": "Password",
+      "label": "VAPID Private Key"
+    },
+    {
+      "fieldname": "column_break_vapid",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "mailto: or https:// URL",
+      "fieldname": "vapid_subject",
+      "fieldtype": "Data",
+      "label": "VAPID Subject"
+    },
+    {
+      "fieldname": "settings_section",
+      "fieldtype": "Section Break",
+      "label": "Default Settings"
+    },
+    {
+      "description": "URL for default notification icon",
+      "fieldname": "default_icon_url",
+      "fieldtype": "Data",
+      "label": "Default Icon URL"
+    },
+    {
+      "fieldname": "default_badge_url",
+      "fieldtype": "Data",
+      "label": "Default Badge URL"
+    },
+    {
+      "fieldname": "column_break_settings",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "default",
+      "fieldname": "notification_sound",
+      "fieldtype": "Data",
+      "label": "Notification Sound"
+    },
+    {
+      "default": "86400",
+      "description": "Time to live in seconds (default: 24 hours)",
+      "fieldname": "ttl_seconds",
+      "fieldtype": "Int",
+      "label": "TTL (seconds)"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Push Notification Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

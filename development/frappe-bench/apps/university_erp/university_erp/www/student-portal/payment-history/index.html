@@ -1,0 +1,360 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Payment History{% endblock %}
+
+{% block head_include %}
+<style>
+    .payment-history-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    .page-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .summary-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+    .summary-value {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .summary-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 5px;
+    }
+    .summary-card.total-paid .summary-value { color: #059669; }
+    .summary-card.pending .summary-value { color: #d97706; }
+    .filter-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .filter-group label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+    .filter-group select,
+    .filter-group input {
+        padding: 6px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--control-bg);
+        color: var(--text-color);
+    }
+    .payment-list {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .payment-item {
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.2s;
+    }
+    .payment-item:last-child {
+        border-bottom: none;
+    }
+    .payment-item:hover {
+        background: var(--control-bg);
+    }
+    .payment-info {
+        flex: 1;
+    }
+    .payment-ref {
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 5px;
+    }
+    .payment-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+    .payment-fee-ref {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+    .payment-details {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+    .payment-amount {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #059669;
+    }
+    .payment-gateway {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        background: var(--control-bg);
+        border-radius: 20px;
+        color: var(--text-muted);
+    }
+    .payment-actions {
+        display: flex;
+        gap: 8px;
+    }
+    .btn-download {
+        padding: 6px 12px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .btn-download:hover {
+        background: var(--primary-dark);
+        color: white;
+        text-decoration: none;
+    }
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+    .empty-state svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+    .status-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    .status-badge.completed {
+        background: #d1fae5;
+        color: #059669;
+    }
+    .status-badge.pending {
+        background: #fef3c7;
+        color: #d97706;
+    }
+    .status-badge.failed {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 20px;
+    }
+    .pagination button {
+        padding: 8px 15px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--text-color);
+    }
+    .pagination button.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+    .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    .back-link:hover {
+        color: var(--primary);
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="payment-history-container">
+    <a href="/student-portal" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to Portal
+    </a>
+
+    <div class="page-header">
+        <h1>Payment History</h1>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <div class="summary-card total-paid">
+            <div class="summary-value">{{ frappe.format_currency(total_paid, 'INR') }}</div>
+            <div class="summary-label">Total Paid</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-value">{{ payment_count }}</div>
+            <div class="summary-label">Total Transactions</div>
+        </div>
+        <div class="summary-card pending">
+            <div class="summary-value">{{ frappe.format_currency(pending_amount, 'INR') }}</div>
+            <div class="summary-label">Pending Dues</div>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-group">
+            <label>Year:</label>
+            <select id="filter-year" onchange="filterPayments()">
+                <option value="">All Years</option>
+                {% for year in available_years %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Status:</label>
+            <select id="filter-status" onchange="filterPayments()">
+                <option value="">All</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="Failed">Failed</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Payment List -->
+    <div class="payment-list">
+        {% if payments %}
+            {% for payment in payments %}
+            <div class="payment-item" data-year="{{ payment.posting_date.year }}" data-status="{{ payment.status }}">
+                <div class="payment-info">
+                    <div class="payment-ref">{{ payment.name }}</div>
+                    <div class="payment-date">{{ frappe.format_date(payment.posting_date) }}</div>
+                    <div class="payment-fee-ref">Fee: {{ payment.reference_no or '-' }}</div>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-amount">{{ frappe.format_currency(payment.paid_amount, 'INR') }}</div>
+                    <span class="status-badge completed">Completed</span>
+                    <div class="payment-actions">
+                        <a href="/api/method/university_erp.university_payments.payment_gateway.download_receipt?payment_entry={{ payment.name }}"
+                           class="btn-download" target="_blank" title="Download Receipt">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Receipt
+                        </a>
+                        <a href="/api/method/university_erp.university_payments.payment_gateway.download_receipt?payment_entry={{ payment.name }}&variant=print"
+                           class="btn-download" style="background: #6b7280;" target="_blank" title="Print-optimized">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                            </svg>
+                            Print
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <h3>No Payment History</h3>
+                <p>You haven't made any payments yet.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Pending Payments Section -->
+    {% if pending_fees %}
+    <div style="margin-top: 30px;">
+        <h2 style="margin-bottom: 15px; font-size: 1.3rem;">Pending Fees</h2>
+        <div class="payment-list">
+            {% for fee in pending_fees %}
+            <div class="payment-item">
+                <div class="payment-info">
+                    <div class="payment-ref">{{ fee.name }}</div>
+                    <div class="payment-date">Due: {{ frappe.format_date(fee.due_date) }}</div>
+                    <div class="payment-fee-ref">{{ fee.program or 'General Fee' }}</div>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-amount" style="color: #d97706;">{{ frappe.format_currency(fee.outstanding_amount, 'INR') }}</div>
+                    <span class="status-badge pending">Pending</span>
+                    <div class="payment-actions">
+                        <a href="/pay-fees?fees={{ fee.name }}" class="btn-download" style="background: #d97706;">
+                            Pay Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    function filterPayments() {
+        const yearFilter = document.getElementById('filter-year').value;
+        const statusFilter = document.getElementById('filter-status').value;
+
+        document.querySelectorAll('.payment-item').forEach(item => {
+            const year = item.dataset.year;
+            const status = item.dataset.status;
+
+            let showYear = !yearFilter || year === yearFilter;
+            let showStatus = !statusFilter || status === statusFilter;
+
+            item.style.display = (showYear && showStatus) ? 'flex' : 'none';
+        });
+    }
+</script>
+{% endblock %}

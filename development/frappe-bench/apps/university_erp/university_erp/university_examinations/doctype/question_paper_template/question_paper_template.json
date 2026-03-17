@@ -1,0 +1,214 @@
+{
+  "doctype": "DocType",
+  "name": "Question Paper Template",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "QPT-.YYYY.-.#####",
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "exam_type",
+      "fieldtype": "Select",
+      "label": "Exam Type",
+      "options": "\nMidterm\nEnd Semester\nQuiz\nClass Test\nRe-examination\nSupplementary\nPractical\nViva",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_marks",
+      "fieldtype": "Int",
+      "label": "Total Marks",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration (Minutes)",
+      "reqd": 1
+    },
+    {
+      "fieldname": "passing_percentage",
+      "fieldtype": "Percent",
+      "label": "Passing Percentage",
+      "default": "40"
+    },
+    {
+      "fieldname": "section_break_structure",
+      "fieldtype": "Section Break",
+      "label": "Paper Structure"
+    },
+    {
+      "fieldname": "sections",
+      "fieldtype": "Table",
+      "label": "Sections",
+      "options": "Question Paper Section",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_distribution",
+      "fieldtype": "Section Break",
+      "label": "Distribution Rules",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "unit_wise_distribution",
+      "fieldtype": "Table",
+      "label": "Unit-wise Distribution",
+      "options": "Unit Distribution Rule",
+      "description": "Define percentage of questions from each unit"
+    },
+    {
+      "fieldname": "bloom_distribution",
+      "fieldtype": "Table",
+      "label": "Bloom's Taxonomy Distribution",
+      "options": "Bloom Distribution Rule",
+      "description": "Define percentage of questions from each Bloom's level"
+    },
+    {
+      "fieldname": "section_break_settings",
+      "fieldtype": "Section Break",
+      "label": "Settings"
+    },
+    {
+      "fieldname": "shuffle_questions",
+      "fieldtype": "Check",
+      "label": "Shuffle Questions",
+      "description": "Randomize question order in generated papers"
+    },
+    {
+      "fieldname": "shuffle_options",
+      "fieldtype": "Check",
+      "label": "Shuffle Options",
+      "description": "Randomize option order for MCQ/MSQ questions"
+    },
+    {
+      "fieldname": "show_calculator",
+      "fieldtype": "Check",
+      "label": "Show Calculator",
+      "description": "Allow calculator in online exams"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allow_review",
+      "fieldtype": "Check",
+      "label": "Allow Review Before Submit",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_marks_per_question",
+      "fieldtype": "Check",
+      "label": "Show Marks Per Question",
+      "default": "1"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": "1"
+    },
+    {
+      "fieldname": "section_break_instructions",
+      "fieldtype": "Section Break",
+      "label": "Instructions"
+    },
+    {
+      "fieldname": "instructions",
+      "fieldtype": "Text Editor",
+      "label": "Instructions",
+      "description": "General instructions for the examination"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "template_name",
+  "search_fields": "template_name,course,exam_type",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

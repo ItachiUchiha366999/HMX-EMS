@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal | EduPortal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    {% if vue_css %}
+    <link rel="stylesheet" href="{{ vue_css }}">
+    {% endif %}
+
+    <style>
+        /* Initial loading state before Vue mounts */
+        body { margin: 0; }
+        #app:empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f8fafc;
+            font-family: 'Lexend', sans-serif;
+        }
+        #app:empty::after {
+            content: '';
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #135bec;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (prefers-color-scheme: dark) {
+            #app:empty { background: #0d121b; }
+            #app:empty::after { border-color: #334155; border-top-color: #135bec; }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    {% if vue_js %}
+    <script type="module" src="{{ vue_js }}"></script>
+    {% else %}
+    <script>
+        document.getElementById('app').innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:Lexend,sans-serif;color:#64748b;"><h2 style="color:#0f172a;">Student Portal</h2><p>Build assets not found. Please run <code>npm run build</code> in the student-portal-vue directory.</p></div>';
+    </script>
+    {% endif %}
+</body>
+</html>

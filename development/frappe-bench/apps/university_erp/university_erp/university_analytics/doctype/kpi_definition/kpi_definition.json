@@ -1,0 +1,272 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:kpi_name",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "kpi_name",
+    "kpi_code",
+    "category",
+    "description",
+    "column_break_basic",
+    "unit",
+    "tracking_frequency",
+    "is_active",
+    "show_on_executive_dashboard",
+    "section_break_calculation",
+    "calculation_method",
+    "sql_query",
+    "python_method",
+    "formula",
+    "section_break_targets",
+    "target_value",
+    "minimum_acceptable",
+    "stretch_target",
+    "column_break_targets",
+    "higher_is_better",
+    "section_break_thresholds",
+    "red_threshold",
+    "yellow_threshold",
+    "green_threshold",
+    "section_break_benchmark",
+    "benchmark_source",
+    "benchmark_value",
+    "section_break_ownership",
+    "responsible_role",
+    "data_owner"
+  ],
+  "fields": [
+    {
+      "fieldname": "kpi_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "KPI Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "kpi_code",
+      "fieldtype": "Data",
+      "label": "KPI Code",
+      "unique": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Category",
+      "options": "\nAcademic\nAdmissions\nFinancial\nFaculty\nResearch\nInfrastructure\nPlacement\nStudent Services\nGovernance",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Data",
+      "label": "Unit"
+    },
+    {
+      "default": "Monthly",
+      "fieldname": "tracking_frequency",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Tracking Frequency",
+      "options": "Daily\nWeekly\nMonthly\nQuarterly\nYearly"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "default": "0",
+      "fieldname": "show_on_executive_dashboard",
+      "fieldtype": "Check",
+      "label": "Show on Executive Dashboard"
+    },
+    {
+      "fieldname": "section_break_calculation",
+      "fieldtype": "Section Break",
+      "label": "Calculation Method"
+    },
+    {
+      "fieldname": "calculation_method",
+      "fieldtype": "Select",
+      "label": "Calculation Method",
+      "options": "\nSQL Query\nPython Method\nFormula\nManual Entry",
+      "reqd": 1
+    },
+    {
+      "depends_on": "eval:doc.calculation_method=='SQL Query'",
+      "fieldname": "sql_query",
+      "fieldtype": "Code",
+      "label": "SQL Query",
+      "options": "SQL"
+    },
+    {
+      "depends_on": "eval:doc.calculation_method=='Python Method'",
+      "description": "Full path to the Python method, e.g., university_erp.analytics.kpis.academic_kpis.student_pass_percentage",
+      "fieldname": "python_method",
+      "fieldtype": "Data",
+      "label": "Python Method"
+    },
+    {
+      "depends_on": "eval:doc.calculation_method=='Formula'",
+      "description": "Use field names in curly braces, e.g., {passed_students}/{total_students}*100",
+      "fieldname": "formula",
+      "fieldtype": "Code",
+      "label": "Formula",
+      "options": "Python"
+    },
+    {
+      "fieldname": "section_break_targets",
+      "fieldtype": "Section Break",
+      "label": "Target Values"
+    },
+    {
+      "fieldname": "target_value",
+      "fieldtype": "Float",
+      "label": "Target Value"
+    },
+    {
+      "fieldname": "minimum_acceptable",
+      "fieldtype": "Float",
+      "label": "Minimum Acceptable"
+    },
+    {
+      "fieldname": "stretch_target",
+      "fieldtype": "Float",
+      "label": "Stretch Target"
+    },
+    {
+      "fieldname": "column_break_targets",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "description": "If checked, higher values indicate better performance",
+      "fieldname": "higher_is_better",
+      "fieldtype": "Check",
+      "label": "Higher is Better"
+    },
+    {
+      "fieldname": "section_break_thresholds",
+      "fieldtype": "Section Break",
+      "label": "Status Thresholds"
+    },
+    {
+      "description": "Value below which status is Red",
+      "fieldname": "red_threshold",
+      "fieldtype": "Float",
+      "label": "Red Threshold"
+    },
+    {
+      "description": "Value below which status is Yellow (above Red)",
+      "fieldname": "yellow_threshold",
+      "fieldtype": "Float",
+      "label": "Yellow Threshold"
+    },
+    {
+      "description": "Value at or above which status is Green",
+      "fieldname": "green_threshold",
+      "fieldtype": "Float",
+      "label": "Green Threshold"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_benchmark",
+      "fieldtype": "Section Break",
+      "label": "Benchmark Information"
+    },
+    {
+      "fieldname": "benchmark_source",
+      "fieldtype": "Data",
+      "label": "Benchmark Source"
+    },
+    {
+      "fieldname": "benchmark_value",
+      "fieldtype": "Float",
+      "label": "Benchmark Value"
+    },
+    {
+      "fieldname": "section_break_ownership",
+      "fieldtype": "Section Break",
+      "label": "Ownership"
+    },
+    {
+      "fieldname": "responsible_role",
+      "fieldtype": "Link",
+      "label": "Responsible Role",
+      "options": "Role"
+    },
+    {
+      "fieldname": "data_owner",
+      "fieldtype": "Link",
+      "label": "Data Owner",
+      "options": "User"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Analytics",
+  "name": "KPI Definition",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

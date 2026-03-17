@@ -1,0 +1,212 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"lms_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Learning Management System</b></span>\",\"col\":12}},{\"id\":\"shortcut_course\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LMS Course\",\"col\":3}},{\"id\":\"shortcut_assignment\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LMS Assignment\",\"col\":3}},{\"id\":\"shortcut_quiz\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LMS Quiz\",\"col\":3}},{\"id\":\"shortcut_discussion\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LMS Discussion\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_course\",\"type\":\"card\",\"data\":{\"card_name\":\"Course Management\",\"col\":4}},{\"id\":\"card_assessments\",\"type\":\"card\",\"data\":{\"card_name\":\"Assessments\",\"col\":4}},{\"id\":\"card_collab\",\"type\":\"card\",\"data\":{\"card_name\":\"Collaboration\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-02 00:00:00.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "laptop",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University LMS",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Course Management",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Course",
+      "link_count": 0,
+      "link_to": "LMS Course",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Content",
+      "link_count": 0,
+      "link_to": "LMS Content",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Content Progress",
+      "link_count": 0,
+      "link_to": "LMS Content Progress",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Assessments",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Assignment",
+      "link_count": 0,
+      "link_to": "LMS Assignment",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Assignment Submission",
+      "link_count": 0,
+      "link_to": "Assignment Submission",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Quiz",
+      "link_count": 0,
+      "link_to": "LMS Quiz",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Quiz Attempt",
+      "link_count": 0,
+      "link_to": "Quiz Attempt",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Collaboration",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "LMS Discussion",
+      "link_count": 0,
+      "link_to": "LMS Discussion",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Course Progress",
+      "link_count": 0,
+      "link_to": "Course Progress",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Assignment Submission Report",
+      "link_count": 0,
+      "link_to": "Assignment Submission Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Quiz Analytics",
+      "link_count": 0,
+      "link_to": "Quiz Analytics",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2026-01-04 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "University LMS",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 12.0,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "LMS Course",
+      "link_to": "LMS Course",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "LMS Assignment",
+      "link_to": "LMS Assignment",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "LMS Quiz",
+      "link_to": "LMS Quiz",
+      "type": "DocType"
+    },
+    {
+      "color": "Yellow",
+      "doc_view": "List",
+      "label": "LMS Discussion",
+      "link_to": "LMS Discussion",
+      "type": "DocType"
+    }
+  ],
+  "title": "University LMS"
+}

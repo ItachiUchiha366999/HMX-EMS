@@ -1,0 +1,259 @@
+{
+  "actions": [],
+  "autoname": "format:{course}-CO{co_number}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "course",
+    "course_name",
+    "co_number",
+    "column_break_1",
+    "co_code",
+    "academic_year",
+    "status",
+    "section_co",
+    "co_statement",
+    "description",
+    "section_bloom",
+    "bloom_level",
+    "bloom_level_number",
+    "column_break_2",
+    "action_verb",
+    "knowledge_dimension",
+    "section_syllabus",
+    "syllabus_units",
+    "topics_covered",
+    "section_assessment",
+    "assessment_methods",
+    "column_break_3",
+    "weightage",
+    "section_attainment",
+    "target_attainment",
+    "column_break_4",
+    "current_attainment"
+  ],
+  "fields": [
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "course.course_name",
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "co_number",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "CO Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Auto-generated based on course code",
+      "fieldname": "co_code",
+      "fieldtype": "Data",
+      "label": "CO Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Effective From",
+      "options": "Academic Year"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Active\nRevised\nArchived"
+    },
+    {
+      "fieldname": "section_co",
+      "fieldtype": "Section Break",
+      "label": "CO Statement"
+    },
+    {
+      "fieldname": "co_statement",
+      "fieldtype": "Text",
+      "in_list_view": 1,
+      "label": "CO Statement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Detailed Description"
+    },
+    {
+      "fieldname": "section_bloom",
+      "fieldtype": "Section Break",
+      "label": "Bloom's Taxonomy"
+    },
+    {
+      "fieldname": "bloom_level",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Bloom's Level",
+      "options": "\nRemember\nUnderstand\nApply\nAnalyze\nEvaluate\nCreate",
+      "reqd": 1
+    },
+    {
+      "description": "Numeric level (1-6)",
+      "fieldname": "bloom_level_number",
+      "fieldtype": "Int",
+      "label": "Level Number",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "description": "Primary action verb used in CO statement",
+      "fieldname": "action_verb",
+      "fieldtype": "Data",
+      "label": "Action Verb"
+    },
+    {
+      "fieldname": "knowledge_dimension",
+      "fieldtype": "Select",
+      "label": "Knowledge Dimension",
+      "options": "\nFactual\nConceptual\nProcedural\nMetacognitive"
+    },
+    {
+      "fieldname": "section_syllabus",
+      "fieldtype": "Section Break",
+      "label": "Syllabus Mapping"
+    },
+    {
+      "description": "Comma-separated unit/module numbers",
+      "fieldname": "syllabus_units",
+      "fieldtype": "Small Text",
+      "label": "Covered Units/Modules"
+    },
+    {
+      "fieldname": "topics_covered",
+      "fieldtype": "Text",
+      "label": "Topics Covered"
+    },
+    {
+      "fieldname": "section_assessment",
+      "fieldtype": "Section Break",
+      "label": "Assessment"
+    },
+    {
+      "fieldname": "assessment_methods",
+      "fieldtype": "Small Text",
+      "label": "Assessment Methods",
+      "description": "Comma-separated: Written Exam, Assignment, Quiz, Project, Lab Work, Presentation, Viva, Mid-term, End-term"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "weightage",
+      "fieldtype": "Percent",
+      "label": "Weightage in Course"
+    },
+    {
+      "fieldname": "section_attainment",
+      "fieldtype": "Section Break",
+      "label": "Attainment"
+    },
+    {
+      "default": "60",
+      "fieldname": "target_attainment",
+      "fieldtype": "Percent",
+      "label": "Target Attainment %"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "current_attainment",
+      "fieldtype": "Percent",
+      "label": "Current Attainment %",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "Course Outcome",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "co_statement",
+  "track_changes": 1
+}

@@ -1,0 +1,76 @@
+{
+  "doctype": "DocType",
+  "name": "Question Paper Section",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "section_name",
+      "fieldtype": "Data",
+      "label": "Section Name",
+      "in_list_view": 1,
+      "reqd": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "question_type",
+      "fieldtype": "Select",
+      "label": "Question Type",
+      "options": "\nMultiple Choice (MCQ)\nMultiple Select (MSQ)\nTrue/False\nShort Answer\nLong Answer\nNumerical\nFill in the Blanks\nCase Study",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "total_questions",
+      "fieldtype": "Int",
+      "label": "Total Questions",
+      "in_list_view": 1,
+      "reqd": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "questions_to_attempt",
+      "fieldtype": "Int",
+      "label": "Questions to Attempt",
+      "in_list_view": 1,
+      "reqd": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "marks_per_question",
+      "fieldtype": "Float",
+      "label": "Marks Per Question",
+      "in_list_view": 1,
+      "reqd": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "section_marks",
+      "fieldtype": "Float",
+      "label": "Section Total Marks",
+      "read_only": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "compulsory",
+      "fieldtype": "Check",
+      "label": "Compulsory Section"
+    },
+    {
+      "fieldname": "negative_marking",
+      "fieldtype": "Check",
+      "label": "Negative Marking"
+    },
+    {
+      "fieldname": "negative_marks",
+      "fieldtype": "Float",
+      "label": "Negative Marks"
+    },
+    {
+      "fieldname": "section_instructions",
+      "fieldtype": "Small Text",
+      "label": "Section Instructions"
+    }
+  ],
+  "engine": "InnoDB"
+}

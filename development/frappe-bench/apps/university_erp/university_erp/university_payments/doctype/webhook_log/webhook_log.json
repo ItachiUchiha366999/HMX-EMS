@@ -1,0 +1,131 @@
+{
+  "doctype": "DocType",
+  "name": "Webhook Log",
+  "module": "University Payments",
+  "naming_rule": "Expression",
+  "autoname": "WHL-.YYYY.-.#####",
+  "engine": "InnoDB",
+  "field_order": [
+    "webhook_type",
+    "event_type",
+    "received_at",
+    "column_break_1",
+    "processed",
+    "processing_time",
+    "payload_section",
+    "payload",
+    "response_section",
+    "response",
+    "error_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "webhook_type",
+      "fieldtype": "Data",
+      "label": "Webhook Type",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "label": "Event Type",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "received_at",
+      "fieldtype": "Datetime",
+      "label": "Received At",
+      "default": "Now",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "processed",
+      "fieldtype": "Check",
+      "label": "Processed",
+      "default": "0",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "processing_time",
+      "fieldtype": "Float",
+      "label": "Processing Time (ms)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payload_section",
+      "fieldtype": "Section Break",
+      "label": "Payload"
+    },
+    {
+      "fieldname": "payload",
+      "fieldtype": "Long Text",
+      "label": "Payload"
+    },
+    {
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "Response"
+    },
+    {
+      "fieldname": "response",
+      "fieldtype": "Long Text",
+      "label": "Response"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "track_changes": 0,
+  "sort_field": "received_at",
+  "sort_order": "DESC",
+  "modified_by": "Administrator",
+  "owner": "Administrator"
+}

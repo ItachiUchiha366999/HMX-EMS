@@ -1,0 +1,14 @@
+{
+  "name": "Examination Result Analysis",
+  "doctype": "Report",
+  "ref_doctype": "Student Exam Attempt",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "University Examinations",
+  "roles": [
+    {"role": "System Manager"},
+    {"role": "Examination Controller"},
+    {"role": "HOD"},
+    {"role": "Instructor"}
+  ]
+}

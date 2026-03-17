@@ -1,0 +1,48 @@
+{
+  "doctype": "DocType",
+  "name": "Question Option",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "option_label",
+      "fieldtype": "Data",
+      "label": "Option Label",
+      "in_list_view": 1,
+      "columns": 1,
+      "description": "e.g., A, B, C, D or 1, 2, 3, 4"
+    },
+    {
+      "fieldname": "option_text",
+      "fieldtype": "Text Editor",
+      "label": "Option Text",
+      "in_list_view": 1,
+      "columns": 4
+    },
+    {
+      "fieldname": "option_image",
+      "fieldtype": "Attach Image",
+      "label": "Option Image"
+    },
+    {
+      "fieldname": "is_correct",
+      "fieldtype": "Check",
+      "label": "Is Correct",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "partial_marks_percentage",
+      "fieldtype": "Percent",
+      "label": "Partial Marks %",
+      "description": "For MSQ - percentage of marks for this option"
+    },
+    {
+      "fieldname": "match_with",
+      "fieldtype": "Data",
+      "label": "Match With",
+      "description": "For Match the Following type - what this option matches with"
+    }
+  ],
+  "engine": "InnoDB"
+}

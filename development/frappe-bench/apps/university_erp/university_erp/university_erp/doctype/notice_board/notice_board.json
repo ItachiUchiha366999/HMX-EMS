@@ -1,0 +1,230 @@
+{
+  "actions": [],
+  "autoname": "NB-.#####",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "notice_type",
+    "priority",
+    "column_break_basic",
+    "publish_date",
+    "expiry_date",
+    "is_pinned",
+    "content_section",
+    "content",
+    "attachment",
+    "target_audience_section",
+    "audience_type",
+    "column_break_audience",
+    "target_programs",
+    "target_departments",
+    "notification_section",
+    "send_email",
+    "send_sms",
+    "column_break_notification",
+    "send_push",
+    "send_whatsapp",
+    "statistics_section",
+    "views_count",
+    "notifications_sent",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "default": "General",
+      "fieldname": "notice_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Notice Type",
+      "options": "General\nAcademic\nExamination\nAdmission\nPlacement\nHostel\nLibrary\nSports\nCultural\nEmergency",
+      "reqd": 1
+    },
+    {
+      "default": "Medium",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "publish_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Publish Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "expiry_date",
+      "fieldtype": "Date",
+      "label": "Expiry Date"
+    },
+    {
+      "default": "0",
+      "description": "Pin this notice to the top of the list",
+      "fieldname": "is_pinned",
+      "fieldtype": "Check",
+      "label": "Pin to Top"
+    },
+    {
+      "fieldname": "content_section",
+      "fieldtype": "Section Break",
+      "label": "Content"
+    },
+    {
+      "fieldname": "content",
+      "fieldtype": "Text Editor",
+      "label": "Notice Content",
+      "reqd": 1
+    },
+    {
+      "fieldname": "attachment",
+      "fieldtype": "Attach",
+      "label": "Attachment"
+    },
+    {
+      "fieldname": "target_audience_section",
+      "fieldtype": "Section Break",
+      "label": "Target Audience"
+    },
+    {
+      "default": "All",
+      "fieldname": "audience_type",
+      "fieldtype": "Select",
+      "label": "Audience Type",
+      "options": "All\nStudents Only\nFaculty Only\nStaff Only\nParents Only\nSpecific Programs\nSpecific Departments"
+    },
+    {
+      "fieldname": "column_break_audience",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.audience_type=='Specific Programs'",
+      "fieldname": "target_programs",
+      "fieldtype": "Table MultiSelect",
+      "label": "Target Programs",
+      "options": "Notice Target Program"
+    },
+    {
+      "depends_on": "eval:doc.audience_type=='Specific Departments'",
+      "fieldname": "target_departments",
+      "fieldtype": "Table MultiSelect",
+      "label": "Target Departments",
+      "options": "Notice Target Department"
+    },
+    {
+      "fieldname": "notification_section",
+      "fieldtype": "Section Break",
+      "label": "Notifications"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_email",
+      "fieldtype": "Check",
+      "label": "Send Email Notification"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_sms",
+      "fieldtype": "Check",
+      "label": "Send SMS Notification"
+    },
+    {
+      "fieldname": "column_break_notification",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_push",
+      "fieldtype": "Check",
+      "label": "Send Push Notification"
+    },
+    {
+      "default": "0",
+      "fieldname": "send_whatsapp",
+      "fieldtype": "Check",
+      "label": "Send WhatsApp Notification"
+    },
+    {
+      "fieldname": "statistics_section",
+      "fieldtype": "Section Break",
+      "label": "Statistics"
+    },
+    {
+      "default": "0",
+      "fieldname": "views_count",
+      "fieldtype": "Int",
+      "label": "Views",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "notifications_sent",
+      "fieldtype": "Int",
+      "label": "Notifications Sent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Notice Board",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Notice Board",
+  "naming_rule": "Expression (old style)",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,282 @@
+{
+  "doctype": "DocType",
+  "name": "External Examiner",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "EXT-.YYYY.-.#####",
+  "fields": [
+    {
+      "fieldname": "examiner_name",
+      "fieldtype": "Data",
+      "label": "Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Data",
+      "label": "Designation",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "organization",
+      "fieldtype": "Data",
+      "label": "Organization/University",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Data",
+      "label": "Department"
+    },
+    {
+      "fieldname": "section_break_contact",
+      "fieldtype": "Section Break",
+      "label": "Contact Information"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email",
+      "reqd": 1
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "mobile",
+      "fieldtype": "Data",
+      "label": "Mobile",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "column_break_contact",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "city",
+      "fieldtype": "Data",
+      "label": "City"
+    },
+    {
+      "fieldname": "state",
+      "fieldtype": "Data",
+      "label": "State"
+    },
+    {
+      "fieldname": "section_break_expertise",
+      "fieldtype": "Section Break",
+      "label": "Expertise & Qualifications"
+    },
+    {
+      "fieldname": "specialization",
+      "fieldtype": "Data",
+      "label": "Specialization",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qualification",
+      "fieldtype": "Data",
+      "label": "Highest Qualification"
+    },
+    {
+      "fieldname": "experience_years",
+      "fieldtype": "Int",
+      "label": "Experience (Years)"
+    },
+    {
+      "fieldname": "column_break_expertise",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "areas_of_expertise",
+      "fieldtype": "Small Text",
+      "label": "Areas of Expertise",
+      "description": "Comma separated"
+    },
+    {
+      "fieldname": "courses_can_evaluate",
+      "fieldtype": "Small Text",
+      "label": "Courses Can Evaluate",
+      "description": "List of course codes"
+    },
+    {
+      "fieldname": "section_break_bank",
+      "fieldtype": "Section Break",
+      "label": "Bank Details"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name"
+    },
+    {
+      "fieldname": "bank_account",
+      "fieldtype": "Data",
+      "label": "Account Number"
+    },
+    {
+      "fieldname": "ifsc_code",
+      "fieldtype": "Data",
+      "label": "IFSC Code"
+    },
+    {
+      "fieldname": "column_break_bank",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pan_number",
+      "fieldtype": "Data",
+      "label": "PAN Number"
+    },
+    {
+      "fieldname": "gst_number",
+      "fieldtype": "Data",
+      "label": "GST Number"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Active\nInactive\nBlacklisted",
+      "default": "Active",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "empanelment_date",
+      "fieldtype": "Date",
+      "label": "Empanelment Date"
+    },
+    {
+      "fieldname": "empanelment_valid_till",
+      "fieldtype": "Date",
+      "label": "Valid Till"
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "times_assigned",
+      "fieldtype": "Int",
+      "label": "Times Assigned",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "last_assignment_date",
+      "fieldtype": "Date",
+      "label": "Last Assignment",
+      "read_only": 1
+    },
+    {
+      "fieldname": "average_rating",
+      "fieldtype": "Rating",
+      "label": "Average Rating",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_remarks",
+      "fieldtype": "Section Break",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "photo",
+      "fieldtype": "Attach Image",
+      "label": "Photo"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "examiner_name",
+  "search_fields": "examiner_name,organization,specialization,status",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

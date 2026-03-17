@@ -1,0 +1,190 @@
+{
+  "actions": [],
+  "autoname": "WA-.#####",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "phone_number",
+    "direction",
+    "message_type",
+    "column_break_basic",
+    "status",
+    "message_id",
+    "template_section",
+    "template_name",
+    "template_params",
+    "message_section",
+    "message_content",
+    "media_url",
+    "timestamps_section",
+    "sent_at",
+    "delivered_at",
+    "column_break_timestamps",
+    "read_at",
+    "failed_at",
+    "error_section",
+    "error_message",
+    "raw_response"
+  ],
+  "fields": [
+    {
+      "fieldname": "phone_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Phone Number",
+      "reqd": 1
+    },
+    {
+      "default": "Outgoing",
+      "fieldname": "direction",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Direction",
+      "options": "Outgoing\nIncoming"
+    },
+    {
+      "default": "template",
+      "fieldname": "message_type",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Message Type",
+      "options": "template\ntext\nimage\ndocument\nvideo\naudio\nsticker\nlocation\ncontact\ninteractive"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Queued",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Queued\nSent\nDelivered\nRead\nFailed"
+    },
+    {
+      "fieldname": "message_id",
+      "fieldtype": "Data",
+      "label": "Message ID"
+    },
+    {
+      "fieldname": "template_section",
+      "fieldtype": "Section Break",
+      "label": "Template Details"
+    },
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "label": "Template Name"
+    },
+    {
+      "fieldname": "template_params",
+      "fieldtype": "Code",
+      "label": "Template Parameters",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "message_section",
+      "fieldtype": "Section Break",
+      "label": "Message Content"
+    },
+    {
+      "fieldname": "message_content",
+      "fieldtype": "Small Text",
+      "label": "Message Content"
+    },
+    {
+      "fieldname": "media_url",
+      "fieldtype": "Data",
+      "label": "Media URL"
+    },
+    {
+      "fieldname": "timestamps_section",
+      "fieldtype": "Section Break",
+      "label": "Timestamps"
+    },
+    {
+      "fieldname": "sent_at",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Sent At"
+    },
+    {
+      "fieldname": "delivered_at",
+      "fieldtype": "Datetime",
+      "label": "Delivered At"
+    },
+    {
+      "fieldname": "column_break_timestamps",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "read_at",
+      "fieldtype": "Datetime",
+      "label": "Read At"
+    },
+    {
+      "fieldname": "failed_at",
+      "fieldtype": "Datetime",
+      "label": "Failed At"
+    },
+    {
+      "fieldname": "error_section",
+      "fieldtype": "Section Break",
+      "label": "Error Details"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    },
+    {
+      "fieldname": "raw_response",
+      "fieldtype": "Code",
+      "label": "Raw Response",
+      "options": "JSON"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "WhatsApp Log",
+  "naming_rule": "Expression (old style)",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

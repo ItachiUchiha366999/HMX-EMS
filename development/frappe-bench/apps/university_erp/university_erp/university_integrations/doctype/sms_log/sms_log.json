@@ -1,0 +1,159 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "recipient",
+    "recipient_name",
+    "message",
+    "column_break_basic",
+    "sent_on",
+    "status",
+    "sms_gateway",
+    "template_used",
+    "response_section",
+    "message_id",
+    "gateway_response",
+    "error_message",
+    "delivery_section",
+    "delivered_on",
+    "delivery_status"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "SMS-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recipient",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Recipient Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recipient_name",
+      "fieldtype": "Data",
+      "label": "Recipient Name"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Text",
+      "in_list_view": 1,
+      "label": "Message",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Now",
+      "fieldname": "sent_on",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Sent On"
+    },
+    {
+      "default": "Queued",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Queued\nSent\nDelivered\nFailed"
+    },
+    {
+      "fieldname": "sms_gateway",
+      "fieldtype": "Data",
+      "in_standard_filter": 1,
+      "label": "SMS Gateway"
+    },
+    {
+      "fieldname": "template_used",
+      "fieldtype": "Data",
+      "label": "Template Used"
+    },
+    {
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "Gateway Response"
+    },
+    {
+      "fieldname": "message_id",
+      "fieldtype": "Data",
+      "label": "Message ID"
+    },
+    {
+      "fieldname": "gateway_response",
+      "fieldtype": "Code",
+      "label": "Gateway Response",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "delivery_section",
+      "fieldtype": "Section Break",
+      "label": "Delivery Status"
+    },
+    {
+      "fieldname": "delivered_on",
+      "fieldtype": "Datetime",
+      "label": "Delivered On"
+    },
+    {
+      "fieldname": "delivery_status",
+      "fieldtype": "Data",
+      "label": "Delivery Status"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "SMS Log",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,92 @@
+{
+    "actions": [],
+    "creation": "2026-01-02 00:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "question_text",
+        "question_type",
+        "marks",
+        "negative_marks",
+        "column_break_1",
+        "options",
+        "correct_answer",
+        "section_additional",
+        "explanation",
+        "image"
+    ],
+    "fields": [
+        {
+            "fieldname": "question_text",
+            "fieldtype": "Text Editor",
+            "in_list_view": 1,
+            "label": "Question",
+            "reqd": 1
+        },
+        {
+            "fieldname": "question_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Question Type",
+            "options": "Multiple Choice\nMultiple Select\nTrue/False\nShort Answer\nFill in Blank",
+            "reqd": 1
+        },
+        {
+            "default": "1",
+            "fieldname": "marks",
+            "fieldtype": "Float",
+            "in_list_view": 1,
+            "label": "Marks",
+            "reqd": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "negative_marks",
+            "fieldtype": "Float",
+            "label": "Negative Marks"
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "description": "For MCQ/MSQ. One option per line. Mark correct with * at start",
+            "fieldname": "options",
+            "fieldtype": "Text",
+            "label": "Options"
+        },
+        {
+            "description": "For Short Answer/Fill in Blank",
+            "fieldname": "correct_answer",
+            "fieldtype": "Data",
+            "label": "Correct Answer"
+        },
+        {
+            "fieldname": "section_additional",
+            "fieldtype": "Section Break",
+            "label": "Additional"
+        },
+        {
+            "fieldname": "explanation",
+            "fieldtype": "Small Text",
+            "label": "Explanation"
+        },
+        {
+            "fieldname": "image",
+            "fieldtype": "Attach Image",
+            "label": "Question Image"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2026-01-02 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "University LMS",
+    "name": "Quiz Question",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}

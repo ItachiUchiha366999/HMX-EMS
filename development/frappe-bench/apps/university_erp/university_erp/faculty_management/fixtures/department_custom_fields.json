@@ -1,0 +1,103 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_hr_section",
+    "label": "HR Strength Details",
+    "fieldtype": "Section Break",
+    "insert_after": "disabled",
+    "collapsible": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_sanctioned_teaching_strength",
+    "label": "Sanctioned Teaching Strength",
+    "fieldtype": "Int",
+    "insert_after": "custom_hr_section",
+    "default": "0",
+    "description": "Total sanctioned positions for teaching staff"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_sanctioned_non_teaching_strength",
+    "label": "Sanctioned Non-Teaching Strength",
+    "fieldtype": "Int",
+    "insert_after": "custom_sanctioned_teaching_strength",
+    "default": "0",
+    "description": "Total sanctioned positions for non-teaching staff"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_column_break_1",
+    "fieldtype": "Column Break",
+    "insert_after": "custom_sanctioned_non_teaching_strength"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_current_teaching_strength",
+    "label": "Current Teaching Strength",
+    "fieldtype": "Int",
+    "insert_after": "custom_column_break_1",
+    "read_only": 1,
+    "default": "0",
+    "description": "Current number of teaching staff (auto-calculated)"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_current_non_teaching_strength",
+    "label": "Current Non-Teaching Strength",
+    "fieldtype": "Int",
+    "insert_after": "custom_current_teaching_strength",
+    "read_only": 1,
+    "default": "0",
+    "description": "Current number of non-teaching staff (auto-calculated)"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_section_break_2",
+    "fieldtype": "Section Break",
+    "insert_after": "custom_current_non_teaching_strength",
+    "collapsible": 1,
+    "label": "Vacancy Details"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_teaching_vacancies",
+    "label": "Teaching Vacancies",
+    "fieldtype": "Int",
+    "insert_after": "custom_section_break_2",
+    "read_only": 1,
+    "default": "0",
+    "description": "Vacant teaching positions (auto-calculated)"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_non_teaching_vacancies",
+    "label": "Non-Teaching Vacancies",
+    "fieldtype": "Int",
+    "insert_after": "custom_teaching_vacancies",
+    "read_only": 1,
+    "default": "0",
+    "description": "Vacant non-teaching positions (auto-calculated)"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Department",
+    "fieldname": "custom_total_vacancies",
+    "label": "Total Vacancies",
+    "fieldtype": "Int",
+    "insert_after": "custom_non_teaching_vacancies",
+    "read_only": 1,
+    "default": "0",
+    "bold": 1,
+    "description": "Total vacant positions (auto-calculated)"
+  }
+]

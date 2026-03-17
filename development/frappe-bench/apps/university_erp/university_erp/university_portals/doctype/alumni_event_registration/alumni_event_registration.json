@@ -1,0 +1,167 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 12:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "event",
+    "event_name",
+    "column_break_1",
+    "alumni",
+    "alumni_name",
+    "registration_section",
+    "registration_date",
+    "payment_status",
+    "payment_amount",
+    "column_break_2",
+    "attendance_status",
+    "attended_date",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "AEREG-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "event",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Event",
+      "options": "Alumni Event",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "event.event_name",
+      "fieldname": "event_name",
+      "fieldtype": "Data",
+      "label": "Event Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "alumni",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Alumni",
+      "options": "Alumni",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "alumni.student_name",
+      "fieldname": "alumni_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Alumni Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "registration_section",
+      "fieldtype": "Section Break",
+      "label": "Registration Details"
+    },
+    {
+      "default": "Now",
+      "fieldname": "registration_date",
+      "fieldtype": "Datetime",
+      "label": "Registration Date"
+    },
+    {
+      "default": "Pending",
+      "fieldname": "payment_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Payment Status",
+      "options": "Pending\nPaid\nWaived\nRefunded"
+    },
+    {
+      "fieldname": "payment_amount",
+      "fieldtype": "Currency",
+      "label": "Payment Amount"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Registered",
+      "fieldname": "attendance_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Attendance Status",
+      "options": "Registered\nConfirmed\nAttended\nNo Show\nCancelled"
+    },
+    {
+      "fieldname": "attended_date",
+      "fieldtype": "Datetime",
+      "label": "Attended Date"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Portals",
+  "name": "Alumni Event Registration",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

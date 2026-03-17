@@ -1,0 +1,249 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "job_title",
+    "company",
+    "job_type",
+    "column_break_1",
+    "posting_date",
+    "deadline",
+    "status",
+    "vacancies",
+    "package_section",
+    "min_ctc",
+    "max_ctc",
+    "job_location",
+    "eligibility_section",
+    "eligible_programs",
+    "min_cgpa",
+    "max_backlogs",
+    "batch_year",
+    "description_section",
+    "job_description",
+    "skills_required",
+    "selection_process"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "JOB-.YYYY.-",
+      "reqd": 1
+    },
+    {
+      "fieldname": "job_title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Job Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Company",
+      "options": "Placement Company",
+      "reqd": 1
+    },
+    {
+      "default": "Full Time",
+      "fieldname": "job_type",
+      "fieldtype": "Select",
+      "label": "Job Type",
+      "options": "Full Time\nInternship\nPart Time"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "posting_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Posting Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "deadline",
+      "fieldtype": "Date",
+      "label": "Application Deadline"
+    },
+    {
+      "default": "Open",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Open\nClosed\nOn Hold\nCancelled"
+    },
+    {
+      "default": "1",
+      "fieldname": "vacancies",
+      "fieldtype": "Int",
+      "label": "Vacancies"
+    },
+    {
+      "fieldname": "package_section",
+      "fieldtype": "Section Break",
+      "label": "Package Details"
+    },
+    {
+      "fieldname": "min_ctc",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Minimum CTC (LPA)"
+    },
+    {
+      "fieldname": "max_ctc",
+      "fieldtype": "Currency",
+      "label": "Maximum CTC (LPA)"
+    },
+    {
+      "fieldname": "job_location",
+      "fieldtype": "Data",
+      "label": "Job Location"
+    },
+    {
+      "fieldname": "eligibility_section",
+      "fieldtype": "Section Break",
+      "label": "Eligibility Criteria"
+    },
+    {
+      "fieldname": "eligible_programs",
+      "fieldtype": "Table",
+      "label": "Eligible Programs",
+      "options": "Job Eligible Program"
+    },
+    {
+      "default": "0",
+      "fieldname": "min_cgpa",
+      "fieldtype": "Float",
+      "label": "Minimum CGPA"
+    },
+    {
+      "default": "0",
+      "fieldname": "max_backlogs",
+      "fieldtype": "Int",
+      "label": "Max Backlogs Allowed"
+    },
+    {
+      "fieldname": "batch_year",
+      "fieldtype": "Data",
+      "label": "Batch Year (e.g., 2026)"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "description_section",
+      "fieldtype": "Section Break",
+      "label": "Job Details"
+    },
+    {
+      "fieldname": "job_description",
+      "fieldtype": "Text Editor",
+      "label": "Job Description"
+    },
+    {
+      "fieldname": "skills_required",
+      "fieldtype": "Small Text",
+      "label": "Skills Required"
+    },
+    {
+      "fieldname": "selection_process",
+      "fieldtype": "Small Text",
+      "label": "Selection Process"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Placement Application",
+      "link_fieldname": "job_opening"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Placement",
+  "name": "Placement Job Opening",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Placement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "search_fields": "job_title, company",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "job_title",
+  "track_changes": 1
+}

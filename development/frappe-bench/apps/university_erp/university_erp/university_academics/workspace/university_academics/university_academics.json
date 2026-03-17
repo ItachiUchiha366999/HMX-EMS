@@ -1,0 +1,31 @@
+{
+  "name": "University Academics",
+  "doctype": "Workspace",
+  "module": "University Academics",
+  "label": "University Academics",
+  "icon": "education",
+  "public": 1,
+  "title": "University Academics",
+  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>University Academics</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Registration\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Admission Cycle\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"University Alumni\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timetable Slot\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Academics\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Admissions\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Student Info\",\"col\":4}}]",
+  "links": [
+    {"type": "Card Break", "label": "Academics"},
+    {"type": "Link", "link_to": "Course Registration", "link_type": "DocType", "label": "Course Registration"},
+    {"type": "Link", "link_to": "Elective Course Group", "link_type": "DocType", "label": "Elective Course Group"},
+    {"type": "Link", "link_to": "Timetable Slot", "link_type": "DocType", "label": "Timetable Slot"},
+    {"type": "Card Break", "label": "Admissions"},
+    {"type": "Link", "link_to": "Admission Cycle", "link_type": "DocType", "label": "Admission Cycle"},
+    {"type": "Link", "link_to": "Admission Criteria", "link_type": "DocType", "label": "Admission Criteria"},
+    {"type": "Link", "link_to": "Merit List", "link_type": "DocType", "label": "Merit List"},
+    {"type": "Link", "link_to": "Seat Matrix", "link_type": "DocType", "label": "Seat Matrix"},
+    {"type": "Card Break", "label": "Student Info"},
+    {"type": "Link", "link_to": "Student Status Log", "link_type": "DocType", "label": "Student Status Log"},
+    {"type": "Link", "link_to": "University Alumni", "link_type": "DocType", "label": "University Alumni"},
+    {"type": "Link", "link_to": "University Announcement", "link_type": "DocType", "label": "University Announcement"}
+  ],
+  "shortcuts": [
+    {"color": "Blue", "doc_view": "List", "label": "Course Registration", "link_to": "Course Registration", "type": "DocType"},
+    {"color": "Green", "doc_view": "List", "label": "Admission Cycle", "link_to": "Admission Cycle", "type": "DocType"},
+    {"color": "Orange", "doc_view": "List", "label": "University Alumni", "link_to": "University Alumni", "type": "DocType"},
+    {"color": "Grey", "doc_view": "List", "label": "Timetable Slot", "link_to": "Timetable Slot", "type": "DocType"}
+  ]
+}

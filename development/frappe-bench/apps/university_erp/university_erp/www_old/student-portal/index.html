@@ -1,0 +1,261 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="student-portal container mt-4">
+	<div class="portal-header mb-4">
+		<h1>Welcome, {{ student.student_name }}</h1>
+		<p class="text-muted">
+			Enrollment: <strong>{{ student.custom_enrollment_number }}</strong> |
+			Program: <strong>{{ student.custom_program }}</strong> |
+			Status: <span class="badge badge-success">{{ student.custom_student_status }}</span>
+		</p>
+	</div>
+
+	<!-- Quick Stats -->
+	<div class="row mb-4">
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body text-center">
+					<h3 class="text-primary mb-1">{{ student.custom_cgpa or "N/A" }}</h3>
+					<p class="text-muted mb-0">CGPA</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body text-center">
+					<h3 class="text-success mb-1">{{ student.custom_total_credits_earned or 0 }}</h3>
+					<p class="text-muted mb-0">Credits Earned</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body text-center">
+					<h3 class="text-info mb-1">{{ current_semester }}</h3>
+					<p class="text-muted mb-0">Current Semester</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Main Content -->
+		<div class="col-md-8">
+			<!-- Enrolled Courses -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0">My Courses</h5>
+				</div>
+				<div class="card-body">
+					{% if enrolled_courses %}
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Course</th>
+									<th>Attendance</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for course in enrolled_courses %}
+								<tr>
+									<td>{{ course.course_name }}</td>
+									<td>
+										{% set att = None %}
+										{% for item in attendance_summary %}
+											{% if item.course == course.course_name %}
+												{% set att = item %}
+											{% endif %}
+										{% endfor %}
+
+										{% if att %}
+										<div class="progress" style="height: 20px;">
+											<div class="progress-bar {% if att.percentage >= 75 %}bg-success{% else %}bg-warning{% endif %}"
+												 role="progressbar"
+												 style="width: {{ att.percentage }}%">
+												{{ att.percentage }}%
+											</div>
+										</div>
+										{% else %}
+										N/A
+										{% endif %}
+									</td>
+									<td>
+										{% if att %}
+											{% if att.status == "Good" %}
+											<span class="badge badge-success">Good</span>
+											{% else %}
+											<span class="badge badge-warning">Low</span>
+											{% endif %}
+										{% else %}
+										-
+										{% endif %}
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					{% else %}
+					<p class="text-muted">No courses enrolled for current semester</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<!-- Pending Fees -->
+			{% if fee_status %}
+			<div class="card mb-4 border-warning">
+				<div class="card-header bg-warning text-white">
+					<h5 class="mb-0">Pending Fees</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Fee Type</th>
+									<th>Amount Due</th>
+									<th>Due Date</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for fee in fee_status %}
+								<tr>
+									<td>{{ fee.fee_structure }}</td>
+									<td>₹ {{ fee.outstanding_amount }}</td>
+									<td>{{ fee.due_date }}</td>
+									<td>
+										<a href="/app/fees/{{ fee.name }}" class="btn btn-sm btn-primary">
+											Pay Now
+										</a>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+
+			<!-- Recent Results -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0">Recent Results</h5>
+				</div>
+				<div class="card-body">
+					{% if recent_results %}
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Course</th>
+									<th>Grade</th>
+									<th>Credits</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for result in recent_results %}
+								<tr>
+									<td>{{ result.course }}</td>
+									<td><strong>{{ result.custom_grade }}</strong></td>
+									<td>{{ result.custom_credits }}</td>
+									<td>
+										{% if result.custom_result_status == "Pass" %}
+										<span class="badge badge-success">Pass</span>
+										{% else %}
+										<span class="badge badge-danger">Fail</span>
+										{% endif %}
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					{% else %}
+					<p class="text-muted">No results available yet</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div class="col-md-4">
+			<!-- Announcements -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0">Announcements</h5>
+				</div>
+				<div class="card-body" style="max-height: 400px; overflow-y: auto;">
+					{% if announcements %}
+						{% for announcement in announcements %}
+						<div class="announcement-item mb-3 pb-3 border-bottom">
+							<h6 class="mb-1">
+								{{ announcement.title }}
+								{% if announcement.priority == "High" %}
+								<span class="badge badge-danger badge-sm">High</span>
+								{% endif %}
+							</h6>
+							<div class="text-muted small">
+								{{ announcement.content|striptags|truncate(100) }}
+							</div>
+							<small class="text-muted">{{ announcement.publish_date }}</small>
+						</div>
+						{% endfor %}
+					{% else %}
+					<p class="text-muted">No announcements</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<!-- Quick Links -->
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">Quick Links</h5>
+				</div>
+				<div class="list-group list-group-flush">
+					<a href="/app/student/{{ student.name }}" class="list-group-item list-group-item-action">
+						My Profile
+					</a>
+					<a href="/app/program-enrollment" class="list-group-item list-group-item-action">
+						Course Registration
+					</a>
+					<a href="/app/student-attendance" class="list-group-item list-group-item-action">
+						Attendance
+					</a>
+					<a href="/app/assessment-result" class="list-group-item list-group-item-action">
+						Results
+					</a>
+					<a href="/app/fees" class="list-group-item list-group-item-action">
+						Fee Payments
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.student-portal .card {
+	box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.student-portal .portal-header {
+	padding-bottom: 1rem;
+	border-bottom: 2px solid #e9ecef;
+}
+
+.student-portal .announcement-item:last-child {
+	border-bottom: none !important;
+}
+
+.student-portal .progress {
+	font-size: 0.75rem;
+	font-weight: bold;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,1 @@
+# Merit List Applicant DocType

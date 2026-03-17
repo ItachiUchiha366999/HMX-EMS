@@ -1,0 +1,252 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "subject",
+    "category",
+    "column_break_1",
+    "is_anonymous",
+    "submitted_by_type",
+    "section_break_details",
+    "suggestion",
+    "expected_benefit",
+    "implementation_idea",
+    "attachments",
+    "section_break_review",
+    "reviewed_by",
+    "review_date",
+    "review_comments",
+    "column_break_2",
+    "feasibility",
+    "priority",
+    "section_break_implementation",
+    "implementation_plan",
+    "assigned_to",
+    "target_date",
+    "implementation_status",
+    "section_break_status",
+    "status",
+    "votes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "SUG-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Subject",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Category",
+      "options": "\nAcademic Improvement\nInfrastructure\nServices\nEvents & Activities\nPolicy Suggestion\nTechnology\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": 0,
+      "fieldname": "is_anonymous",
+      "fieldtype": "Check",
+      "label": "Submit Anonymously"
+    },
+    {
+      "fieldname": "submitted_by_type",
+      "fieldtype": "Select",
+      "label": "Submitted By Type",
+      "options": "\nStudent\nFaculty\nStaff\nParent\nAlumni\nOther"
+    },
+    {
+      "fieldname": "section_break_details",
+      "fieldtype": "Section Break",
+      "label": "Suggestion Details"
+    },
+    {
+      "fieldname": "suggestion",
+      "fieldtype": "Text Editor",
+      "label": "Your Suggestion",
+      "reqd": 1
+    },
+    {
+      "fieldname": "expected_benefit",
+      "fieldtype": "Text",
+      "label": "Expected Benefits"
+    },
+    {
+      "fieldname": "implementation_idea",
+      "fieldtype": "Text",
+      "label": "Implementation Ideas (if any)"
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Table",
+      "label": "Attachments",
+      "options": "Suggestion Attachment"
+    },
+    {
+      "fieldname": "section_break_review",
+      "fieldtype": "Section Break",
+      "label": "Review"
+    },
+    {
+      "fieldname": "reviewed_by",
+      "fieldtype": "Link",
+      "label": "Reviewed By",
+      "options": "User"
+    },
+    {
+      "fieldname": "review_date",
+      "fieldtype": "Date",
+      "label": "Review Date"
+    },
+    {
+      "fieldname": "review_comments",
+      "fieldtype": "Text",
+      "label": "Review Comments"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "feasibility",
+      "fieldtype": "Select",
+      "label": "Feasibility Assessment",
+      "options": "\nHighly Feasible\nFeasible\nNeeds Further Study\nNot Feasible"
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "\nLow\nMedium\nHigh"
+    },
+    {
+      "depends_on": "eval:doc.status == 'Approved' || doc.status == 'Implemented' || doc.status == 'In Implementation'",
+      "fieldname": "section_break_implementation",
+      "fieldtype": "Section Break",
+      "label": "Implementation"
+    },
+    {
+      "fieldname": "implementation_plan",
+      "fieldtype": "Text Editor",
+      "label": "Implementation Plan"
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To",
+      "options": "User"
+    },
+    {
+      "fieldname": "target_date",
+      "fieldtype": "Date",
+      "label": "Target Implementation Date"
+    },
+    {
+      "fieldname": "implementation_status",
+      "fieldtype": "Text",
+      "label": "Implementation Status Update"
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "New",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "New\nUnder Review\nApproved\nRejected\nIn Implementation\nImplemented\nDeferred"
+    },
+    {
+      "default": "0",
+      "fieldname": "votes",
+      "fieldtype": "Int",
+      "label": "Upvotes",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Suggestion",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "search_fields": "subject,category,status",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "subject",
+  "track_changes": 1
+}

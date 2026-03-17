@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Payment Receipt - {{ payment_entry.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 24px;
+        }
+        .header h2 {
+            color: #7f8c8d;
+            margin: 5px 0;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .receipt-title {
+            text-align: center;
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .details-table th,
+        .details-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .details-table th {
+            background: #f8f9fa;
+            width: 30%;
+        }
+        .amount-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        .total-row {
+            font-size: 18px;
+            font-weight: bold;
+            border-top: 2px solid #2c3e50;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .status-paid {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .signature-section {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            text-align: center;
+            width: 40%;
+        }
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 50px;
+            padding-top: 5px;
+        }
+        @media print {
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ company or "University Name" }}</h1>
+        <h2>Fee Payment Receipt</h2>
+    </div>
+
+    <div class="receipt-title">
+        PAYMENT RECEIPT
+    </div>
+
+    <table class="details-table">
+        <tr>
+            <th>Receipt No</th>
+            <td><strong>{{ payment_entry.name }}</strong></td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ frappe.utils.format_date(payment_entry.posting_date) }}</td>
+        </tr>
+        <tr>
+            <th>Student ID</th>
+            <td>{{ student.name }}</td>
+        </tr>
+        <tr>
+            <th>Student Name</th>
+            <td>{{ student.student_name }}</td>
+        </tr>
+        {% if fees.program %}
+        <tr>
+            <th>Program</th>
+            <td>{{ fees.program }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>Fee Reference</th>
+            <td>{{ fees.name }}</td>
+        </tr>
+        <tr>
+            <th>Payment Method</th>
+            <td>Online Payment ({{ payment_order.payment_gateway }})</td>
+        </tr>
+        <tr>
+            <th>Transaction ID</th>
+            <td>{{ payment_order.gateway_payment_id }}</td>
+        </tr>
+    </table>
+
+    <div class="amount-section">
+        <div class="amount-row">
+            <span>Fee Amount:</span>
+            <span>{{ frappe.utils.fmt_money(fees.grand_total, currency="INR") }}</span>
+        </div>
+        {% if fees.outstanding_amount > 0 %}
+        <div class="amount-row">
+            <span>Previous Outstanding:</span>
+            <span>{{ frappe.utils.fmt_money(fees.outstanding_amount + payment_order.amount, currency="INR") }}</span>
+        </div>
+        {% endif %}
+        <div class="amount-row total-row">
+            <span>Amount Paid:</span>
+            <span>{{ frappe.utils.fmt_money(payment_order.amount, currency="INR") }}</span>
+        </div>
+        {% if fees.outstanding_amount > 0 %}
+        <div class="amount-row">
+            <span>Balance Outstanding:</span>
+            <span>{{ frappe.utils.fmt_money(fees.outstanding_amount, currency="INR") }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <span class="status-paid">PAID</span>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line">Student Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line">Authorized Signatory</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This is a computer-generated receipt and does not require a physical signature.</p>
+        <p>For any queries, please contact the Accounts Department.</p>
+        <p>Generated on: {{ frappe.utils.now_datetime().strftime('%d-%m-%Y %H:%M:%S') }}</p>
+    </div>
+</body>
+</html>

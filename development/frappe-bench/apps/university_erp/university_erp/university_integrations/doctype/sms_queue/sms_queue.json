@@ -1,0 +1,232 @@
+{
+  "actions": [],
+  "autoname": "format:SMS-Q-{######}",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "recipient_section",
+    "mobile_number",
+    "recipient_name",
+    "column_break_recipient",
+    "recipient_type",
+    "recipient_reference",
+    "message_section",
+    "message",
+    "template_name",
+    "column_break_message",
+    "priority",
+    "character_count",
+    "scheduling_section",
+    "scheduled_time",
+    "retry_count",
+    "column_break_scheduling",
+    "max_retries",
+    "retry_after",
+    "status_section",
+    "status",
+    "sent_at",
+    "column_break_status",
+    "error_message",
+    "message_id",
+    "batch_section",
+    "batch_id",
+    "batch_sequence"
+  ],
+  "fields": [
+    {
+      "fieldname": "recipient_section",
+      "fieldtype": "Section Break",
+      "label": "Recipient"
+    },
+    {
+      "fieldname": "mobile_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Mobile Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recipient_name",
+      "fieldtype": "Data",
+      "label": "Recipient Name"
+    },
+    {
+      "fieldname": "column_break_recipient",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "recipient_type",
+      "fieldtype": "Select",
+      "label": "Recipient Type",
+      "options": "\nStudent\nEmployee\nParent\nOther"
+    },
+    {
+      "fieldname": "recipient_reference",
+      "fieldtype": "Dynamic Link",
+      "label": "Recipient Reference",
+      "options": "recipient_type"
+    },
+    {
+      "fieldname": "message_section",
+      "fieldtype": "Section Break",
+      "label": "Message"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Small Text",
+      "in_list_view": 1,
+      "label": "Message",
+      "reqd": 1
+    },
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Link",
+      "label": "Template",
+      "options": "SMS Template"
+    },
+    {
+      "fieldname": "column_break_message",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Normal",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Priority",
+      "options": "Low\nNormal\nHigh\nUrgent"
+    },
+    {
+      "fieldname": "character_count",
+      "fieldtype": "Int",
+      "label": "Character Count",
+      "read_only": 1
+    },
+    {
+      "fieldname": "scheduling_section",
+      "fieldtype": "Section Break",
+      "label": "Scheduling"
+    },
+    {
+      "fieldname": "scheduled_time",
+      "fieldtype": "Datetime",
+      "label": "Scheduled Time"
+    },
+    {
+      "default": "0",
+      "fieldname": "retry_count",
+      "fieldtype": "Int",
+      "label": "Retry Count",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_scheduling",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "3",
+      "fieldname": "max_retries",
+      "fieldtype": "Int",
+      "label": "Max Retries"
+    },
+    {
+      "default": "5",
+      "description": "Minutes to wait before retry",
+      "fieldname": "retry_after",
+      "fieldtype": "Int",
+      "label": "Retry After (minutes)"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "default": "Queued",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Queued\nScheduled\nProcessing\nSent\nDelivered\nFailed\nCancelled"
+    },
+    {
+      "fieldname": "sent_at",
+      "fieldtype": "Datetime",
+      "label": "Sent At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message",
+      "read_only": 1
+    },
+    {
+      "fieldname": "message_id",
+      "fieldtype": "Data",
+      "label": "Message ID",
+      "read_only": 1
+    },
+    {
+      "fieldname": "batch_section",
+      "fieldtype": "Section Break",
+      "label": "Batch Info"
+    },
+    {
+      "fieldname": "batch_id",
+      "fieldtype": "Data",
+      "in_standard_filter": 1,
+      "label": "Batch ID"
+    },
+    {
+      "fieldname": "batch_sequence",
+      "fieldtype": "Int",
+      "label": "Batch Sequence"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "SMS Queue",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,101 @@
+[
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_academic_impact_section",
+  "fieldname": "custom_academic_impact_section",
+  "fieldtype": "Section Break",
+  "label": "Academic Impact",
+  "insert_after": "description"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_affects_teaching",
+  "fieldname": "custom_affects_teaching",
+  "fieldtype": "Check",
+  "label": "Affects Teaching",
+  "insert_after": "custom_academic_impact_section",
+  "default": "0"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_total_classes_affected",
+  "fieldname": "custom_total_classes_affected",
+  "fieldtype": "Int",
+  "label": "Total Classes Affected",
+  "read_only": 1,
+  "insert_after": "custom_affects_teaching"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_column_break_academic",
+  "fieldname": "custom_column_break_academic",
+  "fieldtype": "Column Break",
+  "insert_after": "custom_total_classes_affected"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_substitute_arranged",
+  "fieldname": "custom_substitute_arranged",
+  "fieldtype": "Check",
+  "label": "Substitute Arranged",
+  "insert_after": "custom_column_break_academic",
+  "default": "0"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_hod_notified",
+  "fieldname": "custom_hod_notified",
+  "fieldtype": "Check",
+  "label": "HoD Notified",
+  "read_only": 1,
+  "insert_after": "custom_substitute_arranged",
+  "default": "0"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_affected_courses_section",
+  "fieldname": "custom_affected_courses_section",
+  "fieldtype": "Section Break",
+  "label": "Affected Courses",
+  "insert_after": "custom_hod_notified",
+  "depends_on": "eval:doc.custom_affects_teaching==1"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_affected_courses",
+  "fieldname": "custom_affected_courses",
+  "fieldtype": "Table",
+  "label": "Affected Courses",
+  "options": "Leave Affected Course",
+  "insert_after": "custom_affected_courses_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_substitute_section",
+  "fieldname": "custom_substitute_section",
+  "fieldtype": "Section Break",
+  "label": "Substitute Faculty",
+  "insert_after": "custom_affected_courses",
+  "depends_on": "eval:doc.custom_substitute_arranged==1"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Leave Application",
+  "name": "Leave Application-custom_temporary_assignment",
+  "fieldname": "custom_temporary_assignment",
+  "fieldtype": "Link",
+  "label": "Temporary Assignment",
+  "options": "Temporary Teaching Assignment",
+  "read_only": 1,
+  "insert_after": "custom_substitute_section"
+ }
+]

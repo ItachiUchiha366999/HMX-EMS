@@ -1,0 +1,281 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "student",
+    "student_name",
+    "program",
+    "column_break_basic",
+    "certificate_template",
+    "certificate_type",
+    "request_date",
+    "purpose",
+    "status",
+    "details_section",
+    "additional_fields",
+    "approval_section",
+    "approved_by",
+    "approval_date",
+    "column_break_approval",
+    "rejection_reason",
+    "generation_section",
+    "certificate_number",
+    "issue_date",
+    "column_break_generation",
+    "generated_pdf",
+    "copies_issued",
+    "verification_section",
+    "verification_code",
+    "qr_code",
+    "column_break_verification",
+    "verification_url",
+    "digilocker_section",
+    "digilocker_issued",
+    "digilocker_uri",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CERT-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "certificate_template",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Certificate Template",
+      "options": "Certificate Template",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "certificate_template.certificate_type",
+      "fieldname": "certificate_type",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Certificate Type",
+      "read_only": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "request_date",
+      "fieldtype": "Date",
+      "label": "Request Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "purpose",
+      "fieldtype": "Small Text",
+      "label": "Purpose"
+    },
+    {
+      "default": "Pending",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Pending\nApproved\nRejected\nGenerated\nIssued\nCancelled"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Additional Details"
+    },
+    {
+      "fieldname": "additional_fields",
+      "fieldtype": "Table",
+      "label": "Additional Fields",
+      "options": "Certificate Field"
+    },
+    {
+      "fieldname": "approval_section",
+      "fieldtype": "Section Break",
+      "label": "Approval"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approval_date",
+      "fieldtype": "Date",
+      "label": "Approval Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_approval",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "eval:doc.status=='Rejected'",
+      "fieldname": "rejection_reason",
+      "fieldtype": "Small Text",
+      "label": "Rejection Reason"
+    },
+    {
+      "fieldname": "generation_section",
+      "fieldtype": "Section Break",
+      "label": "Certificate Details"
+    },
+    {
+      "fieldname": "certificate_number",
+      "fieldtype": "Data",
+      "label": "Certificate Number",
+      "read_only": 1
+    },
+    {
+      "fieldname": "issue_date",
+      "fieldtype": "Date",
+      "label": "Issue Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_generation",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "generated_pdf",
+      "fieldtype": "Attach",
+      "label": "Generated PDF",
+      "read_only": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "copies_issued",
+      "fieldtype": "Int",
+      "label": "Copies Issued"
+    },
+    {
+      "fieldname": "verification_section",
+      "fieldtype": "Section Break",
+      "label": "Verification"
+    },
+    {
+      "fieldname": "verification_code",
+      "fieldtype": "Data",
+      "label": "Verification Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "qr_code",
+      "fieldtype": "Attach Image",
+      "label": "QR Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_verification",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "verification_url",
+      "fieldtype": "Data",
+      "label": "Verification URL",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "digilocker_section",
+      "fieldtype": "Section Break",
+      "label": "DigiLocker"
+    },
+    {
+      "default": "0",
+      "fieldname": "digilocker_issued",
+      "fieldtype": "Check",
+      "label": "Issued to DigiLocker",
+      "read_only": 1
+    },
+    {
+      "fieldname": "digilocker_uri",
+      "fieldtype": "Data",
+      "label": "DigiLocker URI",
+      "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Certificate Request",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Certificate Request",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "student_name",
+  "track_changes": 1
+}

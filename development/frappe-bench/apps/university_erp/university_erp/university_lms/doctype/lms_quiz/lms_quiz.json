@@ -1,0 +1,237 @@
+{
+  "actions": [],
+  "autoname": "format:QZ-.YYYY.-.#####",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "lms_course",
+    "module",
+    "column_break_1",
+    "quiz_type",
+    "total_marks",
+    "passing_marks",
+    "section_settings",
+    "time_limit_minutes",
+    "max_attempts",
+    "shuffle_questions",
+    "shuffle_options",
+    "column_break_2",
+    "show_correct_answers",
+    "show_score_immediately",
+    "allow_review",
+    "section_availability",
+    "available_from",
+    "available_until",
+    "prerequisite_quiz",
+    "section_questions",
+    "questions",
+    "section_instructions",
+    "instructions"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Quiz Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "lms_course",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "LMS Course",
+      "options": "LMS Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "module",
+      "fieldtype": "Data",
+      "label": "Module"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Graded",
+      "fieldname": "quiz_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Quiz Type",
+      "options": "Practice\nGraded"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_marks",
+      "fieldtype": "Float",
+      "label": "Total Marks",
+      "read_only": 1
+    },
+    {
+      "fieldname": "passing_marks",
+      "fieldtype": "Float",
+      "label": "Passing Marks"
+    },
+    {
+      "fieldname": "section_settings",
+      "fieldtype": "Section Break",
+      "label": "Quiz Settings"
+    },
+    {
+      "default": "30",
+      "fieldname": "time_limit_minutes",
+      "fieldtype": "Int",
+      "label": "Time Limit (minutes)"
+    },
+    {
+      "default": "1",
+      "fieldname": "max_attempts",
+      "fieldtype": "Int",
+      "label": "Maximum Attempts"
+    },
+    {
+      "default": "0",
+      "fieldname": "shuffle_questions",
+      "fieldtype": "Check",
+      "label": "Shuffle Questions"
+    },
+    {
+      "default": "0",
+      "fieldname": "shuffle_options",
+      "fieldtype": "Check",
+      "label": "Shuffle Options"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "show_correct_answers",
+      "fieldtype": "Check",
+      "label": "Show Correct Answers After Submission"
+    },
+    {
+      "default": "1",
+      "fieldname": "show_score_immediately",
+      "fieldtype": "Check",
+      "label": "Show Score Immediately"
+    },
+    {
+      "default": "0",
+      "fieldname": "allow_review",
+      "fieldtype": "Check",
+      "label": "Allow Review After Submission"
+    },
+    {
+      "fieldname": "section_availability",
+      "fieldtype": "Section Break",
+      "label": "Availability"
+    },
+    {
+      "fieldname": "available_from",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Available From"
+    },
+    {
+      "fieldname": "available_until",
+      "fieldtype": "Datetime",
+      "label": "Available Until"
+    },
+    {
+      "fieldname": "prerequisite_quiz",
+      "fieldtype": "Link",
+      "label": "Prerequisite Quiz",
+      "options": "LMS Quiz"
+    },
+    {
+      "fieldname": "section_questions",
+      "fieldtype": "Section Break",
+      "label": "Questions"
+    },
+    {
+      "fieldname": "questions",
+      "fieldtype": "Table",
+      "label": "Questions",
+      "options": "Quiz Question"
+    },
+    {
+      "fieldname": "section_instructions",
+      "fieldtype": "Section Break",
+      "label": "Instructions"
+    },
+    {
+      "fieldname": "instructions",
+      "fieldtype": "Text Editor",
+      "label": "Instructions"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "LMS Quiz",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

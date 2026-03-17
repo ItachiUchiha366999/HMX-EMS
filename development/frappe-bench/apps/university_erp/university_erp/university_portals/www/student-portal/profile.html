@@ -1,0 +1,254 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("My Profile") }} - {{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <div class="portal-header">
+        <a href="/student-portal" class="back-link">
+            <svg class="icon icon-sm"><use href="#icon-arrow-left"></use></svg>
+            {{ _("Back to Dashboard") }}
+        </a>
+        <h2>{{ _("My Profile") }}</h2>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-image-container">
+            {% if student.image %}
+            <img src="{{ student.image }}" alt="{{ student.student_name }}" class="profile-image">
+            {% else %}
+            <div class="profile-image-placeholder">{{ student.student_name[0] }}</div>
+            {% endif %}
+            <button class="edit-image-btn" onclick="changeProfileImage()">
+                <svg class="icon icon-sm"><use href="#icon-camera"></use></svg>
+            </button>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+        </div>
+        <div class="profile-info">
+            <h2>{{ student.student_name }}</h2>
+            <p class="student-id">{{ student.name }}</p>
+            <p class="program">{{ academic_info.program_name or academic_info.program }}</p>
+            <p class="batch">{{ student.student_batch_name }}</p>
+        </div>
+    </div>
+
+    <!-- Academic Information -->
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Academic Information") }}</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="label">{{ _("Student ID") }}</span>
+                <span class="value">{{ student.name }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Program") }}</span>
+                <span class="value">{{ academic_info.program_name or academic_info.program or '-' }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Department") }}</span>
+                <span class="value">{{ academic_info.department or '-' }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Batch") }}</span>
+                <span class="value">{{ student.student_batch_name or '-' }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Academic Year") }}</span>
+                <span class="value">{{ academic_info.academic_year or '-' }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Academic Term") }}</span>
+                <span class="value">{{ academic_info.academic_term or '-' }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">{{ _("Joining Date") }}</span>
+                <span class="value">{{ frappe.format_date(academic_info.joining_date) if academic_info.joining_date else '-' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="portal-section">
+        <div class="section-header">
+            <h3 class="section-title">{{ _("Personal Information") }}</h3>
+            <button class="btn btn-sm btn-default" onclick="toggleEditMode()">
+                <svg class="icon icon-sm"><use href="#icon-edit"></use></svg>
+                {{ _("Edit") }}
+            </button>
+        </div>
+        <form id="profileForm">
+            <div class="info-grid editable">
+                <div class="info-item">
+                    <span class="label">{{ _("Full Name") }}</span>
+                    <span class="value">{{ student.student_name }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">{{ _("Date of Birth") }}</span>
+                    <span class="value">{{ frappe.format_date(student.date_of_birth) if student.date_of_birth else '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">{{ _("Gender") }}</span>
+                    <span class="value">{{ student.gender or '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">{{ _("Blood Group") }}</span>
+                    <span class="value">{{ student.blood_group or '-' }}</span>
+                </div>
+                <div class="info-item editable-field">
+                    <span class="label">{{ _("Mobile Number") }}</span>
+                    <span class="value view-mode">{{ student.student_mobile_number or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="student_mobile_number"
+                           value="{{ student.student_mobile_number or '' }}" style="display: none;">
+                </div>
+                <div class="info-item editable-field">
+                    <span class="label">{{ _("Email") }}</span>
+                    <span class="value view-mode">{{ student.student_email_id or '-' }}</span>
+                    <input type="email" class="form-control edit-mode" name="student_email_id"
+                           value="{{ student.student_email_id or '' }}" style="display: none;">
+                </div>
+            </div>
+
+            <h4 class="mt-4">{{ _("Address") }}</h4>
+            <div class="info-grid editable">
+                <div class="info-item editable-field full-width">
+                    <span class="label">{{ _("Address Line 1") }}</span>
+                    <span class="value view-mode">{{ student.address_line_1 or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="address_line_1"
+                           value="{{ student.address_line_1 or '' }}" style="display: none;">
+                </div>
+                <div class="info-item editable-field full-width">
+                    <span class="label">{{ _("Address Line 2") }}</span>
+                    <span class="value view-mode">{{ student.address_line_2 or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="address_line_2"
+                           value="{{ student.address_line_2 or '' }}" style="display: none;">
+                </div>
+                <div class="info-item editable-field">
+                    <span class="label">{{ _("City") }}</span>
+                    <span class="value view-mode">{{ student.city or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="city"
+                           value="{{ student.city or '' }}" style="display: none;">
+                </div>
+                <div class="info-item editable-field">
+                    <span class="label">{{ _("State") }}</span>
+                    <span class="value view-mode">{{ student.state or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="state"
+                           value="{{ student.state or '' }}" style="display: none;">
+                </div>
+                <div class="info-item editable-field">
+                    <span class="label">{{ _("PIN Code") }}</span>
+                    <span class="value view-mode">{{ student.pincode or '-' }}</span>
+                    <input type="text" class="form-control edit-mode" name="pincode"
+                           value="{{ student.pincode or '' }}" style="display: none;">
+                </div>
+            </div>
+
+            <div class="form-actions edit-mode" style="display: none;">
+                <button type="button" class="btn btn-default" onclick="cancelEdit()">{{ _("Cancel") }}</button>
+                <button type="button" class="btn btn-primary" onclick="saveProfile()">{{ _("Save Changes") }}</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Guardian Information -->
+    {% if guardians %}
+    <div class="portal-section">
+        <h3 class="section-title">{{ _("Guardian Information") }}</h3>
+        <div class="guardian-list">
+            {% for guardian in guardians %}
+            <div class="guardian-card">
+                <h4>{{ guardian.guardian_name }}</h4>
+                <p class="relation">{{ guardian.relation }}</p>
+                <div class="contact-info">
+                    {% if guardian.mobile_number %}
+                    <p><svg class="icon icon-sm"><use href="#icon-phone"></use></svg> {{ guardian.mobile_number }}</p>
+                    {% endif %}
+                    {% if guardian.email_address %}
+                    <p><svg class="icon icon-sm"><use href="#icon-mail"></use></svg> {{ guardian.email_address }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+let editMode = false;
+
+function toggleEditMode() {
+    editMode = !editMode;
+    if (editMode) {
+        $('.view-mode').hide();
+        $('.edit-mode').show();
+    } else {
+        $('.view-mode').show();
+        $('.edit-mode').hide();
+    }
+}
+
+function cancelEdit() {
+    editMode = false;
+    $('.view-mode').show();
+    $('.edit-mode').hide();
+    $('#profileForm')[0].reset();
+}
+
+function saveProfile() {
+    const formData = {};
+    $('#profileForm input.edit-mode').each(function() {
+        formData[$(this).attr('name')] = $(this).val();
+    });
+
+    frappe.call({
+        method: 'university_erp.university_portals.www.student-portal.profile.update_student_profile',
+        args: formData,
+        callback: function(r) {
+            if (r.message && r.message.success) {
+                frappe.msgprint({
+                    title: __('Success'),
+                    message: r.message.message,
+                    indicator: 'green'
+                });
+                setTimeout(() => location.reload(), 1500);
+            }
+        }
+    });
+}
+
+function changeProfileImage() {
+    $('#imageInput').click();
+}
+
+$('#imageInput').on('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    $.ajax({
+        url: '/api/method/university_erp.university_portals.www.student-portal.profile.update_profile_image',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+            'X-Frappe-CSRF-Token': frappe.csrf_token
+        },
+        success: function(r) {
+            if (r.message && r.message.success) {
+                location.reload();
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

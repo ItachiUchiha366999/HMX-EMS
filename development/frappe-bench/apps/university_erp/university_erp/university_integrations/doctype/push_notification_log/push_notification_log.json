@@ -1,0 +1,176 @@
+{
+  "actions": [],
+  "autoname": "PN-.#####",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "user",
+    "platform",
+    "status",
+    "column_break_basic",
+    "message_id",
+    "sent_at",
+    "notification_section",
+    "title",
+    "body",
+    "data",
+    "settings_section",
+    "icon_url",
+    "image_url",
+    "column_break_settings",
+    "click_action",
+    "topic",
+    "error_section",
+    "error_message",
+    "raw_response"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "User",
+      "options": "User"
+    },
+    {
+      "fieldname": "platform",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Platform",
+      "options": "android\nios\nweb\ntopic"
+    },
+    {
+      "default": "Queued",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Queued\nSent\nDelivered\nFailed"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "message_id",
+      "fieldtype": "Data",
+      "label": "Message ID"
+    },
+    {
+      "fieldname": "sent_at",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Sent At"
+    },
+    {
+      "fieldname": "notification_section",
+      "fieldtype": "Section Break",
+      "label": "Notification Content"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Title"
+    },
+    {
+      "fieldname": "body",
+      "fieldtype": "Small Text",
+      "label": "Body"
+    },
+    {
+      "description": "Additional data payload (JSON)",
+      "fieldname": "data",
+      "fieldtype": "Code",
+      "label": "Data",
+      "options": "JSON"
+    },
+    {
+      "fieldname": "settings_section",
+      "fieldtype": "Section Break",
+      "label": "Settings"
+    },
+    {
+      "fieldname": "icon_url",
+      "fieldtype": "Data",
+      "label": "Icon URL"
+    },
+    {
+      "fieldname": "image_url",
+      "fieldtype": "Data",
+      "label": "Image URL"
+    },
+    {
+      "fieldname": "column_break_settings",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "click_action",
+      "fieldtype": "Data",
+      "label": "Click Action"
+    },
+    {
+      "description": "Topic name if sent to topic",
+      "fieldname": "topic",
+      "fieldtype": "Data",
+      "label": "Topic"
+    },
+    {
+      "fieldname": "error_section",
+      "fieldtype": "Section Break",
+      "label": "Error Details"
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message"
+    },
+    {
+      "fieldname": "raw_response",
+      "fieldtype": "Code",
+      "label": "Raw Response",
+      "options": "JSON"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Push Notification Log",
+  "naming_rule": "Expression (old style)",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,367 @@
+{
+  "doctype": "DocType",
+  "name": "Practical Examination",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "PRAC-.YYYY.-.#####",
+  "is_submittable": 1,
+  "fields": [
+    {
+      "fieldname": "examination_name",
+      "fieldtype": "Data",
+      "label": "Examination Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "examination",
+      "fieldtype": "Link",
+      "label": "Parent Examination",
+      "options": "Exam Schedule",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "label": "Academic Term",
+      "options": "Academic Term",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_break_course",
+      "fieldtype": "Section Break",
+      "label": "Course Details"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "fetch_from": "course.course_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_course",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "section_break_venue",
+      "fieldtype": "Section Break",
+      "label": "Venue & Schedule"
+    },
+    {
+      "fieldname": "venue",
+      "fieldtype": "Link",
+      "label": "Default Venue/Lab",
+      "options": "Room"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "label": "End Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_venue",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "duration_per_student",
+      "fieldtype": "Int",
+      "label": "Duration per Student (mins)",
+      "default": "30"
+    },
+    {
+      "fieldname": "students_per_slot",
+      "fieldtype": "Int",
+      "label": "Students per Slot",
+      "default": "20"
+    },
+    {
+      "fieldname": "section_break_marks",
+      "fieldtype": "Section Break",
+      "label": "Marks Configuration"
+    },
+    {
+      "fieldname": "maximum_marks",
+      "fieldtype": "Float",
+      "label": "Maximum Marks",
+      "reqd": 1
+    },
+    {
+      "fieldname": "passing_marks",
+      "fieldtype": "Float",
+      "label": "Passing Marks"
+    },
+    {
+      "fieldname": "experiment_marks",
+      "fieldtype": "Float",
+      "label": "Experiment Marks"
+    },
+    {
+      "fieldname": "column_break_marks",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "viva_marks",
+      "fieldtype": "Float",
+      "label": "Viva Marks"
+    },
+    {
+      "fieldname": "record_marks",
+      "fieldtype": "Float",
+      "label": "Record Marks"
+    },
+    {
+      "fieldname": "grading_scale",
+      "fieldtype": "Link",
+      "label": "Grading Scale",
+      "options": "Grading Scale"
+    },
+    {
+      "fieldname": "section_break_criteria",
+      "fieldtype": "Section Break",
+      "label": "Evaluation Criteria"
+    },
+    {
+      "fieldname": "evaluation_criteria",
+      "fieldtype": "Table",
+      "label": "Evaluation Criteria",
+      "options": "Practical Evaluation Criteria"
+    },
+    {
+      "fieldname": "section_break_examiners",
+      "fieldtype": "Section Break",
+      "label": "Examiners"
+    },
+    {
+      "fieldname": "examiners",
+      "fieldtype": "Table",
+      "label": "Examiners",
+      "options": "Practical Exam Examiner"
+    },
+    {
+      "fieldname": "section_break_slots",
+      "fieldtype": "Section Break",
+      "label": "Exam Slots"
+    },
+    {
+      "fieldname": "slots",
+      "fieldtype": "Table",
+      "label": "Slots",
+      "options": "Practical Exam Slot"
+    },
+    {
+      "fieldname": "section_break_scores",
+      "fieldtype": "Section Break",
+      "label": "Student Scores"
+    },
+    {
+      "fieldname": "student_scores",
+      "fieldtype": "Table",
+      "label": "Student Scores",
+      "options": "Practical Exam Student Score"
+    },
+    {
+      "fieldname": "section_break_summary",
+      "fieldtype": "Section Break",
+      "label": "Summary Statistics"
+    },
+    {
+      "fieldname": "total_students",
+      "fieldtype": "Int",
+      "label": "Total Students",
+      "read_only": 1
+    },
+    {
+      "fieldname": "evaluated_count",
+      "fieldtype": "Int",
+      "label": "Evaluated",
+      "read_only": 1
+    },
+    {
+      "fieldname": "passed_count",
+      "fieldtype": "Int",
+      "label": "Passed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_summary",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "average_marks",
+      "fieldtype": "Float",
+      "label": "Average Marks",
+      "read_only": 1
+    },
+    {
+      "fieldname": "highest_marks",
+      "fieldtype": "Float",
+      "label": "Highest Marks",
+      "read_only": 1
+    },
+    {
+      "fieldname": "lowest_marks",
+      "fieldtype": "Float",
+      "label": "Lowest Marks",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nScheduled\nIn Progress\nEvaluation Pending\nCompleted\nCancelled",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "result_published",
+      "fieldtype": "Check",
+      "label": "Result Published"
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "coordinator",
+      "fieldtype": "Link",
+      "label": "Exam Coordinator",
+      "options": "Instructor"
+    },
+    {
+      "fieldname": "section_break_instructions",
+      "fieldtype": "Section Break",
+      "label": "Instructions"
+    },
+    {
+      "fieldname": "instructions_students",
+      "fieldtype": "Text Editor",
+      "label": "Instructions for Students"
+    },
+    {
+      "fieldname": "instructions_examiners",
+      "fieldtype": "Text Editor",
+      "label": "Instructions for Examiners"
+    },
+    {
+      "fieldname": "experiment_list",
+      "fieldtype": "Attach",
+      "label": "Experiment List"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "examination_name",
+  "search_fields": "examination_name,course,program,status",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

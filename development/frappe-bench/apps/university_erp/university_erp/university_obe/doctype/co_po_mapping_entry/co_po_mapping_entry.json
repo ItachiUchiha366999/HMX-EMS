@@ -1,0 +1,106 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "course_outcome",
+    "co_code",
+    "co_statement",
+    "column_break_copo",
+    "program_outcome",
+    "po_code",
+    "po_title",
+    "section_break_correlation",
+    "correlation_level",
+    "column_break_just",
+    "justification"
+  ],
+  "fields": [
+    {
+      "fieldname": "course_outcome",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Course Outcome",
+      "options": "Course Outcome",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "course_outcome.co_code",
+      "fieldname": "co_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "CO Code",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "course_outcome.co_statement",
+      "fieldname": "co_statement",
+      "fieldtype": "Small Text",
+      "label": "CO Statement",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_copo",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "program_outcome",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Program Outcome",
+      "options": "Program Outcome",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "program_outcome.po_code",
+      "fieldname": "po_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "PO Code",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "program_outcome.po_title",
+      "fieldname": "po_title",
+      "fieldtype": "Data",
+      "label": "PO Title",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_correlation",
+      "fieldtype": "Section Break",
+      "label": "Correlation"
+    },
+    {
+      "default": "0",
+      "fieldname": "correlation_level",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Correlation Level",
+      "options": "0 - No Correlation\n1 - Low\n2 - Medium\n3 - High",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_just",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "justification",
+      "fieldtype": "Small Text",
+      "label": "Justification"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "CO PO Mapping Entry",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
+}

@@ -1,0 +1,230 @@
+[
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Structure",
+  "name": "Fee Structure-custom_academic_year",
+  "fieldname": "custom_academic_year",
+  "fieldtype": "Link",
+  "label": "Academic Year",
+  "options": "Academic Year",
+  "insert_after": "program",
+  "reqd": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Structure",
+  "name": "Fee Structure-custom_semester",
+  "fieldname": "custom_semester",
+  "fieldtype": "Link",
+  "label": "Semester",
+  "options": "Academic Term",
+  "insert_after": "custom_academic_year"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Structure",
+  "name": "Fee Structure-custom_admission_batch",
+  "fieldname": "custom_admission_batch",
+  "fieldtype": "Link",
+  "label": "Admission Batch",
+  "options": "Student Batch Name",
+  "insert_after": "custom_semester"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Structure",
+  "name": "Fee Structure-custom_fee_type",
+  "fieldname": "custom_fee_type",
+  "fieldtype": "Select",
+  "label": "Fee Type",
+  "options": "Semester Fee\nAnnual Fee\nOne-Time Fee\nExamination Fee",
+  "insert_after": "custom_admission_batch",
+  "reqd": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Structure",
+  "name": "Fee Structure-custom_due_date_offset",
+  "fieldname": "custom_due_date_offset",
+  "fieldtype": "Int",
+  "label": "Due Date Offset (Days)",
+  "description": "Days from fee generation to due date",
+  "insert_after": "custom_fee_type",
+  "default": "30"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Component",
+  "name": "Fee Component-custom_fee_category",
+  "fieldname": "custom_fee_category",
+  "fieldtype": "Link",
+  "label": "Fee Category",
+  "options": "Fee Category",
+  "insert_after": "fees_category"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Component",
+  "name": "Fee Component-custom_category_variations",
+  "fieldname": "custom_category_variations",
+  "fieldtype": "JSON",
+  "label": "Category-wise Variations",
+  "description": "Fee variations by admission category",
+  "insert_after": "amount"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_fee_section",
+  "fieldname": "custom_fee_section",
+  "fieldtype": "Section Break",
+  "label": "University Fee Details",
+  "insert_after": "grand_total"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_due_date",
+  "fieldname": "custom_due_date",
+  "fieldtype": "Date",
+  "label": "Due Date",
+  "insert_after": "custom_fee_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_penalty_percentage",
+  "fieldname": "custom_penalty_percentage",
+  "fieldtype": "Percent",
+  "label": "Late Penalty %",
+  "insert_after": "custom_due_date",
+  "default": "2"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_penalty_amount",
+  "fieldname": "custom_penalty_amount",
+  "fieldtype": "Currency",
+  "label": "Penalty Amount",
+  "insert_after": "custom_penalty_percentage",
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_column_break_penalty",
+  "fieldname": "custom_column_break_penalty",
+  "fieldtype": "Column Break",
+  "insert_after": "custom_penalty_amount"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_scholarship_amount",
+  "fieldname": "custom_scholarship_amount",
+  "fieldtype": "Currency",
+  "label": "Scholarship/Concession",
+  "insert_after": "custom_column_break_penalty",
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_grand_total_with_penalty",
+  "fieldname": "custom_grand_total_with_penalty",
+  "fieldtype": "Currency",
+  "label": "Total with Penalty",
+  "insert_after": "custom_scholarship_amount",
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_receipt_number",
+  "fieldname": "custom_receipt_number",
+  "fieldtype": "Data",
+  "label": "Receipt Number",
+  "insert_after": "custom_grand_total_with_penalty",
+  "read_only": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_payment_section",
+  "fieldname": "custom_payment_section",
+  "fieldtype": "Section Break",
+  "label": "Payment Details",
+  "insert_after": "outstanding_amount"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_payment_mode",
+  "fieldname": "custom_payment_mode",
+  "fieldtype": "Select",
+  "label": "Payment Mode",
+  "options": "\nCash\nCheque\nBank Transfer\nOnline Payment\nDD",
+  "insert_after": "custom_payment_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_transaction_id",
+  "fieldname": "custom_transaction_id",
+  "fieldtype": "Data",
+  "label": "Transaction ID",
+  "insert_after": "custom_payment_mode"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_payment_date",
+  "fieldname": "custom_payment_date",
+  "fieldtype": "Date",
+  "label": "Payment Date",
+  "insert_after": "custom_transaction_id"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_cost_center",
+  "fieldname": "custom_cost_center",
+  "fieldtype": "Link",
+  "label": "Cost Center",
+  "options": "Cost Center",
+  "insert_after": "income_account"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_refund_status",
+  "fieldname": "custom_refund_status",
+  "fieldtype": "Select",
+  "label": "Refund Status",
+  "options": "\nNot Refunded\nRefunded",
+  "default": "Not Refunded",
+  "insert_after": "custom_payment_date"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_refund_amount",
+  "fieldname": "custom_refund_amount",
+  "fieldtype": "Currency",
+  "label": "Refund Amount",
+  "read_only": 1,
+  "insert_after": "custom_refund_status"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fees",
+  "name": "Fees-custom_razorpay_order_id",
+  "fieldname": "custom_razorpay_order_id",
+  "fieldtype": "Data",
+  "label": "Razorpay Order ID",
+  "read_only": 1,
+  "hidden": 1,
+  "insert_after": "custom_refund_amount"
+ }
+]

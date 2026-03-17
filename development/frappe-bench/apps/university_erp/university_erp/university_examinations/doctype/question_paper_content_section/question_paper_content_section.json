@@ -1,0 +1,26 @@
+{
+  "doctype": "DocType",
+  "name": "Question Paper Content Section",
+  "module": "University Examinations",
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "section_name",
+      "fieldtype": "Data",
+      "label": "Section",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_instructions",
+      "fieldtype": "Small Text",
+      "label": "Instructions"
+    },
+    {
+      "fieldname": "questions",
+      "fieldtype": "Table",
+      "label": "Questions",
+      "options": "Question Paper Question Item"
+    }
+  ],
+  "engine": "InnoDB"
+}

@@ -1,0 +1,277 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:TA-{academic_year}-{####}",
+  "creation": "2026-01-01 00:00:00",
+  "doctype": "DocType",
+  "document_type": "Document",
+  "engine": "InnoDB",
+  "field_order": [
+    "academic_year",
+    "academic_term",
+    "column_break_1",
+    "assignment_status",
+    "section_break_1",
+    "course",
+    "course_name",
+    "program",
+    "column_break_2",
+    "instructor",
+    "instructor_name",
+    "instructor_department",
+    "section_break_2",
+    "lecture_hours",
+    "tutorial_hours",
+    "practical_hours",
+    "column_break_3",
+    "total_weekly_hours",
+    "student_count",
+    "section_break_3",
+    "schedule",
+    "section_break_4",
+    "room",
+    "co_instructor",
+    "column_break_4",
+    "assignment_type",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "academic_year",
+      "fieldtype": "Link",
+      "label": "Academic Year",
+      "options": "Academic Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "academic_term",
+      "fieldtype": "Link",
+      "label": "Academic Term",
+      "options": "Academic Term",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assignment_status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nPending Approval\nApproved\nCancelled",
+      "default": "Draft",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_1",
+      "fieldtype": "Section Break",
+      "label": "Course & Instructor Details"
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "course_name",
+      "fieldtype": "Data",
+      "label": "Course Name",
+      "fetch_from": "course.course_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "program",
+      "fieldtype": "Link",
+      "label": "Program",
+      "options": "Program",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "instructor",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Employee",
+      "reqd": 1
+    },
+    {
+      "fieldname": "instructor_name",
+      "fieldtype": "Data",
+      "label": "Instructor Name",
+      "fetch_from": "instructor.employee_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "instructor_department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department",
+      "fetch_from": "instructor.department",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_2",
+      "fieldtype": "Section Break",
+      "label": "Workload"
+    },
+    {
+      "fieldname": "lecture_hours",
+      "fieldtype": "Float",
+      "label": "Lecture Hours/Week",
+      "precision": "2"
+    },
+    {
+      "fieldname": "tutorial_hours",
+      "fieldtype": "Float",
+      "label": "Tutorial Hours/Week",
+      "precision": "2"
+    },
+    {
+      "fieldname": "practical_hours",
+      "fieldtype": "Float",
+      "label": "Practical Hours/Week",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_weekly_hours",
+      "fieldtype": "Float",
+      "label": "Total Weekly Hours",
+      "read_only": 1,
+      "precision": "2"
+    },
+    {
+      "fieldname": "student_count",
+      "fieldtype": "Int",
+      "label": "Number of Students"
+    },
+    {
+      "fieldname": "section_break_3",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "schedule",
+      "fieldtype": "Table",
+      "label": "Teaching Schedule",
+      "options": "Teaching Assignment Schedule"
+    },
+    {
+      "fieldname": "section_break_4",
+      "fieldtype": "Section Break",
+      "label": "Additional Information"
+    },
+    {
+      "fieldname": "room",
+      "fieldtype": "Link",
+      "label": "Primary Room",
+      "options": "Room"
+    },
+    {
+      "fieldname": "co_instructor",
+      "fieldtype": "Link",
+      "label": "Co-Instructor",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assignment_type",
+      "fieldtype": "Select",
+      "label": "Assignment Type",
+      "options": "Regular\nGuest Lecture\nTemporary",
+      "default": "Regular"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-01-01 00:00:00",
+  "modified_by": "Administrator",
+  "module": "Faculty Management",
+  "name": "Teaching Assignment",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University HR Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University HOD",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

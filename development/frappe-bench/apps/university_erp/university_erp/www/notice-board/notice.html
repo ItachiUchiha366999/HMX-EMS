@@ -1,0 +1,278 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ notice.title }}{% endblock %}
+
+{% block page_content %}
+<div class="notice-detail-container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/notice-board">Notice Board</a></li>
+            <li class="breadcrumb-item active">{{ notice.notice_type }}</li>
+        </ol>
+    </nav>
+
+    <div class="notice-detail-card">
+        <!-- Header -->
+        <div class="notice-header">
+            <div class="notice-meta">
+                <span class="notice-type-badge {{ notice.notice_type|lower }}">{{ notice.notice_type }}</span>
+                {% if notice.priority in ['High', 'Urgent'] %}
+                <span class="notice-priority {{ notice.priority|lower }}">{{ notice.priority }}</span>
+                {% endif %}
+                {% if notice.is_pinned %}
+                <span class="notice-pinned"><i class="fa fa-thumb-tack"></i> Pinned</span>
+                {% endif %}
+            </div>
+            <h1 class="notice-title">{{ notice.title }}</h1>
+            <div class="notice-info">
+                <span><i class="fa fa-calendar"></i> Published: {{ frappe.utils.format_date(notice.publish_date) }}</span>
+                {% if notice.expiry_date %}
+                <span><i class="fa fa-clock-o"></i> Valid until: {{ frappe.utils.format_date(notice.expiry_date) }}</span>
+                {% endif %}
+                <span><i class="fa fa-eye"></i> {{ notice.views_count or 0 }} views</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="notice-content">
+            {{ notice.content | safe }}
+        </div>
+
+        <!-- Attachment -->
+        {% if notice.attachment %}
+        <div class="notice-attachment-section">
+            <h5><i class="fa fa-paperclip"></i> Attachment</h5>
+            <a href="{{ notice.attachment }}" target="_blank" class="attachment-link">
+                <i class="fa fa-file"></i> Download Attachment
+            </a>
+        </div>
+        {% endif %}
+
+        <!-- Footer -->
+        <div class="notice-footer">
+            <a href="/notice-board" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Back to Notice Board
+            </a>
+        </div>
+    </div>
+
+    <!-- Related Notices -->
+    {% if related_notices %}
+    <div class="related-notices mt-4">
+        <h5>Related Notices</h5>
+        <div class="row">
+            {% for related in related_notices %}
+            <div class="col-md-4 mb-3">
+                <div class="related-notice-card">
+                    <span class="notice-type-badge {{ related.notice_type|lower }}">{{ related.notice_type }}</span>
+                    <h6>{{ related.title }}</h6>
+                    <p class="text-muted small">{{ frappe.utils.format_date(related.publish_date) }}</p>
+                    <a href="/notice-board/{{ related.name }}" class="stretched-link"></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.notice-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.notice-detail-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.notice-header {
+    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-color);
+}
+
+.notice-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.notice-type-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.notice-type-badge.general { background: #e3e8ef; color: #374151; }
+.notice-type-badge.academic { background: #dbeafe; color: #1e40af; }
+.notice-type-badge.examination { background: #fef3c7; color: #92400e; }
+.notice-type-badge.admission { background: #d1fae5; color: #065f46; }
+.notice-type-badge.placement { background: #ede9fe; color: #5b21b6; }
+.notice-type-badge.hostel { background: #fce7f3; color: #9d174d; }
+.notice-type-badge.library { background: #e0e7ff; color: #3730a3; }
+.notice-type-badge.sports { background: #ccfbf1; color: #0f766e; }
+.notice-type-badge.cultural { background: #fae8ff; color: #86198f; }
+.notice-type-badge.emergency { background: #fee2e2; color: #991b1b; }
+
+.notice-priority {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.notice-priority.urgent { background: #dc2626; color: white; }
+.notice-priority.high { background: #ea580c; color: white; }
+
+.notice-pinned {
+    font-size: 11px;
+    color: var(--primary);
+}
+
+.notice-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--heading-color);
+    margin-bottom: 15px;
+}
+
+.notice-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.notice-info i {
+    margin-right: 5px;
+}
+
+.notice-content {
+    padding: 30px;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.notice-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.notice-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.notice-content table th,
+.notice-content table td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+}
+
+.notice-attachment-section {
+    padding: 20px 30px;
+    background: var(--bg-light-gray, #f8f9fa);
+    border-top: 1px solid var(--border-color);
+}
+
+.notice-attachment-section h5 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--heading-color);
+}
+
+.attachment-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: var(--primary);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.attachment-link:hover {
+    background: var(--primary-dark);
+    color: white;
+}
+
+.notice-footer {
+    padding: 20px 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+.related-notices {
+    margin-top: 30px;
+}
+
+.related-notice-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 15px;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.related-notice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.related-notice-card h6 {
+    margin: 10px 0 5px;
+    font-weight: 600;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
+@media (max-width: 768px) {
+    .notice-header {
+        padding: 20px;
+    }
+    .notice-content {
+        padding: 20px;
+    }
+    .notice-title {
+        font-size: 22px;
+    }
+    .notice-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+
+<script>
+frappe.ready(function() {
+    // Log view
+    frappe.call({
+        method: 'university_erp.university_erp.doctype.notice_view_log.notice_view_log.mark_notice_viewed',
+        args: {
+            notice_name: '{{ notice.name }}'
+        }
+    });
+});
+</script>
+{% endblock %}

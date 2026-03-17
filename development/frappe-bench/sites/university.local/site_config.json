@@ -1,0 +1,11 @@
+{
+ "allow_tests": true,
+ "db_name": "_df4394075d9a924d",
+ "db_password": "MEQEH6nrrzCmiP5Y",
+ "db_type": "mariadb",
+ "user_type_doctype_limit": {
+  "employee_self_service": 40
+ },
+ "host_name": "http://localhost:8000",
+ "domains": ["localhost", "127.0.0.1", "university.local"]
+}

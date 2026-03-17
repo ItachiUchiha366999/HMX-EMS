@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ meta_description or 'EduPortal - Student Dashboard' }}">
+    <title>{% block title %}{{ title or 'Dashboard' }}{% endblock %} | EduPortal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/assets/university_erp/css/theme/variables.css">
+    <link rel="stylesheet" href="/assets/university_erp/css/theme/portal.css">
+
+    {% block head %}{% endblock %}
+</head>
+<body class="edu-portal">
+    <div class="portal-container">
+        <!-- Sidebar Overlay (Mobile) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo -->
+            <div class="sidebar-header">
+                <a href="/student_portal" class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="sidebar-logo-text">
+                        <span class="sidebar-logo-title">EduPortal</span>
+                        <span class="sidebar-logo-subtitle">Student Dashboard</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <a href="/student_portal" class="nav-item {% if active_page == 'dashboard' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-home"></i></span>
+                    <span class="nav-item-text">Dashboard</span>
+                </a>
+                <a href="/student_portal/profile" class="nav-item {% if active_page == 'profile' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-user"></i></span>
+                    <span class="nav-item-text">Profile</span>
+                </a>
+                <a href="/student_portal/attendance" class="nav-item {% if active_page == 'attendance' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="nav-item-text">Attendance</span>
+                </a>
+                <a href="/student_portal/academics" class="nav-item {% if active_page == 'academics' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-book-open"></i></span>
+                    <span class="nav-item-text">Academics</span>
+                </a>
+                <a href="/student_portal/assignments" class="nav-item {% if active_page == 'assignments' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-tasks"></i></span>
+                    <span class="nav-item-text">Assignments</span>
+                </a>
+                <a href="/student_portal/exams" class="nav-item {% if active_page == 'exams' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-file-alt"></i></span>
+                    <span class="nav-item-text">Examinations</span>
+                </a>
+                <a href="/student_portal/library" class="nav-item {% if active_page == 'library' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-book"></i></span>
+                    <span class="nav-item-text">Library</span>
+                </a>
+                <a href="/student_portal/timetable" class="nav-item {% if active_page == 'timetable' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-clock"></i></span>
+                    <span class="nav-item-text">Timetable</span>
+                </a>
+                <a href="/student_portal/notifications" class="nav-item {% if active_page == 'notifications' %}active{% endif %}">
+                    <span class="nav-item-icon"><i class="fas fa-bell"></i></span>
+                    <span class="nav-item-text">Notifications</span>
+                </a>
+            </nav>
+
+            <!-- User Profile -->
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">
+                        {% if student and student.image %}
+                            <img src="{{ student.image }}" alt="{{ student.student_name }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                        {% else %}
+                            {{ (student.student_name or 'S')[0:2] | upper }}
+                        {% endif %}
+                    </div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">{{ student.student_name or 'Student' }}</div>
+                        <div class="sidebar-user-id">ID: {{ student.name or '' }}</div>
+                    </div>
+                </div>
+                <a href="/?cmd=web_logout" class="sidebar-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                    <button class="mobile-nav-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars" style="font-size: 20px;"></i>
+                    </button>
+                    <h1 class="page-title">{% block page_title %}{{ title or 'Dashboard' }}{% endblock %}</h1>
+                </div>
+                <div class="page-header-right">
+                    {% block page_actions %}{% endblock %}
+                    <div class="semester-badge">
+                        <div class="semester-badge-title">{{ current_semester or 'Spring 2026' }}</div>
+                        <div class="semester-badge-subtitle">Current Semester</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Sidebar Toggle (Mobile)
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('sidebar').classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Set active nav item based on current path
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-item').forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentPath === href || (href !== '/student_portal' && currentPath.startsWith(href))) {
+                    link.classList.add('active');
+                } else if (href === '/student_portal' && currentPath === '/student_portal') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Close sidebar on window resize (if desktop)
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,176 @@
+{
+  "actions": [],
+  "autoname": "format:{student}-{content}",
+  "creation": "2026-01-02 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "student",
+    "student_name",
+    "content",
+    "lms_course",
+    "column_break_1",
+    "status",
+    "progress_percent",
+    "time_spent_minutes",
+    "section_tracking",
+    "first_accessed",
+    "last_accessed",
+    "completed_on",
+    "access_count"
+  ],
+  "fields": [
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "student.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "content",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Content",
+      "options": "LMS Content",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "content.lms_course",
+      "fieldname": "lms_course",
+      "fieldtype": "Link",
+      "label": "LMS Course",
+      "options": "LMS Course",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Not Started",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Not Started\nIn Progress\nCompleted"
+    },
+    {
+      "default": "0",
+      "fieldname": "progress_percent",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "label": "Progress %"
+    },
+    {
+      "default": "0",
+      "fieldname": "time_spent_minutes",
+      "fieldtype": "Int",
+      "label": "Time Spent (min)"
+    },
+    {
+      "fieldname": "section_tracking",
+      "fieldtype": "Section Break",
+      "label": "Tracking"
+    },
+    {
+      "fieldname": "first_accessed",
+      "fieldtype": "Datetime",
+      "label": "First Accessed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_accessed",
+      "fieldtype": "Datetime",
+      "label": "Last Accessed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_on",
+      "fieldtype": "Datetime",
+      "label": "Completed On",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "access_count",
+      "fieldtype": "Int",
+      "label": "Access Count",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University LMS",
+  "name": "LMS Content Progress",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

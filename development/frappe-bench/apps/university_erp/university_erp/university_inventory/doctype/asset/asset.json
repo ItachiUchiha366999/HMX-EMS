@@ -1,0 +1,463 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-01-14 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "asset_name",
+    "asset_code",
+    "item_code",
+    "column_break_1",
+    "asset_category",
+    "status",
+    "is_existing_asset",
+    "image",
+    "details_section",
+    "asset_serial_no",
+    "manufacturer",
+    "model",
+    "column_break_details",
+    "purchase_date",
+    "warranty_expiry_date",
+    "purchase_section",
+    "purchase_receipt",
+    "purchase_invoice",
+    "column_break_purchase",
+    "supplier",
+    "location_section",
+    "location",
+    "department",
+    "custodian",
+    "column_break_location",
+    "building",
+    "floor",
+    "room_number",
+    "valuation_section",
+    "gross_purchase_amount",
+    "opening_accumulated_depreciation",
+    "column_break_valuation",
+    "asset_value",
+    "total_depreciation",
+    "depreciation_section",
+    "calculate_depreciation",
+    "depreciation_method",
+    "total_number_of_depreciations",
+    "frequency_of_depreciation",
+    "column_break_depreciation",
+    "depreciation_start_date",
+    "expected_value_after_useful_life",
+    "rate_of_depreciation",
+    "depreciation_schedule_section",
+    "depreciation_schedule",
+    "maintenance_section",
+    "maintenance_required",
+    "next_maintenance_date",
+    "column_break_maintenance",
+    "maintenance_frequency",
+    "last_maintenance_date",
+    "accounts_section",
+    "fixed_asset_account",
+    "accumulated_depreciation_account",
+    "column_break_accounts",
+    "depreciation_expense_account",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "AST-.YYYY.-.#####",
+      "reqd": 1,
+      "set_only_once": 1
+    },
+    {
+      "fieldname": "asset_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Asset Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "asset_code",
+      "fieldtype": "Data",
+      "label": "Asset Code",
+      "read_only": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "item_code",
+      "fieldtype": "Link",
+      "label": "Item Code",
+      "options": "Inventory Item"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "asset_category",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Asset Category",
+      "options": "Asset Category",
+      "reqd": 1
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Draft\nSubmitted\nIn Use\nIn Maintenance\nDisposed\nScrapped",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Check if this is an existing asset being recorded",
+      "fieldname": "is_existing_asset",
+      "fieldtype": "Check",
+      "label": "Is Existing Asset"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Asset Details"
+    },
+    {
+      "fieldname": "asset_serial_no",
+      "fieldtype": "Data",
+      "label": "Serial Number"
+    },
+    {
+      "fieldname": "manufacturer",
+      "fieldtype": "Data",
+      "label": "Manufacturer"
+    },
+    {
+      "fieldname": "model",
+      "fieldtype": "Data",
+      "label": "Model"
+    },
+    {
+      "fieldname": "column_break_details",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "purchase_date",
+      "fieldtype": "Date",
+      "label": "Purchase Date"
+    },
+    {
+      "fieldname": "warranty_expiry_date",
+      "fieldtype": "Date",
+      "label": "Warranty Expiry Date"
+    },
+    {
+      "fieldname": "purchase_section",
+      "fieldtype": "Section Break",
+      "label": "Purchase Details"
+    },
+    {
+      "fieldname": "purchase_receipt",
+      "fieldtype": "Link",
+      "label": "Purchase Receipt",
+      "options": "Purchase Receipt",
+      "read_only": 1
+    },
+    {
+      "fieldname": "purchase_invoice",
+      "fieldtype": "Link",
+      "label": "Purchase Invoice",
+      "options": "Purchase Invoice",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_purchase",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier",
+      "fieldtype": "Link",
+      "label": "Supplier",
+      "options": "Supplier"
+    },
+    {
+      "fieldname": "location_section",
+      "fieldtype": "Section Break",
+      "label": "Location"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Location (Warehouse)",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Department",
+      "options": "University Department"
+    },
+    {
+      "fieldname": "custodian",
+      "fieldtype": "Link",
+      "label": "Custodian",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "column_break_location",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "building",
+      "fieldtype": "Data",
+      "label": "Building"
+    },
+    {
+      "fieldname": "floor",
+      "fieldtype": "Data",
+      "label": "Floor"
+    },
+    {
+      "fieldname": "room_number",
+      "fieldtype": "Data",
+      "label": "Room Number"
+    },
+    {
+      "fieldname": "valuation_section",
+      "fieldtype": "Section Break",
+      "label": "Asset Value"
+    },
+    {
+      "default": "0",
+      "fieldname": "gross_purchase_amount",
+      "fieldtype": "Currency",
+      "label": "Gross Purchase Amount",
+      "reqd": 1
+    },
+    {
+      "default": "0",
+      "depends_on": "is_existing_asset",
+      "fieldname": "opening_accumulated_depreciation",
+      "fieldtype": "Currency",
+      "label": "Opening Accumulated Depreciation"
+    },
+    {
+      "fieldname": "column_break_valuation",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "asset_value",
+      "fieldtype": "Currency",
+      "label": "Current Asset Value",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_depreciation",
+      "fieldtype": "Currency",
+      "label": "Total Depreciation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "depreciation_section",
+      "fieldtype": "Section Break",
+      "label": "Depreciation"
+    },
+    {
+      "default": "0",
+      "fieldname": "calculate_depreciation",
+      "fieldtype": "Check",
+      "label": "Calculate Depreciation"
+    },
+    {
+      "depends_on": "calculate_depreciation",
+      "fetch_from": "asset_category.depreciation_method",
+      "fieldname": "depreciation_method",
+      "fieldtype": "Select",
+      "label": "Depreciation Method",
+      "options": "\nStraight Line\nDouble Declining Balance\nWritten Down Value"
+    },
+    {
+      "depends_on": "calculate_depreciation",
+      "fetch_from": "asset_category.total_number_of_depreciations",
+      "fieldname": "total_number_of_depreciations",
+      "fieldtype": "Int",
+      "label": "Total Number of Depreciations"
+    },
+    {
+      "default": "12",
+      "depends_on": "calculate_depreciation",
+      "fetch_from": "asset_category.frequency_of_depreciation",
+      "fieldname": "frequency_of_depreciation",
+      "fieldtype": "Int",
+      "label": "Frequency of Depreciation (Months)"
+    },
+    {
+      "fieldname": "column_break_depreciation",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "calculate_depreciation",
+      "fieldname": "depreciation_start_date",
+      "fieldtype": "Date",
+      "label": "Depreciation Start Date"
+    },
+    {
+      "default": "0",
+      "depends_on": "calculate_depreciation",
+      "fetch_from": "asset_category.expected_value_after_useful_life",
+      "fieldname": "expected_value_after_useful_life",
+      "fieldtype": "Currency",
+      "label": "Expected Value After Useful Life"
+    },
+    {
+      "depends_on": "eval:doc.calculate_depreciation && doc.depreciation_method=='Written Down Value'",
+      "fetch_from": "asset_category.rate_of_depreciation",
+      "fieldname": "rate_of_depreciation",
+      "fieldtype": "Percent",
+      "label": "Rate of Depreciation (%)"
+    },
+    {
+      "collapsible": 1,
+      "depends_on": "calculate_depreciation",
+      "fieldname": "depreciation_schedule_section",
+      "fieldtype": "Section Break",
+      "label": "Depreciation Schedule"
+    },
+    {
+      "fieldname": "depreciation_schedule",
+      "fieldtype": "Table",
+      "label": "Depreciation Schedule",
+      "options": "Depreciation Schedule"
+    },
+    {
+      "fieldname": "maintenance_section",
+      "fieldtype": "Section Break",
+      "label": "Maintenance"
+    },
+    {
+      "default": "0",
+      "fieldname": "maintenance_required",
+      "fieldtype": "Check",
+      "label": "Maintenance Required"
+    },
+    {
+      "depends_on": "maintenance_required",
+      "fieldname": "next_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Next Maintenance Date"
+    },
+    {
+      "fieldname": "column_break_maintenance",
+      "fieldtype": "Column Break"
+    },
+    {
+      "depends_on": "maintenance_required",
+      "fieldname": "maintenance_frequency",
+      "fieldtype": "Select",
+      "label": "Maintenance Frequency",
+      "options": "\nMonthly\nQuarterly\nHalf-yearly\nYearly"
+    },
+    {
+      "fieldname": "last_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Last Maintenance Date",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "accounts_section",
+      "fieldtype": "Section Break",
+      "label": "Accounts"
+    },
+    {
+      "fetch_from": "asset_category.fixed_asset_account",
+      "fieldname": "fixed_asset_account",
+      "fieldtype": "Link",
+      "label": "Fixed Asset Account",
+      "options": "Account"
+    },
+    {
+      "fetch_from": "asset_category.accumulated_depreciation_account",
+      "fieldname": "accumulated_depreciation_account",
+      "fieldtype": "Link",
+      "label": "Accumulated Depreciation Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_accounts",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "asset_category.depreciation_expense_account",
+      "fieldname": "depreciation_expense_account",
+      "fieldtype": "Link",
+      "label": "Depreciation Expense Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Asset",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-14 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Inventory",
+  "name": "Asset",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "search_fields": "asset_name, asset_category, status, department",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "asset_name",
+  "track_changes": 1
+}

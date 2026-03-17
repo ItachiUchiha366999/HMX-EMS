@@ -1,0 +1,215 @@
+{
+  "actions": [],
+  "autoname": "UN-.#####",
+  "creation": "2026-01-13 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "user",
+    "notification_type",
+    "category",
+    "column_break_basic",
+    "priority",
+    "read",
+    "read_at",
+    "content_section",
+    "title",
+    "message",
+    "link_section",
+    "link",
+    "link_doctype",
+    "link_name",
+    "metadata_section",
+    "source_doctype",
+    "source_name",
+    "column_break_metadata",
+    "expires_on",
+    "icon"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "User",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "default": "info",
+      "fieldname": "notification_type",
+      "fieldtype": "Select",
+      "in_standard_filter": 1,
+      "label": "Type",
+      "options": "info\nsuccess\nwarning\nerror\nannouncement"
+    },
+    {
+      "default": "General",
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Category",
+      "options": "General\nAcademic\nFee\nExamination\nLibrary\nHostel\nPlacement\nEmergency"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Normal",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nNormal\nHigh\nUrgent"
+    },
+    {
+      "default": "0",
+      "fieldname": "read",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Read"
+    },
+    {
+      "fieldname": "read_at",
+      "fieldtype": "Datetime",
+      "label": "Read At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "content_section",
+      "fieldtype": "Section Break",
+      "label": "Content"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Small Text",
+      "label": "Message"
+    },
+    {
+      "fieldname": "link_section",
+      "fieldtype": "Section Break",
+      "label": "Link"
+    },
+    {
+      "description": "URL to navigate to when notification is clicked",
+      "fieldname": "link",
+      "fieldtype": "Data",
+      "label": "Link"
+    },
+    {
+      "fieldname": "link_doctype",
+      "fieldtype": "Link",
+      "label": "Link DocType",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "link_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Link Name",
+      "options": "link_doctype"
+    },
+    {
+      "fieldname": "metadata_section",
+      "fieldtype": "Section Break",
+      "label": "Metadata"
+    },
+    {
+      "description": "Source document that triggered this notification",
+      "fieldname": "source_doctype",
+      "fieldtype": "Data",
+      "label": "Source DocType"
+    },
+    {
+      "fieldname": "source_name",
+      "fieldtype": "Data",
+      "label": "Source Name"
+    },
+    {
+      "fieldname": "column_break_metadata",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expires_on",
+      "fieldtype": "Datetime",
+      "label": "Expires On"
+    },
+    {
+      "description": "Icon class name (e.g., fa-bell)",
+      "fieldname": "icon",
+      "fieldtype": "Data",
+      "label": "Icon"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-13 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "User Notification",
+  "naming_rule": "Expression (old style)",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0,
+      "if_owner": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

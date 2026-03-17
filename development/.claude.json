@@ -1,0 +1,115 @@
+{
+  "cachedStatsigGates": {
+    "tengu_prompt_suggestion": true,
+    "tengu_vscode_review_upsell": false,
+    "tengu_year_end_2025_campaign_promo": false
+  },
+  "cachedDynamicConfigs": {
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 5000,
+      "maxExportBatchSize": 200,
+      "maxQueueSize": 8192
+    }
+  },
+  "cachedGrowthBookFeatures": {
+    "tengu_mcp_tool_search": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "strawberry_granite_flag": "OFF",
+    "persimmon_marble_flag": "OFF",
+    "tengu_tool_pear": false,
+    "tengu_thinkback": false,
+    "tengu_ant_attribution_header_new": true,
+    "tengu_c4w_usage_limit_notifications_enabled": true
+  },
+  "userID": "ae57ec7c154e1bcad9a0ba4405edc74a990b31eb3b7f272f8b255ea6fcaa48b3",
+  "firstStartTime": "2025-12-31T09:23:55.665Z",
+  "sonnet45MigrationComplete": true,
+  "opus45MigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "githubRepoPaths": {
+    "frappe/frappe_docker": [
+      "/workspace/development"
+    ]
+  },
+  "oauthAccount": {
+    "accountUuid": "6ecf6f2b-075b-406b-92ef-ee088a15b143",
+    "emailAddress": "connect@hanumatrix.com",
+    "organizationUuid": "b94c7a6a-d459-4a9f-9add-825ed011b3ad",
+    "hasExtraUsageEnabled": false,
+    "displayName": "Hanumatrix"
+  },
+  "s1mAccessCache": {
+    "b94c7a6a-d459-4a9f-9add-825ed011b3ad": {
+      "hasAccess": false,
+      "hasAccessNotAsDefault": false,
+      "timestamp": 1767196090604
+    }
+  },
+  "tokenBudget": 64000,
+  "projects": {
+    "/workspace": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "Task",
+        "TodoWrite",
+        "WebFetch",
+        "WebSearch",
+        "NotebookEdit",
+        "AskUserQuestion"
+      ],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": true,
+      "hasClaudeMdExternalIncludesWarningShown": true,
+      "exampleFiles": [
+        "pwd.yml",
+        "example.env",
+        "compose.yaml",
+        "requirements-test.txt",
+        "docker-bake.hcl"
+      ],
+      "exampleFilesGeneratedAt": 1767174092387
+    },
+    "/workspace/development": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "Task",
+        "TodoWrite",
+        "WebFetch",
+        "WebSearch",
+        "NotebookEdit",
+        "AskUserQuestion"
+      ],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": true,
+      "hasClaudeMdExternalIncludesWarningShown": true,
+      "exampleFiles": [
+        "pwd.yml",
+        "example.env",
+        "compose.yaml",
+        "requirements-test.txt",
+        "docker-bake.hcl"
+      ],
+      "exampleFilesGeneratedAt": 1767174092387
+    }
+  }
+}

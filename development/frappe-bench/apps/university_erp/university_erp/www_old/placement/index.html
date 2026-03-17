@@ -1,0 +1,327 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Placement Portal") }}{% endblock %}
+
+{% block page_content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-3">{{ _("Placement Portal") }}</h1>
+        </div>
+    </div>
+
+    {% if not is_logged_in %}
+    <!-- Guest View -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _("Current Openings") }}</h5>
+                </div>
+                <div class="card-body">
+                    {% if open_jobs %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{ _("Company") }}</th>
+                                    <th>{{ _("Position") }}</th>
+                                    <th>{{ _("Type") }}</th>
+                                    <th>{{ _("Package") }}</th>
+                                    <th>{{ _("Deadline") }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for job in open_jobs %}
+                                <tr>
+                                    <td>{{ job.company_name }}</td>
+                                    <td>{{ job.job_title }}</td>
+                                    <td><span class="badge bg-info">{{ job.job_type }}</span></td>
+                                    <td>
+                                        {% if job.ctc_max %}
+                                        {{ frappe.format_value(job.ctc_max, {"fieldtype": "Currency"}) }} LPA
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ frappe.format_date(job.application_deadline) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted">{{ _("No open positions at the moment.") }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5>{{ _("Student Login") }}</h5>
+                    <p class="text-muted">{{ _("Login to apply for jobs and track your applications.") }}</p>
+                    <a href="/login" class="btn btn-primary">{{ _("Login") }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% elif not is_student %}
+    <div class="alert alert-warning">{{ message }}</div>
+
+    {% else %}
+    <!-- Student Dashboard -->
+    <div class="row mb-4">
+        <!-- Stats Cards -->
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-primary">{{ applications|length }}</h3>
+                    <p class="mb-0">{{ _("Applications") }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-success">{{ eligible_jobs|length }}</h3>
+                    <p class="mb-0">{{ _("Eligible Jobs") }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-info">{{ upcoming_drives|length }}</h3>
+                    <p class="mb-0">{{ _("Upcoming Drives") }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    {% if has_resume %}
+                    <h3 class="text-success">{{ resume_completeness }}%</h3>
+                    <p class="mb-0">{{ _("Resume Complete") }}</p>
+                    {% else %}
+                    <h3 class="text-danger">0%</h3>
+                    <p class="mb-0">{{ _("Resume Pending") }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Alert -->
+    {% if not has_resume or resume_completeness < 50 %}
+    <div class="alert alert-warning">
+        <strong>{{ _("Complete Your Resume!") }}</strong>
+        {{ _("A complete resume increases your chances of getting shortlisted.") }}
+        <a href="/app/student-resume/{{ student.name }}-Resume" class="btn btn-sm btn-warning ms-2">
+            {{ _("Update Resume") }}
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <!-- Eligible Jobs -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ _("Eligible Job Openings") }}</h5>
+                </div>
+                <div class="card-body">
+                    {% if eligible_jobs %}
+                    {% for job in eligible_jobs %}
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">{{ job.job_title }}</h6>
+                                <p class="text-muted mb-1">{{ job.company_name }}</p>
+                                <p class="small mb-1">
+                                    <span class="badge bg-info">{{ job.job_type }}</span>
+                                    {% if job.location %}
+                                    <span class="text-muted ms-2"><i class="fa fa-map-marker"></i> {{ job.location }}</span>
+                                    {% endif %}
+                                </p>
+                                <p class="small text-muted mb-0">
+                                    {% if job.ctc_min and job.ctc_max %}
+                                    <strong>Package:</strong> {{ job.ctc_min }} - {{ job.ctc_max }} LPA
+                                    {% elif job.ctc_max %}
+                                    <strong>Package:</strong> Up to {{ job.ctc_max }} LPA
+                                    {% endif %}
+                                    | <strong>Deadline:</strong> {{ frappe.format_date(job.application_deadline) }}
+                                </p>
+                            </div>
+                            <div>
+                                {% if job.already_applied %}
+                                <span class="badge bg-success">{{ _("Applied") }}</span>
+                                {% else %}
+                                <button class="btn btn-primary btn-sm apply-btn" data-job="{{ job.name }}">
+                                    {{ _("Apply") }}
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted">{{ _("No eligible jobs at the moment.") }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- My Applications -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _("My Applications") }}</h5>
+                </div>
+                <div class="card-body">
+                    {% if applications %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{ _("Company") }}</th>
+                                    <th>{{ _("Position") }}</th>
+                                    <th>{{ _("Status") }}</th>
+                                    <th>{{ _("Applied On") }}</th>
+                                    <th>{{ _("Action") }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in applications %}
+                                <tr>
+                                    <td>{{ app.company_name }}</td>
+                                    <td>{{ app.job_title }}</td>
+                                    <td>
+                                        {% if app.status == 'Offer Accepted' %}
+                                        <span class="badge bg-success">{{ app.status }}</span>
+                                        {% elif app.status == 'Rejected' or app.status == 'Withdrawn' %}
+                                        <span class="badge bg-danger">{{ app.status }}</span>
+                                        {% elif app.status == 'Shortlisted' %}
+                                        <span class="badge bg-info">{{ app.status }}</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">{{ app.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ frappe.format_date(app.application_date) }}</td>
+                                    <td>
+                                        {% if app.status in ['Applied', 'Shortlisted'] %}
+                                        <button class="btn btn-sm btn-outline-danger withdraw-btn"
+                                                data-application="{{ app.name }}">
+                                            {{ _("Withdraw") }}
+                                        </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted">{{ _("No applications yet.") }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <!-- Upcoming Drives -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _("Upcoming Drives") }}</h5>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_drives %}
+                    {% for drive in upcoming_drives %}
+                    <div class="border-bottom pb-2 mb-2">
+                        <h6 class="mb-1">{{ drive.company_name }}</h6>
+                        <p class="small text-muted mb-1">
+                            {{ frappe.format_date(drive.drive_date) }}
+                            {% if drive.venue %} | {{ drive.venue }}{% endif %}
+                        </p>
+                        {% if drive.job_title %}
+                        <p class="small mb-0">{{ drive.job_title }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted small">{{ _("No upcoming drives.") }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Placement Stats -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ _("Placement Statistics") }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>{{ _("Total Placed") }}:</strong>
+                        <span class="text-success">{{ stats.total_placed or 0 }}</span>
+                    </p>
+                    <p class="mb-2">
+                        <strong>{{ _("Average Package") }}:</strong>
+                        {% if stats.avg_package %}
+                        {{ "%.2f"|format(stats.avg_package) }} LPA
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </p>
+                    <p class="mb-0">
+                        <strong>{{ _("Highest Package") }}:</strong>
+                        {% if stats.highest_package %}
+                        {{ "%.2f"|format(stats.highest_package) }} LPA
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Apply for job
+    document.querySelectorAll('.apply-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var job = this.dataset.job;
+            frappe.call({
+                method: 'university_erp.www.placement.index.apply_for_job',
+                args: { job_opening: job },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.msgprint(r.message.message);
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+
+    // Withdraw application
+    document.querySelectorAll('.withdraw-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var application = this.dataset.application;
+            frappe.confirm('{{ _("Are you sure you want to withdraw this application?") }}', function() {
+                frappe.call({
+                    method: 'university_erp.www.placement.index.withdraw_application',
+                    args: { application: application },
+                    callback: function(r) {
+                        if (r.message) {
+                            frappe.msgprint(r.message.message);
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

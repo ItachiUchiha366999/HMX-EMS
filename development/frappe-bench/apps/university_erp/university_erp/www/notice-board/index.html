@@ -1,0 +1,284 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Notice Board{% endblock %}
+
+{% block page_content %}
+<div class="notice-board-container">
+    <div class="notice-board-header">
+        <h1>Notice Board</h1>
+        <p class="text-muted">Stay updated with the latest announcements</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="notice-filters mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <select id="notice-type-filter" class="form-control">
+                    <option value="">All Categories</option>
+                    {% for type in notice_types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="notice-search" class="form-control" placeholder="Search notices...">
+            </div>
+            <div class="col-md-4">
+                <select id="notice-sort" class="form-control">
+                    <option value="recent">Most Recent</option>
+                    <option value="priority">By Priority</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pinned Notices -->
+    {% if pinned_notices %}
+    <div class="pinned-notices mb-4">
+        <h5 class="section-title"><i class="fa fa-thumb-tack"></i> Pinned Notices</h5>
+        <div class="row">
+            {% for notice in pinned_notices %}
+            <div class="col-md-6 mb-3">
+                <div class="notice-card pinned" data-notice="{{ notice.name }}" data-type="{{ notice.notice_type }}">
+                    <div class="notice-card-header">
+                        <span class="notice-type-badge {{ notice.notice_type|lower }}">{{ notice.notice_type }}</span>
+                        <span class="notice-priority {{ notice.priority|lower }}">{{ notice.priority }}</span>
+                    </div>
+                    <h4 class="notice-title">{{ notice.title }}</h4>
+                    <p class="notice-date">
+                        <i class="fa fa-calendar"></i> {{ frappe.utils.format_date(notice.publish_date) }}
+                    </p>
+                    <a href="/notice-board/{{ notice.name }}" class="btn btn-sm btn-primary">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- All Notices -->
+    <div class="all-notices">
+        <h5 class="section-title">All Notices</h5>
+        <div id="notices-list" class="row">
+            {% for notice in notices %}
+            <div class="col-md-6 col-lg-4 mb-3 notice-item" data-type="{{ notice.notice_type }}">
+                <div class="notice-card" data-notice="{{ notice.name }}">
+                    <div class="notice-card-header">
+                        <span class="notice-type-badge {{ notice.notice_type|lower }}">{{ notice.notice_type }}</span>
+                        {% if notice.priority in ['High', 'Urgent'] %}
+                        <span class="notice-priority {{ notice.priority|lower }}">{{ notice.priority }}</span>
+                        {% endif %}
+                    </div>
+                    <h5 class="notice-title">{{ notice.title }}</h5>
+                    <p class="notice-excerpt">{{ notice.content | striptags | truncate(100) }}</p>
+                    <div class="notice-footer">
+                        <span class="notice-date">
+                            <i class="fa fa-calendar"></i> {{ frappe.utils.format_date(notice.publish_date) }}
+                        </span>
+                        {% if notice.attachment %}
+                        <span class="notice-attachment">
+                            <i class="fa fa-paperclip"></i>
+                        </span>
+                        {% endif %}
+                    </div>
+                    <a href="/notice-board/{{ notice.name }}" class="stretched-link"></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not notices %}
+        <div class="empty-state text-center py-5">
+            <i class="fa fa-clipboard fa-3x text-muted mb-3"></i>
+            <p class="text-muted">No notices available at this time.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Pagination -->
+    {% if total_pages > 1 %}
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if current_page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ current_page - 1 }}">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for page in range(1, total_pages + 1) %}
+            <li class="page-item {% if page == current_page %}active{% endif %}">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+
+            {% if current_page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ current_page + 1 }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<style>
+.notice-board-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.notice-board-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.notice-board-header h1 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.section-title {
+    color: var(--heading-color);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.notice-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.notice-card.pinned {
+    border-left: 4px solid var(--primary);
+    background: var(--bg-light-yellow, #fffdf0);
+}
+
+.notice-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.notice-type-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.notice-type-badge.general { background: #e3e8ef; color: #374151; }
+.notice-type-badge.academic { background: #dbeafe; color: #1e40af; }
+.notice-type-badge.examination { background: #fef3c7; color: #92400e; }
+.notice-type-badge.admission { background: #d1fae5; color: #065f46; }
+.notice-type-badge.placement { background: #ede9fe; color: #5b21b6; }
+.notice-type-badge.hostel { background: #fce7f3; color: #9d174d; }
+.notice-type-badge.library { background: #e0e7ff; color: #3730a3; }
+.notice-type-badge.sports { background: #ccfbf1; color: #0f766e; }
+.notice-type-badge.cultural { background: #fae8ff; color: #86198f; }
+.notice-type-badge.emergency { background: #fee2e2; color: #991b1b; }
+
+.notice-priority {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.notice-priority.urgent { background: #dc2626; color: white; }
+.notice-priority.high { background: #ea580c; color: white; }
+.notice-priority.medium { background: #ca8a04; color: white; }
+.notice-priority.low { background: #65a30d; color: white; }
+
+.notice-title {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.notice-excerpt {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.notice-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.notice-date i,
+.notice-attachment i {
+    margin-right: 4px;
+}
+
+.notice-filters {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.empty-state {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+</style>
+
+<script>
+frappe.ready(function() {
+    // Filter by type
+    $('#notice-type-filter').on('change', function() {
+        var type = $(this).val();
+        if (type) {
+            $('.notice-item').hide();
+            $('.notice-item[data-type="' + type + '"]').show();
+        } else {
+            $('.notice-item').show();
+        }
+    });
+
+    // Search
+    $('#notice-search').on('input', function() {
+        var query = $(this).val().toLowerCase();
+        $('.notice-item').each(function() {
+            var title = $(this).find('.notice-title').text().toLowerCase();
+            var excerpt = $(this).find('.notice-excerpt').text().toLowerCase();
+            if (title.includes(query) || excerpt.includes(query)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

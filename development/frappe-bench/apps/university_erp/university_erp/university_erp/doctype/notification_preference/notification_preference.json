@@ -1,0 +1,289 @@
+{
+  "actions": [],
+  "autoname": "format:{user}-preferences",
+  "creation": "2026-01-01 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "user",
+    "column_break_1",
+    "enabled",
+    "preferred_language",
+    "section_break_channels",
+    "email_enabled",
+    "sms_enabled",
+    "whatsapp_enabled",
+    "column_break_channels",
+    "push_enabled",
+    "in_app_enabled",
+    "section_break_ui",
+    "sound_enabled",
+    "badge_enabled",
+    "column_break_ui",
+    "desktop_notifications",
+    "vibration_enabled",
+    "section_break_categories",
+    "fee_notifications",
+    "academic_notifications",
+    "column_break_categories",
+    "library_notifications",
+    "placement_notifications",
+    "section_break_timing",
+    "quiet_hours_enabled",
+    "quiet_start_time",
+    "column_break_timing",
+    "quiet_end_time",
+    "section_break_digest",
+    "email_digest",
+    "digest_frequency"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "User",
+      "options": "User",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Notifications Enabled"
+    },
+    {
+      "fieldname": "preferred_language",
+      "fieldtype": "Link",
+      "label": "Preferred Language",
+      "options": "Language"
+    },
+    {
+      "fieldname": "section_break_channels",
+      "fieldtype": "Section Break",
+      "label": "Notification Channels"
+    },
+    {
+      "default": "1",
+      "fieldname": "email_enabled",
+      "fieldtype": "Check",
+      "label": "Email Notifications"
+    },
+    {
+      "default": "0",
+      "fieldname": "sms_enabled",
+      "fieldtype": "Check",
+      "label": "SMS Notifications"
+    },
+    {
+      "default": "0",
+      "fieldname": "whatsapp_enabled",
+      "fieldtype": "Check",
+      "label": "WhatsApp Notifications"
+    },
+    {
+      "fieldname": "column_break_channels",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "push_enabled",
+      "fieldtype": "Check",
+      "label": "Push Notifications"
+    },
+    {
+      "default": "1",
+      "fieldname": "in_app_enabled",
+      "fieldtype": "Check",
+      "label": "In-App Notifications"
+    },
+    {
+      "fieldname": "section_break_ui",
+      "fieldtype": "Section Break",
+      "label": "UI Preferences"
+    },
+    {
+      "default": "1",
+      "description": "Play sound when new notification arrives",
+      "fieldname": "sound_enabled",
+      "fieldtype": "Check",
+      "label": "Notification Sound"
+    },
+    {
+      "default": "1",
+      "description": "Show unread count badge in navbar",
+      "fieldname": "badge_enabled",
+      "fieldtype": "Check",
+      "label": "Show Badge Count"
+    },
+    {
+      "fieldname": "column_break_ui",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "description": "Show browser desktop notifications (requires permission)",
+      "fieldname": "desktop_notifications",
+      "fieldtype": "Check",
+      "label": "Desktop Notifications"
+    },
+    {
+      "default": "0",
+      "description": "Vibrate on mobile devices for new notifications",
+      "fieldname": "vibration_enabled",
+      "fieldtype": "Check",
+      "label": "Vibration (Mobile)"
+    },
+    {
+      "fieldname": "section_break_categories",
+      "fieldtype": "Section Break",
+      "label": "Notification Categories"
+    },
+    {
+      "default": "1",
+      "fieldname": "fee_notifications",
+      "fieldtype": "Check",
+      "label": "Fee & Payment Notifications"
+    },
+    {
+      "default": "1",
+      "fieldname": "academic_notifications",
+      "fieldtype": "Check",
+      "label": "Academic Notifications"
+    },
+    {
+      "fieldname": "column_break_categories",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "library_notifications",
+      "fieldtype": "Check",
+      "label": "Library Notifications"
+    },
+    {
+      "default": "1",
+      "fieldname": "placement_notifications",
+      "fieldtype": "Check",
+      "label": "Placement Notifications"
+    },
+    {
+      "fieldname": "section_break_timing",
+      "fieldtype": "Section Break",
+      "label": "Quiet Hours"
+    },
+    {
+      "default": "0",
+      "fieldname": "quiet_hours_enabled",
+      "fieldtype": "Check",
+      "label": "Enable Quiet Hours"
+    },
+    {
+      "default": "22:00",
+      "depends_on": "quiet_hours_enabled",
+      "fieldname": "quiet_start_time",
+      "fieldtype": "Time",
+      "label": "Quiet Start Time"
+    },
+    {
+      "fieldname": "column_break_timing",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "07:00",
+      "depends_on": "quiet_hours_enabled",
+      "fieldname": "quiet_end_time",
+      "fieldtype": "Time",
+      "label": "Quiet End Time"
+    },
+    {
+      "fieldname": "section_break_digest",
+      "fieldtype": "Section Break",
+      "label": "Email Digest"
+    },
+    {
+      "default": "0",
+      "fieldname": "email_digest",
+      "fieldtype": "Check",
+      "label": "Receive Email Digest"
+    },
+    {
+      "default": "Daily",
+      "depends_on": "email_digest",
+      "fieldname": "digest_frequency",
+      "fieldtype": "Select",
+      "label": "Digest Frequency",
+      "options": "Daily\nWeekly"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-01 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "Notification Preference",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,254 @@
+{
+  "actions": [],
+  "autoname": "field:template_name",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "certificate_type",
+    "description",
+    "column_break_basic",
+    "is_active",
+    "requires_approval",
+    "approver_role",
+    "approval_workflow",
+    "template_section",
+    "html_template",
+    "styling_section",
+    "page_size",
+    "orientation",
+    "margin_top",
+    "margin_bottom",
+    "column_break_styling",
+    "margin_left",
+    "margin_right",
+    "images_section",
+    "header_image",
+    "footer_image",
+    "column_break_images",
+    "watermark_image",
+    "signature_image",
+    "seal_image",
+    "css_section",
+    "css_styles",
+    "numbering_section",
+    "numbering_prefix",
+    "numbering_series"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "certificate_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Certificate Type",
+      "options": "Bonafide Certificate\nCharacter Certificate\nMigration Certificate\nTransfer Certificate\nDegree Certificate\nProvisional Certificate\nConduct Certificate\nStudy Certificate\nNo Dues Certificate\nMedium of Instruction Certificate\nRank Certificate\nMerit Certificate\nExperience Certificate\nInternship Certificate\nCustom",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_basic",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active"
+    },
+    {
+      "default": "0",
+      "fieldname": "requires_approval",
+      "fieldtype": "Check",
+      "label": "Requires Approval"
+    },
+    {
+      "depends_on": "requires_approval",
+      "fieldname": "approver_role",
+      "fieldtype": "Link",
+      "label": "Approver Role",
+      "options": "Role"
+    },
+    {
+      "depends_on": "requires_approval",
+      "fieldname": "approval_workflow",
+      "fieldtype": "Link",
+      "label": "Approval Workflow",
+      "options": "Workflow"
+    },
+    {
+      "fieldname": "template_section",
+      "fieldtype": "Section Break",
+      "label": "Template Content"
+    },
+    {
+      "description": "Use Jinja2 syntax: {{ student.student_name }}, {{ certificate_number }}, etc.",
+      "fieldname": "html_template",
+      "fieldtype": "Code",
+      "label": "HTML Template",
+      "options": "HTML"
+    },
+    {
+      "fieldname": "styling_section",
+      "fieldtype": "Section Break",
+      "label": "Page Settings"
+    },
+    {
+      "default": "A4",
+      "fieldname": "page_size",
+      "fieldtype": "Select",
+      "label": "Page Size",
+      "options": "A4\nLetter\nLegal\nA3"
+    },
+    {
+      "default": "Portrait",
+      "fieldname": "orientation",
+      "fieldtype": "Select",
+      "label": "Orientation",
+      "options": "Portrait\nLandscape"
+    },
+    {
+      "default": "10",
+      "fieldname": "margin_top",
+      "fieldtype": "Int",
+      "label": "Margin Top (mm)"
+    },
+    {
+      "default": "10",
+      "fieldname": "margin_bottom",
+      "fieldtype": "Int",
+      "label": "Margin Bottom (mm)"
+    },
+    {
+      "fieldname": "column_break_styling",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "10",
+      "fieldname": "margin_left",
+      "fieldtype": "Int",
+      "label": "Margin Left (mm)"
+    },
+    {
+      "default": "10",
+      "fieldname": "margin_right",
+      "fieldtype": "Int",
+      "label": "Margin Right (mm)"
+    },
+    {
+      "fieldname": "images_section",
+      "fieldtype": "Section Break",
+      "label": "Images"
+    },
+    {
+      "fieldname": "header_image",
+      "fieldtype": "Attach Image",
+      "label": "Header Image"
+    },
+    {
+      "fieldname": "footer_image",
+      "fieldtype": "Attach Image",
+      "label": "Footer Image"
+    },
+    {
+      "fieldname": "column_break_images",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "watermark_image",
+      "fieldtype": "Attach Image",
+      "label": "Watermark Image"
+    },
+    {
+      "fieldname": "signature_image",
+      "fieldtype": "Attach Image",
+      "label": "Signature Image"
+    },
+    {
+      "fieldname": "seal_image",
+      "fieldtype": "Attach Image",
+      "label": "Seal Image"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "css_section",
+      "fieldtype": "Section Break",
+      "label": "Custom CSS"
+    },
+    {
+      "fieldname": "css_styles",
+      "fieldtype": "Code",
+      "label": "Custom CSS",
+      "options": "CSS"
+    },
+    {
+      "fieldname": "numbering_section",
+      "fieldtype": "Section Break",
+      "label": "Certificate Numbering"
+    },
+    {
+      "description": "e.g., BON, CHR, MIG",
+      "fieldname": "numbering_prefix",
+      "fieldtype": "Data",
+      "label": "Number Prefix"
+    },
+    {
+      "default": "{prefix}/{YYYY}/{#####}",
+      "description": "Use {prefix}, {YYYY}, {MM}, {DD}, {#####}",
+      "fieldname": "numbering_series",
+      "fieldtype": "Data",
+      "label": "Numbering Format"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Certificate Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

@@ -1,0 +1,219 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:mess_name",
+  "creation": "2026-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "mess_name",
+    "mess_type",
+    "capacity",
+    "current_subscribers",
+    "mess_incharge",
+    "column_break_1",
+    "monthly_charge",
+    "daily_rate",
+    "status",
+    "timings_section",
+    "breakfast_time",
+    "lunch_time",
+    "snacks_time",
+    "dinner_time",
+    "menu_section",
+    "menu",
+    "contact_section",
+    "contact_number",
+    "email"
+  ],
+  "fields": [
+    {
+      "fieldname": "mess_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Mess Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Both",
+      "fieldname": "mess_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Mess Type",
+      "options": "Vegetarian\nNon-Vegetarian\nBoth"
+    },
+    {
+      "fieldname": "capacity",
+      "fieldtype": "Int",
+      "label": "Seating Capacity"
+    },
+    {
+      "default": "0",
+      "fieldname": "current_subscribers",
+      "fieldtype": "Int",
+      "label": "Current Subscribers",
+      "read_only": 1
+    },
+    {
+      "fieldname": "mess_incharge",
+      "fieldtype": "Link",
+      "label": "Mess Incharge",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "monthly_charge",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Monthly Charge"
+    },
+    {
+      "fieldname": "daily_rate",
+      "fieldtype": "Currency",
+      "label": "Daily Rate"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Active\nInactive\nClosed"
+    },
+    {
+      "fieldname": "timings_section",
+      "fieldtype": "Section Break",
+      "label": "Meal Timings"
+    },
+    {
+      "default": "07:30 AM - 09:00 AM",
+      "fieldname": "breakfast_time",
+      "fieldtype": "Data",
+      "label": "Breakfast Time"
+    },
+    {
+      "default": "12:30 PM - 02:00 PM",
+      "fieldname": "lunch_time",
+      "fieldtype": "Data",
+      "label": "Lunch Time"
+    },
+    {
+      "default": "04:30 PM - 05:30 PM",
+      "fieldname": "snacks_time",
+      "fieldtype": "Data",
+      "label": "Snacks Time"
+    },
+    {
+      "default": "07:30 PM - 09:00 PM",
+      "fieldname": "dinner_time",
+      "fieldtype": "Data",
+      "label": "Dinner Time"
+    },
+    {
+      "fieldname": "menu_section",
+      "fieldtype": "Section Break",
+      "label": "Weekly Menu"
+    },
+    {
+      "fieldname": "menu",
+      "fieldtype": "Table",
+      "label": "Menu",
+      "options": "Mess Menu Item"
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact"
+    },
+    {
+      "fieldname": "contact_number",
+      "fieldtype": "Data",
+      "label": "Contact Number",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [
+    {
+      "link_doctype": "Hostel Building",
+      "link_fieldname": "mess"
+    }
+  ],
+  "modified": "2026-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Mess",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "quick_entry": 1,
+  "search_fields": "mess_name, mess_type",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "mess_name",
+  "track_changes": 1
+}

@@ -1,0 +1,336 @@
+{
+  "actions": [],
+  "autoname": "format:NIRF-{ranking_year}-{category}",
+  "creation": "2026-01-15 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "ranking_year",
+    "category",
+    "column_break_1",
+    "submission_deadline",
+    "submitted_date",
+    "section_break_tlr",
+    "ss_student_strength",
+    "fsr_faculty_ratio",
+    "fqe_faculty_qualification",
+    "column_break_tlr",
+    "fru_financial_resources",
+    "tlr_score",
+    "section_break_rp",
+    "pu_publications",
+    "qp_quality_publications",
+    "ipr_patents",
+    "column_break_rp",
+    "fppp_projects",
+    "rp_score",
+    "section_break_go",
+    "gue_university_exams",
+    "gphd_phd_students",
+    "column_break_go",
+    "gms_median_salary",
+    "go_score",
+    "section_break_oi",
+    "rd_region_diversity",
+    "wd_women_diversity",
+    "escs_economically_backward",
+    "column_break_oi",
+    "pcs_facilities_disabled",
+    "oi_score",
+    "section_break_pr",
+    "pr_peer_perception",
+    "pr_score",
+    "section_break_result",
+    "total_score",
+    "rank_obtained",
+    "band",
+    "column_break_result",
+    "status",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "ranking_year",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Ranking Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Category",
+      "options": "\nOverall\nUniversity\nEngineering\nManagement\nPharmacy\nMedical\nLaw\nArchitecture\nDental\nResearch",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "submission_deadline",
+      "fieldtype": "Date",
+      "label": "Submission Deadline"
+    },
+    {
+      "fieldname": "submitted_date",
+      "fieldtype": "Date",
+      "label": "Submitted Date"
+    },
+    {
+      "fieldname": "section_break_tlr",
+      "fieldtype": "Section Break",
+      "label": "Teaching, Learning & Resources (TLR) - 30%"
+    },
+    {
+      "fieldname": "ss_student_strength",
+      "fieldtype": "Int",
+      "label": "Student Strength (SS)"
+    },
+    {
+      "fieldname": "fsr_faculty_ratio",
+      "fieldtype": "Float",
+      "label": "Faculty-Student Ratio (FSR)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "fqe_faculty_qualification",
+      "fieldtype": "Float",
+      "label": "Faculty with PhD (FQE) %",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_tlr",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fru_financial_resources",
+      "fieldtype": "Float",
+      "label": "Financial Resources (FRU) in Lakhs",
+      "precision": "2"
+    },
+    {
+      "description": "Auto-calculated TLR score",
+      "fieldname": "tlr_score",
+      "fieldtype": "Float",
+      "label": "TLR Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_rp",
+      "fieldtype": "Section Break",
+      "label": "Research and Professional Practice (RP) - 30%"
+    },
+    {
+      "fieldname": "pu_publications",
+      "fieldtype": "Int",
+      "label": "Publications (PU)"
+    },
+    {
+      "fieldname": "qp_quality_publications",
+      "fieldtype": "Int",
+      "label": "Quality Publications (QP)"
+    },
+    {
+      "fieldname": "ipr_patents",
+      "fieldtype": "Int",
+      "label": "IPR/Patents (IPR)"
+    },
+    {
+      "fieldname": "column_break_rp",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fppp_projects",
+      "fieldtype": "Float",
+      "label": "Funded Projects (FPPP) in Lakhs",
+      "precision": "2"
+    },
+    {
+      "description": "Auto-calculated RP score",
+      "fieldname": "rp_score",
+      "fieldtype": "Float",
+      "label": "RP Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_go",
+      "fieldtype": "Section Break",
+      "label": "Graduation Outcomes (GO) - 20%"
+    },
+    {
+      "fieldname": "gue_university_exams",
+      "fieldtype": "Float",
+      "label": "University Exam Results (GUE) %",
+      "precision": "2"
+    },
+    {
+      "fieldname": "gphd_phd_students",
+      "fieldtype": "Int",
+      "label": "PhD Students Graduated (GPHD)"
+    },
+    {
+      "fieldname": "column_break_go",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "gms_median_salary",
+      "fieldtype": "Float",
+      "label": "Median Salary (GMS) in Lakhs",
+      "precision": "2"
+    },
+    {
+      "description": "Auto-calculated GO score",
+      "fieldname": "go_score",
+      "fieldtype": "Float",
+      "label": "GO Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_oi",
+      "fieldtype": "Section Break",
+      "label": "Outreach and Inclusivity (OI) - 10%"
+    },
+    {
+      "fieldname": "rd_region_diversity",
+      "fieldtype": "Float",
+      "label": "Region Diversity (RD) %",
+      "precision": "2"
+    },
+    {
+      "fieldname": "wd_women_diversity",
+      "fieldtype": "Float",
+      "label": "Women Diversity (WD) %",
+      "precision": "2"
+    },
+    {
+      "fieldname": "escs_economically_backward",
+      "fieldtype": "Float",
+      "label": "Economically Backward (ESCS) %",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_oi",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pcs_facilities_disabled",
+      "fieldtype": "Float",
+      "label": "Facilities for Disabled (PCS) %",
+      "precision": "2"
+    },
+    {
+      "description": "Auto-calculated OI score",
+      "fieldname": "oi_score",
+      "fieldtype": "Float",
+      "label": "OI Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_pr",
+      "fieldtype": "Section Break",
+      "label": "Perception (PR) - 10%"
+    },
+    {
+      "fieldname": "pr_peer_perception",
+      "fieldtype": "Float",
+      "label": "Peer Perception Score",
+      "precision": "2"
+    },
+    {
+      "description": "Auto-calculated PR score",
+      "fieldname": "pr_score",
+      "fieldtype": "Float",
+      "label": "PR Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_result",
+      "fieldtype": "Section Break",
+      "label": "Result"
+    },
+    {
+      "fieldname": "total_score",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Total Score",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "rank_obtained",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Rank Obtained"
+    },
+    {
+      "description": "e.g., 101-150, 151-200",
+      "fieldname": "band",
+      "fieldtype": "Data",
+      "label": "Band"
+    },
+    {
+      "fieldname": "column_break_result",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Data Collection",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Data Collection\nIn Progress\nSubmitted\nResult Declared"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Text",
+      "label": "Remarks"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-01-15 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University ERP",
+  "name": "NIRF Data",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

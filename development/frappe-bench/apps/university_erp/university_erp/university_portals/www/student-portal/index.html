@@ -1,0 +1,190 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Student Portal") }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/university_erp/css/portal.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="portal-container student-portal">
+    <!-- Header Section -->
+    <div class="portal-header">
+        <div class="student-info">
+            <div class="student-avatar">
+                {% if student.image %}
+                <img src="{{ student.image }}" alt="{{ student.student_name }}">
+                {% else %}
+                <div class="avatar-placeholder">{{ student.student_name[0] }}</div>
+                {% endif %}
+            </div>
+            <div class="student-details">
+                <h2>{{ _("Welcome") }}, {{ student.student_name }}</h2>
+                <p class="text-muted">
+                    {{ student.program or '' }}
+                    {% if student.student_batch_name %}| {{ student.student_batch_name }}{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-cards">
+        <div class="dashboard-card attendance-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-check-circle"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ dashboard.attendance_percentage }}%</h3>
+                <p>{{ _("Attendance") }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card cgpa-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-star"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ dashboard.current_cgpa }}</h3>
+                <p>{{ _("CGPA") }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card fees-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-credit-card"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ frappe.format_value(dashboard.pending_fees, {"fieldtype": "Currency"}) }}</h3>
+                <p>{{ _("Pending Fees") }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card exams-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-file-text"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ dashboard.upcoming_exams }}</h3>
+                <p>{{ _("Upcoming Exams") }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card books-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-book"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ dashboard.issued_books }}</h3>
+                <p>{{ _("Issued Books") }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card assignments-card">
+            <div class="card-icon">
+                <svg class="icon icon-md"><use href="#icon-edit"></use></svg>
+            </div>
+            <div class="card-content">
+                <h3>{{ dashboard.pending_assignments }}</h3>
+                <p>{{ _("Pending Assignments") }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div class="portal-content">
+        <!-- Left Column -->
+        <div class="portal-column">
+            <!-- Today's Classes -->
+            <div class="portal-section">
+                <h3 class="section-title">{{ _("Today's Classes") }}</h3>
+                {% if today_classes %}
+                <div class="class-list">
+                    {% for cls in today_classes %}
+                    <div class="class-item">
+                        <div class="class-time">
+                            <span class="from-time">{{ frappe.format_time(cls.from_time) }}</span>
+                            <span class="to-time">{{ frappe.format_time(cls.to_time) }}</span>
+                        </div>
+                        <div class="class-details">
+                            <h4>{{ cls.course }}</h4>
+                            <p>{{ cls.instructor_name or cls.instructor }}</p>
+                            {% if cls.room %}
+                            <span class="room-badge">{{ cls.room }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted empty-message">{{ _("No classes scheduled for today") }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Quick Links -->
+            <div class="portal-section">
+                <h3 class="section-title">{{ _("Quick Links") }}</h3>
+                <div class="quick-links-grid">
+                    {% for link in quick_links %}
+                    <a href="{{ link.url }}" class="quick-link">
+                        <svg class="icon icon-sm"><use href="#icon-{{ link.icon }}"></use></svg>
+                        <span>{{ link.label }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="portal-column">
+            <!-- Announcements -->
+            <div class="portal-section">
+                <h3 class="section-title">{{ _("Announcements") }}</h3>
+                {% if announcements %}
+                <div class="announcement-list">
+                    {% for ann in announcements %}
+                    <div class="announcement-item priority-{{ ann.priority | lower }}">
+                        <div class="announcement-header">
+                            <h4>{{ ann.title }}</h4>
+                            <span class="announcement-date">{{ frappe.format_date(ann.publish_date) }}</span>
+                        </div>
+                        <p>{{ ann.description | truncate(150) }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted empty-message">{{ _("No announcements") }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Enrolled Courses -->
+            <div class="portal-section">
+                <h3 class="section-title">{{ _("My Courses") }}</h3>
+                {% if dashboard.student_groups %}
+                <div class="course-list">
+                    {% for group in dashboard.student_groups %}
+                    <div class="course-item">
+                        <h4>{{ group.course or group.student_group }}</h4>
+                        <p class="text-muted">{{ group.program or '' }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted empty-message">{{ _("Not enrolled in any courses") }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+frappe.ready(function() {
+    // Refresh dashboard data periodically
+    if (typeof MobilePortal !== 'undefined') {
+        MobilePortal.init();
+    }
+});
+</script>
+{% endblock %}

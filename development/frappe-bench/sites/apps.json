@@ -1,0 +1,32 @@
+{
+    "frappe": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "54da72cc596b26be9a7e69ae61725c28b2fd757e",
+            "branch": "version-15"
+        },
+        "required": [],
+        "idx": 1,
+        "version": "15.94.0"
+    },
+    "hrms": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "beba4034a340761b90a761eccd0f3750c2418b20",
+            "branch": "version-15"
+        },
+        "required": [],
+        "idx": 2,
+        "version": "15.54.2"
+    },
+    "education": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "d15e0be1983bf9c72fc6b5f9a7b46f8e43af577a",
+            "branch": "version-15"
+        },
+        "required": [],
+        "idx": 3,
+        "version": "15.0.0"
+    }
+}

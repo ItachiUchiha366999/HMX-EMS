@@ -1,0 +1,142 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"research_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Research Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_publication\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Research Publication\",\"col\":3}},{\"id\":\"shortcut_project\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Research Project\",\"col\":3}},{\"id\":\"shortcut_grant\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Research Grant\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_publications\",\"type\":\"card\",\"data\":{\"card_name\":\"Publications\",\"col\":4}},{\"id\":\"card_projects\",\"type\":\"card\",\"data\":{\"card_name\":\"Projects & Grants\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-02 00:00:00.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "search",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University Research",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Publications",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Research Publication",
+      "link_count": 0,
+      "link_to": "Research Publication",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Projects & Grants",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Research Project",
+      "link_count": 0,
+      "link_to": "Research Project",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Research Grant",
+      "link_count": 0,
+      "link_to": "Research Grant",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Faculty Research Output",
+      "link_count": 0,
+      "link_to": "Faculty Research Output",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Publication Statistics",
+      "link_count": 0,
+      "link_to": "Publication Statistics",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Grant Utilization Report",
+      "link_count": 0,
+      "link_to": "Grant Utilization Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2026-01-04 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Research",
+  "name": "University Research",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 13.0,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Research Publication",
+      "link_to": "Research Publication",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Research Project",
+      "link_to": "Research Project",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Research Grant",
+      "link_to": "Research Grant",
+      "type": "DocType"
+    }
+  ],
+  "title": "University Research"
+}

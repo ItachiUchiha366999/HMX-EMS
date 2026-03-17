@@ -1,0 +1,103 @@
+[
+  {
+    "doctype": "Workflow",
+    "workflow_name": "Leave Application Workflow",
+    "document_type": "Leave Application",
+    "is_active": 1,
+    "send_email_alert": 1,
+    "workflow_state_field": "workflow_state",
+    "states": [
+      {
+        "doctype": "Workflow Document State",
+        "state": "Draft",
+        "doc_status": "0",
+        "allow_edit": "Employee",
+        "update_field": "status",
+        "update_value": "Open"
+      },
+      {
+        "doctype": "Workflow Document State",
+        "state": "Pending HOD Approval",
+        "doc_status": "0",
+        "allow_edit": "HR Manager",
+        "update_field": "status",
+        "update_value": "Open",
+        "is_optional_state": 0
+      },
+      {
+        "doctype": "Workflow Document State",
+        "state": "Pending HR Approval",
+        "doc_status": "0",
+        "allow_edit": "HR Manager",
+        "update_field": "status",
+        "update_value": "Open"
+      },
+      {
+        "doctype": "Workflow Document State",
+        "state": "Approved",
+        "doc_status": "1",
+        "allow_edit": "",
+        "update_field": "status",
+        "update_value": "Approved"
+      },
+      {
+        "doctype": "Workflow Document State",
+        "state": "Rejected",
+        "doc_status": "2",
+        "allow_edit": "",
+        "update_field": "status",
+        "update_value": "Rejected"
+      }
+    ],
+    "transitions": [
+      {
+        "doctype": "Workflow Transition",
+        "state": "Draft",
+        "action": "Submit for Approval",
+        "next_state": "Pending HOD Approval",
+        "allowed": "Employee",
+        "allow_self_approval": 0
+      },
+      {
+        "doctype": "Workflow Transition",
+        "state": "Pending HOD Approval",
+        "action": "Approve",
+        "next_state": "Pending HR Approval",
+        "allowed": "Department Manager",
+        "allow_self_approval": 0
+      },
+      {
+        "doctype": "Workflow Transition",
+        "state": "Pending HOD Approval",
+        "action": "Reject",
+        "next_state": "Rejected",
+        "allowed": "Department Manager",
+        "allow_self_approval": 0
+      },
+      {
+        "doctype": "Workflow Transition",
+        "state": "Pending HR Approval",
+        "action": "Approve",
+        "next_state": "Approved",
+        "allowed": "HR Manager",
+        "allow_self_approval": 0
+      },
+      {
+        "doctype": "Workflow Transition",
+        "state": "Pending HR Approval",
+        "action": "Reject",
+        "next_state": "Rejected",
+        "allowed": "HR Manager",
+        "allow_self_approval": 0
+      },
+      {
+        "doctype": "Workflow Transition",
+        "state": "Pending HR Approval",
+        "action": "Send Back to HOD",
+        "next_state": "Pending HOD Approval",
+        "allowed": "HR Manager",
+        "allow_self_approval": 0
+      }
+    ]
+  }
+]

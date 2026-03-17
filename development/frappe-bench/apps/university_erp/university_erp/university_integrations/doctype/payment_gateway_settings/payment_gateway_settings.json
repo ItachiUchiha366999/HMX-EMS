@@ -1,0 +1,283 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "gateway_section",
+    "default_gateway",
+    "environment",
+    "column_break_gateway",
+    "enable_test_mode",
+    "log_all_transactions",
+    "razorpay_section",
+    "razorpay_key_id",
+    "razorpay_key_secret",
+    "column_break_razorpay",
+    "razorpay_webhook_secret",
+    "payu_section",
+    "payu_merchant_key",
+    "payu_merchant_salt",
+    "column_break_payu",
+    "payu_auth_header",
+    "paytm_section",
+    "paytm_merchant_id",
+    "paytm_merchant_key",
+    "column_break_paytm",
+    "paytm_website",
+    "paytm_industry_type",
+    "ccavenue_section",
+    "ccavenue_merchant_id",
+    "ccavenue_access_code",
+    "column_break_ccavenue",
+    "ccavenue_working_key",
+    "stripe_section",
+    "stripe_publishable_key",
+    "stripe_secret_key",
+    "column_break_stripe",
+    "stripe_webhook_secret",
+    "callback_section",
+    "success_url",
+    "failure_url",
+    "column_break_callback",
+    "webhook_url",
+    "cancel_url"
+  ],
+  "fields": [
+    {
+      "fieldname": "gateway_section",
+      "fieldtype": "Section Break",
+      "label": "Gateway Configuration"
+    },
+    {
+      "default": "Razorpay",
+      "fieldname": "default_gateway",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Default Payment Gateway",
+      "options": "\nRazorpay\nPayU\nPaytm\nCCAvenue\nStripe",
+      "reqd": 1
+    },
+    {
+      "default": "Sandbox",
+      "fieldname": "environment",
+      "fieldtype": "Select",
+      "label": "Environment",
+      "options": "Sandbox\nProduction"
+    },
+    {
+      "fieldname": "column_break_gateway",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "enable_test_mode",
+      "fieldtype": "Check",
+      "label": "Enable Test Mode"
+    },
+    {
+      "default": "0",
+      "fieldname": "log_all_transactions",
+      "fieldtype": "Check",
+      "label": "Log All Transactions"
+    },
+    {
+      "depends_on": "eval:doc.default_gateway=='Razorpay'",
+      "fieldname": "razorpay_section",
+      "fieldtype": "Section Break",
+      "label": "Razorpay Settings"
+    },
+    {
+      "fieldname": "razorpay_key_id",
+      "fieldtype": "Data",
+      "label": "Razorpay Key ID"
+    },
+    {
+      "fieldname": "razorpay_key_secret",
+      "fieldtype": "Password",
+      "label": "Razorpay Key Secret"
+    },
+    {
+      "fieldname": "column_break_razorpay",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "razorpay_webhook_secret",
+      "fieldtype": "Password",
+      "label": "Webhook Secret"
+    },
+    {
+      "depends_on": "eval:doc.default_gateway=='PayU'",
+      "fieldname": "payu_section",
+      "fieldtype": "Section Break",
+      "label": "PayU Settings"
+    },
+    {
+      "fieldname": "payu_merchant_key",
+      "fieldtype": "Data",
+      "label": "PayU Merchant Key"
+    },
+    {
+      "fieldname": "payu_merchant_salt",
+      "fieldtype": "Password",
+      "label": "PayU Merchant Salt"
+    },
+    {
+      "fieldname": "column_break_payu",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payu_auth_header",
+      "fieldtype": "Password",
+      "label": "PayU Auth Header"
+    },
+    {
+      "depends_on": "eval:doc.default_gateway=='Paytm'",
+      "fieldname": "paytm_section",
+      "fieldtype": "Section Break",
+      "label": "Paytm Settings"
+    },
+    {
+      "fieldname": "paytm_merchant_id",
+      "fieldtype": "Data",
+      "label": "Paytm Merchant ID"
+    },
+    {
+      "fieldname": "paytm_merchant_key",
+      "fieldtype": "Password",
+      "label": "Paytm Merchant Key"
+    },
+    {
+      "fieldname": "column_break_paytm",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "paytm_website",
+      "fieldtype": "Data",
+      "label": "Paytm Website"
+    },
+    {
+      "fieldname": "paytm_industry_type",
+      "fieldtype": "Data",
+      "label": "Industry Type"
+    },
+    {
+      "depends_on": "eval:doc.default_gateway=='CCAvenue'",
+      "fieldname": "ccavenue_section",
+      "fieldtype": "Section Break",
+      "label": "CCAvenue Settings"
+    },
+    {
+      "fieldname": "ccavenue_merchant_id",
+      "fieldtype": "Data",
+      "label": "CCAvenue Merchant ID"
+    },
+    {
+      "fieldname": "ccavenue_access_code",
+      "fieldtype": "Data",
+      "label": "CCAvenue Access Code"
+    },
+    {
+      "fieldname": "column_break_ccavenue",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "ccavenue_working_key",
+      "fieldtype": "Password",
+      "label": "CCAvenue Working Key"
+    },
+    {
+      "depends_on": "eval:doc.default_gateway=='Stripe'",
+      "fieldname": "stripe_section",
+      "fieldtype": "Section Break",
+      "label": "Stripe Settings"
+    },
+    {
+      "fieldname": "stripe_publishable_key",
+      "fieldtype": "Data",
+      "label": "Stripe Publishable Key"
+    },
+    {
+      "fieldname": "stripe_secret_key",
+      "fieldtype": "Password",
+      "label": "Stripe Secret Key"
+    },
+    {
+      "fieldname": "column_break_stripe",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "stripe_webhook_secret",
+      "fieldtype": "Password",
+      "label": "Stripe Webhook Secret"
+    },
+    {
+      "fieldname": "callback_section",
+      "fieldtype": "Section Break",
+      "label": "Callback URLs"
+    },
+    {
+      "fieldname": "success_url",
+      "fieldtype": "Data",
+      "label": "Success Redirect URL"
+    },
+    {
+      "fieldname": "failure_url",
+      "fieldtype": "Data",
+      "label": "Failure Redirect URL"
+    },
+    {
+      "fieldname": "column_break_callback",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "webhook_url",
+      "fieldtype": "Data",
+      "label": "Webhook URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancel_url",
+      "fieldtype": "Data",
+      "label": "Cancel URL"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Integrations",
+  "name": "Payment Gateway Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

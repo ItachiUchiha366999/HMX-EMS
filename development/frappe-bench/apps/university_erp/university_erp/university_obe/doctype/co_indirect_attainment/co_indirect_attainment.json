@@ -1,0 +1,109 @@
+{
+  "actions": [],
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "course_outcome",
+    "co_code",
+    "column_break_survey",
+    "survey_type",
+    "survey_reference",
+    "section_break_data",
+    "total_responses",
+    "avg_rating",
+    "column_break_attain",
+    "attainment_percent",
+    "attainment_level"
+  ],
+  "fields": [
+    {
+      "fieldname": "course_outcome",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Course Outcome",
+      "options": "Course Outcome",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "course_outcome.co_code",
+      "fieldname": "co_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "CO Code",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_survey",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "survey_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Survey Type",
+      "options": "Course Exit Survey\nStudent Feedback\nMid-term Feedback",
+      "reqd": 1
+    },
+    {
+      "fieldname": "survey_reference",
+      "fieldtype": "Data",
+      "label": "Survey Reference"
+    },
+    {
+      "fieldname": "section_break_data",
+      "fieldtype": "Section Break",
+      "label": "Survey Data"
+    },
+    {
+      "default": "0",
+      "fieldname": "total_responses",
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "label": "Total Responses"
+    },
+    {
+      "default": "0",
+      "description": "Average rating on 5-point scale",
+      "fieldname": "avg_rating",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Avg Rating (1-5)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "column_break_attain",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "description": "(Avg Rating / 5) × 100",
+      "fieldname": "attainment_percent",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "label": "Attainment %",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "description": "Level 0-3 based on attainment percentage",
+      "fieldname": "attainment_level",
+      "fieldtype": "Float",
+      "label": "Attainment Level",
+      "precision": "2",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University OBE",
+  "name": "CO Indirect Attainment",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
+}

@@ -1,0 +1,271 @@
+{
+  "actions": [],
+  "autoname": "format:MR-{YYYY}-{#####}",
+  "creation": "2026-01-02 10:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "request_date",
+    "building",
+    "building_name",
+    "room",
+    "room_number",
+    "column_break_1",
+    "requested_by",
+    "student_name",
+    "request_type",
+    "priority",
+    "details_section",
+    "subject",
+    "description",
+    "attachments",
+    "assignment_section",
+    "assigned_to",
+    "assigned_on",
+    "column_break_assignment",
+    "expected_completion",
+    "actual_completion",
+    "resolution_section",
+    "resolution_remarks",
+    "cost_incurred",
+    "column_break_resolution",
+    "status",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "default": "Today",
+      "fieldname": "request_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Request Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "building",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Hostel Building",
+      "options": "Hostel Building",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "building.building_name",
+      "fieldname": "building_name",
+      "fieldtype": "Data",
+      "label": "Building Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "room",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Room",
+      "options": "Hostel Room"
+    },
+    {
+      "fetch_from": "room.room_number",
+      "fieldname": "room_number",
+      "fieldtype": "Data",
+      "label": "Room Number",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "requested_by",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Requested By",
+      "options": "Student"
+    },
+    {
+      "fetch_from": "requested_by.student_name",
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "request_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Request Type",
+      "options": "\nElectrical\nPlumbing\nFurniture\nCleaning\nAC\nInternet\nOther",
+      "reqd": 1
+    },
+    {
+      "default": "Medium",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Request Details"
+    },
+    {
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Subject",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description",
+      "reqd": 1
+    },
+    {
+      "fieldname": "attachments",
+      "fieldtype": "Attach",
+      "label": "Attachments"
+    },
+    {
+      "fieldname": "assignment_section",
+      "fieldtype": "Section Break",
+      "label": "Assignment"
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "assigned_on",
+      "fieldtype": "Date",
+      "label": "Assigned On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_assignment",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expected_completion",
+      "fieldtype": "Date",
+      "label": "Expected Completion"
+    },
+    {
+      "fieldname": "actual_completion",
+      "fieldtype": "Date",
+      "label": "Actual Completion",
+      "read_only": 1
+    },
+    {
+      "fieldname": "resolution_section",
+      "fieldtype": "Section Break",
+      "label": "Resolution"
+    },
+    {
+      "fieldname": "resolution_remarks",
+      "fieldtype": "Text",
+      "label": "Resolution Remarks"
+    },
+    {
+      "fieldname": "cost_incurred",
+      "fieldtype": "Currency",
+      "label": "Cost Incurred"
+    },
+    {
+      "fieldname": "column_break_resolution",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Open",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "options": "Open\nIn Progress\nCompleted\nCancelled"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Hostel Maintenance Request",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-01-02 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Hostel",
+  "name": "Hostel Maintenance Request",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Warden",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1,
+      "if_owner": 1
+    }
+  ],
+  "search_fields": "subject, building, request_type, priority",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "subject",
+  "track_changes": 1
+}

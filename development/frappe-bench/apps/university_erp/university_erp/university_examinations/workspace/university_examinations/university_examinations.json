@@ -1,0 +1,173 @@
+{
+  "name": "University Examinations",
+  "doctype": "Workspace",
+  "module": "University Examinations",
+  "label": "University Examinations",
+  "icon": "edit",
+  "category": "Modules",
+  "for_user": "",
+  "public": 1,
+  "title": "University Examinations",
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Your Shortcuts\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Exam Schedule\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Question Bank\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Online Examination\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hall Ticket\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Reports & Analytics\", \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Exam Scheduling\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Question Bank\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Online Examinations\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Internal Assessment\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Results & Transcripts\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+  "links": [
+    {
+      "type": "Card Break",
+      "label": "Exam Scheduling"
+    },
+    {
+      "type": "Link",
+      "link_to": "Exam Schedule",
+      "link_type": "DocType",
+      "label": "Exam Schedule"
+    },
+    {
+      "type": "Link",
+      "link_to": "Hall Ticket",
+      "link_type": "DocType",
+      "label": "Hall Tickets"
+    },
+    {
+      "type": "Link",
+      "link_to": "External Examiner",
+      "link_type": "DocType",
+      "label": "External Examiners"
+    },
+    {
+      "type": "Card Break",
+      "label": "Question Bank"
+    },
+    {
+      "type": "Link",
+      "link_to": "Question Bank",
+      "link_type": "DocType",
+      "label": "Question Bank"
+    },
+    {
+      "type": "Link",
+      "link_to": "Question Tag",
+      "link_type": "DocType",
+      "label": "Question Tags"
+    },
+    {
+      "type": "Link",
+      "link_to": "Question Paper Template",
+      "link_type": "DocType",
+      "label": "Question Paper Templates"
+    },
+    {
+      "type": "Link",
+      "link_to": "Generated Question Paper",
+      "link_type": "DocType",
+      "label": "Generated Papers"
+    },
+    {
+      "type": "Card Break",
+      "label": "Online Examinations"
+    },
+    {
+      "type": "Link",
+      "link_to": "Online Examination",
+      "link_type": "DocType",
+      "label": "Online Examinations"
+    },
+    {
+      "type": "Link",
+      "link_to": "Student Exam Attempt",
+      "link_type": "DocType",
+      "label": "Exam Attempts"
+    },
+    {
+      "type": "Link",
+      "link_to": "Answer Sheet",
+      "link_type": "DocType",
+      "label": "Answer Sheets"
+    },
+    {
+      "type": "Card Break",
+      "label": "Internal Assessment"
+    },
+    {
+      "type": "Link",
+      "link_to": "Internal Assessment",
+      "link_type": "DocType",
+      "label": "Internal Assessments"
+    },
+    {
+      "type": "Link",
+      "link_to": "Practical Examination",
+      "link_type": "DocType",
+      "label": "Practical Examinations"
+    },
+    {
+      "type": "Card Break",
+      "label": "Results & Transcripts"
+    },
+    {
+      "type": "Link",
+      "link_to": "Student Transcript",
+      "link_type": "DocType",
+      "label": "Student Transcripts"
+    },
+    {
+      "type": "Link",
+      "link_to": "Revaluation Request",
+      "link_type": "DocType",
+      "label": "Revaluation Requests"
+    },
+    {
+      "type": "Card Break",
+      "label": "Reports"
+    },
+    {
+      "type": "Link",
+      "link_to": "Examination Result Analysis",
+      "link_type": "Report",
+      "label": "Examination Result Analysis",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Internal Assessment Summary",
+      "link_type": "Report",
+      "label": "Internal Assessment Summary",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Question Bank Analysis",
+      "link_type": "Report",
+      "label": "Question Bank Analysis",
+      "is_query_report": 1
+    }
+  ],
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Exam Schedule",
+      "link_to": "Exam Schedule",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Question Bank",
+      "link_to": "Question Bank",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Online Examination",
+      "link_to": "Online Examination",
+      "type": "DocType"
+    },
+    {
+      "color": "Grey",
+      "doc_view": "List",
+      "label": "Hall Ticket",
+      "link_to": "Hall Ticket",
+      "type": "DocType"
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+  "doctype": "DocType",
+  "name": "Student Exam Attempt",
+  "module": "University Examinations",
+  "naming_rule": "Expression",
+  "autoname": "SEA-.YYYY.-.#####",
+  "fields": [
+    {
+      "fieldname": "online_examination",
+      "fieldtype": "Link",
+      "label": "Online Examination",
+      "options": "Online Examination",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "fetch_from": "student.student_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "attempt_number",
+      "fieldtype": "Int",
+      "label": "Attempt Number",
+      "default": "1"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "start_time",
+      "fieldtype": "Datetime",
+      "label": "Start Time"
+    },
+    {
+      "fieldname": "end_time",
+      "fieldtype": "Datetime",
+      "label": "End Time"
+    },
+    {
+      "fieldname": "time_taken_minutes",
+      "fieldtype": "Int",
+      "label": "Time Taken (Minutes)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_answers",
+      "fieldtype": "Section Break",
+      "label": "Answers"
+    },
+    {
+      "fieldname": "answers",
+      "fieldtype": "Table",
+      "label": "Answers",
+      "options": "Student Answer"
+    },
+    {
+      "fieldname": "section_break_scoring",
+      "fieldtype": "Section Break",
+      "label": "Scoring"
+    },
+    {
+      "fieldname": "total_questions",
+      "fieldtype": "Int",
+      "label": "Total Questions"
+    },
+    {
+      "fieldname": "attempted",
+      "fieldtype": "Int",
+      "label": "Attempted"
+    },
+    {
+      "fieldname": "correct",
+      "fieldtype": "Int",
+      "label": "Correct"
+    },
+    {
+      "fieldname": "incorrect",
+      "fieldtype": "Int",
+      "label": "Incorrect"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "marks_obtained",
+      "fieldtype": "Float",
+      "label": "Marks Obtained",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "total_marks",
+      "fieldtype": "Float",
+      "label": "Total Marks"
+    },
+    {
+      "fieldname": "percentage",
+      "fieldtype": "Percent",
+      "label": "Percentage",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "negative_marks_applied",
+      "fieldtype": "Float",
+      "label": "Negative Marks Applied"
+    },
+    {
+      "fieldname": "section_break_proctoring",
+      "fieldtype": "Section Break",
+      "label": "Proctoring Data",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "proctoring_snapshots",
+      "fieldtype": "Table",
+      "label": "Proctoring Snapshots",
+      "options": "Proctoring Snapshot"
+    },
+    {
+      "fieldname": "tab_switches",
+      "fieldtype": "Int",
+      "label": "Tab Switches Detected",
+      "default": "0"
+    },
+    {
+      "fieldname": "proctoring_violations",
+      "fieldtype": "Int",
+      "label": "Proctoring Violations",
+      "default": "0"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "ip_address",
+      "fieldtype": "Data",
+      "label": "IP Address",
+      "read_only": 1
+    },
+    {
+      "fieldname": "browser_info",
+      "fieldtype": "Small Text",
+      "label": "Browser Info",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Not Started\nIn Progress\nSubmitted\nAuto Submitted\nEvaluated\nDisqualified",
+      "default": "Not Started",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "submit_type",
+      "fieldtype": "Select",
+      "label": "Submit Type",
+      "options": "\nManual\nAuto (Time Expired)\nAuto (Violation)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evaluated_by",
+      "fieldtype": "Link",
+      "label": "Evaluated By",
+      "options": "User"
+    },
+    {
+      "fieldname": "evaluation_date",
+      "fieldtype": "Datetime",
+      "label": "Evaluation Date"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Text",
+      "label": "Remarks"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Exam Cell",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Faculty",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Student",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "search_fields": "online_examination,student",
+  "track_changes": 1,
+  "engine": "InnoDB"
+}

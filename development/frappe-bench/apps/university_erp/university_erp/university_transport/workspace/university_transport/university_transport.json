@@ -1,0 +1,160 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"transport_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>University Transport Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_route\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Route\",\"col\":3}},{\"id\":\"shortcut_vehicle\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Vehicle\",\"col\":3}},{\"id\":\"shortcut_allocation\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Allocation\",\"col\":3}},{\"id\":\"shortcut_trip\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Trip Log\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_master\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"card_transactions\",\"type\":\"card\",\"data\":{\"card_name\":\"Transactions\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "creation": "2026-01-01 00:00:00.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "truck",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "University Transport",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Master Data",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transport Route",
+      "link_count": 0,
+      "link_to": "Transport Route",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transport Vehicle",
+      "link_count": 0,
+      "link_to": "Transport Vehicle",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transactions",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transport Allocation",
+      "link_count": 0,
+      "link_to": "Transport Allocation",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Transport Trip Log",
+      "link_count": 0,
+      "link_to": "Transport Trip Log",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Route Wise Students",
+      "link_count": 0,
+      "link_to": "Route Wise Students",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Vehicle Utilization",
+      "link_count": 0,
+      "link_to": "Vehicle Utilization",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Transport Fee Collection",
+      "link_count": 0,
+      "link_to": "Transport Fee Collection",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2026-01-04 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "University Transport",
+  "name": "University Transport",
+  "number_cards": [],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 8.0,
+  "shortcuts": [
+    {
+      "color": "Blue",
+      "doc_view": "List",
+      "label": "Transport Route",
+      "link_to": "Transport Route",
+      "type": "DocType"
+    },
+    {
+      "color": "Green",
+      "doc_view": "List",
+      "label": "Transport Vehicle",
+      "link_to": "Transport Vehicle",
+      "type": "DocType"
+    },
+    {
+      "color": "Orange",
+      "doc_view": "List",
+      "label": "Transport Allocation",
+      "link_to": "Transport Allocation",
+      "type": "DocType"
+    },
+    {
+      "color": "Yellow",
+      "doc_view": "List",
+      "label": "Transport Trip Log",
+      "link_to": "Transport Trip Log",
+      "type": "DocType"
+    }
+  ],
+  "title": "University Transport"
+}

@@ -1,0 +1,163 @@
+{
+  "doctype": "DocType",
+  "name": "Razorpay Settings",
+  "module": "University Payments",
+  "issingle": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "enabled",
+    "test_mode",
+    "column_break_1",
+    "api_key",
+    "api_secret",
+    "webhook_secret",
+    "payment_settings_section",
+    "auto_capture",
+    "send_receipt",
+    "column_break_2",
+    "receipt_prefix",
+    "payment_description",
+    "account_settings_section",
+    "fee_income_account",
+    "column_break_3",
+    "payment_gateway_account"
+  ],
+  "fields": [
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "0",
+      "bold": 1
+    },
+    {
+      "fieldname": "test_mode",
+      "fieldtype": "Check",
+      "label": "Test Mode",
+      "default": "1",
+      "description": "Use test/sandbox credentials"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "api_key",
+      "fieldtype": "Data",
+      "label": "API Key",
+      "reqd": 1,
+      "depends_on": "enabled"
+    },
+    {
+      "fieldname": "api_secret",
+      "fieldtype": "Password",
+      "label": "API Secret",
+      "reqd": 1,
+      "depends_on": "enabled"
+    },
+    {
+      "fieldname": "webhook_secret",
+      "fieldtype": "Password",
+      "label": "Webhook Secret",
+      "description": "Secret for verifying webhook signatures"
+    },
+    {
+      "fieldname": "payment_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Settings"
+    },
+    {
+      "fieldname": "auto_capture",
+      "fieldtype": "Check",
+      "label": "Auto Capture Payments",
+      "default": "1",
+      "description": "Automatically capture authorized payments"
+    },
+    {
+      "fieldname": "send_receipt",
+      "fieldtype": "Check",
+      "label": "Send Payment Receipt Email",
+      "default": "1",
+      "description": "Send email receipt to student after payment"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "receipt_prefix",
+      "fieldtype": "Data",
+      "label": "Receipt Number Prefix",
+      "default": "UNIV"
+    },
+    {
+      "fieldname": "payment_description",
+      "fieldtype": "Data",
+      "label": "Payment Description",
+      "default": "University Fee Payment"
+    },
+    {
+      "fieldname": "account_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Account Settings"
+    },
+    {
+      "fieldname": "fee_income_account",
+      "fieldtype": "Link",
+      "label": "Fee Income Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_gateway_account",
+      "fieldtype": "Link",
+      "label": "Payment Gateway Account",
+      "options": "Account",
+      "description": "Bank account linked to Razorpay"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Admin",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    },
+    {
+      "role": "University Finance",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "report": 1,
+      "share": 1
+    }
+  ],
+  "track_changes": 1,
+  "modified_by": "Administrator",
+  "owner": "Administrator"
+}
