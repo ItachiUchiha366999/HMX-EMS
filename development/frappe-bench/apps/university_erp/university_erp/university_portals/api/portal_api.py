@@ -744,3 +744,52 @@ def get_portal_redirect():
         return {"url": portal_urls.get(portal_type, "/me")}
 
     return {"url": "/me"}
+
+
+# ==================== Unified Portal APIs ====================
+
+@frappe.whitelist()
+def get_session_info():
+    """
+    Get current session info for the unified portal app shell.
+
+    Called once at boot by the Pinia session store (portal-vue/src/stores/session.js).
+    Returns user identity, roles, and allowed modules in a single response.
+
+    Returns:
+        dict: {logged_user, full_name, user_image, roles[], allowed_modules[]}
+    """
+    user = frappe.session.user
+    if not user or user == "Guest":
+        frappe.throw(frappe._("Not logged in"), frappe.AuthenticationError)
+
+    user_doc = frappe.db.get_value(
+        "User",
+        user,
+        ["full_name", "user_image"],
+        as_dict=True,
+    ) or {}
+
+    roles = frappe.get_roles(user)
+
+    # Determine allowed portal modules based on roles held
+    # This list grows as Phase 3-6 add new portal modules
+    module_role_map = {
+        "management": ["University Admin", "University VC", "University Dean", "University Registrar"],
+        "faculty": ["University Faculty", "University HOD"],
+        "hod": ["University HOD"],
+        "student": ["University Student"],
+        "finance": ["University Finance", "University Admin"],
+    }
+    allowed_modules = [
+        module for module, required_roles in module_role_map.items()
+        if any(r in roles for r in required_roles)
+    ]
+
+    return {
+        "logged_user": user,
+        "full_name": user_doc.get("full_name", ""),
+        "user_image": user_doc.get("user_image", ""),
+        "roles": roles,
+        "allowed_modules": allowed_modules,
+    }

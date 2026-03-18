@@ -152,19 +152,20 @@ class DashboardEngine:
 
         query = widget.custom_query
 
-        # Replace filter placeholders safely
+        # Build values dict for parameterized execution
+        values = {}
         if filters:
             if filters.get("from_date"):
-                query = query.replace("%(from_date)s", f"'{filters['from_date']}'")
+                values["from_date"] = filters["from_date"]
             if filters.get("to_date"):
-                query = query.replace("%(to_date)s", f"'{filters['to_date']}'")
+                values["to_date"] = filters["to_date"]
             if filters.get("department"):
-                query = query.replace("%(department)s", f"'{filters['department']}'")
+                values["department"] = filters["department"]
             if filters.get("program"):
-                query = query.replace("%(program)s", f"'{filters['program']}'")
+                values["program"] = filters["program"]
 
         try:
-            result = frappe.db.sql(query, as_dict=True)
+            result = frappe.db.sql(query, values=values, as_dict=True)
             return self._format_widget_data(widget.widget_type, result)
         except Exception as e:
             frappe.log_error(f"Query Widget Error: {str(e)}", "Dashboard Engine")

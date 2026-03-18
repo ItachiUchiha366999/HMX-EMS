@@ -60,6 +60,9 @@ def get_kpi_value(kpi_name, filters=None):
     Returns:
         dict: KPI value with status
     """
+    if not frappe.has_permission("KPI Definition", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     if isinstance(filters, str):
         filters = json.loads(filters)
 
@@ -94,6 +97,9 @@ def get_kpi_trend(kpi_name, periods=6, period_type="Monthly", filters=None):
     Returns:
         list: Trend data points
     """
+    if not frappe.has_permission("KPI Definition", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     if isinstance(filters, str):
         filters = json.loads(filters)
 
@@ -119,6 +125,9 @@ def get_kpi_comparison(kpi_name, current_start, current_end, previous_start, pre
     Returns:
         dict: Comparison data
     """
+    if not frappe.has_permission("KPI Definition", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     if isinstance(filters, str):
         filters = json.loads(filters)
 
@@ -140,6 +149,9 @@ def get_quick_stats():
     Returns:
         dict: Quick stats including counts and key metrics
     """
+    if not frappe.has_permission("Custom Dashboard", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     from university_erp.university_erp.analytics.dashboards.executive_dashboard import (
         get_overview_metrics
     )
@@ -188,6 +200,9 @@ def get_all_kpis(category=None, active_only=True):
     Returns:
         list: KPI definitions with current values
     """
+    if not frappe.has_permission("KPI Definition", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     filters = {}
 
     if category:
@@ -238,6 +253,9 @@ def calculate_kpi_now(kpi_name, store_value=False, filters=None):
     Returns:
         dict: Calculated value and status
     """
+    if not frappe.has_permission("KPI Definition", "read"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
+
     if isinstance(filters, str):
         filters = json.loads(filters)
 
