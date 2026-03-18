@@ -15,6 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
+- [ ] **Phase 03.1: Cross-App Integration Audit & Accessibility Testing** (INSERTED) - Audit duplicate doctypes, test cross-app links, verify reports/APIs, fix accessibility issues
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
 - [ ] **Phase 5: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
 - [ ] **Phase 6: HOD Portal** - HODs can oversee department performance, manage faculty, and handle approvals
@@ -74,13 +75,21 @@ Plans:
 
 ### Phase 03.1: Cross-App Integration Audit & Accessibility Testing (INSERTED)
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
+**Goal:** All cross-app data flows are verified, duplicate doctypes are catalogued with recommendations, every report and API endpoint executes without error, and the portal UI meets WCAG 2.1 AA with zero critical/serious violations
 **Depends on:** Phase 3
-**Plans:** 0 plans
+**Requirements**: AUDIT-DUP, AUDIT-CONN, AUDIT-RPT, AUDIT-API, AUDIT-A11Y
+**Success Criteria** (what must be TRUE):
+  1. Duplicate doctype audit identifies all exact-name and semantic overlaps across Education, ERPNext, HRMS, and university_erp with schema diffs and recommendations
+  2. Cross-app link integrity test discovers all Link/Dynamic Link fields and reports broken link counts
+  3. All 59+ reports execute without error (or with documented mandatory filter fallbacks)
+  4. All 27 faculty API endpoints return valid responses with cross-app data resolution verified
+  5. Portal UI has zero critical and zero serious WCAG 2.1 AA violations
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+- [ ] 03.1-01-PLAN.md — Duplicate doctype audit + cross-app link integrity testing
+- [ ] 03.1-02-PLAN.md — Report/dashboard verification + faculty API integration testing
+- [ ] 03.1-03-PLAN.md — Accessibility audit with vitest-axe + fix critical/serious violations
 
 ### Phase 4: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
@@ -147,14 +156,15 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
-Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 6 requires Phase 3.
+Phases execute in numeric order: 1 -> 2 -> 3 -> 03.1 -> 4 -> 5 -> 6 -> 7
+Note: Phases 4, 5 can execute in parallel after Phase 03.1 completes. Phase 6 requires Phase 3.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
+| 03.1. Integration Audit & Accessibility | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
 | 5. Parent Portal | 0/2 | Not started | - |
 | 6. HOD Portal | 0/2 | Not started | - |
