@@ -17,8 +17,8 @@ import Sidebar from '../components/Sidebar.vue'
   display: flex;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f8fafc;
+  font-family: var(--font-family);
+  background: var(--bg-surface);
 }
 
 .portal-main {
