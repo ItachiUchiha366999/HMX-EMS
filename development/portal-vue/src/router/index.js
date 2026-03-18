@@ -17,9 +17,13 @@ const routes = [
       // Default redirect based on roles — handled in PortalLayout's onMounted
       { path: '', name: 'home', component: ComingSoon, props: { moduleName: 'Dashboard' } },
       { path: 'management', name: 'management', component: ComingSoon, props: { moduleName: 'Management Dashboard' } },
-      { path: 'faculty', name: 'faculty', component: ComingSoon, props: { moduleName: 'My Teaching' } },
-      { path: 'faculty/attendance', name: 'faculty-attendance', component: ComingSoon, props: { moduleName: 'Mark Attendance' } },
-      { path: 'faculty/grades', name: 'faculty-grades', component: ComingSoon, props: { moduleName: 'Enter Grades' } },
+      { path: 'faculty', name: 'faculty', component: () => import('../components/faculty/FacultyDashboard.vue') },
+      { path: 'faculty/teaching', name: 'faculty-teaching', component: () => import('../components/faculty/FacultyTeaching.vue') },
+      { path: 'faculty/work', name: 'faculty-work', component: () => import('../components/faculty/FacultyWork.vue') },
+      { path: 'faculty/notices', name: 'faculty-notices', component: () => import('../components/faculty/FacultyNotices.vue') },
+      // Redirects from old faculty routes
+      { path: 'faculty/attendance', redirect: '/faculty/teaching?tab=attendance' },
+      { path: 'faculty/grades', redirect: '/faculty/teaching?tab=grades' },
       { path: 'hod', name: 'hod', component: ComingSoon, props: { moduleName: 'Department Overview' } },
       { path: 'student', name: 'student', component: ComingSoon, props: { moduleName: 'My Dashboard' } },
       { path: 'finance', name: 'finance', component: ComingSoon, props: { moduleName: 'Finance' } },

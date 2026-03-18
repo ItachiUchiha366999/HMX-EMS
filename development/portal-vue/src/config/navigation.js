@@ -20,20 +20,26 @@ export const navItems = [
   // Faculty
   {
     path: '/faculty',
-    label: 'My Teaching',
+    label: 'Dashboard',
+    icon: 'dashboard',
+    roles: ['University Faculty', 'University HOD'],
+  },
+  {
+    path: '/faculty/teaching',
+    label: 'Teaching',
     icon: 'school',
     roles: ['University Faculty', 'University HOD'],
   },
   {
-    path: '/faculty/attendance',
-    label: 'Mark Attendance',
-    icon: 'fact_check',
+    path: '/faculty/work',
+    label: 'My Work',
+    icon: 'work',
     roles: ['University Faculty', 'University HOD'],
   },
   {
-    path: '/faculty/grades',
-    label: 'Enter Grades',
-    icon: 'grade',
+    path: '/faculty/notices',
+    label: 'Notices',
+    icon: 'campaign',
     roles: ['University Faculty', 'University HOD'],
   },
   // HOD

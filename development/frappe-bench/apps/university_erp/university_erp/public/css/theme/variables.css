@@ -147,6 +147,8 @@
   --border-subtle: var(--gray-100);
   --skeleton-base: var(--gray-200);
   --skeleton-shine: var(--gray-100);
+  --error-tint: var(--error-light);
+  --primary-tint: var(--primary-light);
 }
 
 [data-theme="dark"] {
@@ -159,4 +161,6 @@
   --border-subtle: var(--gray-800);
   --skeleton-base: var(--gray-700);
   --skeleton-shine: var(--gray-600);
+  --error-tint: rgba(239, 68, 68, 0.15);
+  --primary-tint: rgba(79, 70, 229, 0.15);
 }
