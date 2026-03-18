@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 ## Current Position
 
 Phase: 3.1 of 7 (Cross-App Integration Audit & Accessibility Testing)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase (COMPLETE)
 Status: Executing Phase 03.1
-Last activity: 2026-03-18 - Completed 03.1-01-PLAN.md (Duplicate doctype audit + cross-app link integrity)
+Last activity: 2026-03-18 - Completed 03.1-02-PLAN.md (Report & dashboard audit + faculty API integration tests)
 
-Progress: [██████████] 100% (Phases 1-3) + Phase 3.1: 1/3 plans
+Progress: [██████████] 100% (Phases 1-3) + Phase 3.1: 2/3 plans
 
 ## Performance Metrics
 
@@ -100,6 +100,10 @@ Recent decisions affecting current work:
 - [03.1-01]: Scripts in university_erp/university_erp/scripts/ (inner package) for Frappe bench execute module resolution
 - [03.1-01]: Disk-based scanning (os.walk + json.load) for all doctypes including dead/overridden ones not in DB
 - [03.1-01]: Semantic overlap threshold: 60% with 3+ shared targets (reduced 1259 to 260 actionable pairs)
+- [03.1-02]: Report audit tests ALL 279 registered reports across all apps, not just university_erp's 59
+- [03.1-02]: Faculty API audit discovers endpoints via regex on source (future-proof vs hardcoded list)
+- [03.1-02]: custom_is_faculty column missing from Employee table -- root cause of all 27 faculty API endpoint failures
+- [03.1-02]: Two-pass report testing: empty filters first, then JS-parsed mandatory filter defaults
 
 ### Roadmap Evolution
 
@@ -123,6 +127,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T23:36:00Z
-Stopped at: Completed 03.1-01-PLAN.md
-Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-01-SUMMARY.md
+Last session: 2026-03-18T23:47:44Z
+Stopped at: Completed 03.1-02-PLAN.md
+Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-02-SUMMARY.md
