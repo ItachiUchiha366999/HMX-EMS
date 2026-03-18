@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 ## Current Position
 
 Phase: 1 of 7 (Foundation & Security Hardening)
-Plan: 1 of 2 in current phase
+Plan: 2 of 3 in current phase
 Status: Executing
-Last activity: 2026-03-18 - Completed 01-01-backend-security-PLAN.md (SQL injection fix, permission guards, N+1 elimination, health check, new roles)
+Last activity: 2026-03-18 - Completed 01-02-portal-app-shell-PLAN.md (portal-vue Vite project, Pinia session store, role-filtered sidebar, www/portal/ SPA page)
 
-Progress: [#░░░░░░░░░] 7%
+Progress: [##░░░░░░░░] 13%
 
 ## Performance Metrics
 
@@ -48,6 +48,9 @@ Recent decisions affecting current work:
 - [01-01]: Used frappe.db.sql(query, values=dict) for parameterized SQL -- standard Frappe pattern
 - [01-01]: Permission check uses KPI Definition doctype for KPI endpoints, Custom Dashboard for get_quick_stats
 - [01-01]: Kept mock/fallback data in executive_dashboard.py for graceful degradation when doctypes missing
+- [01-02]: Pinia session store fetches once at boot (main.js), router guard reads store synchronously -- no per-route API calls
+- [01-02]: portal-vue/ build output committed to public/portal/ matching student-portal-spa pattern
+- [01-02]: navigation.js is single source of truth for sidebar items and route definitions -- future phases add entries here
 
 ### Pending Todos
 
@@ -68,5 +71,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-18
-Stopped at: Completed 01-01-backend-security-PLAN.md
+Stopped at: Completed 01-02-portal-app-shell-PLAN.md
 Resume file: None

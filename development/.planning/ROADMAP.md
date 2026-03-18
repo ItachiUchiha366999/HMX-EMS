@@ -36,7 +36,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-backend-security-PLAN.md — Fix SQL injection, permission guards, N+1 queries; create health_check.py; add University VC and University Dean roles
-- [ ] 02-portal-app-shell-PLAN.md — Standalone portal-vue/ Vite project with Pinia session store, Vue Router, role-filtered sidebar, get_session_info() endpoint, Frappe www/portal/ page
+- [x] 02-portal-app-shell-PLAN.md — Standalone portal-vue/ Vite project with Pinia session store, Vue Router, role-filtered sidebar, get_session_info() endpoint, Frappe www/portal/ page
 - [ ] 03-integration-wiring-PLAN.md — Build Vue app, verify Frappe routing, confirm endpoint access control, human smoke test
 
 ### Phase 2: Shared Component Library
@@ -142,7 +142,7 @@ Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Security Hardening | 0/3 | Not started | - |
+| 1. Foundation & Security Hardening | 2/3 | In progress | - |
 | 2. Shared Component Library | 0/2 | Not started | - |
 | 3. Faculty Portal | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |

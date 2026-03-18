@@ -13,9 +13,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FOUND-02**: SQL injection vulnerability in dashboard_engine.py fixed with parameterized queries
 - [x] **FOUND-03**: Permission checks enforced on all analytics and dashboard API endpoints (role-based access)
 - [x] **FOUND-04**: N+1 query patterns in executive_dashboard.py resolved with aggregation queries
-- [ ] **FOUND-05**: Unified Vue app shell with role-based routing (student, faculty, HOD, parent, management)
-- [ ] **FOUND-06**: Auth guard with cached session (eliminate per-route API call for logged-in user check)
-- [ ] **FOUND-07**: Academic year / semester filter available on all data views
+- [x] **FOUND-05**: Unified Vue app shell with role-based routing (student, faculty, HOD, parent, management)
+- [x] **FOUND-06**: Auth guard with cached session (eliminate per-route API call for logged-in user check)
+- [x] **FOUND-07**: Academic year / semester filter available on all data views
 - [x] **FOUND-08**: Management role detection added (VC, Registrar, Finance Officer, Dean) beyond existing student/faculty/parent
 
 ### Shared Components
@@ -133,9 +133,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
-| FOUND-05 | Phase 1 | Pending |
-| FOUND-06 | Phase 1 | Pending |
-| FOUND-07 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Complete |
+| FOUND-06 | Phase 1 | Complete |
+| FOUND-07 | Phase 1 | Complete |
 | FOUND-08 | Phase 1 | Complete |
 | COMP-01 | Phase 2 | Pending |
 | COMP-02 | Phase 2 | Pending |
