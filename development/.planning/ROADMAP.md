@@ -13,7 +13,7 @@ This roadmap delivers management dashboards, analytics, and role-based portals (
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
-- [ ] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
+- [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [ ] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
 - [ ] **Phase 5: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
@@ -52,8 +52,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Wave 0 infra (vitest, dark mode tokens, useFrappe) + KPI card, chart wrapper, filter bar, notification panel
-- [ ] 02-02-PLAN.md — DataTable with TanStack + server-side pagination, PDF/Excel export composables, report viewer with Frappe report API
+- [x] 02-01-PLAN.md — Wave 0 infra (vitest, dark mode tokens, useFrappe) + KPI card, chart wrapper, filter bar, notification panel
+- [x] 02-02-PLAN.md — DataTable with TanStack + server-side pagination, PDF/Excel export composables, report viewer with Frappe report API
 
 ### Phase 3: Faculty Portal
 **Goal**: Faculty can manage their complete daily teaching workflow from the portal without needing to access Frappe desk
@@ -143,7 +143,7 @@ Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
-| 2. Shared Component Library | 1/2 | In Progress|  |
+| 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
 | 5. Parent Portal | 0/2 | Not started | - |
