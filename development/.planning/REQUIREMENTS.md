@@ -33,11 +33,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **FCTY-01**: Faculty can view today's classes with room, time, and course details
 - [x] **FCTY-02**: Faculty can mark attendance for a class with bulk-select UI (mark 60 students in under 2 minutes)
-- [ ] **FCTY-03**: Faculty can enter grades/marks in a spreadsheet-like grid for their courses
-- [ ] **FCTY-04**: Faculty can view enrolled student list per course/section
+- [x] **FCTY-03**: Faculty can enter grades/marks in a spreadsheet-like grid for their courses
+- [x] **FCTY-04**: Faculty can view enrolled student list per course/section
 - [x] **FCTY-05**: Faculty can see a pending tasks dashboard (unmarked attendance, unsubmitted grades, pending leave requests)
 - [x] **FCTY-06**: Faculty can view institutional announcements and notices
-- [ ] **FCTY-07**: Faculty can view per-course student performance analytics (grade distribution, at-risk students)
+- [x] **FCTY-07**: Faculty can view per-course student performance analytics (grade distribution, at-risk students)
 - [x] **FCTY-08**: Faculty can approve/reject student leave requests from the portal
 - [x] **FCTY-09**: Faculty can manage LMS course content, assignments, and view quiz results
 - [x] **FCTY-10**: Faculty can view their research publications and OBE CO/PO attainment data
@@ -147,11 +147,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMP-08 | Phase 2 | Complete |
 | FCTY-01 | Phase 3 | Complete |
 | FCTY-02 | Phase 3 | Complete |
-| FCTY-03 | Phase 3 | Pending |
-| FCTY-04 | Phase 3 | Pending |
+| FCTY-03 | Phase 3 | Complete |
+| FCTY-04 | Phase 3 | Complete |
 | FCTY-05 | Phase 3 | Complete |
 | FCTY-06 | Phase 3 | Complete |
-| FCTY-07 | Phase 3 | Pending |
+| FCTY-07 | Phase 3 | Complete |
 | FCTY-08 | Phase 3 | Complete |
 | FCTY-09 | Phase 3 | Complete |
 | FCTY-10 | Phase 3 | Complete |
