@@ -65,12 +65,12 @@ Plans:
   3. Faculty can view their pending tasks dashboard (unmarked attendance, unsubmitted grades, pending leave requests) and take action on each
   4. Faculty can approve/reject student leave requests, view their own leave balance, submit leave requests, and see their teaching workload summary
   5. Faculty can manage LMS course content, view research publications, and view OBE CO/PO attainment data
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Faculty layout, dashboard, timetable, and attendance marking
-- [ ] 03-02: Grade entry, student lists, performance analytics
-- [ ] 03-03: Leave management, LMS, research/OBE views, announcements
+- [ ] 03-01-PLAN.md — Backend faculty API + dashboard + timetable + attendance marking + announcements (Wave 1)
+- [ ] 03-02-PLAN.md — Spreadsheet grade grid + student lists + performance analytics (Wave 2)
+- [ ] 03-03-PLAN.md — Leave management + LMS CRUD + research + OBE CO/PO + workload summary (Wave 2)
 
 ### Phase 4: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
