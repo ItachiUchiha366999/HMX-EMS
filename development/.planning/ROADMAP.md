@@ -49,11 +49,11 @@ Plans:
   3. Data tables support sorting, pagination, search, and inline PDF/Excel export using TanStack Table
   4. A filter bar with date range, academic year, department, and program selectors can be dropped into any view and its state drives data queries
   5. The existing 54+ backend reports can be browsed and executed through a report viewer component inside the portal
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Core components (KPI card, chart wrapper, filter bar, notification panel)
-- [ ] 02-02: Data table with TanStack, export components (PDF/Excel), report viewer
+- [ ] 02-01-PLAN.md — Wave 0 infra (vitest, dark mode tokens, useFrappe) + KPI card, chart wrapper, filter bar, notification panel
+- [ ] 02-02-PLAN.md — DataTable with TanStack + server-side pagination, PDF/Excel export composables, report viewer with Frappe report API
 
 ### Phase 3: Faculty Portal
 **Goal**: Faculty can manage their complete daily teaching workflow from the portal without needing to access Frappe desk
