@@ -20,14 +20,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Shared Components
 
-- [ ] **COMP-01**: KPI counter card component (value, label, trend indicator, status color)
-- [ ] **COMP-02**: Chart wrapper component (line, bar, pie, heatmap) using ApexCharts
+- [x] **COMP-01**: KPI counter card component (value, label, trend indicator, status color)
+- [x] **COMP-02**: Chart wrapper component (line, bar, pie, heatmap) using ApexCharts
 - [ ] **COMP-03**: Data table component with sorting, pagination, and search using TanStack Table
-- [ ] **COMP-04**: Filter bar component (date range, academic year, department, program selectors)
+- [x] **COMP-04**: Filter bar component (date range, academic year, department, program selectors)
 - [ ] **COMP-05**: PDF export on any data table or report view using jsPDF
 - [ ] **COMP-06**: Excel export on any data table or report view using ExcelJS
 - [ ] **COMP-07**: Report viewer component to expose existing 54+ backend reports in portal
-- [ ] **COMP-08**: Notification/alert panel component (reusable across portals)
+- [x] **COMP-08**: Notification/alert panel component (reusable across portals)
 
 ### Faculty Portal
 
@@ -137,14 +137,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-06 | Phase 1 | Complete |
 | FOUND-07 | Phase 1 | Complete |
 | FOUND-08 | Phase 1 | Complete |
-| COMP-01 | Phase 2 | Pending |
-| COMP-02 | Phase 2 | Pending |
+| COMP-01 | Phase 2 | Complete |
+| COMP-02 | Phase 2 | Complete |
 | COMP-03 | Phase 2 | Pending |
-| COMP-04 | Phase 2 | Pending |
+| COMP-04 | Phase 2 | Complete |
 | COMP-05 | Phase 2 | Pending |
 | COMP-06 | Phase 2 | Pending |
 | COMP-07 | Phase 2 | Pending |
-| COMP-08 | Phase 2 | Pending |
+| COMP-08 | Phase 2 | Complete |
 | FCTY-01 | Phase 3 | Pending |
 | FCTY-02 | Phase 3 | Pending |
 | FCTY-03 | Phase 3 | Pending |

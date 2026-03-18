@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready for Phase 2
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-18T15:34:39.925Z"
-last_activity: 2026-03-18 - Completed 01-03-integration-wiring-PLAN.md (Vue build verified, end-to-end integration smoke test passed, Phase 1 complete)
+status: Executing Phase 2
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-18T18:37:53Z"
+last_activity: 2026-03-18 - Completed 02-01-PLAN.md (4 shared components with 19 passing tests, dark mode tokens, useFrappe composable)
 progress:
   total_phases: 7
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 19
+  total_plans: 5
+  completed_plans: 4
+  percent: 80
 ---
 
 # Project State
@@ -21,32 +21,33 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while faculty, HODs, and parents have self-service portal access to the information and actions relevant to their role.
-**Current focus:** Phase 1: Foundation & Security Hardening
+**Current focus:** Phase 2: Shared Component Library
 
 ## Current Position
 
 Phase: 2 of 7 (Shared Component Library)
-Plan: 0 of 2 in current phase
-Status: Ready for Phase 2
-Last activity: 2026-03-18 - Completed 01-03-integration-wiring-PLAN.md (Vue build verified, end-to-end integration smoke test passed, Phase 1 complete)
+Plan: 1 of 2 in current phase
+Status: Executing Phase 2
+Last activity: 2026-03-18 - Completed 02-01-PLAN.md (4 shared components with 19 passing tests, dark mode tokens, useFrappe composable)
 
-Progress: [###░░░░░░░] 19%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 7min
-- Total execution time: 0.3 hours
+- Total execution time: 0.5 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-security-hardening | 3 | 20min | 7min |
+| 02-shared-component-library | 1 | 8min | 8min |
 
 **Recent Trend:**
-- Last 5 plans: 6min, 6min, 8min
+- Last 5 plans: 6min, 6min, 8min, 8min
 - Trend: stable
 
 *Updated after each plan completion*
@@ -69,6 +70,11 @@ Recent decisions affecting current work:
 - [01-02]: navigation.js is single source of truth for sidebar items and route definitions -- future phases add entries here
 - [01-03]: All 8 FOUND-XX requirements verified complete through automated + human browser verification
 - [01-03]: Integration plan pattern: automated checks first, then human-verify in browser
+- [02-01]: useFrappe adapted from student-portal: removed PORTAL_API prefix, call() uses /api/method/ directly, added getList()
+- [02-01]: useThemeColors resolves CSS vars via getComputedStyle for ApexCharts (needs hex, not var() references)
+- [02-01]: KpiCard uses --font-semibold (not --font-bold) per UI-SPEC typography contract
+- [02-01]: ChartWrapper registers vue3-apexcharts locally, not globally in main.js
+- [02-01]: TDD red-green cycle: tests committed first as failing, then components committed to pass
 
 ### Pending Todos
 
@@ -88,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T15:34:39.907Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-shared-component-library/02-CONTEXT.md
+Last session: 2026-03-18T18:37:53Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-shared-component-library/02-02-PLAN.md
