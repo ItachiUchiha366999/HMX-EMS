@@ -87,6 +87,11 @@ Recent decisions affecting current work:
 - [03-01]: Old /faculty/attendance and /faculty/grades redirect to /faculty/teaching?tab=attendance and ?tab=grades
 - [03-01]: AttendanceMarker pre-checks all students as Present (present-by-default per user decision)
 - [03-01]: TimetableGrid uses Teaching Assignment Schedule as primary data source (has instructor mapping)
+- [03-02]: FacultyGradeGrid is custom component (not DataTable) with shallowRef/shallowReactive for grade matrix performance
+- [03-02]: _verify_faculty_teaches_course helper centralizes Teaching Assignment auth check for all grade/student endpoints
+- [03-02]: Grade analytics side panel receives data via prop from parent (FacultyTeaching refetches on save)
+- [03-02]: StudentListView uses manual pagination with server-side SQL for attendance-enriched student list
+- [03-02]: PerformanceAnalytics uses attendance bucket ranges for correlation chart
 - [03-03]: Faculty Publication queried as child table on Faculty Profile (istable=1 in doctype JSON)
 - [03-03]: get_copo_matrix integrates COPOAttainmentCalculator with graceful ImportError fallback
 - [03-03]: get_workload_summary runs faculty_workload_summary report for dept average calculation
