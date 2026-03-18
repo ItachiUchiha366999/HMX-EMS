@@ -490,66 +490,599 @@ def _get_recent_announcements(limit=3):
     return notices
 
 
-# ==================== Plan 02 Stub Endpoints (Grades, Students) ====================
+# ==================== Plan 02 Active Endpoints (Grades, Students) ====================
+
+
+def _verify_faculty_teaches_course(employee_name, course):
+    """Verify that the faculty member teaches the given course."""
+    exists = frappe.db.exists(
+        "Teaching Assignment",
+        {"instructor": employee_name, "course": course, "docstatus": 1},
+    )
+    if not exists:
+        frappe.throw(
+            _("You are not authorized to access this course"),
+            frappe.PermissionError,
+        )
 
 
 @frappe.whitelist()
 def get_students_for_grading(course, assessment_plan):
-    """Get students for grade entry. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(_("Grade entry not yet implemented"), frappe.ValidationError)
+    """Get students for grade entry with existing grades.
+
+    Returns:
+        {students: [{student, student_name, roll_no, grades: [{assessment_name, marks, grade, docstatus}]}],
+         assessments: [{name, assessment_type, max_marks}]}
+    """
+    employee = get_current_faculty()
+    _verify_faculty_teaches_course(employee.name, course)
+
+    # Get assessment criteria from Assessment Plan
+    plan = frappe.get_doc("Assessment Plan", assessment_plan)
+    assessments = []
+    for criteria in plan.get("assessment_criteria", []):
+        assessments.append(
+            {
+                "name": criteria.assessment_criteria,
+                "assessment_type": plan.assessment_type or "",
+                "max_marks": flt(criteria.maximum_score),
+            }
+        )
+
+    # Get enrolled students
+    assignment = frappe.db.get_value(
+        "Teaching Assignment",
+        {"instructor": employee.name, "course": course, "docstatus": 1},
+        "student_group",
+    )
+
+    students_raw = []
+    if assignment:
+        students_raw = frappe.db.sql(
+            """
+            SELECT
+                sgs.student,
+                sgs.student_name,
+                s.custom_roll_number as roll_no
+            FROM `tabStudent Group Student` sgs
+            LEFT JOIN `tabStudent` s ON s.name = sgs.student
+            WHERE sgs.parent = %(student_group)s
+            ORDER BY s.custom_roll_number, sgs.student_name
+            """,
+            {"student_group": assignment},
+            as_dict=True,
+        )
+    else:
+        students_raw = frappe.db.sql(
+            """
+            SELECT
+                ce.student,
+                ce.student_name,
+                s.custom_roll_number as roll_no
+            FROM `tabCourse Enrollment` ce
+            LEFT JOIN `tabStudent` s ON s.name = ce.student
+            WHERE ce.course = %(course)s
+            ORDER BY s.custom_roll_number, ce.student_name
+            """,
+            {"course": course},
+            as_dict=True,
+        )
+
+    # Get existing Assessment Results
+    students = []
+    for stu in students_raw:
+        grades = []
+        for assess in assessments:
+            result = frappe.db.sql(
+                """
+                SELECT ar.docstatus, ard.grade, ard.score as marks
+                FROM `tabAssessment Result` ar
+                INNER JOIN `tabAssessment Result Detail` ard ON ard.parent = ar.name
+                WHERE ar.student = %(student)s
+                  AND ar.assessment_plan = %(assessment_plan)s
+                  AND ard.assessment_criteria = %(criteria)s
+                LIMIT 1
+                """,
+                {
+                    "student": stu.student,
+                    "assessment_plan": assessment_plan,
+                    "criteria": assess["name"],
+                },
+                as_dict=True,
+            )
+            if result:
+                grades.append(
+                    {
+                        "assessment_name": assess["name"],
+                        "marks": flt(result[0].marks),
+                        "grade": result[0].grade or None,
+                        "docstatus": result[0].docstatus,
+                    }
+                )
+            else:
+                grades.append(
+                    {
+                        "assessment_name": assess["name"],
+                        "marks": None,
+                        "grade": None,
+                        "docstatus": 0,
+                    }
+                )
+
+        students.append(
+            {
+                "student": stu.student,
+                "student_name": stu.student_name,
+                "roll_no": stu.roll_no or "",
+                "grades": grades,
+            }
+        )
+
+    return {"students": students, "assessments": assessments}
 
 
 @frappe.whitelist()
 def save_draft_grade(**kwargs):
-    """Save draft grade for a student. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(_("Grade save not yet implemented"), frappe.ValidationError)
+    """Save draft grade for a student.
+
+    Args:
+        student, course, assessment_plan, assessment_name, marks
+
+    Returns:
+        {grade: computed_grade, marks: entered_marks, status: "saved"}
+    """
+    employee = get_current_faculty()
+    student = kwargs.get("student")
+    course = kwargs.get("course")
+    assessment_plan = kwargs.get("assessment_plan")
+    assessment_name = kwargs.get("assessment_name")
+    marks = kwargs.get("marks")
+
+    _verify_faculty_teaches_course(employee.name, course)
+
+    # Find or create Assessment Result (draft)
+    existing = frappe.db.get_value(
+        "Assessment Result",
+        {
+            "student": student,
+            "assessment_plan": assessment_plan,
+            "docstatus": 0,
+        },
+        "name",
+    )
+
+    if existing:
+        doc = frappe.get_doc("Assessment Result", existing)
+    else:
+        doc = frappe.new_doc("Assessment Result")
+        doc.student = student
+        doc.assessment_plan = assessment_plan
+        doc.course = course
+        plan = frappe.get_doc("Assessment Plan", assessment_plan)
+        doc.academic_year = plan.academic_year if plan.get("academic_year") else ""
+        doc.academic_term = plan.academic_term if plan.get("academic_term") else ""
+        doc.student_group = plan.student_group if plan.get("student_group") else ""
+        doc.grading_scale = plan.grading_scale if plan.get("grading_scale") else ""
+
+    # Update the specific criteria row
+    found = False
+    for row in doc.get("details", []):
+        if row.assessment_criteria == assessment_name:
+            row.score = flt(marks) if marks else 0
+            found = True
+            break
+
+    if not found:
+        doc.append(
+            "details",
+            {
+                "assessment_criteria": assessment_name,
+                "score": flt(marks) if marks else 0,
+            },
+        )
+
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
+
+    computed_grade = None
+    for row in doc.get("details", []):
+        if row.assessment_criteria == assessment_name:
+            computed_grade = row.grade
+            break
+
+    return {
+        "grade": computed_grade,
+        "marks": flt(marks),
+        "status": "saved",
+    }
 
 
 @frappe.whitelist()
 def submit_grades(course, assessment_plan):
-    """Submit final grades. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(
-        _("Grade submission not yet implemented"), frappe.ValidationError
+    """Submit/finalize all draft grades for a course + assessment plan.
+
+    Returns:
+        {submitted_count, message}
+    """
+    employee = get_current_faculty()
+    _verify_faculty_teaches_course(employee.name, course)
+
+    drafts = frappe.get_all(
+        "Assessment Result",
+        filters={
+            "assessment_plan": assessment_plan,
+            "docstatus": 0,
+        },
+        fields=["name"],
     )
+
+    submitted_count = 0
+    for draft in drafts:
+        try:
+            doc = frappe.get_doc("Assessment Result", draft.name)
+            doc.submit()
+            submitted_count += 1
+        except Exception:
+            frappe.log_error(
+                f"Grade submission failed for {draft.name}"
+            )
+
+    frappe.db.commit()
+
+    return {
+        "submitted_count": submitted_count,
+        "message": _("{0} grade(s) submitted successfully").format(
+            submitted_count
+        ),
+    }
 
 
 @frappe.whitelist()
 def get_grade_analytics(course, assessment_plan):
-    """Get grade analytics for side panel. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(
-        _("Grade analytics not yet implemented"), frappe.ValidationError
+    """Get grade analytics for the side panel.
+
+    Returns:
+        {distribution: {grade: count}, average, pass_count, fail_count,
+         at_risk_count, at_risk_threshold}
+    """
+    employee = get_current_faculty()
+    _verify_faculty_teaches_course(employee.name, course)
+
+    at_risk_threshold = 40
+
+    results = frappe.db.sql(
+        """
+        SELECT ar.student, ar.total_score, ar.grade
+        FROM `tabAssessment Result` ar
+        WHERE ar.assessment_plan = %(assessment_plan)s
+        """,
+        {"assessment_plan": assessment_plan},
+        as_dict=True,
     )
+
+    if not results:
+        return {
+            "distribution": {},
+            "average": 0,
+            "pass_count": 0,
+            "fail_count": 0,
+            "at_risk_count": 0,
+            "at_risk_threshold": at_risk_threshold,
+        }
+
+    distribution = {}
+    total_score = 0
+    pass_count = 0
+    fail_count = 0
+    at_risk_count = 0
+
+    for r in results:
+        grade = r.grade or "Ungraded"
+        distribution[grade] = distribution.get(grade, 0) + 1
+        score = flt(r.total_score)
+        total_score += score
+
+        if grade.upper() in ("F", "FAIL"):
+            fail_count += 1
+        else:
+            pass_count += 1
+
+        if score < at_risk_threshold:
+            at_risk_count += 1
+
+    average = round(total_score / len(results), 1) if results else 0
+
+    return {
+        "distribution": distribution,
+        "average": average,
+        "pass_count": pass_count,
+        "fail_count": fail_count,
+        "at_risk_count": at_risk_count,
+        "at_risk_threshold": at_risk_threshold,
+    }
 
 
 @frappe.whitelist()
 def get_student_list(**kwargs):
-    """Get student list with attendance and grades. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(
-        _("Student list not yet implemented"), frappe.ValidationError
-    )
+    """Get paginated student list with attendance and grades.
+
+    Args:
+        course, section, search, start, page_length, order_by
+
+    Returns:
+        {data: [{student, student_name, roll_no, enrollment_no, image,
+                 attendance_percentage, current_grade}], total_count}
+    """
+    employee = get_current_faculty()
+    course = kwargs.get("course")
+    section = kwargs.get("section")
+    search = kwargs.get("search")
+    start = int(kwargs.get("start", 0))
+    page_length = int(kwargs.get("page_length", 20))
+    order_by = kwargs.get("order_by", "student_name")
+
+    _verify_faculty_teaches_course(employee.name, course)
+
+    conditions = "WHERE ce.course = %(course)s"
+    params = {"course": course, "start": start, "page_length": page_length}
+
+    if search:
+        conditions += " AND (ce.student_name LIKE %(search)s OR s.custom_roll_number LIKE %(search)s)"
+        params["search"] = f"%{search}%"
+
+    count_sql = f"""
+        SELECT COUNT(*) as cnt
+        FROM `tabCourse Enrollment` ce
+        LEFT JOIN `tabStudent` s ON s.name = ce.student
+        {conditions}
+    """
+    total_count = frappe.db.sql(count_sql, params, as_dict=True)[0].cnt
+
+    allowed_order = {
+        "student_name": "ce.student_name",
+        "roll_no": "s.custom_roll_number",
+    }
+    order_clause = allowed_order.get(order_by, "ce.student_name")
+
+    sql = f"""
+        SELECT
+            ce.student,
+            ce.student_name,
+            s.custom_roll_number as roll_no,
+            s.name as enrollment_no,
+            s.image
+        FROM `tabCourse Enrollment` ce
+        LEFT JOIN `tabStudent` s ON s.name = ce.student
+        {conditions}
+        ORDER BY {order_clause}
+        LIMIT %(start)s, %(page_length)s
+    """
+    students = frappe.db.sql(sql, params, as_dict=True)
+
+    for stu in students:
+        total_att = frappe.db.count(
+            "Student Attendance",
+            {"student": stu.student, "course": course},
+        )
+        present_att = frappe.db.count(
+            "Student Attendance",
+            {
+                "student": stu.student,
+                "course": course,
+                "status": "Present",
+            },
+        )
+        stu["attendance_percentage"] = (
+            round((present_att / total_att) * 100, 1)
+            if total_att > 0
+            else 0
+        )
+
+        latest_grade = frappe.db.get_value(
+            "Assessment Result",
+            {
+                "student": stu.student,
+                "course": course,
+                "docstatus": ["in", [0, 1]],
+            },
+            "grade",
+            order_by="creation desc",
+        )
+        stu["current_grade"] = latest_grade or "-"
+
+    return {"data": students, "total_count": total_count}
 
 
 @frappe.whitelist()
 def get_student_detail(student, course):
-    """Get student detail with history. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(
-        _("Student detail not yet implemented"), frappe.ValidationError
+    """Get student detail with attendance history, assessment marks, grade trend.
+
+    Returns:
+        {attendance_history, assessment_marks, grade_trend}
+    """
+    employee = get_current_faculty()
+    _verify_faculty_teaches_course(employee.name, course)
+
+    attendance_history = frappe.db.sql(
+        """
+        SELECT date, status
+        FROM `tabStudent Attendance`
+        WHERE student = %(student)s AND course = %(course)s
+        ORDER BY date DESC
+        LIMIT 30
+        """,
+        {"student": student, "course": course},
+        as_dict=True,
     )
+
+    assessment_marks = frappe.db.sql(
+        """
+        SELECT
+            ard.assessment_criteria as assessment_name,
+            ard.score as marks,
+            ard.maximum_score as max_marks,
+            ard.grade
+        FROM `tabAssessment Result` ar
+        INNER JOIN `tabAssessment Result Detail` ard ON ard.parent = ar.name
+        WHERE ar.student = %(student)s AND ar.course = %(course)s
+        ORDER BY ar.creation
+        """,
+        {"student": student, "course": course},
+        as_dict=True,
+    )
+
+    grade_trend = []
+    for mark in assessment_marks:
+        max_marks = flt(mark.max_marks) or 100
+        grade_trend.append(
+            {
+                "assessment_name": mark.assessment_name,
+                "marks_percentage": round(
+                    (flt(mark.marks) / max_marks) * 100, 1
+                ),
+            }
+        )
+
+    return {
+        "attendance_history": attendance_history,
+        "assessment_marks": assessment_marks,
+        "grade_trend": grade_trend,
+    }
 
 
 @frappe.whitelist()
 def get_performance_analytics(course):
-    """Get course performance analytics. Stub -- implemented in Plan 02."""
-    get_current_faculty()
-    frappe.throw(
-        _("Performance analytics not yet implemented"), frappe.ValidationError
+    """Get course performance analytics with charts data.
+
+    Returns:
+        {grade_distribution, attendance_correlation, assessment_trend, batch_comparison}
+    """
+    employee = get_current_faculty()
+    _verify_faculty_teaches_course(employee.name, course)
+
+    # Grade distribution
+    grade_dist = frappe.db.sql(
+        """
+        SELECT grade, COUNT(*) as cnt
+        FROM `tabAssessment Result`
+        WHERE course = %(course)s AND docstatus IN (0, 1)
+        GROUP BY grade
+        ORDER BY grade
+        """,
+        {"course": course},
+        as_dict=True,
     )
+    grade_labels = [r.grade or "Ungraded" for r in grade_dist]
+    grade_data = [r.cnt for r in grade_dist]
+
+    # Attendance correlation
+    attendance_buckets = ["0-50%", "50-60%", "60-75%", "75-90%", "90-100%"]
+    att_corr_data = []
+    bucket_ranges = [(0, 50), (50, 60), (60, 75), (75, 90), (90, 100)]
+
+    for low, high in bucket_ranges:
+        avg = frappe.db.sql(
+            """
+            SELECT AVG(ar.total_score) as avg_score
+            FROM `tabAssessment Result` ar
+            WHERE ar.course = %(course)s
+              AND ar.student IN (
+                SELECT sa.student
+                FROM `tabStudent Attendance` sa
+                WHERE sa.course = %(course)s
+                GROUP BY sa.student
+                HAVING (SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) / COUNT(*)) * 100
+                  BETWEEN %(low)s AND %(high)s
+              )
+            """,
+            {"course": course, "low": low, "high": high},
+            as_dict=True,
+        )
+        att_corr_data.append(round(flt(avg[0].avg_score if avg else 0), 1))
+
+    # Assessment trend
+    trend = frappe.db.sql(
+        """
+        SELECT ard.assessment_criteria, AVG(ard.score) as avg_score
+        FROM `tabAssessment Result` ar
+        INNER JOIN `tabAssessment Result Detail` ard ON ard.parent = ar.name
+        WHERE ar.course = %(course)s
+        GROUP BY ard.assessment_criteria
+        ORDER BY ard.assessment_criteria
+        """,
+        {"course": course},
+        as_dict=True,
+    )
+    trend_labels = [r.assessment_criteria for r in trend]
+    trend_data = [round(flt(r.avg_score), 1) for r in trend]
+
+    # Batch comparison
+    current_term = _get_current_academic_term()
+    current_avg = 0
+    current_pass = 0
+    previous_avg = 0
+    previous_pass = 0
+
+    if current_term:
+        current_stats = frappe.db.sql(
+            """
+            SELECT AVG(total_score) as avg_score,
+                   SUM(CASE WHEN grade NOT IN ('F', 'Fail') THEN 1 ELSE 0 END) as pass_count,
+                   COUNT(*) as total
+            FROM `tabAssessment Result`
+            WHERE course = %(course)s AND academic_term = %(term)s
+            """,
+            {"course": course, "term": current_term.name},
+            as_dict=True,
+        )
+        if current_stats and current_stats[0].total:
+            current_avg = round(flt(current_stats[0].avg_score), 1)
+            current_pass = round(
+                (flt(current_stats[0].pass_count) / flt(current_stats[0].total)) * 100, 1
+            )
+
+        prev_term = frappe.db.get_value(
+            "Academic Term",
+            {"term_end_date": ["<", current_term.term_start_date]},
+            "name",
+            order_by="term_end_date desc",
+        )
+        if prev_term:
+            prev_stats = frappe.db.sql(
+                """
+                SELECT AVG(total_score) as avg_score,
+                       SUM(CASE WHEN grade NOT IN ('F', 'Fail') THEN 1 ELSE 0 END) as pass_count,
+                       COUNT(*) as total
+                FROM `tabAssessment Result`
+                WHERE course = %(course)s AND academic_term = %(term)s
+                """,
+                {"course": course, "term": prev_term},
+                as_dict=True,
+            )
+            if prev_stats and prev_stats[0].total:
+                previous_avg = round(flt(prev_stats[0].avg_score), 1)
+                previous_pass = round(
+                    (flt(prev_stats[0].pass_count) / flt(prev_stats[0].total)) * 100, 1
+                )
+
+    return {
+        "grade_distribution": {"labels": grade_labels, "data": grade_data},
+        "attendance_correlation": {
+            "labels": attendance_buckets,
+            "data": att_corr_data,
+        },
+        "assessment_trend": {
+            "labels": trend_labels,
+            "series": [{"name": "Class Average", "data": trend_data}],
+        },
+        "batch_comparison": {
+            "current": {"average": current_avg, "pass_rate": current_pass},
+            "previous": {
+                "average": previous_avg,
+                "pass_rate": previous_pass,
+            },
+        },
+    }
 
 
 # ==================== Plan 03 Active Endpoints (Leave, LMS, Research, OBE, Workload) ====================
