@@ -72,6 +72,16 @@ Plans:
 - [x] 03-02-PLAN.md — Spreadsheet grade grid + student lists + performance analytics (Wave 2)
 - [x] 03-03-PLAN.md — Leave management + LMS CRUD + research + OBE CO/PO + workload summary (Wave 2)
 
+### Phase 03.1: Cross-App Integration Audit & Accessibility Testing (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 3
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+
 ### Phase 4: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
 **Depends on**: Phase 2

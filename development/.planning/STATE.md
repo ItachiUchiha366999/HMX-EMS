@@ -98,6 +98,10 @@ Recent decisions affecting current work:
 - [03-03]: LMS endpoints use frappe.db.exists per-doctype (LMS Course, Lesson, Assignment, Quiz) for granular degradation
 - [03-03]: WorkloadSummary uses 1.1x threshold for warning status when personal > department avg
 
+### Roadmap Evolution
+
+- Phase 3.1 inserted after Phase 3: Cross-App Integration Audit & Accessibility Testing (URGENT) — audit duplicate doctypes across Education/ERPNext/university_erp, test all cross-app connections, verify doctype/report availability, test dashboard/report data flows, and verify UI accessibility
+
 ### Pending Todos
 
 None yet.
