@@ -51,26 +51,28 @@ Exceptions: Touch targets on mobile use `min-height: 44px` per existing portal.c
 
 ## Typography
 
-All sizes reference existing CSS variables from `variables.css`.
+All sizes reference existing CSS variables from `variables.css`. Exactly 4 sizes and 2 weights.
 
 | Role | CSS Variable | Size | Weight Variable | Weight | Line Height |
 |------|-------------|------|----------------|--------|-------------|
-| Caption | `--text-xs` | 12px | `--font-medium` | 500 | 1.5 |
+| Caption | `--text-xs` | 12px | `--font-normal` | 400 | 1.5 |
 | Body | `--text-sm` | 14px | `--font-normal` | 400 | 1.5 |
-| Heading | `--text-lg` | 18px | `--font-semibold` | 600 | 1.25 |
-| Display | `--text-2xl` | 24px | `--font-bold` | 700 | 1.25 |
+| Heading | `--text-base` | 16px | `--font-semibold` | 600 | 1.25 |
+| Display | `--text-2xl` | 24px | `--font-semibold` | 600 | 1.25 |
+
+**Allowed weights:** `--font-normal` (400) and `--font-semibold` (600) only. No other weights permitted.
 
 **Per-component specifics:**
 
 | Component | Element | Size | Weight |
 |-----------|---------|------|--------|
-| KPI Card | Value | `--text-2xl` (24px) | `--font-bold` (700) |
+| KPI Card | Value | `--text-2xl` (24px) | `--font-semibold` (600) |
 | KPI Card | Label | `--text-sm` (14px) | `--font-normal` (400) |
-| KPI Card | Trend text | `--text-xs` (12px) | `--font-medium` (500) |
+| KPI Card | Trend text | `--text-xs` (12px) | `--font-normal` (400) |
 | Table | Header cell | `--text-xs` (12px) | `--font-semibold` (600), uppercase |
 | Table | Body cell | `--text-sm` (14px) | `--font-normal` (400) |
 | Chart | Title | `--text-base` (16px) | `--font-semibold` (600) |
-| Filter Bar | Label | `--text-sm` (14px) | `--font-medium` (500) |
+| Filter Bar | Label | `--text-sm` (14px) | `--font-normal` (400) |
 | Filter Bar | Input | `--text-sm` (14px) | `--font-normal` (400) |
 | Notification | Title | `--text-sm` (14px) | `--font-semibold` (600) |
 | Notification | Body | `--text-sm` (14px) | `--font-normal` (400) |
@@ -142,15 +144,27 @@ Heatmap gradient: `--success-light` (#D1FAE5) at low end through `--success` (#1
 
 ---
 
+## Dashboard Composition
+
+**Focal point:** The KPI card row is the primary visual anchor of any dashboard view. It occupies the top of the content area, above charts and tables, providing at-a-glance status before the user scrolls to detail components.
+
+**Visual hierarchy (top to bottom):**
+1. KPI card row (4-column grid at desktop) -- primary focal point
+2. Chart row (1-2 charts side-by-side at desktop)
+3. Data table (full width, with filter bar above or inline)
+4. Notification panel (sidebar or below-fold section)
+
+---
+
 ## Component Visual Contracts
 
 ### COMP-01: KPI Counter Card
 
 ```
 +-------------------------------------------------------+
-|  [icon-bg]  Label text (14px, gray-500)               |
-|  [  icon ]  VALUE (24px, bold, gray-900)              |
-|             trend_arrow +12.5% vs last sem (12px)     |
+|  [icon-bg]  Label text (14px, normal, gray-500)        |
+|  [  icon ]  VALUE (24px, semibold, gray-900)           |
+|             trend_arrow +12.5% vs last sem (12px)      |
 +-------------------------------------------------------+
    ^--- 3px left border in status color
 ```
@@ -165,7 +179,7 @@ Heatmap gradient: `--success-light` (#D1FAE5) at low end through `--success` (#1
 ### COMP-02: Chart Wrapper
 
 - **Container:** Card wrapper (`--white` bg, `--radius-xl`, `--gray-200` border)
-- **Header:** `--space-4` padding, chart title at `--text-base` / `--font-semibold`, optional subtitle at `--text-xs` / `--gray-500`
+- **Header:** `--space-4` padding, chart title at `--text-base` (16px) / `--font-semibold`, optional subtitle at `--text-xs` / `--gray-500`
 - **Chart area:** Minimum height 240px, `--space-5` padding
 - **ApexCharts theme:** Pass `fontFamily: var(--font-family)`, colors from chart series palette above, tooltip background `--white` with `--shadow-lg`
 - **Loading state:** Skeleton rectangle matching chart dimensions, animated with existing `.skeleton` keyframes
@@ -184,24 +198,24 @@ Heatmap gradient: `--success-light` (#D1FAE5) at low end through `--success` (#1
 - **Pagination:** Below table, `--space-3` padding, flex layout: "Showing 1-20 of 245" text (left, `--text-sm`, `--gray-500`), page buttons (right) using `btn-secondary` / `btn-primary` for current page
 - **Search input:** Inside table header bar, `--gray-50` background, `--gray-200` border, `--radius-lg`, search icon (`search`, `--gray-400`) prefix, `--text-sm` input
 - **Loading state:** Table skeleton -- header row + 5 body rows of skeleton rectangles
-- **Empty state:** Full-width cell spanning all columns, centered: `table_chart` icon (48px, `--gray-300`) + "No records found" heading (`--text-lg`, `--font-semibold`) + "Try adjusting your filters" body (`--text-sm`, `--gray-500`)
-- **Export buttons:** Icon-only buttons (`btn-icon btn-secondary btn-sm`), `picture_as_pdf` for PDF, `table_view` for Excel, with tooltip via `data-tooltip`
+- **Empty state:** Full-width cell spanning all columns, centered: `table_chart` icon (48px, `--gray-300`) + "No records found" heading (`--text-base`, `--font-semibold`) + "Try adjusting your filters" body (`--text-sm`, `--gray-500`)
+- **Export buttons:** Icon-only buttons (`btn-icon btn-secondary btn-sm`), `picture_as_pdf` for PDF (`aria-label="Export to PDF"`), `table_view` for Excel (`aria-label="Export to Excel"`), with tooltip via `data-tooltip`
 
 ### COMP-04: Filter Bar
 
 - **Container:** `--white` bg, `--radius-xl`, `--gray-200` border, `--space-4` padding, flex row with wrap, `--space-3` gap between filter items
 - **Filter inputs:** Use existing `.form-input` / `.form-select` styles from components.css at `--text-sm`, `--radius-lg`
-- **Filter labels:** `--text-xs`, `--font-medium`, `--gray-500`, `--space-1` margin-bottom
+- **Filter labels:** `--text-xs`, `--font-normal`, `--gray-500`, `--space-1` margin-bottom
 - **Date range:** Two date inputs with "to" text separator (`--text-sm`, `--gray-400`)
 - **Select dropdowns:** Native `<select>` styled with `.form-select`, populated from Frappe API
-- **Action area:** "Apply" button (`btn-primary btn-sm`) + "Clear" button (`btn-ghost btn-sm`)
+- **Action area:** "Apply Filters" button (`btn-primary btn-sm`) + "Clear Filters" button (`btn-ghost btn-sm`)
 - **Collapsed state on mobile:** Filters collapse behind a "Filters" toggle button; expanded state shows vertically stacked
 
 ### COMP-05 + COMP-06: Export (PDF + Excel)
 
 - **Trigger:** Icon buttons in DataTable header bar (see COMP-03 export buttons)
-- **PDF (jsPDF):** Exports current page data as a formatted table. Header row uses `--primary` background with white text. Body alternates white and `--gray-50` rows. Page title at top in `--text-lg` / `--font-semibold`. Timestamp footer in `--text-xs`.
-- **Excel (ExcelJS):** Exports current page data. Header row bold with `--primary` hex (#4F46E5) fill. Auto-width columns. Sheet name matches the view title.
+- **PDF (jsPDF):** Exports current page data as a formatted table. Header row uses `--primary` background with white text. Body alternates white and `--gray-50` rows. Page title at top in `--text-base` (16px) / `--font-semibold`. Timestamp footer in `--text-xs`.
+- **Excel (ExcelJS):** Exports current page data. Header row semibold with `--primary` hex (#4F46E5) fill. Auto-width columns. Sheet name matches the view title.
 - **Feedback:** Brief toast notification "Exported to PDF" / "Exported to Excel" in `--success-light` bg with `--success-dark` text, auto-dismiss after 3 seconds, bottom-right position
 
 ### COMP-07: Report Viewer
@@ -216,7 +230,7 @@ Heatmap gradient: `--success-light` (#D1FAE5) at low end through `--success` (#1
 ### COMP-08: Notification/Alert Panel
 
 - **Container:** Card wrapper (`--white` bg, `--radius-xl`, `--gray-200` border)
-- **Header:** "Notifications" title (`--text-base`, `--font-semibold`), "Mark all read" ghost button (right)
+- **Header:** "Notifications" title (`--text-base` 16px, `--font-semibold`), "Mark all read" ghost button (right)
 - **Notification item:** Uses existing `.notification-item` pattern from portal.css (theme). 40x40px icon area with category-specific tint (assignment=primary, grade=warning, deadline=error, schedule=info). Title (`--text-sm`, `--font-semibold`), body (`--text-sm`, `--gray-500`), timestamp (`--text-xs`, `--gray-400`).
 - **Unread indicator:** 8px circle dot in `--primary` color, positioned left of item or as left border
 - **Read state:** No dot, slightly reduced opacity (0.7) on timestamp
@@ -245,7 +259,7 @@ Heatmap gradient: `--success-light` (#D1FAE5) at low end through `--success` (#1
 | Export success toast (PDF) | "Exported to PDF" |
 | Export success toast (Excel) | "Exported to Excel" |
 | Loading text (implicit) | No text -- skeleton placeholders only |
-| Filter clear | "Clear" |
+| Filter clear | "Clear Filters" |
 | Notifications mark read | "Mark all read" |
 | Notifications view all | "View all notifications" |
 | Pagination summary | "Showing {start}-{end} of {total}" |
@@ -288,6 +302,7 @@ All components use skeleton loading (existing `.skeleton` animation from compone
 - Chart has `role="img"` with `aria-label` describing the data summary
 - Color is never the sole indicator -- status always includes icon + text alongside color
 - Toast notifications use `role="status"` with `aria-live="polite"`
+- Icon-only export buttons have explicit `aria-label`: "Export to PDF" and "Export to Excel"
 
 ---
 
