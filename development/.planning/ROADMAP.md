@@ -32,11 +32,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Cross-app data verification script runs clean (Employee count matches Instructor count, Fees paid_amount matches GL Entry totals, all 6 Education overrides verified)
   4. A logged-in user visiting /portal/ is automatically routed to the correct role module (student, faculty, HOD, parent, or management) based on their Frappe roles
   5. Academic year/semester filter is available as a global context that all data views can consume
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Security remediation (SQL injection fix, permission decorator, N+1 query resolution)
-- [ ] 01-02: Cross-app data verification and unified Vue app shell with role routing
+- [x] 01-backend-security-PLAN.md — Fix SQL injection, permission guards, N+1 queries; create health_check.py; add University VC and University Dean roles
+- [ ] 02-portal-app-shell-PLAN.md — Standalone portal-vue/ Vite project with Pinia session store, Vue Router, role-filtered sidebar, get_session_info() endpoint, Frappe www/portal/ page
+- [ ] 03-integration-wiring-PLAN.md — Build Vue app, verify Frappe routing, confirm endpoint access control, human smoke test
 
 ### Phase 2: Shared Component Library
 **Goal**: Reusable UI components exist and are verified in isolation so every portal module can compose dashboards, tables, charts, and exports from proven primitives
@@ -141,7 +142,7 @@ Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Security Hardening | 0/2 | Not started | - |
+| 1. Foundation & Security Hardening | 0/3 | Not started | - |
 | 2. Shared Component Library | 0/2 | Not started | - |
 | 3. Faculty Portal | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
