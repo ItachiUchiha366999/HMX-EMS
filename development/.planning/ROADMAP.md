@@ -12,7 +12,7 @@ This roadmap delivers management dashboards, analytics, and role-based portals (
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
+- [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [ ] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [ ] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
@@ -37,7 +37,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-backend-security-PLAN.md — Fix SQL injection, permission guards, N+1 queries; create health_check.py; add University VC and University Dean roles
 - [x] 02-portal-app-shell-PLAN.md — Standalone portal-vue/ Vite project with Pinia session store, Vue Router, role-filtered sidebar, get_session_info() endpoint, Frappe www/portal/ page
-- [ ] 03-integration-wiring-PLAN.md — Build Vue app, verify Frappe routing, confirm endpoint access control, human smoke test
+- [x] 03-integration-wiring-PLAN.md — Build Vue app, verify Frappe routing, confirm endpoint access control, human smoke test
 
 ### Phase 2: Shared Component Library
 **Goal**: Reusable UI components exist and are verified in isolation so every portal module can compose dashboards, tables, charts, and exports from proven primitives
@@ -142,7 +142,7 @@ Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Security Hardening | 2/3 | In progress | - |
+| 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 0/2 | Not started | - |
 | 3. Faculty Portal | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
