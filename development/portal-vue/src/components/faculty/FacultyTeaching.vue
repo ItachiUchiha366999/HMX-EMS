@@ -29,17 +29,43 @@
       </template>
 
       <template #grades>
-        <div class="placeholder-content">
+        <div class="grades-layout">
+          <FacultyGradeGrid
+            v-if="selectedCourse"
+            :course="selectedCourse"
+            :assessmentPlan="selectedAssessmentPlan"
+            @analytics-updated="refreshGradeAnalytics"
+          />
+          <GradeAnalyticsPanel
+            v-if="selectedCourse"
+            :analytics="gradeAnalytics"
+            :loading="loadingAnalytics"
+          />
+        </div>
+        <div v-if="!selectedCourse" class="placeholder-content">
           <span class="material-symbols-outlined placeholder-icon">edit_note</span>
-          <p>Grade entry coming soon</p>
+          <p>Select a course to begin grading</p>
         </div>
       </template>
 
       <template #students>
-        <div class="placeholder-content">
-          <span class="material-symbols-outlined placeholder-icon">group</span>
-          <p>Student list coming soon</p>
-        </div>
+        <template v-if="showAnalyticsView">
+          <PerformanceAnalytics
+            :course="selectedCourse"
+            @back="showAnalyticsView = false"
+          />
+        </template>
+        <template v-else>
+          <StudentListView
+            v-if="selectedCourse"
+            :course="selectedCourse"
+            @view-analytics="showAnalyticsView = true"
+          />
+          <div v-else class="placeholder-content">
+            <span class="material-symbols-outlined placeholder-icon">group</span>
+            <p>Select a course to view students</p>
+          </div>
+        </template>
       </template>
     </TabLayout>
   </div>
@@ -53,14 +79,40 @@ import TabLayout from './TabLayout.vue'
 import TimetableGrid from './TimetableGrid.vue'
 import TimetableToday from './TimetableToday.vue'
 import AttendanceMarker from './AttendanceMarker.vue'
+import FacultyGradeGrid from './FacultyGradeGrid.vue'
+import GradeAnalyticsPanel from './GradeAnalyticsPanel.vue'
+import StudentListView from './StudentListView.vue'
+import PerformanceAnalytics from './PerformanceAnalytics.vue'
 
 const route = useRoute()
-const { getTodayClasses } = useFacultyApi()
+const { getTodayClasses, getGradeAnalytics } = useFacultyApi()
 
 const activeTab = ref(route.query.tab || 'timetable')
 const todayClasses = ref([])
 const loadingClasses = ref(true)
 const selectedClass = ref(null)
+
+// Shared course state across tabs
+const selectedCourse = ref('')
+const selectedAssessmentPlan = ref('')
+const showAnalyticsView = ref(false)
+
+// Grade analytics for side panel
+const gradeAnalytics = ref(null)
+const loadingAnalytics = ref(false)
+
+async function refreshGradeAnalytics() {
+  if (!selectedCourse.value || !selectedAssessmentPlan.value) return
+  loadingAnalytics.value = true
+  try {
+    const result = await getGradeAnalytics(selectedCourse.value, selectedAssessmentPlan.value)
+    if (result) gradeAnalytics.value = result
+  } catch (e) {
+    // ignore
+  } finally {
+    loadingAnalytics.value = false
+  }
+}
 
 const teachingTabs = [
   { id: 'timetable', label: 'Timetable' },
@@ -136,5 +188,21 @@ function handleAttendanceSubmitted() {
 
 .placeholder-content p {
   font-size: var(--text-sm);
+}
+
+.grades-layout {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.grades-layout > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 1023px) {
+  .grades-layout {
+    flex-direction: column;
+  }
 }
 </style>

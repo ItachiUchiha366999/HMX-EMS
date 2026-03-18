@@ -38,11 +38,11 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FCTY-05**: Faculty can see a pending tasks dashboard (unmarked attendance, unsubmitted grades, pending leave requests)
 - [x] **FCTY-06**: Faculty can view institutional announcements and notices
 - [ ] **FCTY-07**: Faculty can view per-course student performance analytics (grade distribution, at-risk students)
-- [ ] **FCTY-08**: Faculty can approve/reject student leave requests from the portal
-- [ ] **FCTY-09**: Faculty can manage LMS course content, assignments, and view quiz results
-- [ ] **FCTY-10**: Faculty can view their research publications and OBE CO/PO attainment data
-- [ ] **FCTY-11**: Faculty can view their own leave balance and submit leave requests
-- [ ] **FCTY-12**: Faculty can view their teaching workload summary
+- [x] **FCTY-08**: Faculty can approve/reject student leave requests from the portal
+- [x] **FCTY-09**: Faculty can manage LMS course content, assignments, and view quiz results
+- [x] **FCTY-10**: Faculty can view their research publications and OBE CO/PO attainment data
+- [x] **FCTY-11**: Faculty can view their own leave balance and submit leave requests
+- [x] **FCTY-12**: Faculty can view their teaching workload summary
 
 ### HOD Portal
 
@@ -152,11 +152,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FCTY-05 | Phase 3 | Complete |
 | FCTY-06 | Phase 3 | Complete |
 | FCTY-07 | Phase 3 | Pending |
-| FCTY-08 | Phase 3 | Pending |
-| FCTY-09 | Phase 3 | Pending |
-| FCTY-10 | Phase 3 | Pending |
-| FCTY-11 | Phase 3 | Pending |
-| FCTY-12 | Phase 3 | Pending |
+| FCTY-08 | Phase 3 | Complete |
+| FCTY-09 | Phase 3 | Complete |
+| FCTY-10 | Phase 3 | Complete |
+| FCTY-11 | Phase 3 | Complete |
+| FCTY-12 | Phase 3 | Complete |
 | HOD-01 | Phase 6 | Pending |
 | HOD-02 | Phase 6 | Pending |
 | HOD-03 | Phase 6 | Pending |

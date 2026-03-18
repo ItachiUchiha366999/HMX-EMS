@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
-- [ ] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
+- [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
 - [ ] **Phase 5: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
 - [ ] **Phase 6: HOD Portal** - HODs can oversee department performance, manage faculty, and handle approvals
@@ -68,9 +68,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Backend faculty API + dashboard + timetable + attendance marking + announcements (Wave 1)
-- [ ] 03-02-PLAN.md — Spreadsheet grade grid + student lists + performance analytics (Wave 2)
-- [ ] 03-03-PLAN.md — Leave management + LMS CRUD + research + OBE CO/PO + workload summary (Wave 2)
+- [x] 03-01-PLAN.md — Backend faculty API + dashboard + timetable + attendance marking + announcements (Wave 1)
+- [x] 03-02-PLAN.md — Spreadsheet grade grid + student lists + performance analytics (Wave 2)
+- [x] 03-03-PLAN.md — Leave management + LMS CRUD + research + OBE CO/PO + workload summary (Wave 2)
 
 ### Phase 4: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
@@ -144,7 +144,7 @@ Note: Phases 3, 4, and 5 can execute in parallel after Phase 2 completes. Phase 
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
-| 3. Faculty Portal | 0/3 | Not started | - |
+| 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
 | 4. Management Dashboards | 0/3 | Not started | - |
 | 5. Parent Portal | 0/2 | Not started | - |
 | 6. HOD Portal | 0/2 | Not started | - |
