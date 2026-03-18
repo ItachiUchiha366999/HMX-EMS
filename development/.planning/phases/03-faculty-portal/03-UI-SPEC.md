@@ -333,7 +333,7 @@ The tab-based approach reduces sidebar items. Faculty gets 3-4 top-level sidebar
 
 - **Leave balance cards:** 3-column grid, each card uses KpiCard pattern. Value = "{used} / {total}", label = leave type name. Progress bar below value: `--success` fill if < 75% used, `--warning` if 75-90%, `--error` if > 90%.
   - Progress bar: 4px height, `--gray-200` track, fill color per threshold, `--radius-full`
-- **Apply form:** Modal or slide-over panel (320px from right). Fields: Leave Type (select), From Date, To Date, Reason (textarea). "Submit Leave Request" button (`btn-primary`). "Cancel" button (`btn-ghost`).
+- **Apply form:** Modal or slide-over panel (320px from right). Fields: Leave Type (select), From Date, To Date, Reason (textarea). "Submit Leave Request" button (`btn-primary`). "Discard" button (`btn-ghost`).
 - **Recent applications table:** DataTable with columns: Type, From Date, To Date, Reason (truncated), Status (badge). Status badges use semantic colors (Approved=success, Rejected=error, Pending=warning).
 
 **Student leave approval queue (Teaching tab > Students sub-tab or dedicated view):**
@@ -396,7 +396,7 @@ The tab-based approach reduces sidebar items. Faculty gets 3-4 top-level sidebar
 - **Content management view:** Nested list of lessons, each expandable:
   - Lesson item: Drag handle (optional), title (`--text-sm`, `--font-semibold`), type badge, "Edit" ghost button, "Delete" ghost button (`--error` text)
   - "Add Lesson" / "Add Assignment" / "Add Quiz" buttons: `btn-ghost btn-sm` with `add` icon prefix
-- **CRUD forms:** Slide-over panel (480px) or full-page form depending on content type. Standard form inputs using `.form-input`, `.form-select`, `.form-label` styles from components.css. "Save" (`btn-primary`) + "Cancel" (`btn-ghost`).
+- **CRUD forms:** Slide-over panel (480px) or full-page form depending on content type. Standard form inputs using `.form-input`, `.form-select`, `.form-label` styles from components.css. "Save Content" (`btn-primary`) + "Discard" (`btn-ghost`).
 
 ### Research Publications (My Work tab > Research sub-tab)
 
@@ -483,9 +483,11 @@ The tab-based approach reduces sidebar items. Faculty gets 3-4 top-level sidebar
 | Primary CTA (Leave apply) | "Submit Leave Request" |
 | Primary CTA (Leave approve) | "Approve" |
 | Primary CTA (Leave reject) | "Reject" |
-| Primary CTA (LMS save) | "Save" |
+| Primary CTA (LMS save) | "Save Content" |
 | Secondary CTA (Attendance) | "Mark Attendance" |
 | Secondary CTA (Attendance alt) | "Mark for Another Date" |
+| Secondary CTA (Leave form dismiss) | "Discard" |
+| Secondary CTA (LMS form dismiss) | "Discard" |
 | Empty state heading (Timetable) | "No classes scheduled" |
 | Empty state body (Timetable) | "You have no classes scheduled for today. Check back on a teaching day." |
 | Empty state heading (Attendance) | "All classes marked" |
@@ -525,7 +527,7 @@ The tab-based approach reduces sidebar items. Faculty gets 3-4 top-level sidebar
 | Action | Confirmation Approach |
 |--------|-----------------------|
 | Reject student leave | Inline reason text input + "Confirm Reject" button (`--error` bg). No modal. |
-| Delete LMS lesson/assignment | Confirmation modal: "Delete {item name}?" body: "This action cannot be undone." Buttons: "Cancel" (`btn-ghost`) + "Delete" (`btn-sm`, `--error` bg, white text) |
+| Delete LMS lesson/assignment | Confirmation modal: "Delete {item name}?" body: "This action cannot be undone." Buttons: "Keep Content" (`btn-ghost`) + "Delete" (`btn-sm`, `--error` bg, white text) |
 | Undo attendance (before submit) | No confirmation needed -- toggle checkbox is instantly reversible |
 
 ---
