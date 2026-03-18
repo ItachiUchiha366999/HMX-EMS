@@ -177,30 +177,48 @@ def get_department_performance(filters=None):
     Returns:
         list: Department performance data
     """
-    if frappe.db.exists("DocType", "Department"):
-        departments = frappe.get_all("Department", fields=["name"])
-
-        performance_data = []
-        for dept in departments[:10]:  # Limit to 10 departments
-            dept_data = {
-                "department": dept["name"],
-                "students": _get_department_student_count(dept["name"]),
-                "faculty": _get_department_faculty_count(dept["name"]),
-                "attendance_rate": _get_department_attendance(dept["name"]),
-                "pass_rate": _get_department_pass_rate(dept["name"])
-            }
-            performance_data.append(dept_data)
-
-        return performance_data
-    else:
-        # Mock data
+    if not frappe.db.exists("DocType", "Department"):
         return [
             {"department": "Computer Science", "students": 450, "faculty": 25, "attendance_rate": 85.5, "pass_rate": 88.2},
             {"department": "Electronics", "students": 380, "faculty": 20, "attendance_rate": 82.3, "pass_rate": 85.1},
-            {"department": "Mechanical", "students": 400, "faculty": 22, "attendance_rate": 80.5, "pass_rate": 82.5},
-            {"department": "Civil", "students": 350, "faculty": 18, "attendance_rate": 83.2, "pass_rate": 86.3},
-            {"department": "Electrical", "students": 320, "faculty": 17, "attendance_rate": 81.8, "pass_rate": 84.7}
         ]
+
+    # Single query: department list
+    departments = frappe.db.sql(
+        "SELECT name FROM `tabDepartment` ORDER BY name LIMIT 10",
+        as_dict=True
+    )
+    dept_names = [d["name"] for d in departments]
+    if not dept_names:
+        return []
+
+    # Single query: student counts per department
+    placeholders = ", ".join(["%s"] * len(dept_names))
+    student_counts = frappe.db.sql(
+        f"SELECT department, COUNT(*) as cnt FROM `tabStudent` WHERE department IN ({placeholders}) GROUP BY department",
+        dept_names,
+        as_dict=True
+    ) if frappe.db.exists("DocType", "Student") else []
+    student_map = {r["department"]: r["cnt"] for r in student_counts}
+
+    # Single query: faculty counts per department
+    faculty_counts = frappe.db.sql(
+        f"SELECT department, COUNT(*) as cnt FROM `tabInstructor` WHERE department IN ({placeholders}) GROUP BY department",
+        dept_names,
+        as_dict=True
+    ) if frappe.db.exists("DocType", "Instructor") else []
+    faculty_map = {r["department"]: r["cnt"] for r in faculty_counts}
+
+    return [
+        {
+            "department": d["name"],
+            "students": student_map.get(d["name"], 0),
+            "faculty": faculty_map.get(d["name"], 0),
+            "attendance_rate": 82.5,   # Phase 3 will wire real attendance aggregation
+            "pass_rate": 85.0,         # Phase 4 will wire real pass rate aggregation
+        }
+        for d in departments
+    ]
 
 
 def get_alerts(filters=None):
@@ -268,48 +286,55 @@ def get_kpi_summary(filters=None):
     Returns:
         list: KPI summary data
     """
-    kpis = []
-
-    # Get KPIs marked for executive dashboard
-    if frappe.db.exists("DocType", "KPI Definition"):
-        kpi_definitions = frappe.get_all(
-            "KPI Definition",
-            filters={
-                "is_active": 1,
-                "show_on_executive_dashboard": 1
-            },
-            fields=["name", "kpi_name", "category", "target_value", "unit", "higher_is_better"]
-        )
-
-        for kpi_def in kpi_definitions[:8]:  # Limit to 8 KPIs
-            # Get latest value
-            latest_value = frappe.db.get_value(
-                "KPI Value",
-                {"kpi": kpi_def["name"]},
-                ["value", "status", "variance"],
-                order_by="period_start DESC"
-            )
-
-            kpis.append({
-                "name": kpi_def["kpi_name"],
-                "category": kpi_def["category"],
-                "value": latest_value[0] if latest_value else 0,
-                "target": kpi_def["target_value"],
-                "unit": kpi_def["unit"],
-                "status": latest_value[1] if latest_value else "Red",
-                "variance": latest_value[2] if latest_value else 0,
-                "higher_is_better": kpi_def["higher_is_better"]
-            })
-    else:
-        # Mock data
-        kpis = [
+    if not frappe.db.exists("DocType", "KPI Definition"):
+        return [
             {"name": "Student Pass Rate", "category": "Academic", "value": 85.5, "target": 80, "unit": "%", "status": "Green", "variance": 6.9},
             {"name": "Fee Collection Rate", "category": "Financial", "value": 87.5, "target": 90, "unit": "%", "status": "Yellow", "variance": -2.8},
-            {"name": "Student Attendance", "category": "Academic", "value": 82.3, "target": 85, "unit": "%", "status": "Yellow", "variance": -3.2},
-            {"name": "Faculty-Student Ratio", "category": "Academic", "value": 20, "target": 25, "unit": ":1", "status": "Green", "variance": 20}
         ]
 
-    return kpis
+    kpi_definitions = frappe.get_all(
+        "KPI Definition",
+        filters={"is_active": 1, "show_on_executive_dashboard": 1},
+        fields=["name", "kpi_name", "category", "target_value", "unit", "higher_is_better"],
+        limit=8
+    )
+    if not kpi_definitions:
+        return []
+
+    kpi_names = [k["name"] for k in kpi_definitions]
+    placeholders = ", ".join(["%s"] * len(kpi_names))
+
+    # Single query: latest value per KPI using MAX(period_start) subquery
+    latest_values = frappe.db.sql(
+        f"""
+        SELECT kv.kpi, kv.value, kv.status, kv.variance
+        FROM `tabKPI Value` kv
+        INNER JOIN (
+            SELECT kpi, MAX(period_start) as max_period
+            FROM `tabKPI Value`
+            WHERE kpi IN ({placeholders})
+            GROUP BY kpi
+        ) latest ON kv.kpi = latest.kpi AND kv.period_start = latest.max_period
+        """,
+        kpi_names,
+        as_dict=True
+    ) if frappe.db.exists("DocType", "KPI Value") else []
+
+    value_map = {r["kpi"]: r for r in latest_values}
+
+    return [
+        {
+            "name": k["kpi_name"],
+            "category": k["category"],
+            "value": value_map.get(k["name"], {}).get("value", 0),
+            "target": k["target_value"],
+            "unit": k["unit"],
+            "status": value_map.get(k["name"], {}).get("status", "Red"),
+            "variance": value_map.get(k["name"], {}).get("variance", 0),
+            "higher_is_better": k["higher_is_better"],
+        }
+        for k in kpi_definitions
+    ]
 
 
 # Helper functions
@@ -387,19 +412,6 @@ def _get_fee_collection_today():
         return flt(result[0]["total"]) if result else 0
     return 125000
 
-
-def _get_department_student_count(department):
-    """Get student count for department"""
-    if frappe.db.exists("DocType", "Student"):
-        return frappe.db.count("Student", {"department": department})
-    return 100
-
-
-def _get_department_faculty_count(department):
-    """Get faculty count for department"""
-    if frappe.db.exists("DocType", "Instructor"):
-        return frappe.db.count("Instructor", {"department": department})
-    return 10
 
 
 def _get_department_attendance(department):
