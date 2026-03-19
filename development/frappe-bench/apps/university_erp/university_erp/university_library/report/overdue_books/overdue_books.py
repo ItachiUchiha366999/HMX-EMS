@@ -27,7 +27,10 @@ def get_columns():
 
 
 def get_data(filters):
-    fine_per_day = frappe.db.get_single_value("University Settings", "library_fine_per_day") or 5
+    try:
+        fine_per_day = frappe.db.get_single_value("University Settings", "library_fine_per_day") or 5
+    except Exception:
+        fine_per_day = 5
 
     return frappe.db.sql(f"""
         SELECT

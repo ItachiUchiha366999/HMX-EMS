@@ -92,11 +92,8 @@ def get_data(filters):
 
     if filters:
         if filters.get("program"):
-            conditions.append("s.program = %(program)s")
+            conditions.append("s.custom_program = %(program)s")
             values["program"] = filters["program"]
-        if filters.get("department"):
-            conditions.append("s.department = %(department)s")
-            values["department"] = filters["department"]
         if filters.get("academic_year"):
             values["academic_year"] = filters["academic_year"]
 
@@ -106,18 +103,14 @@ def get_data(filters):
     if not frappe.db.exists("DocType", "Student"):
         return _get_mock_data()
 
-    # Check if CGPA field exists
-    meta = frappe.get_meta("Student")
-    cgpa_field = "s.cgpa" if meta.has_field("cgpa") else "0 as cgpa"
-
     query = f"""
         SELECT
             s.name as student_id,
             s.student_name,
-            s.program,
-            s.department,
-            IFNULL(s.current_semester, '-') as semester,
-            {cgpa_field}
+            s.custom_program as program,
+            '-' as department,
+            '-' as semester,
+            IFNULL(s.custom_cgpa, 0) as cgpa
         FROM `tabStudent` s
         WHERE {where_clause}
         ORDER BY s.student_name

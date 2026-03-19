@@ -44,15 +44,14 @@ def get_data(filters):
             pc.company_name,
             pc.industry_type,
             COUNT(DISTINCT pd.name) as total_drives,
-            COUNT(DISTINCT pjo.name) as total_openings,
+            COUNT(DISTINCT pd.job_opening) as total_openings,
             COUNT(pa.name) as total_applications,
-            SUM(CASE WHEN pa.status IN ('Shortlisted', 'Selected', 'Offer Accepted') THEN 1 ELSE 0 END) as shortlisted,
-            SUM(CASE WHEN pa.status IN ('Selected', 'Offer Accepted') THEN 1 ELSE 0 END) as selected,
-            SUM(CASE WHEN pa.status = 'Offer Accepted' THEN 1 ELSE 0 END) as placed,
-            AVG(CASE WHEN pa.status = 'Offer Accepted' THEN pjo.package_offered ELSE NULL END) as avg_package
+            SUM(CASE WHEN pa.status IN ('Shortlisted', 'Selected', 'Placed') THEN 1 ELSE 0 END) as shortlisted,
+            SUM(CASE WHEN pa.status IN ('Selected', 'Placed') THEN 1 ELSE 0 END) as selected,
+            SUM(CASE WHEN pa.status = 'Placed' THEN 1 ELSE 0 END) as placed,
+            AVG(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as avg_package
         FROM `tabPlacement Company` pc
         LEFT JOIN `tabPlacement Drive` pd ON pd.company = pc.name
-        LEFT JOIN `tabPlacement Job Opening` pjo ON pjo.company = pc.name
         LEFT JOIN `tabPlacement Application` pa ON pa.placement_drive = pd.name
         WHERE pc.docstatus < 2 {conditions}
         GROUP BY pc.name

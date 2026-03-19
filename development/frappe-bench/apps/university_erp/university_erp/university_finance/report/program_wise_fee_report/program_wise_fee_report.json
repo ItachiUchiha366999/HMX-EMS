@@ -1,0 +1,13 @@
+{
+  "name": "Program-wise Fee Report",
+  "doctype": "Report",
+  "ref_doctype": "Fees",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "University Finance",
+  "roles": [
+    {"role": "System Manager"},
+    {"role": "Accounts Manager"},
+    {"role": "Accounts User"}
+  ]
+}

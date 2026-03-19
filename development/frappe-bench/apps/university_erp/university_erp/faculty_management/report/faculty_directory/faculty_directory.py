@@ -23,26 +23,47 @@ def get_columns():
 		{"fieldname": "cell_number", "label": "Mobile", "fieldtype": "Data", "width": 120}
 	]
 
+def _has_custom_field(doctype, fieldname):
+	"""Check if a custom field exists on the given doctype."""
+	try:
+		meta = frappe.get_meta(doctype)
+		return meta.has_field(fieldname)
+	except Exception:
+		return False
+
 def get_data(filters):
-	conditions = "e.custom_is_faculty = 1 AND e.status = 'Active'"
-	
+	has_is_faculty = _has_custom_field("Employee", "custom_is_faculty")
+	has_employee_category = _has_custom_field("Employee", "custom_employee_category")
+	has_current_workload = _has_custom_field("Employee", "custom_current_workload")
+
+	# Build WHERE clause
+	where_parts = ["e.status = 'Active'"]
+	if has_is_faculty:
+		where_parts.append("e.custom_is_faculty = 1")
+
 	if filters.get("department"):
-		conditions += f" AND e.department = '{filters.get('department')}'"
-	
+		where_parts.append(f"e.department = '{filters.get('department')}'")
+
 	if filters.get("designation"):
-		conditions += f" AND e.designation = '{filters.get('designation')}'"
-	
+		where_parts.append(f"e.designation = '{filters.get('designation')}'")
+
+	conditions = " AND ".join(where_parts)
+
+	# Build SELECT fields
+	category_expr = "e.custom_employee_category" if has_employee_category else "NULL"
+	workload_expr = "e.custom_current_workload" if has_current_workload else "0"
+
 	data = frappe.db.sql(f"""
 		SELECT
 			e.name as employee,
 			e.employee_name,
 			e.department,
 			e.designation,
-			e.custom_employee_category as employee_category,
+			{category_expr} as employee_category,
 			fp.specialization,
 			fp.h_index,
 			fp.total_publications,
-			e.custom_current_workload as current_workload,
+			{workload_expr} as current_workload,
 			e.company_email as email,
 			e.cell_number
 		FROM `tabEmployee` e
@@ -50,5 +71,5 @@ def get_data(filters):
 		WHERE {conditions}
 		ORDER BY e.employee_name
 	""", as_dict=True)
-	
+
 	return data

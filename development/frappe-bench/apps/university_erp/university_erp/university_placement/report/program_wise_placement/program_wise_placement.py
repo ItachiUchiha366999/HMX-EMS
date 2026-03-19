@@ -28,31 +28,47 @@ def get_columns():
     ]
 
 
+def _has_custom_field(doctype, fieldname):
+    """Check if a custom field exists on the given doctype."""
+    try:
+        meta = frappe.get_meta(doctype)
+        return meta.has_field(fieldname)
+    except Exception:
+        return False
+
+
 def get_data(filters):
     conditions = ""
     if filters.get("academic_year"):
         conditions += " AND pd.academic_year = %(academic_year)s"
-    if filters.get("program"):
-        conditions += " AND pa.program = %(program)s"
+
+    has_custom_program = _has_custom_field("Student", "custom_program")
+    program_field = "s.custom_program" if has_custom_program else "NULL"
+
+    if filters.get("program") and has_custom_program:
+        conditions += " AND s.custom_program = %(program)s"
 
     data = frappe.db.sql("""
         SELECT
-            pa.program,
+            {program_field} as program,
             COUNT(DISTINCT pa.student) as registered,
-            COUNT(DISTINCT CASE WHEN pa.status = 'Offer Accepted' THEN pa.student ELSE NULL END) as placed,
-            AVG(CASE WHEN pa.status = 'Offer Accepted' THEN pjo.package_offered ELSE NULL END) as avg_package,
-            MAX(CASE WHEN pa.status = 'Offer Accepted' THEN pjo.package_offered ELSE NULL END) as highest_package
+            COUNT(DISTINCT CASE WHEN pa.status = 'Placed' THEN pa.student ELSE NULL END) as placed,
+            AVG(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as avg_package,
+            MAX(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as highest_package
         FROM `tabPlacement Application` pa
+        LEFT JOIN `tabStudent` s ON s.name = pa.student
         LEFT JOIN `tabPlacement Drive` pd ON pd.name = pa.placement_drive
-        LEFT JOIN `tabPlacement Job Opening` pjo ON pjo.name = pa.job_opening
         WHERE pa.docstatus < 2 {conditions}
-        GROUP BY pa.program
+        GROUP BY {program_field}
         ORDER BY placed DESC
-    """.format(conditions=conditions), filters, as_dict=True)
+    """.format(program_field=program_field, conditions=conditions), filters, as_dict=True)
 
     # Get total students per program and multiple offers
     for row in data:
-        row["total_students"] = frappe.db.count("Student", {"program": row.program, "enabled": 1}) or 0
+        if row.program and has_custom_program:
+            row["total_students"] = frappe.db.count("Student", {"custom_program": row.program, "enabled": 1}) or 0
+        else:
+            row["total_students"] = 0
 
         if row.total_students:
             row["placement_rate"] = (row.placed or 0) / row.total_students * 100
@@ -60,25 +76,32 @@ def get_data(filters):
             row["placement_rate"] = 0
 
         # Count students with multiple offers
-        multiple_offers = frappe.db.sql("""
-            SELECT COUNT(*) as count FROM (
-                SELECT student, COUNT(*) as offer_count
-                FROM `tabPlacement Application`
-                WHERE program = %s AND status = 'Offer Accepted'
-                GROUP BY student
-                HAVING offer_count > 1
-            ) as multi
-        """, (row.program,), as_dict=True)[0]
-        row["multiple_offers"] = multiple_offers.count or 0
+        if row.program and has_custom_program:
+            multiple_offers = frappe.db.sql("""
+                SELECT COUNT(*) as count FROM (
+                    SELECT pa2.student, COUNT(*) as offer_count
+                    FROM `tabPlacement Application` pa2
+                    INNER JOIN `tabStudent` s2 ON s2.name = pa2.student
+                    WHERE s2.custom_program = %s AND pa2.status = 'Placed'
+                    GROUP BY pa2.student
+                    HAVING offer_count > 1
+                ) as multi
+            """, (row.program,), as_dict=True)[0]
+            row["multiple_offers"] = multiple_offers.count or 0
 
-        # Average offers per placed student
-        if row.placed:
-            total_offers = frappe.db.count("Placement Application", {
-                "program": row.program,
-                "status": "Offer Accepted"
-            })
-            row["avg_offers"] = total_offers / row.placed if row.placed else 0
+            # Average offers per placed student
+            if row.placed:
+                total_offers = frappe.db.sql("""
+                    SELECT COUNT(*) as cnt
+                    FROM `tabPlacement Application` pa3
+                    INNER JOIN `tabStudent` s3 ON s3.name = pa3.student
+                    WHERE s3.custom_program = %s AND pa3.status = 'Placed'
+                """, (row.program,), as_dict=True)[0]
+                row["avg_offers"] = (total_offers.cnt or 0) / row.placed if row.placed else 0
+            else:
+                row["avg_offers"] = 0
         else:
+            row["multiple_offers"] = 0
             row["avg_offers"] = 0
 
     return data
@@ -88,7 +111,7 @@ def get_chart(data):
     if not data:
         return None
 
-    labels = [row.program for row in data[:10]]
+    labels = [row.program or "Unknown" for row in data[:10]]
     placed = [row.placed or 0 for row in data[:10]]
     registered = [row.registered or 0 for row in data[:10]]
 

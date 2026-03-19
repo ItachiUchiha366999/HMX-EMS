@@ -113,9 +113,9 @@ def get_data(filters):
             fr.student,
             fr.student_name,
             fr.refund_amount,
-            fr.reason,
+            fr.refund_reason as reason,
             fr.status,
-            fr.refund_mode,
+            fr.payment_mode as refund_mode,
             fr.payment_entry,
             fr.creation,
             fr.approved_by,
@@ -143,7 +143,7 @@ def get_conditions(filters):
         conditions.append("AND fr.status = %(status)s")
 
     if filters.get("reason"):
-        conditions.append("AND fr.reason = %(reason)s")
+        conditions.append("AND fr.refund_reason = %(reason)s")
 
     if filters.get("student"):
         conditions.append("AND fr.student = %(student)s")

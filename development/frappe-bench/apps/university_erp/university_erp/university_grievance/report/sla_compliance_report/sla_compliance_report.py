@@ -98,12 +98,12 @@ def get_data(filters):
             SUM(CASE WHEN g.sla_status = 'Breached' THEN 1 ELSE 0 END) as breached_count,
             AVG(CASE
                 WHEN g.status IN ('Resolved', 'Closed') AND g.resolution_date IS NOT NULL
-                THEN DATEDIFF(g.resolution_date, g.submission_date)
+                THEN DATEDIFF(g.resolution_date, g.creation)
                 ELSE NULL
             END) as avg_resolution_days
         FROM `tabGrievance` g
         LEFT JOIN `tabGrievance Type` gt ON g.grievance_type = gt.name
-        WHERE g.submission_date IS NOT NULL
+        WHERE g.creation IS NOT NULL
         {conditions}
         GROUP BY g.category, g.grievance_type, gt.sla_days
         ORDER BY g.category, g.grievance_type
@@ -124,9 +124,9 @@ def get_conditions(filters):
     conditions = ""
 
     if filters.get("from_date"):
-        conditions += f" AND g.submission_date >= '{filters.get('from_date')}'"
+        conditions += f" AND g.creation >= '{filters.get('from_date')}'"
     if filters.get("to_date"):
-        conditions += f" AND g.submission_date <= '{filters.get('to_date')}'"
+        conditions += f" AND g.creation <= '{filters.get('to_date')}'"
     if filters.get("category"):
         conditions += f" AND g.category = '{filters.get('category')}'"
     if filters.get("grievance_type"):

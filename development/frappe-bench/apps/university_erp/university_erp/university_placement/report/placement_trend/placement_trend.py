@@ -52,14 +52,13 @@ def get_data(filters):
             COUNT(DISTINCT pd.name) as drives_conducted,
             COUNT(DISTINCT pd.company) as companies_visited,
             COUNT(pa.name) as applications,
-            SUM(CASE WHEN pa.status IN ('Shortlisted', 'Selected', 'Offer Accepted', 'Offer Rejected') THEN 1 ELSE 0 END) as shortlisted,
-            SUM(CASE WHEN pa.status = 'Offer Accepted' THEN 1 ELSE 0 END) as placed,
-            SUM(CASE WHEN pa.status IN ('Selected', 'Offer Accepted', 'Offer Rejected') THEN 1 ELSE 0 END) as offers_made,
-            SUM(CASE WHEN pa.status = 'Offer Accepted' THEN 1 ELSE 0 END) as offers_accepted,
-            AVG(CASE WHEN pa.status = 'Offer Accepted' THEN pjo.package_offered ELSE NULL END) as avg_package
+            SUM(CASE WHEN pa.status IN ('Shortlisted', 'Selected', 'Placed') THEN 1 ELSE 0 END) as shortlisted,
+            SUM(CASE WHEN pa.status = 'Placed' THEN 1 ELSE 0 END) as placed,
+            SUM(CASE WHEN pa.status IN ('Selected', 'Placed') THEN 1 ELSE 0 END) as offers_made,
+            SUM(CASE WHEN pa.status = 'Placed' THEN 1 ELSE 0 END) as offers_accepted,
+            AVG(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as avg_package
         FROM `tabPlacement Drive` pd
         LEFT JOIN `tabPlacement Application` pa ON pa.placement_drive = pd.name
-        LEFT JOIN `tabPlacement Job Opening` pjo ON pjo.name = pa.job_opening
         WHERE pd.docstatus < 2 AND pd.drive_date IS NOT NULL {conditions}
         GROUP BY {date_format}
         ORDER BY period ASC

@@ -23,15 +23,31 @@ def get_columns():
 		{"fieldname": "utilization", "label": "Utilization", "fieldtype": "Data", "width": 120}
 	]
 
+def _has_custom_field(doctype, fieldname):
+	"""Check if a custom field exists on the given doctype."""
+	try:
+		meta = frappe.get_meta(doctype)
+		return meta.has_field(fieldname)
+	except Exception:
+		return False
+
 def get_data(filters):
+	has_is_faculty = _has_custom_field("Employee", "custom_is_faculty")
+
 	conditions = ""
-	
+
 	if filters.get("academic_term"):
 		conditions += f" AND ta.academic_term = '{filters.get('academic_term')}'"
-	
+
 	if filters.get("department"):
 		conditions += f" AND e.department = '{filters.get('department')}'"
-	
+
+	# Build WHERE clause
+	where_parts = ["e.status = 'Active'"]
+	if has_is_faculty:
+		where_parts.append("e.custom_is_faculty = 1")
+	where_clause = " AND ".join(where_parts)
+
 	data = frappe.db.sql(f"""
 		SELECT
 			e.name as employee,
@@ -45,13 +61,12 @@ def get_data(filters):
 			SUM(ta.practical_hours) as practical_hours
 		FROM `tabEmployee` e
 		LEFT JOIN `tabTeaching Assignment` ta ON ta.instructor = e.name AND ta.docstatus = 1
-		WHERE e.custom_is_faculty = 1
-			AND e.status = 'Active'
+		WHERE {where_clause}
 			{conditions}
 		GROUP BY e.name
 		ORDER BY total_hours DESC
 	""", as_dict=True)
-	
+
 	for row in data:
 		hours = row.total_hours or 0
 		if hours == 0:
@@ -62,23 +77,23 @@ def get_data(filters):
 			row.utilization = "Optimal"
 		else:
 			row.utilization = "Overloaded"
-	
+
 	return data
 
 def get_chart(data):
 	if not data:
 		return None
-	
+
 	utilization_counts = {"No Assignment": 0, "Underutilized": 0, "Optimal": 0, "Overloaded": 0}
-	
+
 	for row in data:
 		utilization_counts[row.utilization] = utilization_counts.get(row.utilization, 0) + 1
-	
+
 	return {
 		"data": {
 			"labels": list(utilization_counts.keys()),
 			"datasets": [{"name": "Faculty Count", "values": list(utilization_counts.values())}]
 		},
 		"type": "bar",
-		"colors": ["#cccccc", "#ffa00", "#28a745", "#dc3545"]
+		"colors": ["#cccccc", "#ffa00a", "#28a745", "#dc3545"]
 	}

@@ -95,10 +95,10 @@ def get_data(filters):
     data = frappe.db.sql(f"""
         SELECT
             ff.name as feedback_form,
-            ff.title as form_title,
+            ff.form_title as form_title,
             ff.form_type,
             ff.academic_term,
-            ff.target_responses as target_count,
+            ff.total_responses as target_count,
             COUNT(fr.name) as response_count,
             AVG(fr.overall_score) as avg_score,
             SUM(CASE WHEN fr.nps_category = 'Promoter' THEN 1 ELSE 0 END) as promoters,
@@ -109,7 +109,7 @@ def get_data(filters):
             AND fr.status IN ('Valid', 'Submitted')
         WHERE 1=1
         {conditions}
-        GROUP BY ff.name, ff.title, ff.form_type, ff.academic_term, ff.target_responses
+        GROUP BY ff.name, ff.form_title, ff.form_type, ff.academic_term, ff.total_responses
         ORDER BY ff.creation DESC
     """, as_dict=True)
 

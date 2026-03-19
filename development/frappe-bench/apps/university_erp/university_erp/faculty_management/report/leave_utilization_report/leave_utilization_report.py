@@ -21,24 +21,36 @@ def get_columns():
 		{"fieldname": "classes_affected", "label": "Classes Affected", "fieldtype": "Int", "width": 140}
 	]
 
+def _has_custom_field(doctype, fieldname):
+	"""Check if a custom field exists on the given doctype."""
+	try:
+		meta = frappe.get_meta(doctype)
+		return meta.has_field(fieldname)
+	except Exception:
+		return False
+
 def get_data(filters):
+	has_classes_affected = _has_custom_field("Leave Application", "custom_total_classes_affected")
+
 	conditions = "la.docstatus = 1"
-	
+
 	if filters.get("employee"):
 		conditions += f" AND la.employee = '{filters.get('employee')}'"
-	
+
 	if filters.get("department"):
 		conditions += f" AND e.department = '{filters.get('department')}'"
-	
+
 	if filters.get("leave_type"):
 		conditions += f" AND la.leave_type = '{filters.get('leave_type')}'"
-	
+
 	if filters.get("from_date"):
 		conditions += f" AND la.from_date >= '{filters.get('from_date')}'"
-	
+
 	if filters.get("to_date"):
 		conditions += f" AND la.to_date <= '{filters.get('to_date')}'"
-	
+
+	classes_expr = "SUM(la.custom_total_classes_affected)" if has_classes_affected else "0"
+
 	data = frappe.db.sql(f"""
 		SELECT
 			la.employee,
@@ -46,14 +58,14 @@ def get_data(filters):
 			e.department,
 			la.leave_type,
 			SUM(la.total_leave_days) as total_leave_days,
-			la.custom_total_classes_affected as classes_affected
+			{classes_expr} as classes_affected
 		FROM `tabLeave Application` la
 		INNER JOIN `tabEmployee` e ON la.employee = e.name
 		WHERE {conditions}
 		GROUP BY la.employee, la.leave_type
 		ORDER BY total_leave_days DESC
 	""", as_dict=True)
-	
+
 	# Get allocation data
 	for row in data:
 		allocation = frappe.db.get_value(
@@ -70,5 +82,5 @@ def get_data(filters):
 			row.allocated_days = 0
 			row.balance = 0
 			row.utilization_pct = 0
-	
+
 	return data
