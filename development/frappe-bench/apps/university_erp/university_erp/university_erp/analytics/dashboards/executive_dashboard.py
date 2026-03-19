@@ -373,7 +373,8 @@ def _get_total_courses():
 def _get_active_batches(filters=None):
     """Get active batch count"""
     if frappe.db.exists("DocType", "Student Batch Name"):
-        return frappe.db.count("Student Batch Name", {"status": "Active"})
+        # Student Batch Name has no "status" field -- count all batches
+        return frappe.db.count("Student Batch Name")
     return 45
 
 

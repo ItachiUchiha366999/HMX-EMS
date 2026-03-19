@@ -31,7 +31,9 @@
     "late_fee_percentage",
     "column_break_4",
     "late_fee_period_days",
-    "enable_online_payment"
+    "enable_online_payment",
+    "library_settings_section",
+    "library_fine_per_day"
   ],
   "fields": [
     {
@@ -183,12 +185,24 @@
       "fieldname": "enable_online_payment",
       "fieldtype": "Check",
       "label": "Enable Online Payment"
+    },
+    {
+      "fieldname": "library_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Library Settings"
+    },
+    {
+      "default": "5",
+      "description": "Fine amount per day for overdue library books",
+      "fieldname": "library_fine_per_day",
+      "fieldtype": "Float",
+      "label": "Library Fine Per Day"
     }
   ],
   "index_web_pages_for_search": 1,
   "issingle": 1,
   "links": [],
-  "modified": "2025-12-31 13:00:00",
+  "modified": "2026-03-19 13:15:00",
   "modified_by": "Administrator",
   "module": "University ERP",
   "name": "University Settings",
