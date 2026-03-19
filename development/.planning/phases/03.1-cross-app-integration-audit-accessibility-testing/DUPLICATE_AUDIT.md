@@ -431,3 +431,117 @@ Doctypes referenced by Link fields from 2+ different apps.
 - Stock Reconciliation Item
 - Supplier
 - Warehouse
+
+
+## Business Logic Overlaps
+
+**Generated:** 2026-03-19 14:28:08 UTC
+
+Analysis of overlapping business logic between Education/ERPNext and university_erp in four key domains. Each overlap area identifies the authoritative source, integration pattern, risk level, and recommendation.
+
+### Fees / Finance
+
+**Education Entities:**
+- Fees doctype (fee creation, submission, GL posting via erpnext.accounts)
+- Fee Component (child table for fee line items)
+- Fee Schedule (batch fee generation)
+- Fee Structure (template for fee calculation)
+
+**university_erp Entities:**
+- UniversityFees override (penalty calculation, scholarship, net amount)
+- Bulk Fee Generator (batch fee creation)
+- Fee Refund (refund workflow with approval)
+- Fee Payment Order (payment gateway integration)
+- fee_collection_summary report
+- fee_defaulters report
+- program_wise_fee_report report
+- GL posting hooks (gl_integration.py, gl_posting.py)
+- Custom fields: due_date, penalty, scholarship, net_amount, fee_category
+
+**Authoritative Source:** Education (Fees doctype)
+**Integration Pattern:** EXTEND -- university_erp subclasses Education's Fees via override_doctype_class. UniversityFees(Fees) adds penalty, scholarship, net amount calculation. doc_events hooks add GL posting on submit/cancel. Education owns the core Fees data model; university_erp extends behavior.
+**Risk:** LOW -- Clean extension pattern. university_erp adds custom_* fields but does not duplicate core fee logic. Dual GL posting hooks (gl_integration.py AND gl_posting.py) on Fees.on_submit could cause double GL entries if not idempotent.
+**Recommendation:** KEEP BOTH -- Education Fees is authoritative for data model. university_erp extends via override. Verify GL posting hooks are not creating duplicate entries (both registered in hooks.py on_submit).
+
+### Examinations / Assessment
+
+**Education Entities:**
+- Assessment Plan (scheduling assessments for courses)
+- Assessment Result (student grades, docstatus-controlled)
+- Assessment Criteria (grading criteria definition)
+- Assessment Group (grouping students for assessment)
+- Grading Scale (grade-to-percentage mapping)
+
+**university_erp Entities:**
+- UniversityAssessmentResult override (10-point grading, SGPA/CGPA, grade points)
+- Online Examination (exam session management, proctoring)
+- Internal Assessment (continuous evaluation)
+- Student Exam Attempt (per-student exam attempt tracking)
+- Question Bank (question paper management)
+- Question Paper (generated papers from bank)
+- Answer Sheet (answer tracking and evaluation)
+- Revaluation Request (grade dispute workflow)
+- Practical Examination (lab/practical exam management)
+- Hall Ticket (exam admission control)
+- Examination (exam scheduling, venue, seating)
+
+**Authoritative Source:** Education (Assessment Result for grades), university_erp (exam logistics)
+**Integration Pattern:** COMPLEMENT -- Education owns grading (Assessment Plan -> Assessment Result). university_erp adds exam logistics layer on top (Online Examination -> Student Exam Attempt -> Answer Sheet -> Assessment Result via override). UniversityAssessmentResult(AssessmentResult) adds 10-point grading scale and CGPA calculation.
+**Risk:** LOW -- Clear separation. Education = grading data model. university_erp = exam delivery + logistics. Override extends Assessment Result with grade points and CGPA.
+**Recommendation:** KEEP BOTH -- Complementary systems. Education Assessment Result is authoritative for grade data. university_erp exam doctypes handle logistics that Education does not cover.
+
+### Attendance
+
+**Education Entities:**
+- Student Attendance (per-student, per-course daily attendance record)
+- Student Attendance Tool (bulk attendance marking page)
+
+**university_erp Entities:**
+- Hostel Attendance (hostel-specific attendance, separate from academic)
+- Biometric Attendance Log (hardware integration for automated attendance)
+- faculty_api.submit_attendance() -- creates Student Attendance records via API
+- attendance.py (university_academics) -- attendance summary/analytics
+
+**Authoritative Source:** Education (Student Attendance doctype)
+**Integration Pattern:** CREATE-INTO -- university_erp creates records directly in Education's Student Attendance table via faculty_api.submit_attendance(). Hostel Attendance is a separate parallel system (different context, not academic). Biometric Attendance Log is an input source that could feed into Student Attendance.
+**Risk:** MEDIUM -- faculty_api.submit_attendance() creates Student Attendance records with idempotency check (frappe.db.count before insert). However, if both Student Attendance Tool and faculty_api are used for same course/date, duplicates could occur if idempotency check is bypassed.
+**Recommendation:** KEEP BOTH -- Education Student Attendance is authoritative data store. university_erp provides alternative input channels (API, biometric). Ensure idempotency check in faculty_api covers all uniqueness constraints.
+
+### Student Data
+
+**Education Entities:**
+- Student doctype (core student record -- name, email, enrollment)
+- Student Group (class/section grouping)
+- Program Enrollment (student-program mapping)
+- Course Enrollment (student-course mapping)
+- Student Applicant (admission pipeline)
+
+**university_erp Entities:**
+- UniversityStudent override (enrollment number validation, CGPA calc, category cert)
+- UniversityApplicant override (extends Student Applicant)
+- Custom fields: enrollment_number, cgpa, category, category_certificate, student_status
+- Permission query conditions (role-based student list visibility)
+- Student query (custom search in link fields)
+
+**Authoritative Source:** Education (Student doctype)
+**Integration Pattern:** EXTEND -- university_erp subclasses Education's Student via override_doctype_class. UniversityStudent(Student) adds enrollment number uniqueness validation, CGPA auto-calculation from Assessment Results, category certificate validation. Custom fields add university-specific data.
+**Risk:** LOW -- Clean extension pattern. No data duplication. Permission query conditions add role-based access control.
+**Recommendation:** KEEP BOTH -- Education Student is authoritative. university_erp extends with university-specific validation and computed fields.
+
+## Authoritative Source Summary
+
+| Domain | Authoritative App | Secondary App | Pattern | Risk |
+|--------|-------------------|---------------|---------|------|
+| Fees / Finance | Education (Fees doctype) | university_erp (override + custom fields) | EXTEND | LOW |
+| Examinations / Assessment | Education (Assessment Result) + university_erp (exam logistics) | Complementary | COMPLEMENT | LOW |
+| Attendance | Education (Student Attendance) | university_erp (creates records via API) | CREATE-INTO | MEDIUM |
+| Student Data | Education (Student doctype) | university_erp (override + custom fields) | EXTEND | LOW |
+
+### Integration Pattern Legend
+
+| Pattern | Meaning |
+|---------|---------|
+| EXTEND | university_erp subclasses Education doctype via override_doctype_class, adds custom fields |
+| COMPLEMENT | Different apps handle different aspects of the same domain (no duplication) |
+| CREATE-INTO | university_erp creates records directly in Education's tables |
+| REPLACE | university_erp replaces Education functionality (requires migration) |
