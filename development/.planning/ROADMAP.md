@@ -2,7 +2,7 @@
 
 ## Overview
 
-This roadmap delivers management dashboards, analytics, and role-based portals (faculty, HOD, parent) on top of an existing Frappe v15 university ERP with 275+ doctypes. The work begins with security remediation and cross-app verification (the existing codebase has SQL injection, missing permission checks, and untested cross-app data flows), then builds a shared component library consumed by all portals, then delivers each portal as a vertical slice (faculty, management, parent, HOD), and finishes with scheduled reports and export integration across all views.
+This roadmap delivers management dashboards, analytics, and role-based portals (student, faculty, HOD, parent, management) on top of an existing Frappe v15 university ERP with 275+ doctypes. Frappe Desk is admin-only backend; all other users access a unified Vue 3 portal. The work begins with security remediation and cross-app verification, then builds a shared component library, delivers portal vertical slices, and performs a comprehensive system audit + fix before proceeding with remaining portals. ERPNext's Accounts module is being forked with student-centric terminology. The existing student portal is being recreated in the unified portal app.
 
 ## Phases
 
@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
-- [ ] **Phase 03.1: Cross-App Integration Audit & Accessibility Testing** (INSERTED) - Audit done, gap closure pending (custom field migration, report fixes)
+- [ ] **Phase 03.1: Comprehensive System Audit & Fix** (INSERTED) - Full system testing: fix custom fields, fix reports, fix permissions, test ALL APIs, test desk/portal UI, fix SQL errors, audit duplicate business logic. Builds on initial 03.1 audit results.
 - [ ] **Phase 03.2: Student Portal Recreation** (INSERTED) - Recreate all 11 student views in portal-vue with shared component library, deprecate old student-portal-spa
 - [ ] **Phase 03.3: ERPNext Accounts Module Fork** (INSERTED) - Fork full Accounts module into university_erp with student-centric terminology
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
@@ -75,29 +75,33 @@ Plans:
 - [x] 03-02-PLAN.md — Spreadsheet grade grid + student lists + performance analytics (Wave 2)
 - [x] 03-03-PLAN.md — Leave management + LMS CRUD + research + OBE CO/PO + workload summary (Wave 2)
 
-### Phase 03.1: Cross-App Integration Audit & Accessibility Testing (INSERTED)
+### Phase 03.1: Comprehensive System Audit & Fix (INSERTED)
 
-**Goal:** All cross-app data flows are verified, duplicate doctypes are catalogued with recommendations, every report and API endpoint executes without error, and the portal UI meets WCAG 2.1 AA with zero critical/serious violations
+**Goal:** The entire ERP system is fully tested and all issues fixed — every API endpoint works, every report runs, permissions are correct for all roles, no SQL errors, no broken desk/portal links, and duplicate business logic between apps is documented with clear recommendations
 **Depends on:** Phase 3
 **Requirements**: AUDIT-DUP, AUDIT-CONN, AUDIT-RPT, AUDIT-API, AUDIT-A11Y, GAP-01, GAP-02, GAP-03, GAP-04, GAP-05
 **Success Criteria** (what must be TRUE):
-  1. Duplicate doctype audit identifies all exact-name and semantic overlaps across Education, ERPNext, HRMS, and university_erp with schema diffs and recommendations
-  2. Cross-app link integrity test discovers all Link/Dynamic Link fields and reports broken link counts
-  3. All 59+ university_erp reports execute without error (or with documented mandatory filter fallbacks)
-  4. All 27 faculty API endpoints return valid responses with cross-app data resolution verified
-  5. Portal UI has zero critical and zero serious WCAG 2.1 AA violations
-**Plans**: 3 plans (executed) + gap closure plans TBD
+  1. All Employee custom fields (13) and Leave Application custom fields (9) migrated to DB and verified in schema
+  2. ALL university_erp reports execute without error (10 previously failing reports fixed + re-verified)
+  3. All 27 faculty API endpoints return valid responses with cross-app data resolution verified
+  4. ALL @whitelist API endpoints across university_erp tested and working (not just faculty_api)
+  5. Permission matrix verified for all roles (Admin, Faculty, Student, Parent, HOD, VC, Dean, Registrar, Finance Officer) — no unauthorized access, no missing access
+  6. All Frappe Desk workspace links, dashboard pages, and sidebar links resolve without 404 errors
+  7. All portal-vue routes render without errors
+  8. No SQL injection risks in any university_erp .py file (zero f-string interpolation in frappe.db.sql calls)
+  9. Duplicate business logic between apps documented (Fees vs Fee Payment, Exams vs Exams) with authoritative source identified
+  10. Portal UI maintains zero critical and zero serious WCAG 2.1 AA violations
+**Plans**: 6 plans (3 initial audit + 3 gap closure/expansion)
 
-Plans:
+Plans (initial audit — completed):
 - [x] 03.1-01-PLAN.md — Duplicate doctype audit + cross-app link integrity testing
 - [x] 03.1-02-PLAN.md — Report/dashboard verification + faculty API integration testing
 - [x] 03.1-03-PLAN.md — Accessibility audit with vitest-axe + fix critical/serious violations
 
-**Gaps (from verification):**
-- GAP-01/02: Employee + Leave Application custom fields not migrated to DB (blocks 27 faculty API endpoints + 4 reports)
-- GAP-03: 10 university_erp reports fail with schema errors (missing columns + broken imports)
-- GAP-04: Executive dashboard status column error
-- GAP-05: Faculty API re-verification needed after fixes
+Plans (gap closure + expansion — planned):
+- [ ] 03.1-04-PLAN.md — Custom field migration + report fixes + dashboard fix + re-verify
+- [ ] 03.1-05-PLAN.md — Comprehensive API audit + permission matrix testing for all roles
+- [ ] 03.1-06-PLAN.md — Desk UI link verification + portal UI verification + SQL injection scan + business logic duplicate audit
 
 ### Phase 03.2: Student Portal Recreation (INSERTED)
 
@@ -202,15 +206,15 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 03.1 (gaps) → 03.2 → 03.3 → 4 → 5 → 6 → 7
-Note: Phase 03.2 and 03.3 can execute in parallel after 03.1 gap closure. Phase 5 depends on 03.2. Phase 4 depends on 03.3. Phase 6 depends on Phase 3.
+Phases execute in numeric order: 1 → 2 → 3 → 03.1 (full audit + fix) → 03.2 → 03.3 → 4 → 5 → 6 → 7
+Note: Phase 03.1 must complete fully (all 10 SC green) before proceeding. Phase 03.2 and 03.3 can execute in parallel after 03.1. Phase 5 depends on 03.2. Phase 4 depends on 03.3. Phase 6 depends on Phase 3.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
-| 03.1. Integration Audit & Accessibility | 3/3 | Gaps found | 2026-03-19 |
+| 03.1. System Audit & Fix | 3/6 | Gaps + expansion | - |
 | 03.2. Student Portal Recreation | 0/3 | Not started | - |
 | 03.3. ERPNext Accounts Fork | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
