@@ -108,11 +108,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Gap Closure (Phase 03.1)
 
-- [ ] **GAP-01**: Employee custom fields (custom_is_faculty, custom_employee_category, etc.) migrated to database
-- [ ] **GAP-02**: Leave Application custom fields (custom_total_classes_affected, etc.) migrated to database
-- [ ] **GAP-03**: 10 failing university_erp reports fixed (schema errors + broken imports)
-- [ ] **GAP-04**: Executive dashboard get_overview_metrics() status column fix
-- [ ] **GAP-05**: All 27 faculty API endpoints verified working after custom field migration
+- [x] **GAP-01**: Employee custom fields (custom_is_faculty, custom_employee_category, etc.) migrated to database
+- [x] **GAP-02**: Leave Application custom fields (custom_total_classes_affected, etc.) migrated to database
+- [x] **GAP-03**: 10 failing university_erp reports fixed (schema errors + broken imports)
+- [x] **GAP-04**: Executive dashboard get_overview_metrics() status column fix
+- [x] **GAP-05**: All 27 faculty API endpoints verified working after custom field migration
 
 ### Analytics & Export
 
@@ -243,11 +243,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ACCT-05 | Phase 03.3 | Pending |
 | ACCT-06 | Phase 03.3 | Pending |
 | ACCT-07 | Phase 03.3 | Pending |
-| GAP-01 | Phase 03.1 (gaps) | Pending |
-| GAP-02 | Phase 03.1 (gaps) | Pending |
-| GAP-03 | Phase 03.1 (gaps) | Pending |
-| GAP-04 | Phase 03.1 (gaps) | Pending |
-| GAP-05 | Phase 03.1 (gaps) | Pending |
+| GAP-01 | Phase 03.1 (gaps) | Complete |
+| GAP-02 | Phase 03.1 (gaps) | Complete |
+| GAP-03 | Phase 03.1 (gaps) | Complete |
+| GAP-04 | Phase 03.1 (gaps) | Complete |
+| GAP-05 | Phase 03.1 (gaps) | Complete |
 
 **Coverage:**
 - v1 requirements: 85 total (62 original + 11 student + 7 accounts + 5 gap closure)

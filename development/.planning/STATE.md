@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Strategic pivot — roadmap restructured with 03.2 (student portal) + 03.3 (accounts fork)
-last_updated: "2026-03-19T12:00:00.000Z"
-last_activity: 2026-03-19 - Roadmap restructured with strategic pivot (accounts fork, student portal recreation, admin-only desk)
+stopped_at: Completed 03.1-04-PLAN.md (gap closure). Plans 05-06 remaining.
+last_updated: "2026-03-19T14:11:00.000Z"
+last_activity: 2026-03-19 - Completed 03.1-04 gap closure (custom fields + 14 reports)
 progress:
   total_phases: 10
   completed_phases: 3
-  total_plans: 14
-  completed_plans: 12
-  percent: 30
+  total_plans: 17
+  completed_plans: 13
+  percent: 35
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access through a unified portal UI.
-**Current focus:** Phase 03.1 gap closure → Phase 03.2 Student Portal → Phase 03.3 Accounts Fork
+**Current focus:** Phase 03.1 Comprehensive System Audit & Fix
 
 ## Current Position
 
-Phase: 03.1 of 10 (Cross-App Integration Audit — gap closure)
-Plan: Gap closure plans TBD
-Status: Phase 03.1 gaps_found — need custom field migration + report fixes
-Last activity: 2026-03-19 - Roadmap restructured (strategic pivot)
+Phase: 03.1 of 10 (Comprehensive System Audit & Fix)
+Plan: 4/6 complete (gap closure done, permission testing + final gaps remaining)
+Status: Phase 03.1 in progress -- custom fields migrated, 14 reports fixed, ready for permission testing
+Last activity: 2026-03-19 - Plan 04 completed: migrated custom fields, fixed 14 reports
 
-Progress: [███░░░░░░░] 30% (Phases 1-3 complete, 03.1 needs gap closure, 03.2/03.3 new phases added)
+Progress: [████░░░░░░] 35% (Phases 1-3 complete, 03.1 plan 4 of 6 done)
 
 ## Performance Metrics
 
@@ -107,10 +107,15 @@ Recent decisions affecting current work:
 - [03.1-03]: vitest-axe axe() used directly (toHaveNoViolations not exported); color-contrast/region disabled in jsdom
 - [03.1-03]: --text-muted changed gray-400 to gray-500 for 4.76:1 WCAG AA contrast ratio
 - [03.1-03]: New --success-text, --warning-text, --error-text, --info-text CSS vars for accessible text on white backgrounds
+- [03.1-04]: Custom fields migrated via explicit script (not hooks.py fixtures) for idempotent rerunnability
+- [03.1-04]: Fees.paid_amount derived as (grand_total - outstanding_amount) -- no paid_amount column on Fees doctype
+- [03.1-04]: Report parent directories need __init__.py for Frappe module resolution -- created in all 9 dirs
+- [03.1-04]: SQL % in string literals must be escaped as %% when using .format() + parameterized queries
 
 ### Roadmap Evolution
 
-- Phase 3.1 inserted after Phase 3: Cross-App Integration Audit & Accessibility Testing (URGENT) — executed, gaps found (3/5 SC)
+- Phase 3.1 inserted after Phase 3: Cross-App Integration Audit (initial audit executed, 3/5 SC passed)
+- **Phase 03.1 expanded (2026-03-19)**: Comprehensive System Audit & Fix — full system testing including permissions, ALL APIs, desk/portal UI, SQL scan, business logic duplicates. 10 success criteria (up from 5). Plans 04-06 added.
 - **Phase 03.2 inserted: Student Portal Recreation** — recreate all 11 student views in portal-vue with shared components
 - **Phase 03.3 inserted: ERPNext Accounts Module Fork** — fork entire Accounts module with student-centric terminology
 - **Strategic pivot (2026-03-19)**: Frappe Desk = admin-only backend, portal-vue = frontend for ALL users. ERPNext Accounts being forked. Student portal being recreated in unified portal. Roadmap expanded from 8 to 10 phases.
@@ -128,14 +133,15 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 1]: ~~SQL injection in dashboard_engine.py is a production blocker~~ RESOLVED in 01-01
-- [Phase 03.1]: Employee custom fields not migrated to DB — blocks 27 faculty API endpoints + 4 faculty reports
-- [Phase 03.1]: 10 university_erp reports with schema errors need fixing
+- [Phase 03.1]: ~~Employee custom fields not migrated to DB~~ RESOLVED in 03.1-04 (24 custom fields migrated)
+- [Phase 03.1]: ~~10 university_erp reports with schema errors~~ RESOLVED in 03.1-04 (all 14 reports fixed)
+- [Phase 03.1]: Permission testing never done for any role — unknown gaps
 - [Phase 03.3]: Accounts fork is massive (200+ files) — highest risk phase in the project
 - [Phase 4]: Management role names (VC, Registrar, etc.) need verification against actual Frappe Role definitions
 - [Phase 6]: Frappe workflow engine integration for HOD approval queues needs API-level verification
 
 ## Session Continuity
 
-Last session: 2026-03-19T12:00:00Z
-Stopped at: Strategic pivot — roadmap restructured with 03.2 (student portal) + 03.3 (accounts fork)
-Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-CONTEXT.md
+Last session: 2026-03-19T14:11:00Z
+Stopped at: Completed 03.1-04-PLAN.md
+Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-05-PLAN.md

@@ -214,7 +214,7 @@ Note: Phase 03.1 must complete fully (all 10 SC green) before proceeding. Phase 
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
-| 03.1. System Audit & Fix | 3/6 | Gaps + expansion | - |
+| 03.1. System Audit & Fix | 4/6 | In Progress|  |
 | 03.2. Student Portal Recreation | 0/3 | Not started | - |
 | 03.3. ERPNext Accounts Fork | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
