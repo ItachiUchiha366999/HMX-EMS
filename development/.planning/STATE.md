@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03.1-05-PLAN.md
-last_updated: "2026-03-19T14:28:30.868Z"
-last_activity: "2026-03-19 - Plan 05 completed: 488 endpoints audited, 268 doctypes x 9 roles permission matrix"
+status: in_progress
+stopped_at: Completed 03.1-06-PLAN.md (Phase 03.1 fully complete)
+last_updated: "2026-03-19T14:35:27.585Z"
+last_activity: "2026-03-19 - Plan 06 completed: SQL injection remediated (44 CRITICAL + 18 WARNING to 0), desk/portal/a11y audits PASS"
 progress:
   total_phases: 10
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 14
-  completed_plans: 13
-  percent: 38
+  completed_plans: 14
+  percent: 42
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-19)
 
 ## Current Position
 
-Phase: 03.1 of 10 (Comprehensive System Audit & Fix)
-Plan: 5/6 complete (API audit + permission matrix done, desk/SQL/logic audit remaining)
-Status: Phase 03.1 in progress -- all APIs audited, permission matrix generated, 2 security findings documented
-Last activity: 2026-03-19 - Plan 05 completed: 488 endpoints audited, 268 doctypes x 9 roles permission matrix
+Phase: 03.1 COMPLETE, ready for 03.2 or 04
+Plan: 6/6 complete (Phase 03.1 fully complete -- all 10 success criteria verified)
+Status: Phase 03.1 complete -- comprehensive system audit done, SQL injection remediated, all audits PASS
+Last activity: 2026-03-19 - Plan 06 completed: SQL injection remediated (44 CRITICAL + 18 WARNING to 0), desk/portal/a11y audits PASS
 
-Progress: [████░░░░░░] 38% (Phases 1-3 complete, 03.1 plan 5 of 6 done)
+Progress: [████░░░░░░] 42% (Phases 1-3 + 03.1 complete, ready for 03.2 or 04)
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Progress: [████░░░░░░] 38% (Phases 1-3 complete, 03.1 plan 5
 - Trend: stable (Phase 3 at ~12min per plan)
 
 *Updated after each plan completion*
+| Phase 03.1 P06 | 16min | 3 tasks | 57 files |
 
 ## Accumulated Context
 
@@ -115,6 +116,10 @@ Recent decisions affecting current work:
 - [03.1-05]: 4/9 roles have test users (Admin, Student, Parent, Registrar); 5 need creation for complete coverage
 - [03.1-05]: 2 HIGH security findings: Student can access get_dashboard_stats and get_available_dashboards without role checks
 - [Phase 03.1]: 488 @whitelist endpoints audited with zero import failures; 2 HIGH security findings: Student can access admin APIs (get_dashboard_stats, get_available_dashboards)
+- [03.1-06]: SQL .format() pattern for conditions is acceptable when values use parameterized dict (consistent with Frappe report pattern)
+- [03.1-06]: INFO-level SQL findings (table name interpolation in audit/seed scripts) left unfixed -- controlled source values
+- [03.1-06]: Education authoritative for Fees, Assessment Result, Student Attendance, Student; university_erp extends via override
+- [03.1-06]: Attendance domain MEDIUM risk: dual input channels (Student Attendance Tool vs faculty_api) -- idempotency check exists
 
 ### Roadmap Evolution
 
@@ -140,12 +145,13 @@ None yet.
 - [Phase 03.1]: ~~Employee custom fields not migrated to DB~~ RESOLVED in 03.1-04 (24 custom fields migrated)
 - [Phase 03.1]: ~~10 university_erp reports with schema errors~~ RESOLVED in 03.1-04 (all 14 reports fixed)
 - [Phase 03.1]: ~~Permission testing never done for any role — unknown gaps~~ RESOLVED in 03.1-05 (9 roles tested, 2 security findings)
+- [Phase 03.1]: ~~SQL injection risks in university_erp~~ RESOLVED in 03.1-06 (44 CRITICAL + 18 WARNING remediated to 0)
 - [Phase 03.3]: Accounts fork is massive (200+ files) — highest risk phase in the project
 - [Phase 4]: Management role names (VC, Registrar, etc.) need verification against actual Frappe Role definitions
 - [Phase 6]: Frappe workflow engine integration for HOD approval queues needs API-level verification
 
 ## Session Continuity
 
-Last session: 2026-03-19T14:28:24.309Z
-Stopped at: Completed 03.1-05-PLAN.md
+Last session: 2026-03-19T14:35:13.703Z
+Stopped at: Completed 03.1-06-PLAN.md (Phase 03.1 fully complete)
 Resume file: None
