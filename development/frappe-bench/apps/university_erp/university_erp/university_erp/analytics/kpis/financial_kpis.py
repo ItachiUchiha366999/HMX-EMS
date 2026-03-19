@@ -45,13 +45,13 @@ def fee_collection_rate(filters=None):
     if not frappe.db.exists("DocType", "Fees"):
         return _get_mock_collection_rate()
 
-    query = f"""
+    query = """
         SELECT
             SUM(f.total_amount) as billed,
             SUM(f.paid_amount) as collected
         FROM `tabFees` f
         WHERE f.docstatus = 1 AND {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -89,11 +89,11 @@ def revenue_per_student(filters=None):
         return _get_mock_revenue_per_student()
 
     # Total revenue
-    revenue_query = f"""
+    revenue_query = """
         SELECT SUM(f.paid_amount) as total_revenue
         FROM `tabFees` f
         WHERE f.docstatus = 1 AND {where_clause}
-    """
+    """.format(where_clause=where_clause)
     revenue_result = frappe.db.sql(revenue_query, values, as_dict=True)
     total_revenue = flt(revenue_result[0]["total_revenue"]) if revenue_result else 0
 
@@ -141,13 +141,13 @@ def outstanding_fees_percentage(filters=None):
     if not frappe.db.exists("DocType", "Fees"):
         return _get_mock_outstanding_percentage()
 
-    query = f"""
+    query = """
         SELECT
             SUM(f.total_amount) as billed,
             SUM(f.outstanding_amount) as outstanding
         FROM `tabFees` f
         WHERE f.docstatus = 1 AND {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -184,13 +184,13 @@ def scholarship_utilization(filters=None):
     if not frappe.db.exists("DocType", "Scholarship"):
         return _get_mock_scholarship_utilization()
 
-    query = f"""
+    query = """
         SELECT
             SUM(s.total_amount) as budgeted,
             SUM(s.disbursed_amount) as utilized
         FROM `tabScholarship` s
         WHERE s.docstatus = 1 AND {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 

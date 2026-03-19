@@ -69,7 +69,7 @@ def get_weekly_timetable(student, week_start):
         if "to_time" in available_fields:
             select_parts.append("cs.to_time")
 
-        query = f"""
+        query = """
             SELECT {', '.join(select_parts)}
             FROM `tabCourse Schedule` cs
             WHERE cs.student_group IN %s

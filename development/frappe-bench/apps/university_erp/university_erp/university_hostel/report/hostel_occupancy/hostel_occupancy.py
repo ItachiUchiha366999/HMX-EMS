@@ -80,34 +80,39 @@ def get_data(filters):
     values = []
 
     if filters.get("hostel_type"):
-        conditions.append("hostel_type = %s")
+        conditions.append("hb.hostel_type = %s")
         values.append(filters.get("hostel_type"))
 
     if filters.get("building"):
-        conditions.append("name = %s")
+        conditions.append("hb.name = %s")
         values.append(filters.get("building"))
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
-            name as building,
-            building_name,
-            hostel_type,
-            warden,
-            total_rooms,
-            total_capacity,
-            occupied,
-            (total_capacity - occupied) as available,
+            hb.name as building,
+            hb.building_name,
+            hb.hostel_type,
+            hb.warden,
+            COUNT(DISTINCT hr.name) as total_rooms,
+            COALESCE(SUM(hr.capacity), 0) as total_capacity,
+            COUNT(ha.name) as occupied,
+            (COALESCE(SUM(hr.capacity), 0) - COUNT(ha.name)) as available,
             CASE
-                WHEN total_capacity > 0
-                THEN ROUND(occupied / total_capacity * 100, 2)
+                WHEN SUM(hr.capacity) > 0
+                THEN ROUND(COUNT(ha.name) / SUM(hr.capacity) * 100, 2)
                 ELSE 0
             END as occupancy_rate
-        FROM `tabHostel Building`
+        FROM `tabHostel Building` hb
+        LEFT JOIN `tabHostel Room` hr
+            ON hr.hostel_building = hb.name AND hr.status != 'Under Maintenance'
+        LEFT JOIN `tabHostel Allocation` ha
+            ON ha.room = hr.name AND ha.status = 'Active' AND ha.docstatus = 1
         {where_clause}
-        ORDER BY building_name
-    """, values, as_dict=True)
+        GROUP BY hb.name
+        ORDER BY hb.building_name
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 def get_chart(data):

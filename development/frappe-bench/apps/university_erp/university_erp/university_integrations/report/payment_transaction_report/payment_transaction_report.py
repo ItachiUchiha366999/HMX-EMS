@@ -108,7 +108,7 @@ def get_data(filters):
 
     where_clause = " AND ".join(conditions) if conditions else "1=1"
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             name,
             transaction_date,
@@ -123,7 +123,7 @@ def get_data(filters):
         FROM `tabPayment Transaction`
         WHERE {where_clause}
         ORDER BY transaction_date DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 def get_chart(data):

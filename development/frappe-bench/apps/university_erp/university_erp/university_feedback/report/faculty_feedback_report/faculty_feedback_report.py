@@ -71,7 +71,7 @@ def get_columns():
 def get_data(filters):
     conditions = get_conditions(filters)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             fr.instructor,
             inst.department,
@@ -92,7 +92,7 @@ def get_data(filters):
         {conditions}
         GROUP BY fr.instructor, inst.department
         ORDER BY avg_score DESC
-    """, as_dict=True)
+    """.format(conditions=conditions), as_dict=True)
 
     return data
 

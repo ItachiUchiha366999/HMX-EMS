@@ -48,7 +48,7 @@ def get_data(filters):
 		where_parts.append("e.custom_is_faculty = 1")
 	where_clause = " AND ".join(where_parts)
 
-	data = frappe.db.sql(f"""
+	data = frappe.db.sql("""
 		SELECT
 			e.name as employee,
 			e.employee_name,
@@ -65,7 +65,7 @@ def get_data(filters):
 			{conditions}
 		GROUP BY e.name
 		ORDER BY total_hours DESC
-	""", as_dict=True)
+	""".format(conditions=conditions, where_clause=where_clause), as_dict=True)
 
 	for row in data:
 		hours = row.total_hours or 0

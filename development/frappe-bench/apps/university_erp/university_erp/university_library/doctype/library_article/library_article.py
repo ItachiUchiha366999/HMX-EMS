@@ -65,7 +65,7 @@ def search_catalog(query, category=None, subject=None, limit=50):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             name,
             title,
@@ -84,7 +84,7 @@ def search_catalog(query, category=None, subject=None, limit=50):
         WHERE {where_clause}
         ORDER BY title
         LIMIT %s
-    """, values + [limit], as_dict=True)
+    """.format(where_clause=where_clause), values + [limit], as_dict=True)
 
 
 @frappe.whitelist()

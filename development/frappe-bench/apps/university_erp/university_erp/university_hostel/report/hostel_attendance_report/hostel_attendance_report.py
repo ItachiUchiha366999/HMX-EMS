@@ -109,7 +109,7 @@ def get_data(filters):
         where_clause += " AND " + " AND ".join(conditions)
 
     # Get all students with active allocations
-    students = frappe.db.sql(f"""
+    students = frappe.db.sql("""
         SELECT DISTINCT
             ha.student,
             s.student_name,
@@ -120,7 +120,7 @@ def get_data(filters):
         LEFT JOIN `tabHostel Attendance` hatt ON ha.student = hatt.student
         {where_clause}
         ORDER BY ha.room, s.student_name
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # Get attendance data for each student
     from_date = getdate(filters.get("from_date")) if filters.get("from_date") else None

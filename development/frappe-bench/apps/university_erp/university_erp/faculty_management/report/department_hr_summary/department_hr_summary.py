@@ -59,7 +59,7 @@ def get_data(filters):
 		overloaded_expr = "0"
 		underutilized_expr = "0"
 
-	data = frappe.db.sql(f"""
+	data = frappe.db.sql("""
 		SELECT
 			e.department,
 			COUNT(e.name) as total_faculty,
@@ -74,7 +74,7 @@ def get_data(filters):
 		WHERE {conditions}
 		GROUP BY e.department
 		ORDER BY total_faculty DESC
-	""", as_dict=True)
+	""".format(avg_workload_expr=avg_workload_expr, conditions=conditions, non_teaching_expr=non_teaching_expr, overloaded_expr=overloaded_expr, teaching_expr=teaching_expr, underutilized_expr=underutilized_expr), as_dict=True)
 
 	return data
 

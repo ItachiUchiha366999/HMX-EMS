@@ -90,14 +90,14 @@ class CustomReportDefinition(Document):
             limit_clause = f"LIMIT {cint(self.row_limit)}"
 
         # Combine query
-        query = f"""
+        query = """
             SELECT {select_clause}
             FROM {from_clause}
             WHERE {where_clause}
             {group_by_clause}
             {order_by_clause}
             {limit_clause}
-        """
+        """.format(from_clause=from_clause, group_by_clause=group_by_clause, limit_clause=limit_clause, order_by_clause=order_by_clause, select_clause=select_clause, where_clause=where_clause)
 
         return query.strip(), values
 

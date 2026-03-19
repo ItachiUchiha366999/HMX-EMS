@@ -47,10 +47,10 @@ def get_context(context):
     where_clause = " AND ".join(conditions)
 
     # Get total count
-    total_count = frappe.db.sql(f"""
+    total_count = frappe.db.sql("""
         SELECT COUNT(*) FROM `tabLibrary Article` la
         WHERE {where_clause}
-    """, values)[0][0]
+    """.format(where_clause=where_clause), values)[0][0]
 
     # Calculate pagination
     context.total_pages = (total_count + page_size - 1) // page_size
@@ -60,7 +60,7 @@ def get_context(context):
     offset = (page - 1) * page_size
 
     # Get articles
-    context.articles = frappe.db.sql(f"""
+    context.articles = frappe.db.sql("""
         SELECT
             la.name,
             la.title,
@@ -80,7 +80,7 @@ def get_context(context):
         WHERE {where_clause}
         ORDER BY la.title
         LIMIT %(limit)s OFFSET %(offset)s
-    """, {**values, "limit": page_size, "offset": offset}, as_dict=True)
+    """.format(where_clause=where_clause), {**values, "limit": page_size, "offset": offset}, as_dict=True)
 
     # Check if user is logged in and has library membership
     context.is_logged_in = frappe.session.user != "Guest"
@@ -139,7 +139,7 @@ def search_books(query, category=None, subject=None, page=1):
     page_size = 20
     offset = (int(page) - 1) * page_size
 
-    articles = frappe.db.sql(f"""
+    articles = frappe.db.sql("""
         SELECT
             la.name,
             la.title,
@@ -150,7 +150,7 @@ def search_books(query, category=None, subject=None, page=1):
         WHERE {where_clause}
         ORDER BY la.title
         LIMIT %(limit)s OFFSET %(offset)s
-    """, {**values, "limit": page_size, "offset": offset}, as_dict=True)
+    """.format(where_clause=where_clause), {**values, "limit": page_size, "offset": offset}, as_dict=True)
 
     return articles
 

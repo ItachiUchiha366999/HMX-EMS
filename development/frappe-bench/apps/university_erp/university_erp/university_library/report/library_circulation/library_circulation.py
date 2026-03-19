@@ -37,7 +37,7 @@ def get_data(filters):
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             transaction_date,
             SUM(CASE WHEN transaction_type = 'Issue' THEN 1 ELSE 0 END) as issues,
@@ -48,7 +48,7 @@ def get_data(filters):
         {where_clause}
         GROUP BY transaction_date
         ORDER BY transaction_date DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 def get_chart(data, filters):

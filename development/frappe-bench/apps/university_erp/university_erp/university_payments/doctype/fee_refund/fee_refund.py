@@ -184,27 +184,29 @@ def reject_refund(refund_name, remarks=None):
 @frappe.whitelist()
 def get_refund_summary(student=None, from_date=None, to_date=None):
     """Get refund summary"""
-    filters = {"docstatus": 1}
+    conditions = ["docstatus = 1"]
+    values = {}
 
     if student:
-        filters["student"] = student
-
-    conditions = "WHERE docstatus = 1"
-    if student:
-        conditions += f" AND student = '{student}'"
+        conditions.append("student = %(student)s")
+        values["student"] = student
     if from_date:
-        conditions += f" AND refund_date >= '{from_date}'"
+        conditions.append("refund_date >= %(from_date)s")
+        values["from_date"] = from_date
     if to_date:
-        conditions += f" AND refund_date <= '{to_date}'"
+        conditions.append("refund_date <= %(to_date)s")
+        values["to_date"] = to_date
 
-    summary = frappe.db.sql(f"""
+    where_clause = "WHERE " + " AND ".join(conditions)
+
+    summary = frappe.db.sql("""
         SELECT
             COUNT(*) as total_refunds,
             SUM(refund_amount) as total_refund_amount,
             SUM(deduction_amount) as total_deductions,
             SUM(net_refund) as total_net_refund
         FROM `tabFee Refund`
-        {conditions}
-    """, as_dict=True)[0]
+        {where_clause}
+    """.format(where_clause=where_clause), values, as_dict=True)[0]
 
     return summary

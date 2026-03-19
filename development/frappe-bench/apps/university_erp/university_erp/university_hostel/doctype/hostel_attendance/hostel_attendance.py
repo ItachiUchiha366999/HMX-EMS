@@ -167,7 +167,7 @@ def get_student_attendance_history(student, from_date=None, to_date=None):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             attendance_date,
             status,
@@ -178,4 +178,4 @@ def get_student_attendance_history(student, from_date=None, to_date=None):
         FROM `tabHostel Attendance`
         WHERE {where_clause}
         ORDER BY attendance_date DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)

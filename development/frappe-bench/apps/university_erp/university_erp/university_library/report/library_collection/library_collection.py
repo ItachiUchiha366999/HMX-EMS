@@ -32,7 +32,7 @@ def get_data(filters):
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             category,
             COUNT(*) as total_titles,
@@ -44,7 +44,7 @@ def get_data(filters):
         {where_clause}
         GROUP BY category
         ORDER BY total_titles DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 def get_chart(data):

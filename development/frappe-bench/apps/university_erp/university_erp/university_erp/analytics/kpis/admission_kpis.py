@@ -45,13 +45,13 @@ def admission_conversion_rate(filters=None):
     if not frappe.db.exists("DocType", "Student Applicant"):
         return _get_mock_conversion_rate()
 
-    query = f"""
+    query = """
         SELECT
             COUNT(*) as total_applications,
             COUNT(CASE WHEN a.application_status = 'Admitted' THEN 1 END) as admitted
         FROM `tabStudent Applicant` a
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -93,7 +93,7 @@ def seat_fill_rate(filters=None):
     if not program_meta.has_field("max_students"):
         return _get_mock_seat_fill_rate()
 
-    seats_query = f"""
+    seats_query = """
         SELECT SUM(p.max_students) as total_seats
         FROM `tabProgram` p
         WHERE {where_clause.replace("pb.", "p.")}
@@ -150,12 +150,12 @@ def average_application_processing_time(filters=None):
     if not (meta.has_field("application_date") and meta.has_field("modified")):
         return _get_mock_processing_time()
 
-    query = f"""
+    query = """
         SELECT
             AVG(DATEDIFF(a.modified, a.application_date)) as avg_days
         FROM `tabStudent Applicant` a
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -192,13 +192,13 @@ def application_rejection_rate(filters=None):
     if not frappe.db.exists("DocType", "Student Applicant"):
         return _get_mock_rejection_rate()
 
-    query = f"""
+    query = """
         SELECT
             COUNT(*) as total_processed,
             COUNT(CASE WHEN a.application_status = 'Rejected' THEN 1 END) as rejected
         FROM `tabStudent Applicant` a
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 

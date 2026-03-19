@@ -103,7 +103,7 @@ def get_data(filters):
     if not frappe.db.exists("DocType", "Student"):
         return _get_mock_data()
 
-    query = f"""
+    query = """
         SELECT
             s.name as student_id,
             s.student_name,
@@ -115,7 +115,7 @@ def get_data(filters):
         WHERE {where_clause}
         ORDER BY s.student_name
         LIMIT 500
-    """
+    """.format(where_clause=where_clause)
 
     students = frappe.db.sql(query, values, as_dict=True)
 
@@ -227,12 +227,16 @@ def _get_courses_enrolled(student_id):
 
 
 def _get_courses_completed(student_id):
-    """Get completed courses count for student"""
-    if frappe.db.exists("DocType", "Course Enrollment"):
-        return frappe.db.count("Course Enrollment", {
-            "student": student_id,
-            "status": "Completed"
-        })
+    """Get completed courses count for student based on assessment results"""
+    if frappe.db.exists("DocType", "Assessment Result"):
+        # Count distinct courses that have assessment results (indicating completion)
+        result = frappe.db.sql("""
+            SELECT COUNT(DISTINCT course) as count
+            FROM `tabAssessment Result`
+            WHERE student = %s AND docstatus = 1
+        """, student_id)
+        if result:
+            return result[0][0] or 0
     return 4  # Mock value
 
 

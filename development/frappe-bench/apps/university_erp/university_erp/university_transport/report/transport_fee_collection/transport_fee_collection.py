@@ -39,7 +39,7 @@ def get_data(filters):
 
     where_clause = " AND ".join(conditions)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             ta.route,
             tr.route_name,
@@ -50,7 +50,7 @@ def get_data(filters):
         WHERE {where_clause}
         GROUP BY ta.route
         ORDER BY tr.route_name
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # Calculate collection for each route
     for row in data:

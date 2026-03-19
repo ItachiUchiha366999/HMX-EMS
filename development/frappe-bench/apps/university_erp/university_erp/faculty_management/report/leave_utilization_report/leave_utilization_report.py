@@ -51,7 +51,7 @@ def get_data(filters):
 
 	classes_expr = "SUM(la.custom_total_classes_affected)" if has_classes_affected else "0"
 
-	data = frappe.db.sql(f"""
+	data = frappe.db.sql("""
 		SELECT
 			la.employee,
 			e.employee_name,
@@ -64,19 +64,19 @@ def get_data(filters):
 		WHERE {conditions}
 		GROUP BY la.employee, la.leave_type
 		ORDER BY total_leave_days DESC
-	""", as_dict=True)
+	""".format(classes_expr=classes_expr, conditions=conditions), as_dict=True)
 
 	# Get allocation data
 	for row in data:
 		allocation = frappe.db.get_value(
 			"Leave Allocation",
 			{"employee": row.employee, "leave_type": row.leave_type, "docstatus": 1},
-			["total_leaves_allocated", "total_leaves_allocated - leaves_taken as balance"],
+			["total_leaves_allocated"],
 			as_dict=True
 		)
 		if allocation:
 			row.allocated_days = allocation.total_leaves_allocated
-			row.balance = allocation.balance
+			row.balance = (allocation.total_leaves_allocated or 0) - (row.total_leave_days or 0)
 			row.utilization_pct = (row.total_leave_days / allocation.total_leaves_allocated * 100) if allocation.total_leaves_allocated else 0
 		else:
 			row.allocated_days = 0

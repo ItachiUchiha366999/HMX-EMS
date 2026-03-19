@@ -42,7 +42,7 @@ def get_data(filters):
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 
-    vehicles = frappe.db.sql(f"""
+    vehicles = frappe.db.sql("""
         SELECT
             tv.name as vehicle,
             tv.vehicle_type,
@@ -54,7 +54,7 @@ def get_data(filters):
         LEFT JOIN `tabTransport Route` tr ON tr.assigned_vehicle = tv.name
         {where_clause}
         ORDER BY tv.vehicle_type, tv.name
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # Add student count and trip stats for each vehicle
     for vehicle in vehicles:

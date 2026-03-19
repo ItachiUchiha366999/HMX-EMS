@@ -129,7 +129,7 @@ def get_daily_trips(date=None, route=None):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             name,
             trip_type,
@@ -145,4 +145,4 @@ def get_daily_trips(date=None, route=None):
         FROM `tabTransport Trip Log`
         WHERE {where_clause}
         ORDER BY scheduled_departure
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)

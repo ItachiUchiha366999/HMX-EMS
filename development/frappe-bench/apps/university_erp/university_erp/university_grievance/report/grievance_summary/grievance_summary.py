@@ -66,7 +66,7 @@ def get_columns():
 def get_data(filters):
     conditions = get_conditions(filters)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             category,
             COUNT(*) as total,
@@ -81,7 +81,7 @@ def get_data(filters):
         WHERE 1=1 {conditions}
         GROUP BY category
         ORDER BY total DESC
-    """, as_dict=True)
+    """.format(conditions=conditions), as_dict=True)
 
     return data
 

@@ -91,7 +91,7 @@ def get_semester_wise_results(student):
         if "grade" in available_fields:
             select_parts.append("ar.grade")
 
-        query = f"""
+        query = """
             SELECT {', '.join(select_parts)}
             FROM `tabAssessment Result` ar
             WHERE ar.student = %s
@@ -116,7 +116,7 @@ def get_semester_wise_results(student):
         for result in course_results:
             year = result.get("academic_year", "Unknown")
             term = result.get("academic_term", "Unknown")
-            key = f"{year} - {term}"
+            key = "{year} - {term}".format(term=term, year=year)
             if key not in grouped:
                 grouped[key] = []
             grouped[key].append(result)

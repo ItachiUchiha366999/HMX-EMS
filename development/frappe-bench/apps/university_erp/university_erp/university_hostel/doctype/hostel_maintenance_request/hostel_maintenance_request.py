@@ -155,7 +155,7 @@ def get_request_summary(building=None, from_date=None, to_date=None):
     where_clause = " AND ".join(conditions)
 
     # By type
-    by_type = frappe.db.sql(f"""
+    by_type = frappe.db.sql("""
         SELECT
             request_type,
             COUNT(*) as count,
@@ -165,10 +165,10 @@ def get_request_summary(building=None, from_date=None, to_date=None):
         WHERE {where_clause}
         GROUP BY request_type
         ORDER BY count DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # By priority
-    by_priority = frappe.db.sql(f"""
+    by_priority = frappe.db.sql("""
         SELECT
             priority,
             COUNT(*) as count,
@@ -176,20 +176,20 @@ def get_request_summary(building=None, from_date=None, to_date=None):
         FROM `tabHostel Maintenance Request`
         WHERE {where_clause}
         GROUP BY priority
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # By status
-    by_status = frappe.db.sql(f"""
+    by_status = frappe.db.sql("""
         SELECT
             status,
             COUNT(*) as count
         FROM `tabHostel Maintenance Request`
         WHERE {where_clause}
         GROUP BY status
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     # Overall stats
-    overall = frappe.db.sql(f"""
+    overall = frappe.db.sql("""
         SELECT
             COUNT(*) as total_requests,
             SUM(CASE WHEN status = 'Completed' THEN 1 ELSE 0 END) as completed,
@@ -200,7 +200,7 @@ def get_request_summary(building=None, from_date=None, to_date=None):
                 THEN DATEDIFF(actual_completion, request_date) END) as avg_resolution_days
         FROM `tabHostel Maintenance Request`
         WHERE {where_clause}
-    """, values, as_dict=True)[0]
+    """.format(where_clause=where_clause), values, as_dict=True)[0]
 
     return {
         "overall": overall,

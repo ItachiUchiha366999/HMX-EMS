@@ -41,7 +41,7 @@ def get_data(filters):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             ta.route,
             tr.route_name,
@@ -55,7 +55,7 @@ def get_data(filters):
         JOIN `tabTransport Route` tr ON ta.route = tr.name
         WHERE {where_clause}
         ORDER BY tr.route_name, ta.pickup_time
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 def get_chart(data):

@@ -60,11 +60,11 @@ def get_eligible_students(job_opening):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT s.name, s.student_name, pe.program, pe.custom_cgpa
         FROM `tabStudent` s
         JOIN `tabProgram Enrollment` pe ON s.name = pe.student
         WHERE {where_clause}
         AND s.name NOT IN (SELECT student FROM `tabPlacement Application` WHERE job_opening = %s)
         ORDER BY pe.custom_cgpa DESC
-    """, (job_opening,), as_dict=True)
+    """.format(where_clause=where_clause), (job_opening,), as_dict=True)

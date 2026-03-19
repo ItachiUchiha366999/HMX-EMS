@@ -225,7 +225,7 @@ def get_available_rooms(hostel_type=None, room_type=None):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             hr.name,
             hr.room_number,
@@ -240,7 +240,7 @@ def get_available_rooms(hostel_type=None, room_type=None):
         JOIN `tabHostel Building` hb ON hr.hostel_building = hb.name
         WHERE {where_clause}
         ORDER BY hb.building_name, hr.room_number
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 @frappe.whitelist()

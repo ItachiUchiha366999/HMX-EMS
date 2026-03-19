@@ -122,7 +122,7 @@ def get_data(filters):
 
     where_clause = " AND ".join(conditions)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             name,
             visit_date,
@@ -141,7 +141,7 @@ def get_data(filters):
         FROM `tabHostel Visitor`
         WHERE {where_clause}
         ORDER BY visit_date DESC, check_in_time DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     return data
 
@@ -165,7 +165,7 @@ def get_chart(filters):
     where_clause = " AND ".join(conditions)
 
     # By relationship chart
-    rel_data = frappe.db.sql(f"""
+    rel_data = frappe.db.sql("""
         SELECT
             relationship as label,
             COUNT(*) as value
@@ -173,7 +173,7 @@ def get_chart(filters):
         WHERE {where_clause}
         GROUP BY relationship
         ORDER BY value DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     if rel_data:
         return {
@@ -207,7 +207,7 @@ def get_summary(filters):
 
     where_clause = " AND ".join(conditions)
 
-    stats = frappe.db.sql(f"""
+    stats = frappe.db.sql("""
         SELECT
             COUNT(*) as total,
             SUM(CASE WHEN status = 'Checked In' THEN 1 ELSE 0 END) as checked_in,
@@ -217,7 +217,7 @@ def get_summary(filters):
             COUNT(DISTINCT visitor_mobile) as unique_visitors
         FROM `tabHostel Visitor`
         WHERE {where_clause}
-    """, values, as_dict=True)[0]
+    """.format(where_clause=where_clause), values, as_dict=True)[0]
 
     return [
         {

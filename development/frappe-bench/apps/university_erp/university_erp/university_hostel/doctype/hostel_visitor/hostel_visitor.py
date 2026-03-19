@@ -184,7 +184,7 @@ def get_visitor_log(building=None, from_date=None, to_date=None):
 
     where_clause = " AND ".join(conditions) if conditions else "1=1"
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             name,
             visitor_name,
@@ -206,7 +206,7 @@ def get_visitor_log(building=None, from_date=None, to_date=None):
         FROM `tabHostel Visitor`
         WHERE {where_clause}
         ORDER BY visit_date DESC, check_in_time DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 @frappe.whitelist()

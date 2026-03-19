@@ -25,18 +25,24 @@ def get_columns():
 	]
 
 def get_data(filters):
-	conditions = "f.docstatus = 1 AND f.outstanding_amount > 0"
-	
+	conditions = ["f.docstatus = 1", "f.outstanding_amount > 0", "f.custom_due_date < CURDATE()"]
+	values = {}
+
 	if filters.get("program"):
-		conditions += f" AND f.program = '{filters.get('program')}'"
-	
+		conditions.append("f.program = %(program)s")
+		values["program"] = filters.get("program")
+
 	if filters.get("academic_year"):
-		conditions += f" AND fs.custom_academic_year = '{filters.get('academic_year')}'"
-	
+		conditions.append("fs.custom_academic_year = %(academic_year)s")
+		values["academic_year"] = filters.get("academic_year")
+
 	if filters.get("min_days_overdue"):
-		conditions += f" AND DATEDIFF(CURDATE(), f.custom_due_date) >= {filters.get('min_days_overdue')}"
-	
-	data = frappe.db.sql(f"""
+		conditions.append("DATEDIFF(CURDATE(), f.custom_due_date) >= %(min_days_overdue)s")
+		values["min_days_overdue"] = filters.get("min_days_overdue")
+
+	where_clause = " AND ".join(conditions)
+
+	data = frappe.db.sql("""
 		SELECT
 			f.student,
 			f.student_name,
@@ -51,11 +57,10 @@ def get_data(filters):
 		FROM `tabFees` f
 		LEFT JOIN `tabFee Structure` fs ON f.fee_structure = fs.name
 		LEFT JOIN `tabStudent` s ON f.student = s.name
-		WHERE {conditions}
-		AND f.custom_due_date < CURDATE()
+		WHERE {where_clause}
 		ORDER BY days_overdue DESC
-	""", as_dict=True)
-	
+	""".format(where_clause=where_clause), values, as_dict=True)
+
 	return data
 
 def get_chart(data):

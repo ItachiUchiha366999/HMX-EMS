@@ -51,7 +51,7 @@ def get_data(filters):
     if filters.get("to_date"):
         conditions += " AND f.posting_date <= %(to_date)s"
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             f.program,
             COUNT(DISTINCT f.student) as total_students,
@@ -65,7 +65,7 @@ def get_data(filters):
         WHERE {conditions}
         GROUP BY f.program
         ORDER BY total_fees DESC
-    """, filters or {}, as_dict=True)
+    """.format(conditions=conditions), filters or {}, as_dict=True)
 
     for row in data:
         if row.total_fees:

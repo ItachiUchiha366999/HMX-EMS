@@ -122,7 +122,7 @@ def get_data(filters):
 
     where_clause = " AND ".join(conditions)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             mr.name,
             mr.request_date,
@@ -149,7 +149,7 @@ def get_data(filters):
         ORDER BY
             FIELD(mr.priority, 'Urgent', 'High', 'Medium', 'Low'),
             mr.request_date DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     return data
 
@@ -173,7 +173,7 @@ def get_chart(filters):
     where_clause = " AND ".join(conditions)
 
     # By type chart
-    type_data = frappe.db.sql(f"""
+    type_data = frappe.db.sql("""
         SELECT
             request_type as label,
             COUNT(*) as value
@@ -181,7 +181,7 @@ def get_chart(filters):
         WHERE {where_clause}
         GROUP BY request_type
         ORDER BY value DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
     if type_data:
         return {
@@ -215,7 +215,7 @@ def get_summary(filters):
 
     where_clause = " AND ".join(conditions)
 
-    stats = frappe.db.sql(f"""
+    stats = frappe.db.sql("""
         SELECT
             COUNT(*) as total,
             SUM(CASE WHEN status = 'Completed' THEN 1 ELSE 0 END) as completed,
@@ -228,7 +228,7 @@ def get_summary(filters):
             END) as avg_days
         FROM `tabHostel Maintenance Request`
         WHERE {where_clause}
-    """, values, as_dict=True)[0]
+    """.format(where_clause=where_clause), values, as_dict=True)[0]
 
     return [
         {

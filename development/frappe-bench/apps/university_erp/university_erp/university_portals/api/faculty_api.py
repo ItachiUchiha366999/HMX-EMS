@@ -830,12 +830,12 @@ def get_student_list(**kwargs):
         conditions += " AND (ce.student_name LIKE %(search)s OR s.custom_roll_number LIKE %(search)s)"
         params["search"] = f"%{search}%"
 
-    count_sql = f"""
+    count_sql = """
         SELECT COUNT(*) as cnt
         FROM `tabCourse Enrollment` ce
         LEFT JOIN `tabStudent` s ON s.name = ce.student
         {conditions}
-    """
+    """.format(conditions=conditions)
     total_count = frappe.db.sql(count_sql, params, as_dict=True)[0].cnt
 
     allowed_order = {
@@ -844,7 +844,7 @@ def get_student_list(**kwargs):
     }
     order_clause = allowed_order.get(order_by, "ce.student_name")
 
-    sql = f"""
+    sql = """
         SELECT
             ce.student,
             ce.student_name,
@@ -856,7 +856,7 @@ def get_student_list(**kwargs):
         {conditions}
         ORDER BY {order_clause}
         LIMIT %(start)s, %(page_length)s
-    """
+    """.format(conditions=conditions, order_clause=order_clause)
     students = frappe.db.sql(sql, params, as_dict=True)
 
     for stu in students:

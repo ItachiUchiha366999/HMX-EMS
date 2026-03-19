@@ -53,7 +53,7 @@ def get_data(filters):
 	category_expr = "e.custom_employee_category" if has_employee_category else "NULL"
 	workload_expr = "e.custom_current_workload" if has_current_workload else "0"
 
-	data = frappe.db.sql(f"""
+	data = frappe.db.sql("""
 		SELECT
 			e.name as employee,
 			e.employee_name,
@@ -70,6 +70,6 @@ def get_data(filters):
 		LEFT JOIN `tabFaculty Profile` fp ON fp.employee = e.name
 		WHERE {conditions}
 		ORDER BY e.employee_name
-	""", as_dict=True)
+	""".format(category_expr=category_expr, conditions=conditions, workload_expr=workload_expr), as_dict=True)
 
 	return data

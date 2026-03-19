@@ -42,14 +42,14 @@ def student_pass_percentage(filters=None):
     if not frappe.db.exists("DocType", "Exam Result"):
         return _get_mock_pass_percentage()
 
-    query = f"""
+    query = """
         SELECT
             COUNT(CASE WHEN er.result = 'Pass' THEN 1 END) as passed,
             COUNT(*) as total
         FROM `tabExam Result` er
         LEFT JOIN `tabStudent` s ON er.student = s.name
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -90,11 +90,11 @@ def average_cgpa(filters=None):
     if not meta.has_field("cgpa"):
         return _get_mock_cgpa()
 
-    query = f"""
+    query = """
         SELECT AVG(s.cgpa) as avg_cgpa
         FROM `tabStudent` s
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -137,14 +137,14 @@ def student_attendance_rate(filters=None):
     if not frappe.db.exists("DocType", "Student Attendance"):
         return _get_mock_attendance_rate()
 
-    query = f"""
+    query = """
         SELECT
             COUNT(CASE WHEN a.status = 'Present' THEN 1 END) as present,
             COUNT(*) as total
         FROM `tabStudent Attendance` a
         LEFT JOIN `tabStudent` s ON a.student = s.name
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 
@@ -228,14 +228,14 @@ def course_completion_rate(filters=None):
     if not frappe.db.exists("DocType", "Course Enrollment"):
         return _get_mock_completion_rate()
 
-    query = f"""
+    query = """
         SELECT
             COUNT(CASE WHEN ce.status = 'Completed' THEN 1 END) as completed,
             COUNT(*) as total
         FROM `tabCourse Enrollment` ce
         LEFT JOIN `tabCourse` c ON ce.course = c.name
         WHERE {where_clause}
-    """
+    """.format(where_clause=where_clause)
 
     result = frappe.db.sql(query, values, as_dict=True)
 

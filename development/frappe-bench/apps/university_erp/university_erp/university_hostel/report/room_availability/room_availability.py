@@ -107,12 +107,12 @@ def get_data(filters):
         values.append(filters.get("status"))
 
     if filters.get("only_available"):
-        conditions.append("hr.available_beds > 0")
         conditions.append("hr.status != 'Under Maintenance'")
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    having_clause = "HAVING available_beds > 0" if filters.get("only_available") else ""
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             hr.name as room,
             hr.room_number,
@@ -121,8 +121,8 @@ def get_data(filters):
             hr.floor,
             hr.room_type,
             hr.capacity,
-            hr.occupied_beds,
-            hr.available_beds,
+            COUNT(ha.name) as occupied_beds,
+            (hr.capacity - COUNT(ha.name)) as available_beds,
             hr.status,
             hr.rent_per_month,
             hr.has_attached_bathroom,
@@ -133,9 +133,13 @@ def get_data(filters):
             hr.has_hot_water
         FROM `tabHostel Room` hr
         JOIN `tabHostel Building` hb ON hr.hostel_building = hb.name
+        LEFT JOIN `tabHostel Allocation` ha
+            ON ha.room = hr.name AND ha.status = 'Active' AND ha.docstatus = 1
         {where_clause}
+        GROUP BY hr.name
+        {having_clause}
         ORDER BY hb.building_name, hr.floor, hr.room_number
-    """, values, as_dict=True)
+    """.format(having_clause=having_clause, where_clause=where_clause), values, as_dict=True)
 
     # Format amenities
     for row in data:

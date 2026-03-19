@@ -74,7 +74,7 @@ def get_available_vehicles(vehicle_type=None, date=None):
 
     where_clause = " AND ".join(conditions)
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             name,
             vehicle_number,
@@ -86,7 +86,7 @@ def get_available_vehicles(vehicle_type=None, date=None):
         FROM `tabTransport Vehicle`
         WHERE {where_clause}
         ORDER BY seating_capacity DESC
-    """, values, as_dict=True)
+    """.format(where_clause=where_clause), values, as_dict=True)
 
 
 @frappe.whitelist()

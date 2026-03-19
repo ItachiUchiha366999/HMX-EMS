@@ -32,7 +32,7 @@ def get_data(filters):
     except Exception:
         fine_per_day = 5
 
-    return frappe.db.sql(f"""
+    return frappe.db.sql("""
         SELECT
             lt.name as transaction,
             lt.article,
@@ -50,7 +50,7 @@ def get_data(filters):
         AND lt.status = 'Active'
         AND lt.due_date < %s
         ORDER BY overdue_days DESC
-    """, (nowdate(),), as_dict=True)
+    """.format(fine_per_day=fine_per_day), (nowdate(),), as_dict=True)
 
 
 def get_chart(data):
