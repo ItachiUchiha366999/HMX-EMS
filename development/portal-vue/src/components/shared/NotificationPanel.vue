@@ -29,7 +29,7 @@
 
     <!-- Items -->
     <template v-else>
-      <div class="notification-list">
+      <div class="notification-list" role="log" aria-live="polite" aria-label="Notifications">
         <div
           v-for="item in visibleItems"
           :key="item.id"

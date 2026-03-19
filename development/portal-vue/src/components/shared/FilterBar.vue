@@ -9,34 +9,34 @@
 
     <div class="filter-bar__content" v-show="!isMobile || showFilters">
       <div class="filter-item">
-        <label class="filter-label">Date From</label>
-        <input type="date" class="form-input" v-model="dateFrom" />
+        <label class="filter-label" for="filter-date-from">Date From</label>
+        <input id="filter-date-from" type="date" class="form-input" v-model="dateFrom" />
       </div>
 
       <div class="filter-item">
-        <label class="filter-label">Date To</label>
-        <input type="date" class="form-input" v-model="dateTo" />
+        <label class="filter-label" for="filter-date-to">Date To</label>
+        <input id="filter-date-to" type="date" class="form-input" v-model="dateTo" />
       </div>
 
       <div class="filter-item">
-        <label class="filter-label">Academic Year</label>
-        <select class="form-select" v-model="academicYear">
+        <label class="filter-label" for="filter-academic-year">Academic Year</label>
+        <select id="filter-academic-year" class="form-select" v-model="academicYear">
           <option value="">All Years</option>
           <option v-for="year in academicYears" :key="year" :value="year">{{ year }}</option>
         </select>
       </div>
 
       <div class="filter-item">
-        <label class="filter-label">Department</label>
-        <select class="form-select" v-model="department">
+        <label class="filter-label" for="filter-department">Department</label>
+        <select id="filter-department" class="form-select" v-model="department">
           <option value="">All Departments</option>
           <option v-for="dept in departments" :key="dept" :value="dept">{{ dept }}</option>
         </select>
       </div>
 
       <div class="filter-item">
-        <label class="filter-label">Program</label>
-        <select class="form-select" v-model="program">
+        <label class="filter-label" for="filter-program">Program</label>
+        <select id="filter-program" class="form-select" v-model="program">
           <option value="">All Programs</option>
           <option v-for="prog in programs" :key="prog" :value="prog">{{ prog }}</option>
         </select>

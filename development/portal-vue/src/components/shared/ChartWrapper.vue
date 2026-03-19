@@ -1,5 +1,5 @@
 <template>
-  <div class="card chart-wrapper">
+  <div class="card chart-wrapper" role="figure" :aria-label="title ? title + ' chart' : 'Data visualization'">
     <div v-if="title || subtitle" class="card-header">
       <div>
         <h3 v-if="title" class="card-title chart-title">{{ title }}</h3>

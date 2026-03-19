@@ -1,56 +1,9 @@
 {
   "total_components": 16,
-  "components_with_violations": 1,
-  "critical": 2,
+  "components_with_violations": 0,
+  "critical": 0,
   "serious": 0,
   "moderate": 0,
   "minor": 0,
-  "violations": [
-    {
-      "component": "FilterBar",
-      "id": "label",
-      "impact": "critical",
-      "description": "Ensure every form element has a label",
-      "nodes": 2,
-      "help": "Form elements must have labels",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=axeAPI",
-      "tags": [
-        "cat.forms",
-        "wcag2a",
-        "wcag412",
-        "section508",
-        "section508.22.n",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-11.1.1"
-      ]
-    },
-    {
-      "component": "FilterBar",
-      "id": "select-name",
-      "impact": "critical",
-      "description": "Ensure select element has an accessible name",
-      "nodes": 3,
-      "help": "Select element must have an accessible name",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=axeAPI",
-      "tags": [
-        "cat.forms",
-        "wcag2a",
-        "wcag412",
-        "section508",
-        "section508.22.n",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-11.1.1"
-      ]
-    }
-  ]
+  "violations": []
 }

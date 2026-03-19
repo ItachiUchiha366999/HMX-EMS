@@ -108,6 +108,11 @@ def analyze_contrast_pairs(variables):
         ("--gray-500", "--white", "Gray-500 text on white", "normal"),
         ("--gray-400", "--white", "Gray-400 text on white", "normal"),
         ("--gray-700", "--gray-50", "Gray-700 on gray-50", "normal"),
+        # Accessible text variants (used for text on white backgrounds)
+        ("--success-text", "--white", "Success-text on white", "normal"),
+        ("--warning-text", "--white", "Warning-text on white", "normal"),
+        ("--error-text", "--white", "Error-text on white", "normal"),
+        ("--info-text", "--white", "Info-text on white", "normal"),
     ]
 
     results = []

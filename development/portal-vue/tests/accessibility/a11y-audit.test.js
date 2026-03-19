@@ -294,8 +294,8 @@ describe('Accessibility Audit - Shared Components', () => {
       })
       const results = await runAxeAudit(wrapper)
       collectViolations('FilterBar', results)
-      // FilterBar has known label issues -- will be fixed in Task 2
-      expect(results).toBeDefined()
+      const criticalSerious = results.violations.filter(v => v.impact === 'critical' || v.impact === 'serious')
+      expect(criticalSerious).toHaveLength(0)
     })
   })
 

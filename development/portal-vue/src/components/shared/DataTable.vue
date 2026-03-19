@@ -9,6 +9,7 @@
             type="text"
             class="form-input data-table__search"
             placeholder="Search..."
+            aria-label="Search table"
             :value="searchValue"
             @input="handleSearchInput"
           />
@@ -37,12 +38,13 @@
 
     <!-- Table -->
     <div class="table-wrapper">
-      <table class="table">
+      <table class="table" :aria-label="title || 'Data table'">
         <thead>
           <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
             <th
               v-for="header in headerGroup.headers"
               :key="header.id"
+              scope="col"
               :class="{
                 'data-table__th--sortable': header.column.columnDef.sortable,
                 'data-table__th--sorted': header.column.getIsSorted(),

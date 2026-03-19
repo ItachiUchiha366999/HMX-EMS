@@ -94,7 +94,20 @@ Audited using `scripts/audit_accessibility.py` against WCAG 2.1 AA requirements 
 
 ## Issues Fixed
 
-*(To be populated after Task 2 fixes)*
+| Component | Rule ID | Impact | Fix Applied |
+|-----------|---------|--------|-------------|
+| FilterBar | label | Critical | Added `id` attributes to all `<input>` elements and `for` attributes to corresponding `<label>` elements |
+| FilterBar | select-name | Critical | Added `id` attributes to all `<select>` elements with matching `for` on labels |
+| DataTable | table-aria | Enhancement | Added `aria-label` on `<table>` element using the `title` prop |
+| DataTable | th-scope | Enhancement | Added `scope="col"` to all `<th>` elements |
+| DataTable | search-label | Enhancement | Added `aria-label="Search table"` to search input |
+| PortalLayout | skip-nav | Enhancement | Added skip-to-content link with keyboard-visible CSS |
+| PortalLayout | main-id | Enhancement | Added `id="main-content"` to `<main>` element for skip link target |
+| ChartWrapper | figure-role | Enhancement | Added `role="figure"` and dynamic `aria-label` to chart wrapper |
+| NotificationPanel | live-region | Enhancement | Added `role="log"` and `aria-live="polite"` to notification list |
+| CSS variables.css | color-contrast | Enhancement | Changed `--text-muted` from gray-400 to gray-500 (2.56:1 to 4.76:1) |
+| CSS variables.css | color-contrast | Enhancement | Added `--success-text` (#047857, 5.48:1), `--warning-text` (#92400E, 7.09:1), `--error-text` (#B91C1C, 6.47:1), `--info-text` (#1D4ED8, 6.7:1) |
+| CSS portal.css | color-contrast | Enhancement | Updated `.status-badge` classes to use accessible `-text` variants |
 
 ## Issues Deferred
 

@@ -383,14 +383,14 @@
 .status-badge.issued,
 .status-badge.resolved {
     background: rgba(40, 167, 69, 0.1);
-    color: var(--portal-success);
+    color: var(--success-text, #047857);
 }
 
 .status-badge.warning,
 .status-badge.pending,
 .status-badge.due-soon {
     background: rgba(255, 193, 7, 0.1);
-    color: #856404;
+    color: var(--warning-text, #92400E);
 }
 
 .status-badge.danger,
@@ -398,13 +398,13 @@
 .status-badge.overdue,
 .status-badge.rejected {
     background: rgba(220, 53, 69, 0.1);
-    color: var(--portal-danger);
+    color: var(--error-text, #B91C1C);
 }
 
 .status-badge.info,
 .status-badge.in-progress {
     background: rgba(23, 162, 184, 0.1);
-    color: var(--portal-info);
+    color: var(--info-text, #1D4ED8);
 }
 
 /* Grade Badges */
