@@ -1,80 +1,80 @@
 # Report & Dashboard Audit Results
 
-**Generated:** 2026-03-18 23:41:15
+**Generated:** 2026-03-19 14:07:34
 **Site:** university.local
 
 ## Executive Summary
 
 - **Total Reports Tested:** 279
-- **Reports Passing:** 189
-- **Reports Failing:** 90
-- **Unregistered Report Files:** 1
+- **Reports Passing:** 203
+- **Reports Failing:** 76
+- **Unregistered Report Files:** 2
 - **Analytics API Endpoints:** 9 (8 PASS, 1 FAIL, 0 DEGRADED)
-- **Dashboard Accuracy Checks:** 1 (0 PASS, 0 WARNING, 0 FAIL)
+- **Dashboard Accuracy Checks:** 5 (5 PASS, 0 WARNING, 0 FAIL)
 
 ## Report Results
 
 | # | Report Name | Module | Type | Pass 1 | Pass 2 | Rows | Columns | Error |
 |---|-------------|--------|------|--------|--------|------|---------|-------|
-| 1 | Question Bank Analysis | University Examinations | Script Report | PASS | N/A | 6 | 12 |  |
-| 2 | Internal Assessment Summary | University Examinations | Script Report | PASS | N/A | 0 | 7 |  |
-| 3 | Examination Result Analysis | University Examinations | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: No module named 'university_erp.university_examinations.report.examination_result_analysis.e |
-| 4 | CO Attainment Report | University OBE | Script Report | PASS | N/A | 15 | 9 |  |
-| 5 | CO PO Attainment | University OBE | Script Report | PASS | N/A | 15 | 6 |  |
-| 6 | NIRF Parameter Report | University OBE | Script Report | PASS | N/A | 0 | 6 |  |
-| 7 | NAAC Criterion Progress | University OBE | Script Report | PASS | N/A | 8 | 8 |  |
-| 8 | Program Outcome Attainment | University OBE | Script Report | PASS | N/A | 12 | 8 |  |
-| 9 | Student Performance Analysis | University Analytics | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 's.program' in 'SELECT'") \| Pass 2: (1054, "Unknown column 's.progra |
-| 10 | Stock Ledger | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
-| 11 | Stock Balance | University Inventory | Script Report | PASS | N/A | 0 | 0 |  |
-| 12 | Asset Register | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
-| 13 | Low Stock Items | University Inventory | Script Report | PASS | N/A | 0 | 10 |  |
-| 14 | Feedback Analysis | University Feedback | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'ff.title' in 'SELECT'") \| Pass 2: (1054, "Unknown column 'ff.title' |
-| 15 | Grievance Summary | University Grievance | Script Report | PASS | N/A | 3 | 7 |  |
-| 16 | Purchase Order Status | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
-| 17 | SLA Compliance Report | University Grievance | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'g.submission_date' in 'SELECT'") \| Pass 2: (1054, "Unknown column ' |
-| 18 | Communication Analytics | University Analytics | Script Report | PASS | N/A | 0 | 6 |  |
-| 19 | Faculty Feedback Report | University Feedback | Script Report | PASS | N/A | 0 | 8 |  |
-| 20 | Lab Equipment Utilization | University Inventory | Script Report | PASS | N/A | 0 | 10 |  |
-| 21 | Refund Report | University Payments | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'fr.reason' in 'SELECT'") \| Pass 2: (1054, "Unknown column 'fr.reaso |
-| 22 | Daily Collection Report | University Payments | Script Report | PASS | N/A | 0 | 9 |  |
-| 23 | Gateway Reconciliation Report | University Payments | Script Report | PASS | N/A | 0 | 11 |  |
-| 24 | SMS Delivery Report | University Integrations | Script Report | PASS | N/A | 0 | 8 |  |
-| 25 | CO-PO Mapping Matrix | University OBE | Script Report | PASS | N/A | 0 | 4 |  |
-| 26 | PO Attainment Report | University OBE | Script Report | PASS | N/A | 12 | 10 |  |
-| 27 | Survey Analysis Report | University OBE | Script Report | PASS | N/A | 0 | 10 |  |
-| 28 | Payment Transaction Report | University Integrations | Script Report | PASS | N/A | 0 | 10 |  |
-| 29 | Program Attainment Summary | University OBE | Script Report | PASS | N/A | 1 | 11 |  |
-| 30 | Certificate Issuance Report | University Integrations | Script Report | PASS | N/A | 2 | 11 |  |
-| 31 | Visitor Log | University Hostel | Script Report | PASS | N/A | 5 | 12 |  |
-| 32 | Quiz Analytics | University LMS | Script Report | PASS | N/A | 15 | 9 |  |
-| 33 | Course Progress | University LMS | Script Report | PASS | N/A | 0 | 8 |  |
-| 34 | Maintenance Summary | University Hostel | Script Report | PASS | N/A | 2 | 12 |  |
-| 35 | Publication Statistics | University Research | Script Report | PASS | N/A | 5 | 8 |  |
-| 36 | Faculty Research Output | University Research | Script Report | PASS | N/A | 6 | 9 |  |
-| 37 | Grant Utilization Report | University Research | Script Report | PASS | N/A | 3 | 10 |  |
-| 38 | Assignment Submission Report | University LMS | Script Report | PASS | N/A | 20 | 8 |  |
-| 39 | Overdue Books | University Library | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: Field <strong>library_fine_per_day</strong> does not exist on <strong>University Settings</s |
-| 40 | Placement Trend | University Placement | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'") \| Pass 2: (1054, "Unknown column |
-| 41 | Hostel Occupancy | University Hostel | Script Report | PASS | N/A | 4 | 9 |  |
-| 42 | Faculty Directory | Faculty Management | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'") \| Pass 2: (1054, "Unknown |
-| 43 | Room Availability | University Hostel | Script Report | PASS | N/A | 31 | 11 |  |
-| 44 | Library Collection | University Library | Script Report | PASS | N/A | 4 | 6 |  |
-| 45 | Library Circulation | University Library | Script Report | PASS | N/A | 9 | 5 |  |
-| 46 | Route Wise Students | University Transport | Script Report | PASS | N/A | 10 | 8 |  |
-| 47 | Vehicle Utilization | University Transport | Script Report | PASS | N/A | 4 | 9 |  |
-| 48 | Placement Statistics | University Placement | Script Report | PASS | N/A | 1 | 10 |  |
-| 49 | Department HR Summary | Faculty Management | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'") \| Pass 2: (1054, "Unknown |
-| 50 | Company Wise Placement | University Placement | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'") \| Pass 2: (1054, "Unknown column |
-| 51 | Program Wise Placement | University Placement | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'pa.program' in 'SELECT'") \| Pass 2: (1054, "Unknown column 'pa.prog |
-| 52 | Faculty Workload Summary | Faculty Management | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'e.custom_is_faculty' in 'WHERE'") \| Pass 2: (1054, "Unknown column  |
-| 53 | Hostel Attendance Report | University Hostel | Script Report | PASS | N/A | 15 | 7 |  |
-| 54 | Leave Utilization Report | Faculty Management | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: (1054, "Unknown column 'la.custom_total_classes_affected' in 'SELECT'") \| Pass 2: (1054, "U |
-| 55 | Member Borrowing History | University Library | Script Report | PASS | N/A | 0 | 9 |  |
-| 56 | Transport Fee Collection | University Transport | Script Report | PASS | N/A | 4 | 6 |  |
-| 57 | Fee Defaulters | University Finance | Script Report | PASS | N/A | 0 | 10 |  |
-| 58 | Fee Collection Summary | University Finance | Script Report | PASS | N/A | 4 | 6 |  |
-| 59 | Program-wise Fee Report | University Finance | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: No module named 'university_erp.university_finance.report.program_wise_fee_report' \| Pass 2 |
+| 1 | Program-wise Fee Report | University Finance | Script Report | PASS | N/A | 4 | 10 |  |
+| 2 | Question Bank Analysis | University Examinations | Script Report | PASS | N/A | 6 | 12 |  |
+| 3 | Internal Assessment Summary | University Examinations | Script Report | PASS | N/A | 0 | 7 |  |
+| 4 | Examination Result Analysis | University Examinations | Script Report | PASS | N/A | 0 | 11 |  |
+| 5 | CO Attainment Report | University OBE | Script Report | PASS | N/A | 15 | 9 |  |
+| 6 | CO PO Attainment | University OBE | Script Report | PASS | N/A | 15 | 6 |  |
+| 7 | NIRF Parameter Report | University OBE | Script Report | PASS | N/A | 0 | 6 |  |
+| 8 | NAAC Criterion Progress | University OBE | Script Report | PASS | N/A | 8 | 8 |  |
+| 9 | Program Outcome Attainment | University OBE | Script Report | PASS | N/A | 12 | 8 |  |
+| 10 | Student Performance Analysis | University Analytics | Script Report | PASS | N/A | 30 | 10 |  |
+| 11 | Stock Ledger | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
+| 12 | Stock Balance | University Inventory | Script Report | PASS | N/A | 0 | 0 |  |
+| 13 | Asset Register | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
+| 14 | Low Stock Items | University Inventory | Script Report | PASS | N/A | 0 | 10 |  |
+| 15 | Feedback Analysis | University Feedback | Script Report | PASS | N/A | 2 | 11 |  |
+| 16 | Grievance Summary | University Grievance | Script Report | PASS | N/A | 3 | 7 |  |
+| 17 | Purchase Order Status | University Inventory | Script Report | PASS | N/A | 0 | 12 |  |
+| 18 | SLA Compliance Report | University Grievance | Script Report | PASS | N/A | 2 | 10 |  |
+| 19 | Communication Analytics | University Analytics | Script Report | PASS | N/A | 0 | 6 |  |
+| 20 | Faculty Feedback Report | University Feedback | Script Report | PASS | N/A | 0 | 8 |  |
+| 21 | Lab Equipment Utilization | University Inventory | Script Report | PASS | N/A | 0 | 10 |  |
+| 22 | Refund Report | University Payments | Script Report | PASS | N/A | 0 | 12 |  |
+| 23 | Daily Collection Report | University Payments | Script Report | PASS | N/A | 0 | 9 |  |
+| 24 | Gateway Reconciliation Report | University Payments | Script Report | PASS | N/A | 0 | 11 |  |
+| 25 | SMS Delivery Report | University Integrations | Script Report | PASS | N/A | 0 | 8 |  |
+| 26 | CO-PO Mapping Matrix | University OBE | Script Report | PASS | N/A | 0 | 4 |  |
+| 27 | PO Attainment Report | University OBE | Script Report | PASS | N/A | 12 | 10 |  |
+| 28 | Survey Analysis Report | University OBE | Script Report | PASS | N/A | 0 | 10 |  |
+| 29 | Payment Transaction Report | University Integrations | Script Report | PASS | N/A | 0 | 10 |  |
+| 30 | Program Attainment Summary | University OBE | Script Report | PASS | N/A | 1 | 11 |  |
+| 31 | Certificate Issuance Report | University Integrations | Script Report | PASS | N/A | 2 | 11 |  |
+| 32 | Visitor Log | University Hostel | Script Report | PASS | N/A | 5 | 12 |  |
+| 33 | Quiz Analytics | University LMS | Script Report | PASS | N/A | 15 | 9 |  |
+| 34 | Course Progress | University LMS | Script Report | PASS | N/A | 0 | 8 |  |
+| 35 | Maintenance Summary | University Hostel | Script Report | PASS | N/A | 2 | 12 |  |
+| 36 | Publication Statistics | University Research | Script Report | PASS | N/A | 5 | 8 |  |
+| 37 | Faculty Research Output | University Research | Script Report | PASS | N/A | 6 | 9 |  |
+| 38 | Grant Utilization Report | University Research | Script Report | PASS | N/A | 3 | 10 |  |
+| 39 | Assignment Submission Report | University LMS | Script Report | PASS | N/A | 20 | 8 |  |
+| 40 | Overdue Books | University Library | Script Report | PASS | N/A | 8 | 9 |  |
+| 41 | Placement Trend | University Placement | Script Report | PASS | N/A | 1 | 10 |  |
+| 42 | Hostel Occupancy | University Hostel | Script Report | PASS | N/A | 4 | 9 |  |
+| 43 | Faculty Directory | Faculty Management | Script Report | PASS | N/A | 0 | 11 |  |
+| 44 | Room Availability | University Hostel | Script Report | PASS | N/A | 31 | 11 |  |
+| 45 | Library Collection | University Library | Script Report | PASS | N/A | 4 | 6 |  |
+| 46 | Library Circulation | University Library | Script Report | PASS | N/A | 9 | 5 |  |
+| 47 | Route Wise Students | University Transport | Script Report | PASS | N/A | 10 | 8 |  |
+| 48 | Vehicle Utilization | University Transport | Script Report | PASS | N/A | 4 | 9 |  |
+| 49 | Placement Statistics | University Placement | Script Report | PASS | N/A | 1 | 10 |  |
+| 50 | Department HR Summary | Faculty Management | Script Report | PASS | N/A | 0 | 8 |  |
+| 51 | Company Wise Placement | University Placement | Script Report | PASS | N/A | 6 | 11 |  |
+| 52 | Program Wise Placement | University Placement | Script Report | PASS | N/A | 2 | 9 |  |
+| 53 | Faculty Workload Summary | Faculty Management | Script Report | PASS | N/A | 0 | 10 |  |
+| 54 | Hostel Attendance Report | University Hostel | Script Report | PASS | N/A | 15 | 7 |  |
+| 55 | Leave Utilization Report | Faculty Management | Script Report | PASS | N/A | 3 | 9 |  |
+| 56 | Member Borrowing History | University Library | Script Report | PASS | N/A | 0 | 9 |  |
+| 57 | Transport Fee Collection | University Transport | Script Report | PASS | N/A | 4 | 6 |  |
+| 58 | Fee Defaulters | University Finance | Script Report | PASS | N/A | 0 | 10 |  |
+| 59 | Fee Collection Summary | University Finance | Script Report | PASS | N/A | 4 | 6 |  |
 | 60 | Stock Qty vs Batch Qty | Stock | Script Report | PASS | N/A | 0 | 6 |  |
 | 61 | General Ledger | Accounts | Script Report | PASS | N/A | 0 | 0 |  |
 | 62 | Quotation Trends | Selling | Script Report | FAIL | FAIL | 0 | 0 | Pass 1: Fiscal Year is mandatory \| Pass 2: Fiscal Year is mandatory |
@@ -297,76 +297,6 @@
 | 279 | Maintenance Schedules | Support | Query Report | PASS | N/A | 0 | 9 |  |
 
 ## Failed Reports Detail
-
-### Examination Result Analysis
-- **Module:** University Examinations
-- **Type:** Script Report
-- **Error:** Pass 1: No module named 'university_erp.university_examinations.report.examination_result_analysis.examinati | Pass 2: No module named 'university_erp.university_examinations.report.examination_result_analysis.examinati
-
-### Student Performance Analysis
-- **Module:** University Analytics
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 's.program' in 'SELECT'") | Pass 2: (1054, "Unknown column 's.program' in 'SELECT'")
-
-### Feedback Analysis
-- **Module:** University Feedback
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'ff.title' in 'SELECT'") | Pass 2: (1054, "Unknown column 'ff.title' in 'SELECT'")
-
-### SLA Compliance Report
-- **Module:** University Grievance
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'g.submission_date' in 'SELECT'") | Pass 2: (1054, "Unknown column 'g.submission_date' in 'SELECT'")
-
-### Refund Report
-- **Module:** University Payments
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'fr.reason' in 'SELECT'") | Pass 2: (1054, "Unknown column 'fr.reason' in 'SELECT'")
-
-### Overdue Books
-- **Module:** University Library
-- **Type:** Script Report
-- **Error:** Pass 1: Field <strong>library_fine_per_day</strong> does not exist on <strong>University Settings</strong> | Pass 2: Field <strong>library_fine_per_day</strong> does not exist on <strong>University Settings</strong>
-
-### Placement Trend
-- **Module:** University Placement
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'") | Pass 2: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'")
-
-### Faculty Directory
-- **Module:** Faculty Management
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'") | Pass 2: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'")
-
-### Department HR Summary
-- **Module:** Faculty Management
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'") | Pass 2: (1054, "Unknown column 'e.custom_employee_category' in 'SELECT'")
-
-### Company Wise Placement
-- **Module:** University Placement
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'") | Pass 2: (1054, "Unknown column 'pjo.package_offered' in 'SELECT'")
-
-### Program Wise Placement
-- **Module:** University Placement
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'pa.program' in 'SELECT'") | Pass 2: (1054, "Unknown column 'pa.program' in 'SELECT'")
-
-### Faculty Workload Summary
-- **Module:** Faculty Management
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'e.custom_is_faculty' in 'WHERE'") | Pass 2: (1054, "Unknown column 'e.custom_is_faculty' in 'WHERE'")
-
-### Leave Utilization Report
-- **Module:** Faculty Management
-- **Type:** Script Report
-- **Error:** Pass 1: (1054, "Unknown column 'la.custom_total_classes_affected' in 'SELECT'") | Pass 2: (1054, "Unknown column 'la.custom_total_classes_affected' in 'SELECT'")
-
-### Program-wise Fee Report
-- **Module:** University Finance
-- **Type:** Script Report
-- **Error:** Pass 1: No module named 'university_erp.university_finance.report.program_wise_fee_report' | Pass 2: No module named 'university_erp.university_finance.report.program_wise_fee_report'
 
 ### Quotation Trends
 - **Module:** Selling
@@ -754,15 +684,16 @@ These `.py` report files exist on disk but are not registered in the Report doct
 
 | # | Report Directory | File Path |
 |---|-----------------|-----------|
-| 1 | co_po_mapping_matrix | /workspace/development/frappe-bench/apps/university_erp/university_erp/university_obe/report/co_po_mapping_matrix/co_po_mapping_matrix.py |
+| 1 | program_wise_fee_report | /workspace/development/frappe-bench/apps/university_erp/university_erp/university_finance/report/program_wise_fee_report/program_wise_fee_report.py |
+| 2 | co_po_mapping_matrix | /workspace/development/frappe-bench/apps/university_erp/university_erp/university_obe/report/co_po_mapping_matrix/co_po_mapping_matrix.py |
 
 ## Analytics API Results
 
 | Endpoint | Status | Response Type | Notes |
 |----------|--------|---------------|-------|
 | get_available_dashboards | PASS | list | 1 items |
-| get_dashboard | PASS | dict |  |
-| get_quick_stats | FAIL | error | (1054, "Unknown column 'status' in 'WHERE'") |
+| get_dashboard | FAIL | error | (1020, "Record has changed since last read in table 'tabCustom Dashboard'") |
+| get_quick_stats | PASS | dict |  |
 | get_all_kpis | PASS | list | 5 items |
 | get_kpi_value | PASS | dict |  |
 | get_kpi_trend | PASS | list | 0 items |
@@ -776,4 +707,8 @@ Comparison of `get_overview_metrics()` values against direct SQL counts.
 
 | Metric | Dashboard Value | Direct SQL Value | Difference | Status |
 |--------|----------------|-----------------|------------|--------|
-| get_overview_metrics() | ERROR | N/A | N/A | FAIL: (1054, "Unknown column 'status' in 'WHERE'") |
+| total_students | 30.0 | 30.0 | 0.0% | PASS |
+| total_faculty | 10.0 | 10.0 | 0.0% | PASS |
+| total_programs | 4.0 | 4.0 | 0.0% | PASS |
+| total_courses | 12.0 | 12.0 | 0.0% | PASS |
+| fee_collection_today | 0.0 | 0.0 | 0.0% | PASS |

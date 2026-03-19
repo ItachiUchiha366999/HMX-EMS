@@ -112,11 +112,11 @@ def get_data(filters):
             oe.course,
             COUNT(*) as total_attempts,
             SUM(CASE WHEN sea.status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as submitted,
-            SUM(CASE WHEN sea.is_passed = 1 THEN 1 ELSE 0 END) as passed,
-            SUM(CASE WHEN sea.is_passed = 0 AND sea.status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as failed,
-            AVG(sea.score_obtained) as avg_score,
-            MAX(sea.score_obtained) as highest_score,
-            MIN(CASE WHEN sea.score_obtained > 0 THEN sea.score_obtained ELSE NULL END) as lowest_score,
+            SUM(CASE WHEN sea.percentage >= 40 AND sea.status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as passed,
+            SUM(CASE WHEN sea.percentage < 40 AND sea.status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as failed,
+            AVG(sea.marks_obtained) as avg_score,
+            MAX(sea.marks_obtained) as highest_score,
+            MIN(CASE WHEN sea.marks_obtained > 0 THEN sea.marks_obtained ELSE NULL END) as lowest_score,
             AVG(TIMESTAMPDIFF(MINUTE, sea.start_time, sea.end_time)) as avg_time_mins
         FROM `tabStudent Exam Attempt` sea
         INNER JOIN `tabOnline Examination` oe ON oe.name = sea.online_examination
@@ -144,12 +144,12 @@ def get_chart_data(filters):
     grade_data = frappe.db.sql("""
         SELECT
             CASE
-                WHEN percentage >= 90 THEN 'A+ (90-100%)'
-                WHEN percentage >= 80 THEN 'A (80-89%)'
-                WHEN percentage >= 70 THEN 'B (70-79%)'
-                WHEN percentage >= 60 THEN 'C (60-69%)'
-                WHEN percentage >= 50 THEN 'D (50-59%)'
-                ELSE 'F (<50%)'
+                WHEN percentage >= 90 THEN 'A+ (90-100%%)'
+                WHEN percentage >= 80 THEN 'A (80-89%%)'
+                WHEN percentage >= 70 THEN 'B (70-79%%)'
+                WHEN percentage >= 60 THEN 'C (60-69%%)'
+                WHEN percentage >= 50 THEN 'D (50-59%%)'
+                ELSE 'F (<50%%)'
             END as grade_range,
             COUNT(*) as count
         FROM `tabStudent Exam Attempt`
@@ -158,11 +158,11 @@ def get_chart_data(filters):
         GROUP BY grade_range
         ORDER BY
             CASE grade_range
-                WHEN 'A+ (90-100%)' THEN 1
-                WHEN 'A (80-89%)' THEN 2
-                WHEN 'B (70-79%)' THEN 3
-                WHEN 'C (60-69%)' THEN 4
-                WHEN 'D (50-59%)' THEN 5
+                WHEN 'A+ (90-100%%)' THEN 1
+                WHEN 'A (80-89%%)' THEN 2
+                WHEN 'B (70-79%%)' THEN 3
+                WHEN 'C (60-69%%)' THEN 4
+                WHEN 'D (50-59%%)' THEN 5
                 ELSE 6
             END
     """.format(conditions=conditions), filters, as_dict=True)
@@ -189,8 +189,8 @@ def get_summary(filters):
         SELECT
             COUNT(*) as total_attempts,
             SUM(CASE WHEN status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as completed,
-            SUM(CASE WHEN is_passed = 1 THEN 1 ELSE 0 END) as passed,
-            AVG(score_obtained) as avg_score,
+            SUM(CASE WHEN percentage >= 40 AND status IN ('Submitted', 'Auto Submitted', 'Evaluated') THEN 1 ELSE 0 END) as passed,
+            AVG(marks_obtained) as avg_score,
             AVG(percentage) as avg_percentage
         FROM `tabStudent Exam Attempt`
         WHERE 1=1 {conditions}

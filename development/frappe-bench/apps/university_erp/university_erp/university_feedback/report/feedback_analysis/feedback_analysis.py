@@ -92,7 +92,7 @@ def get_columns():
 def get_data(filters):
     conditions = get_conditions(filters)
 
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             ff.name as feedback_form,
             ff.form_title as form_title,
@@ -111,7 +111,7 @@ def get_data(filters):
         {conditions}
         GROUP BY ff.name, ff.form_title, ff.form_type, ff.academic_term, ff.total_responses
         ORDER BY ff.creation DESC
-    """, as_dict=True)
+    """.format(conditions=conditions), filters, as_dict=True)
 
     # Calculate derived fields
     for row in data:
@@ -135,15 +135,15 @@ def get_conditions(filters):
     conditions = ""
 
     if filters.get("feedback_form"):
-        conditions += f" AND ff.name = '{filters.get('feedback_form')}'"
+        conditions += " AND ff.name = %(feedback_form)s"
     if filters.get("form_type"):
-        conditions += f" AND ff.form_type = '{filters.get('form_type')}'"
+        conditions += " AND ff.form_type = %(form_type)s"
     if filters.get("academic_term"):
-        conditions += f" AND ff.academic_term = '{filters.get('academic_term')}'"
+        conditions += " AND ff.academic_term = %(academic_term)s"
     if filters.get("from_date"):
-        conditions += f" AND ff.creation >= '{filters.get('from_date')}'"
+        conditions += " AND ff.creation >= %(from_date)s"
     if filters.get("to_date"):
-        conditions += f" AND ff.creation <= '{filters.get('to_date')}'"
+        conditions += " AND ff.creation <= %(to_date)s"
 
     return conditions
 

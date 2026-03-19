@@ -86,7 +86,7 @@ def get_data(filters):
     conditions = get_conditions(filters)
 
     # Get grievance data grouped by category and type
-    data = frappe.db.sql(f"""
+    data = frappe.db.sql("""
         SELECT
             g.category,
             g.grievance_type,
@@ -107,7 +107,7 @@ def get_data(filters):
         {conditions}
         GROUP BY g.category, g.grievance_type, gt.sla_days
         ORDER BY g.category, g.grievance_type
-    """, as_dict=True)
+    """.format(conditions=conditions), filters, as_dict=True)
 
     # Calculate SLA compliance rate
     for row in data:
@@ -124,17 +124,17 @@ def get_conditions(filters):
     conditions = ""
 
     if filters.get("from_date"):
-        conditions += f" AND g.creation >= '{filters.get('from_date')}'"
+        conditions += " AND g.creation >= %(from_date)s"
     if filters.get("to_date"):
-        conditions += f" AND g.creation <= '{filters.get('to_date')}'"
+        conditions += " AND g.creation <= %(to_date)s"
     if filters.get("category"):
-        conditions += f" AND g.category = '{filters.get('category')}'"
+        conditions += " AND g.category = %(category)s"
     if filters.get("grievance_type"):
-        conditions += f" AND g.grievance_type = '{filters.get('grievance_type')}'"
+        conditions += " AND g.grievance_type = %(grievance_type)s"
     if filters.get("assigned_to"):
-        conditions += f" AND g.assigned_to = '{filters.get('assigned_to')}'"
+        conditions += " AND g.assigned_to = %(assigned_to)s"
     if filters.get("sla_status"):
-        conditions += f" AND g.sla_status = '{filters.get('sla_status')}'"
+        conditions += " AND g.sla_status = %(sla_status)s"
 
     return conditions
 

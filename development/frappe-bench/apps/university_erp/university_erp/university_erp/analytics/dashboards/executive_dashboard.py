@@ -128,9 +128,9 @@ def get_financial_summary(filters=None):
 
     # Check if Fees doctype exists
     if frappe.db.exists("DocType", "Fees"):
-        # Monthly collection
+        # Monthly collection (paid = grand_total - outstanding_amount)
         monthly_collection = frappe.db.sql("""
-            SELECT SUM(paid_amount) as total
+            SELECT SUM(grand_total - outstanding_amount) as total
             FROM `tabFees`
             WHERE docstatus = 1
             AND posting_date >= %s
@@ -138,7 +138,7 @@ def get_financial_summary(filters=None):
 
         # Yearly collection
         yearly_collection = frappe.db.sql("""
-            SELECT SUM(paid_amount) as total
+            SELECT SUM(grand_total - outstanding_amount) as total
             FROM `tabFees`
             WHERE docstatus = 1
             AND posting_date >= %s
@@ -406,7 +406,7 @@ def _get_fee_collection_today():
     """Get today's fee collection"""
     if frappe.db.exists("DocType", "Fees"):
         result = frappe.db.sql("""
-            SELECT SUM(paid_amount) as total
+            SELECT SUM(grand_total - outstanding_amount) as total
             FROM `tabFees`
             WHERE docstatus = 1 AND posting_date = %s
         """, today(), as_dict=True)
