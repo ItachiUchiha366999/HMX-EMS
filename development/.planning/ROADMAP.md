@@ -15,7 +15,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
-- [x] **Phase 03.1: Cross-App Integration Audit & Accessibility Testing** (INSERTED) - Audit duplicate doctypes, test cross-app links, verify reports/APIs, fix accessibility issues (completed 2026-03-19)
+- [ ] **Phase 03.1: Cross-App Integration Audit & Accessibility Testing** (INSERTED) - Audit done, gap closure pending (custom field migration, report fixes)
+- [ ] **Phase 03.2: Student Portal Recreation** (INSERTED) - Recreate all 11 student views in portal-vue with shared component library, deprecate old student-portal-spa
+- [ ] **Phase 03.3: ERPNext Accounts Module Fork** (INSERTED) - Fork full Accounts module into university_erp with student-centric terminology
 - [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
 - [ ] **Phase 5: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
 - [ ] **Phase 6: HOD Portal** - HODs can oversee department performance, manage faculty, and handle approvals
@@ -77,23 +79,67 @@ Plans:
 
 **Goal:** All cross-app data flows are verified, duplicate doctypes are catalogued with recommendations, every report and API endpoint executes without error, and the portal UI meets WCAG 2.1 AA with zero critical/serious violations
 **Depends on:** Phase 3
-**Requirements**: AUDIT-DUP, AUDIT-CONN, AUDIT-RPT, AUDIT-API, AUDIT-A11Y
+**Requirements**: AUDIT-DUP, AUDIT-CONN, AUDIT-RPT, AUDIT-API, AUDIT-A11Y, GAP-01, GAP-02, GAP-03, GAP-04, GAP-05
 **Success Criteria** (what must be TRUE):
   1. Duplicate doctype audit identifies all exact-name and semantic overlaps across Education, ERPNext, HRMS, and university_erp with schema diffs and recommendations
   2. Cross-app link integrity test discovers all Link/Dynamic Link fields and reports broken link counts
-  3. All 59+ reports execute without error (or with documented mandatory filter fallbacks)
+  3. All 59+ university_erp reports execute without error (or with documented mandatory filter fallbacks)
   4. All 27 faculty API endpoints return valid responses with cross-app data resolution verified
   5. Portal UI has zero critical and zero serious WCAG 2.1 AA violations
-**Plans**: 3 plans
+**Plans**: 3 plans (executed) + gap closure plans TBD
 
 Plans:
-- [ ] 03.1-01-PLAN.md — Duplicate doctype audit + cross-app link integrity testing
-- [ ] 03.1-02-PLAN.md — Report/dashboard verification + faculty API integration testing
-- [ ] 03.1-03-PLAN.md — Accessibility audit with vitest-axe + fix critical/serious violations
+- [x] 03.1-01-PLAN.md — Duplicate doctype audit + cross-app link integrity testing
+- [x] 03.1-02-PLAN.md — Report/dashboard verification + faculty API integration testing
+- [x] 03.1-03-PLAN.md — Accessibility audit with vitest-axe + fix critical/serious violations
+
+**Gaps (from verification):**
+- GAP-01/02: Employee + Leave Application custom fields not migrated to DB (blocks 27 faculty API endpoints + 4 reports)
+- GAP-03: 10 university_erp reports fail with schema errors (missing columns + broken imports)
+- GAP-04: Executive dashboard status column error
+- GAP-05: Faculty API re-verification needed after fixes
+
+### Phase 03.2: Student Portal Recreation (INSERTED)
+
+**Goal:** All 11 student portal views are recreated inside portal-vue using the shared component library, with consistent UI matching faculty portal, and the old student-portal-spa is deprecated
+**Depends on:** Phase 2 (shared components), Phase 03.1 (gap closure for working APIs)
+**Requirements**: STUD-01, STUD-02, STUD-03, STUD-04, STUD-05, STUD-06, STUD-07, STUD-08, STUD-09, STUD-10, STUD-11
+**Success Criteria** (what must be TRUE):
+  1. Student dashboard shows today's classes, pending tasks, announcements, and key academic metrics using shared KPI cards and charts
+  2. Student can view full academics (timetable, attendance heatmap, grades) and finance (fee status, payment history, online payment via Razorpay/PayU)
+  3. Student can view examinations (schedule, hall tickets, results), hostel (room, attendance, mess), and transport (route, bus)
+  4. Student can view library (books, fines, catalog), placement (companies, applications, stats), and submit/track grievances
+  5. All student views use the same shared components, CSS custom properties, and dark mode support as faculty portal
+**Plans**: TBD
+
+Plans:
+- [ ] 03.2-01: Student API endpoints + dashboard + academics (timetable, attendance, grades)
+- [ ] 03.2-02: Finance (fees, payments, online pay) + examinations (schedule, hall tickets, results)
+- [ ] 03.2-03: Hostel + transport + library + placement + grievances + notifications + profile
+
+### Phase 03.3: ERPNext Accounts Module Fork (INSERTED)
+
+**Goal:** The entire ERPNext Accounts module is forked into university_erp as university_accounts with student-centric terminology, and all existing finance flows (fee→GL, payment gateway, bank reconciliation) work through the forked module
+**Depends on:** Phase 03.1 (gap closure — need working finance reports first)
+**Requirements**: ACCT-01, ACCT-02, ACCT-03, ACCT-04, ACCT-05, ACCT-06, ACCT-07
+**Success Criteria** (what must be TRUE):
+  1. Full ERPNext Accounts module copied into university_erp/university_accounts/ with all doctypes, reports, and controllers
+  2. All doctype labels relabeled: Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor, Sales Order→Fee Order, Purchase Invoice→Procurement Invoice
+  3. GL Entry, Journal Entry, Payment Entry, Bank Reconciliation create/read/update/delete operations work through forked module
+  4. Fee collection → GL posting → Payment Entry flow verified end-to-end (submit fee, verify GL entries, verify payment)
+  5. Payment gateway webhooks (Razorpay/PayU) create Payment Entries through forked module
+  6. All university_erp finance reports (Daily Collection, Gateway Reconciliation, Refund, Fee Collection Summary, Fee Defaulters, Program-wise Fee) use forked module
+  7. No remaining import references to erpnext.accounts in university_erp code (all redirected to university_accounts)
+**Plans**: TBD
+
+Plans:
+- [ ] 03.3-01: Copy Accounts module, rename doctypes, relabel fields, update module registry
+- [ ] 03.3-02: Rewire GL posting, Payment Entry, Bank Reconciliation to forked module
+- [ ] 03.3-03: Update finance reports, payment gateway webhooks, verify end-to-end flows
 
 ### Phase 4: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
-**Depends on**: Phase 2
+**Depends on**: Phase 03.3 (accounts fork needed for accurate finance data in dashboards)
 **Requirements**: MGMT-01, MGMT-02, MGMT-03, MGMT-04, MGMT-05, MGMT-06, MGMT-07, MGMT-08, MGMT-09, MGMT-10, MGMT-11, ANLT-03, ANLT-04
 **Success Criteria** (what must be TRUE):
   1. VC, Registrar, Finance Officer, and Dean each see a dashboard tailored to their role with real aggregated KPIs (not mocked data)
@@ -110,7 +156,7 @@ Plans:
 
 ### Phase 5: Parent Portal
 **Goal**: Parents can monitor their child's complete university life (academics, finances, hostel, transport) and communicate with faculty, all within a secure guardian-verified context
-**Depends on**: Phase 2
+**Depends on**: Phase 03.2 (student portal shares academic/finance views that parent views read-only)
 **Requirements**: PRNT-01, PRNT-02, PRNT-03, PRNT-04, PRNT-05, PRNT-06, PRNT-07, PRNT-08, PRNT-09, PRNT-10
 **Success Criteria** (what must be TRUE):
   1. Parent with multiple enrolled children can switch between them via a child context selector, and every view scopes data to the selected child with guardian ownership verification (no IDOR)
@@ -145,7 +191,7 @@ Plans:
 **Depends on**: Phase 4, Phase 5, Phase 6
 **Requirements**: ANLT-01, ANLT-02, ANLT-05, MGMT-10
 **Success Criteria** (what must be TRUE):
-  1. PDF and Excel export works on every data table and report view across all portals (faculty, HOD, parent, management)
+  1. PDF and Excel export works on every data table and report view across all portals (student, faculty, HOD, parent, management)
   2. Any report can be scheduled for daily/weekly/monthly email delivery to configured recipients
   3. Scheduled reports are delivered on time with correct data scoping (department-scoped for HOD, university-wide for VC, etc.)
 **Plans**: TBD
@@ -156,15 +202,17 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 03.1 -> 4 -> 5 -> 6 -> 7
-Note: Phases 4, 5 can execute in parallel after Phase 03.1 completes. Phase 6 requires Phase 3.
+Phases execute in numeric order: 1 → 2 → 3 → 03.1 (gaps) → 03.2 → 03.3 → 4 → 5 → 6 → 7
+Note: Phase 03.2 and 03.3 can execute in parallel after 03.1 gap closure. Phase 5 depends on 03.2. Phase 4 depends on 03.3. Phase 6 depends on Phase 3.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
-| 03.1. Integration Audit & Accessibility | 3/3 | Complete   | 2026-03-19 |
+| 03.1. Integration Audit & Accessibility | 3/3 | Gaps found | 2026-03-19 |
+| 03.2. Student Portal Recreation | 0/3 | Not started | - |
+| 03.3. ERPNext Accounts Fork | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |
 | 5. Parent Portal | 0/2 | Not started | - |
 | 6. HOD Portal | 0/2 | Not started | - |

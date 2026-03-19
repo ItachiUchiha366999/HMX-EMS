@@ -2,11 +2,11 @@
 
 ## What This Is
 
-A production-ready extension of an existing Frappe-based University ERP system (275+ doctypes across 21 modules) that adds management-level dashboards, analytics, and role-based portal interfaces for faculty, HODs, and parents. The system runs on Frappe v15 with ERPNext, HRMS, Education, and a custom university_erp app inside a Docker dev container. A Vue 3 student portal already exists and will be extended into a unified multi-role portal application.
+A production-ready university ERP system built on Frappe v15 with a **two-tier architecture**: Frappe Desk as admin-only backend, and a unified Vue 3 portal as the frontend for ALL other users (students, faculty, HODs, parents, management). The system has 275+ doctypes across 21 modules with ERPNext (accounting only), HRMS, Education, and a custom university_erp app inside a Docker dev container. ERPNext's Accounts module is being forked into university_erp with student-centric terminology. The existing student-portal-spa is being recreated within the unified portal-vue app.
 
 ## Core Value
 
-University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while faculty, HODs, and parents have self-service portal access to the information and actions relevant to their role.
+University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access to the information and actions relevant to their role — all through a single unified portal UI.
 
 ## Requirements
 
@@ -43,51 +43,68 @@ University leadership can make data-driven decisions through real-time dashboard
 - HR & Accounts staff portals — deferred, not v1 priority
 - Mobile native app — web-first, responsive design covers mobile
 - Real-time chat/messaging — high complexity, not core to management decision-making
-- New doctype creation — doctypes already exist, focus is on views and analytics
-- Student portal redesign — already functional, only extend with unified app shell
+- Removing unused ERPNext modules — keep hidden via hooks.py block_modules, don't uninstall
 
 ## Context
 
 **Technical environment:**
 - Frappe v15+ / ERPNext v15+ / HRMS v15+ / Education v15+ running in Docker dev container
 - MariaDB database, Redis cache/queue
-- Student portal: Vue 3.5 + Vue Router 4.6 + Tailwind CSS 3.4 + Vite 7.2
+- Unified portal: Vue 3.5 + Vue Router 4.6 + Pinia + Vite — at portal-vue/
 - Backend APIs via Frappe @whitelist() decorated methods
 - Site: university.local
 
-**Existing portal pages (server-rendered, to be replaced/integrated):**
-- /faculty-portal/, /parent-portal/, /alumni-portal/, /placement-portal/ — skeleton Jinja pages exist in /www/
+**Two-tier architecture:**
+- **Frappe Desk (backend UI)**: Admin-only. Used by system administrators for configuration, doctype management, and backend operations.
+- **Portal-vue (frontend UI)**: ALL other users — students, faculty, HODs, parents, management. Single unified Vue 3 SPA with role-based routing.
 
-**Cross-app integration status:**
-- Not thoroughly tested — verification needed before building portal views on top
-- Education app overrides exist (6 classes: Student, Program, Course, AssessmentResult, Fees, Applicant)
-- Hook integrations exist for document events (Student, Fees, Leave, Employee, Department)
+**ERPNext module usage:**
+- **Active**: Accounts (GL, Payment Entry, Bank Reconciliation, Cost Centers), Buying (procurement), Stock (inventory), Assets (depreciation)
+- **Blocked/Hidden**: Manufacturing, Selling, CRM, Projects, Quality, Support — hidden via hooks.py block_modules
+- **Being forked**: Accounts module → university_erp with student-centric labels (Customer→Student, Sales Invoice→Fee Invoice)
+
+**Existing portal pages (server-rendered, to be replaced):**
+- /faculty-portal/, /parent-portal/ — skeleton Jinja pages exist in /www/ (being replaced by portal-vue)
+- /student-portal-vue/ — existing Vue 3 SPA with 11 pages (being recreated in portal-vue)
+
+**Cross-app integration status (verified in Phase 03.1):**
+- 1029 cross-app links tested, 1 broken (PO Attainment.department)
+- 32 exact-name duplicate doctypes catalogued
+- 189/279 reports passing (10 university_erp reports need schema fixes)
+- Employee custom fields (custom_is_faculty etc.) defined in fixtures but not yet migrated to DB
 
 **Codebase locations:**
 - Custom app: /frappe-bench/apps/university_erp/
-- Student portal: /student-portal-vue/
+- Unified portal: /portal-vue/
+- Student portal (legacy, to be recreated): /student-portal-vue/
 - Portal API: university_portals/api/portal_api.py
+- Faculty API: university_portals/api/faculty_api.py
 - Analytics module: university_analytics/
 - Existing dashboards: analytics/dashboards/executive_dashboard.py
 
 ## Constraints
 
-- **Tech stack**: Must use Frappe framework backend, Vue 3 + Tailwind for portals — consistent with existing student portal
-- **Architecture**: Unified Vue app with role-based routing — single codebase for all portals
-- **Data**: All data comes from existing doctypes — no new doctype creation, only new APIs/views
-- **Integration**: Must verify cross-app data flows before building dashboard views
-- **Deployment**: Docker container environment, builds to Frappe's public directory
+- **Tech stack**: Must use Frappe framework backend, Vue 3 for portal — consistent with existing work
+- **Architecture**: Unified Vue app with role-based routing — single codebase for all portal users. Frappe Desk is admin-only backend.
+- **Data**: All data comes from existing doctypes — focus is on views, analytics, and the accounts fork
+- **Integration**: Cross-app data flows verified in Phase 03.1 — gaps being closed
+- **Deployment**: Docker container environment, portal builds to Frappe's public directory
 - **Target**: Production deployment for a live university
+- **ERPNext**: Only Accounts module actively used (being forked). Manufacturing/Selling/CRM blocked. Unused modules stay hidden, not removed.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Unified Vue app for all portals | Single codebase, shared components, easier maintenance vs separate SPAs | — Pending |
-| Vue 3 + Tailwind (same as student portal) | Consistency, reuse existing composables (useFrappe, useAuth) | — Pending |
-| Cross-app verification before dashboards | Dashboards built on bad data are worse than no dashboards | — Pending |
-| Faculty + HOD + Parent portals for v1 | Highest impact roles; HR/Accounts deferred | — Pending |
-| All 4 management dashboard personas | VC, Registrar, Finance Officer, Dean — each needs different KPIs | — Pending |
+| Unified Vue app for all portals | Single codebase, shared components, easier maintenance vs separate SPAs | Decided — portal-vue/ |
+| Frappe Desk = admin-only backend | Regular users should never touch Desk UI; portal covers all their needs | Decided — Phase 03.1 update |
+| Fork ERPNext Accounts into university_erp | Confusing manufacturing labels, unused report noise, need university-specific features | Decided — full module fork with student-centric labels |
+| Student-centric terminology | Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor etc. | Decided — applies to forked module |
+| Recreate student portal in portal-vue | Consistent UI across all user types, single codebase, shared components | Decided — all 11 existing student views recreated |
+| Keep unused ERPNext modules hidden | Don't uninstall (dependency risk), just hide via hooks.py block_modules | Decided |
+| Cross-app verification before dashboards | Dashboards built on bad data are worse than no dashboards | Complete — Phase 03.1 |
+| Faculty + HOD + Parent + Student portals for v1 | All user-facing roles get portal access; HR/Accounts deferred | Decided |
+| All 4 management dashboard personas | VC, Registrar, Finance Officer, Dean — each needs different KPIs | Decided |
 
 ---
-*Last updated: 2026-03-17 after initialization*
+*Last updated: 2026-03-19 after strategic pivot (accounts fork + student portal recreation + admin-only desk)*

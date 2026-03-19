@@ -2,35 +2,35 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 03.1-03-PLAN.md
-last_updated: "2026-03-19T00:06:00.000Z"
-last_activity: 2026-03-19 - Completed 03.1-03-PLAN.md (WCAG 2.1 AA accessibility audit and fixes)
+status: in_progress
+stopped_at: Strategic pivot — roadmap restructured with 03.2 (student portal) + 03.3 (accounts fork)
+last_updated: "2026-03-19T12:00:00.000Z"
+last_activity: 2026-03-19 - Roadmap restructured with strategic pivot (accounts fork, student portal recreation, admin-only desk)
 progress:
-  total_phases: 8
+  total_phases: 10
   completed_phases: 3
-  total_plans: 8
-  completed_plans: 9
-  percent: 100
+  total_plans: 14
+  completed_plans: 12
+  percent: 30
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-17)
+See: .planning/PROJECT.md (updated 2026-03-19)
 
-**Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while faculty, HODs, and parents have self-service portal access to the information and actions relevant to their role.
-**Current focus:** Phase 3: Faculty Portal
+**Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access through a unified portal UI.
+**Current focus:** Phase 03.1 gap closure → Phase 03.2 Student Portal → Phase 03.3 Accounts Fork
 
 ## Current Position
 
-Phase: 3.1 of 7 (Cross-App Integration Audit & Accessibility Testing)
-Plan: 3 of 3 in current phase (COMPLETE)
-Status: Phase 03.1 COMPLETE
-Last activity: 2026-03-19 - Completed 03.1-03-PLAN.md (WCAG 2.1 AA accessibility audit and fixes)
+Phase: 03.1 of 10 (Cross-App Integration Audit — gap closure)
+Plan: Gap closure plans TBD
+Status: Phase 03.1 gaps_found — need custom field migration + report fixes
+Last activity: 2026-03-19 - Roadmap restructured (strategic pivot)
 
-Progress: [██████████] 100% (Phases 1-3 + Phase 3.1 complete)
+Progress: [███░░░░░░░] 30% (Phases 1-3 complete, 03.1 needs gap closure, 03.2/03.3 new phases added)
 
 ## Performance Metrics
 
@@ -110,7 +110,10 @@ Recent decisions affecting current work:
 
 ### Roadmap Evolution
 
-- Phase 3.1 inserted after Phase 3: Cross-App Integration Audit & Accessibility Testing (URGENT) — audit duplicate doctypes across Education/ERPNext/university_erp, test all cross-app connections, verify doctype/report availability, test dashboard/report data flows, and verify UI accessibility
+- Phase 3.1 inserted after Phase 3: Cross-App Integration Audit & Accessibility Testing (URGENT) — executed, gaps found (3/5 SC)
+- **Phase 03.2 inserted: Student Portal Recreation** — recreate all 11 student views in portal-vue with shared components
+- **Phase 03.3 inserted: ERPNext Accounts Module Fork** — fork entire Accounts module with student-centric terminology
+- **Strategic pivot (2026-03-19)**: Frappe Desk = admin-only backend, portal-vue = frontend for ALL users. ERPNext Accounts being forked. Student portal being recreated in unified portal. Roadmap expanded from 8 to 10 phases.
 
 ### Pending Todos
 
@@ -125,11 +128,14 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 1]: ~~SQL injection in dashboard_engine.py is a production blocker~~ RESOLVED in 01-01
+- [Phase 03.1]: Employee custom fields not migrated to DB — blocks 27 faculty API endpoints + 4 faculty reports
+- [Phase 03.1]: 10 university_erp reports with schema errors need fixing
+- [Phase 03.3]: Accounts fork is massive (200+ files) — highest risk phase in the project
 - [Phase 4]: Management role names (VC, Registrar, etc.) need verification against actual Frappe Role definitions
 - [Phase 6]: Frappe workflow engine integration for HOD approval queues needs API-level verification
 
 ## Session Continuity
 
-Last session: 2026-03-19T00:06:00Z
-Stopped at: Completed 03.1-03-PLAN.md
-Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-03-SUMMARY.md
+Last session: 2026-03-19T12:00:00Z
+Stopped at: Strategic pivot — roadmap restructured with 03.2 (student portal) + 03.3 (accounts fork)
+Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-CONTEXT.md

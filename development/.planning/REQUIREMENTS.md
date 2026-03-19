@@ -82,6 +82,38 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **MGMT-10**: Scheduled reports delivered via email (daily/weekly/monthly) to configured stakeholders
 - [ ] **MGMT-11**: Year-over-year comparative analytics (enrollment, collection, pass rates, placement) with trend visualization
 
+### Student Portal (Unified)
+
+- [ ] **STUD-01**: Student dashboard showing today's classes, pending tasks, announcements, and key metrics
+- [ ] **STUD-02**: Student can view academics — timetable, attendance summary with calendar heatmap, grades/marks per course
+- [ ] **STUD-03**: Student can view finance — fee status, payment history, pending dues, online payment via Razorpay/PayU
+- [ ] **STUD-04**: Student can view examinations — exam schedule, hall tickets, results
+- [ ] **STUD-05**: Student can view hostel — room allocation, hostel attendance, mess details
+- [ ] **STUD-06**: Student can view transport — route, bus allocation, schedule
+- [ ] **STUD-07**: Student can view library — borrowed books, fines, catalog search
+- [ ] **STUD-08**: Student can view placement — company listings, application status, placement statistics
+- [ ] **STUD-09**: Student can submit grievances and track resolution status
+- [ ] **STUD-10**: Student can view notifications and announcements
+- [ ] **STUD-11**: Student can view and edit their profile
+
+### Accounts Module Fork
+
+- [ ] **ACCT-01**: Full ERPNext Accounts module forked into university_erp as university_accounts
+- [ ] **ACCT-02**: All doctype labels relabeled with student-centric terminology (Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor)
+- [ ] **ACCT-03**: GL Entry, Journal Entry, Payment Entry, Bank Reconciliation working through forked module
+- [ ] **ACCT-04**: Fee collection → GL posting flow verified end-to-end through forked module
+- [ ] **ACCT-05**: Payment gateway integration (Razorpay/PayU) working through forked module
+- [ ] **ACCT-06**: All university_erp finance reports updated to use forked module references
+- [ ] **ACCT-07**: Original ERPNext Accounts module dependencies removed or redirected
+
+### Gap Closure (Phase 03.1)
+
+- [ ] **GAP-01**: Employee custom fields (custom_is_faculty, custom_employee_category, etc.) migrated to database
+- [ ] **GAP-02**: Leave Application custom fields (custom_total_classes_affected, etc.) migrated to database
+- [ ] **GAP-03**: 10 failing university_erp reports fixed (schema errors + broken imports)
+- [ ] **GAP-04**: Executive dashboard get_overview_metrics() status column fix
+- [ ] **GAP-05**: All 27 faculty API endpoints verified working after custom field migration
+
 ### Analytics & Export
 
 - [ ] **ANLT-01**: PDF export available on all data tables and report views
@@ -121,7 +153,8 @@ Deferred to future release. Tracked but not in current roadmap.
 | Granular per-user permission builder | Exponential complexity. Role-based defaults cover 95% of needs |
 | Sub-5-second dashboard auto-refresh | University data doesn't change that fast. Refresh on load + manual refresh sufficient |
 | Full BI/OLAP engine | Frappe/MariaDB is OLTP. Pre-computed KPI values via cron gets 80% of value at 10% of cost |
-| New doctype creation | All doctypes already exist. Focus is on views and analytics only |
+| New doctype creation | All doctypes already exist. Focus is on views, analytics, and accounts fork |
+| Removing unused ERPNext modules | Keep hidden via block_modules, don't uninstall — dependency risk |
 
 ## Traceability
 
@@ -192,11 +225,35 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ANLT-04 | Phase 4 | Pending |
 | ANLT-05 | Phase 7 | Pending |
 
+| STUD-01 | Phase 03.2 | Pending |
+| STUD-02 | Phase 03.2 | Pending |
+| STUD-03 | Phase 03.2 | Pending |
+| STUD-04 | Phase 03.2 | Pending |
+| STUD-05 | Phase 03.2 | Pending |
+| STUD-06 | Phase 03.2 | Pending |
+| STUD-07 | Phase 03.2 | Pending |
+| STUD-08 | Phase 03.2 | Pending |
+| STUD-09 | Phase 03.2 | Pending |
+| STUD-10 | Phase 03.2 | Pending |
+| STUD-11 | Phase 03.2 | Pending |
+| ACCT-01 | Phase 03.3 | Pending |
+| ACCT-02 | Phase 03.3 | Pending |
+| ACCT-03 | Phase 03.3 | Pending |
+| ACCT-04 | Phase 03.3 | Pending |
+| ACCT-05 | Phase 03.3 | Pending |
+| ACCT-06 | Phase 03.3 | Pending |
+| ACCT-07 | Phase 03.3 | Pending |
+| GAP-01 | Phase 03.1 (gaps) | Pending |
+| GAP-02 | Phase 03.1 (gaps) | Pending |
+| GAP-03 | Phase 03.1 (gaps) | Pending |
+| GAP-04 | Phase 03.1 (gaps) | Pending |
+| GAP-05 | Phase 03.1 (gaps) | Pending |
+
 **Coverage:**
-- v1 requirements: 62 total
-- Mapped to phases: 62
+- v1 requirements: 85 total (62 original + 11 student + 7 accounts + 5 gap closure)
+- Mapped to phases: 85
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after roadmap creation*
+*Last updated: 2026-03-19 after strategic pivot (accounts fork + student portal + gap closure)*
