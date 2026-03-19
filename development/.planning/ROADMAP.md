@@ -99,8 +99,8 @@ Plans (initial audit — completed):
 - [x] 03.1-03-PLAN.md — Accessibility audit with vitest-axe + fix critical/serious violations
 
 Plans (gap closure + expansion — planned):
-- [ ] 03.1-04-PLAN.md — Custom field migration + report fixes + dashboard fix + re-verify
-- [ ] 03.1-05-PLAN.md — Comprehensive API audit + permission matrix testing for all roles
+- [x] 03.1-04-PLAN.md — Custom field migration + report fixes + dashboard fix + re-verify
+- [x] 03.1-05-PLAN.md — Comprehensive API audit + permission matrix testing for all roles
 - [ ] 03.1-06-PLAN.md — Desk UI link verification + portal UI verification + SQL injection scan + business logic duplicate audit
 
 ### Phase 03.2: Student Portal Recreation (INSERTED)
@@ -214,7 +214,7 @@ Note: Phase 03.1 must complete fully (all 10 SC green) before proceeding. Phase 
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
-| 03.1. System Audit & Fix | 4/6 | In Progress|  |
+| 03.1. System Audit & Fix | 5/6 | In Progress|  |
 | 03.2. Student Portal Recreation | 0/3 | Not started | - |
 | 03.3. ERPNext Accounts Fork | 0/3 | Not started | - |
 | 4. Management Dashboards | 0/3 | Not started | - |

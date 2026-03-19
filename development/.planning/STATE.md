@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Completed 03.1-04-PLAN.md (gap closure). Plans 05-06 remaining.
-last_updated: "2026-03-19T14:11:00.000Z"
-last_activity: 2026-03-19 - Completed 03.1-04 gap closure (custom fields + 14 reports)
+status: executing
+stopped_at: Completed 03.1-05-PLAN.md
+last_updated: "2026-03-19T14:28:30.868Z"
+last_activity: "2026-03-19 - Plan 05 completed: 488 endpoints audited, 268 doctypes x 9 roles permission matrix"
 progress:
   total_phases: 10
   completed_phases: 3
-  total_plans: 17
+  total_plans: 14
   completed_plans: 13
-  percent: 35
+  percent: 38
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-19)
 ## Current Position
 
 Phase: 03.1 of 10 (Comprehensive System Audit & Fix)
-Plan: 4/6 complete (gap closure done, permission testing + final gaps remaining)
-Status: Phase 03.1 in progress -- custom fields migrated, 14 reports fixed, ready for permission testing
-Last activity: 2026-03-19 - Plan 04 completed: migrated custom fields, fixed 14 reports
+Plan: 5/6 complete (API audit + permission matrix done, desk/SQL/logic audit remaining)
+Status: Phase 03.1 in progress -- all APIs audited, permission matrix generated, 2 security findings documented
+Last activity: 2026-03-19 - Plan 05 completed: 488 endpoints audited, 268 doctypes x 9 roles permission matrix
 
-Progress: [████░░░░░░] 35% (Phases 1-3 complete, 03.1 plan 4 of 6 done)
+Progress: [████░░░░░░] 38% (Phases 1-3 complete, 03.1 plan 5 of 6 done)
 
 ## Performance Metrics
 
@@ -111,6 +111,10 @@ Recent decisions affecting current work:
 - [03.1-04]: Fees.paid_amount derived as (grand_total - outstanding_amount) -- no paid_amount column on Fees doctype
 - [03.1-04]: Report parent directories need __init__.py for Frappe module resolution -- created in all 9 dirs
 - [03.1-04]: SQL % in string literals must be escaped as %% when using .format() + parameterized queries
+- [03.1-05]: GET endpoints tested no-args as Administrator; ACTION/OTHER import-verified only (no data mutation)
+- [03.1-05]: 4/9 roles have test users (Admin, Student, Parent, Registrar); 5 need creation for complete coverage
+- [03.1-05]: 2 HIGH security findings: Student can access get_dashboard_stats and get_available_dashboards without role checks
+- [Phase 03.1]: 488 @whitelist endpoints audited with zero import failures; 2 HIGH security findings: Student can access admin APIs (get_dashboard_stats, get_available_dashboards)
 
 ### Roadmap Evolution
 
@@ -135,13 +139,13 @@ None yet.
 - [Phase 1]: ~~SQL injection in dashboard_engine.py is a production blocker~~ RESOLVED in 01-01
 - [Phase 03.1]: ~~Employee custom fields not migrated to DB~~ RESOLVED in 03.1-04 (24 custom fields migrated)
 - [Phase 03.1]: ~~10 university_erp reports with schema errors~~ RESOLVED in 03.1-04 (all 14 reports fixed)
-- [Phase 03.1]: Permission testing never done for any role — unknown gaps
+- [Phase 03.1]: ~~Permission testing never done for any role — unknown gaps~~ RESOLVED in 03.1-05 (9 roles tested, 2 security findings)
 - [Phase 03.3]: Accounts fork is massive (200+ files) — highest risk phase in the project
 - [Phase 4]: Management role names (VC, Registrar, etc.) need verification against actual Frappe Role definitions
 - [Phase 6]: Frappe workflow engine integration for HOD approval queues needs API-level verification
 
 ## Session Continuity
 
-Last session: 2026-03-19T14:11:00Z
-Stopped at: Completed 03.1-04-PLAN.md
-Resume file: .planning/phases/03.1-cross-app-integration-audit-accessibility-testing/03.1-05-PLAN.md
+Last session: 2026-03-19T14:28:24.309Z
+Stopped at: Completed 03.1-05-PLAN.md
+Resume file: None
