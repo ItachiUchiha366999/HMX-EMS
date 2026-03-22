@@ -26,10 +26,17 @@ def get_current_faculty():
     )
 
     if not employee:
-        frappe.throw(
-            _("No active faculty profile found for this user"),
-            frappe.PermissionError,
-        )
+        # For System Manager / Administrator, try to find ANY active faculty
+        # to allow admin testing of faculty portal features
+        if "System Manager" in frappe.get_roles(user):
+            employee = frappe.db.get_value(
+                "Employee",
+                {"custom_is_faculty": 1, "status": "Active"},
+                ["name", "employee_name", "department", "designation", "user_id"],
+                as_dict=True,
+            )
+        if not employee:
+            return None
 
     return employee
 
@@ -75,10 +82,12 @@ def _get_current_academic_term():
 # ==================== Plan 01 Active Endpoints ====================
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_faculty_dashboard():
     """Get faculty dashboard data: today's classes, pending tasks, announcements."""
     employee = get_current_faculty()
+    if not employee:
+        return {"today_classes": [], "pending_tasks": [], "announcements": [], "no_faculty_profile": True}
 
     today_classes = _get_today_classes_internal(employee)
     pending_tasks = _get_pending_tasks_internal(employee, today_classes)
@@ -91,13 +100,16 @@ def get_faculty_dashboard():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_today_classes():
     """Get today's classes for the current faculty.
 
     Returns list of classes with is_marked status and student_count.
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     return _get_today_classes_internal(employee)
 
 
@@ -222,13 +234,16 @@ def _get_pending_tasks_internal(employee, today_classes=None):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_weekly_timetable(week_start=None):
     """Get weekly timetable based on Teaching Assignment Schedule.
 
     Returns: {week_start, days, slots}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     if week_start:
         week_start = getdate(week_start)
@@ -277,7 +292,7 @@ def get_weekly_timetable(week_start=None):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_students_for_attendance(course_schedule):
     """Get student list for attendance marking.
 
@@ -285,6 +300,9 @@ def get_students_for_attendance(course_schedule):
     Returns list of {student, student_name, roll_no, enrollment_no, image}.
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     # Get course info from course schedule
     schedule = frappe.db.get_value(
@@ -370,6 +388,9 @@ def submit_attendance(course_schedule, attendance_data):
         attendance_data = json.loads(attendance_data)
 
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     # Get schedule info
     schedule = frappe.db.get_value(
@@ -426,7 +447,7 @@ def submit_attendance(course_schedule, attendance_data):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_announcements(category=None, search=None, start=0, page_length=20):
     """Get paginated announcements from Notice Board.
 
@@ -438,7 +459,9 @@ def get_announcements(category=None, search=None, start=0, page_length=20):
 
     Returns: {data: [...], total_count}
     """
-    get_current_faculty()  # Auth check
+    # Announcements are readable by any authenticated user
+    if not frappe.session.user or frappe.session.user == "Guest":
+        return {"data": [], "total_count": 0}
 
     filters = {}
     if category:
@@ -506,7 +529,7 @@ def _verify_faculty_teaches_course(employee_name, course):
         )
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_students_for_grading(course, assessment_plan):
     """Get students for grade entry with existing grades.
 
@@ -515,6 +538,9 @@ def get_students_for_grading(course, assessment_plan):
          assessments: [{name, assessment_type, max_marks}]}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     _verify_faculty_teaches_course(employee.name, course)
 
     # Get assessment criteria from Assessment Plan
@@ -632,6 +658,9 @@ def save_draft_grade(**kwargs):
         {grade: computed_grade, marks: entered_marks, status: "saved"}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     student = kwargs.get("student")
     course = kwargs.get("course")
     assessment_plan = kwargs.get("assessment_plan")
@@ -705,6 +734,9 @@ def submit_grades(course, assessment_plan):
         {submitted_count, message}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     _verify_faculty_teaches_course(employee.name, course)
 
     drafts = frappe.get_all(
@@ -737,7 +769,7 @@ def submit_grades(course, assessment_plan):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_grade_analytics(course, assessment_plan):
     """Get grade analytics for the side panel.
 
@@ -746,6 +778,9 @@ def get_grade_analytics(course, assessment_plan):
          at_risk_count, at_risk_threshold}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     _verify_faculty_teaches_course(employee.name, course)
 
     at_risk_threshold = 40
@@ -802,7 +837,7 @@ def get_grade_analytics(course, assessment_plan):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_list(**kwargs):
     """Get paginated student list with attendance and grades.
 
@@ -814,6 +849,9 @@ def get_student_list(**kwargs):
                  attendance_percentage, current_grade}], total_count}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     course = kwargs.get("course")
     section = kwargs.get("section")
     search = kwargs.get("search")
@@ -893,7 +931,7 @@ def get_student_list(**kwargs):
     return {"data": students, "total_count": total_count}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_detail(student, course):
     """Get student detail with attendance history, assessment marks, grade trend.
 
@@ -901,6 +939,9 @@ def get_student_detail(student, course):
         {attendance_history, assessment_marks, grade_trend}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     _verify_faculty_teaches_course(employee.name, course)
 
     attendance_history = frappe.db.sql(
@@ -950,7 +991,7 @@ def get_student_detail(student, course):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_performance_analytics(course):
     """Get course performance analytics with charts data.
 
@@ -958,6 +999,9 @@ def get_performance_analytics(course):
         {grade_distribution, attendance_correlation, assessment_trend, batch_comparison}
     """
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     _verify_faculty_teaches_course(employee.name, course)
 
     # Grade distribution
@@ -1088,10 +1132,13 @@ def get_performance_analytics(course):
 # ==================== Plan 03 Active Endpoints (Leave, LMS, Research, OBE, Workload) ====================
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_leave_balance():
     """Get faculty leave balance with used/total per leave type."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     # Get leave allocations for this employee in the current leave period
     allocations = frappe.db.sql(
@@ -1171,6 +1218,9 @@ def get_leave_balance():
 def apply_leave(leave_type, from_date, to_date, reason=None):
     """Submit a leave request for the current faculty."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     doc = frappe.new_doc("Leave Application")
     doc.employee = employee.name
@@ -1188,10 +1238,13 @@ def apply_leave(leave_type, from_date, to_date, reason=None):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_leave_history(start=0, page_length=10):
     """Get leave application history for current faculty."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     applications = frappe.get_all(
         "Leave Application",
@@ -1217,10 +1270,13 @@ def get_leave_history(start=0, page_length=10):
     return {"data": applications, "total_count": total_count}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_leave_requests(start=0, page_length=20):
     """Get student leave requests for courses taught by current faculty."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
     assignments = _get_faculty_teaching_assignments(employee.name)
     courses = [a.course for a in assignments]
 
@@ -1262,7 +1318,10 @@ def get_student_leave_requests(start=0, page_length=20):
 @frappe.whitelist()
 def approve_student_leave(name):
     """Approve a student leave request."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        frappe.throw(_("Faculty access required"), frappe.PermissionError)
+
 
     if frappe.db.exists("DocType", "Student Leave Application"):
         doc = frappe.get_doc("Student Leave Application", name)
@@ -1277,7 +1336,10 @@ def approve_student_leave(name):
 @frappe.whitelist()
 def reject_student_leave(name, reason=None):
     """Reject a student leave request with reason."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        frappe.throw(_("Faculty access required"), frappe.PermissionError)
+
 
     if frappe.db.exists("DocType", "Student Leave Application"):
         doc = frappe.get_doc("Student Leave Application", name)
@@ -1292,10 +1354,13 @@ def reject_student_leave(name, reason=None):
     return {"status": "Rejected", "message": _("Leave request rejected")}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_lms_courses():
     """Get LMS courses for faculty. Gracefully degrades if LMS not installed."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     if not frappe.db.exists("DocType", "LMS Course"):
         return {"available": False, "courses": []}
@@ -1333,10 +1398,13 @@ def get_lms_courses():
     return {"available": True, "courses": result}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_lms_course_content(course):
     """Get LMS course content (lessons, assignments, quizzes)."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        return {}
+
 
     lessons = []
     if frappe.db.exists("DocType", "LMS Lesson"):
@@ -1370,7 +1438,10 @@ def get_lms_course_content(course):
 @frappe.whitelist()
 def save_lms_content(doctype, name=None, **data):
     """Create or update LMS content (lesson, assignment, quiz)."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        frappe.throw(_("Faculty access required"), frappe.PermissionError)
+
 
     if name:
         doc = frappe.get_doc(doctype, name)
@@ -1387,16 +1458,22 @@ def save_lms_content(doctype, name=None, **data):
 @frappe.whitelist()
 def delete_lms_content(doctype, name):
     """Delete an LMS content item."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        frappe.throw(_("Faculty access required"), frappe.PermissionError)
+
 
     frappe.delete_doc(doctype, name)
     return {"message": _("Content deleted")}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_publications():
     """Get faculty publications grouped by type from Faculty Profile."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     # Faculty Publication is a child table on Faculty Profile
     profile = frappe.db.get_value(
@@ -1435,10 +1512,13 @@ def get_publications():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_copo_matrix(course):
     """Get CO-PO attainment matrix using accreditation calculator."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        return {}
+
 
     try:
         from university_erp.university_erp.accreditation.attainment_calculator import (
@@ -1491,10 +1571,13 @@ def get_copo_matrix(course):
         return {"course": course, "cos": [], "pos": [], "matrix": []}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_copo_student_detail(course, co):
     """Get student-level attainment for a specific CO."""
-    get_current_faculty()
+    if not get_current_faculty():
+
+        return {}
+
 
     try:
         from university_erp.university_erp.accreditation.attainment_calculator import (
@@ -1511,10 +1594,13 @@ def get_copo_student_detail(course, co):
         return {"co": co, "students": []}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_workload_summary():
     """Get workload summary with personal KPIs, department averages, and weekly heatmap."""
     employee = get_current_faculty()
+    if not employee:
+        return {}
+
 
     # Get personal workload from teaching assignments
     assignments = _get_faculty_teaching_assignments(employee.name)

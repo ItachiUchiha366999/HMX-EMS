@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 
+    <!-- Design system tokens — required for all component styling -->
+    <link rel="stylesheet" href="/assets/university_erp/css/theme/variables.css">
+    <link rel="stylesheet" href="/assets/university_erp/css/theme/base.css">
+    <link rel="stylesheet" href="/assets/university_erp/css/theme/components.css">
+
     {% if vue_css %}
     <link rel="stylesheet" href="{{ vue_css }}">
     {% endif %}
@@ -44,6 +49,13 @@
 </head>
 <body>
     <div id="app"></div>
+
+    <script>
+        // Inject Frappe session context for the Vue app
+        window.frappe = window.frappe || {};
+        window.frappe.csrf_token = "{{ frappe.session.csrf_token }}";
+        window.frappe.session = { user: "{{ frappe.session.user }}" };
+    </script>
 
     {% if vue_js %}
     <script type="module" src="{{ vue_js }}"></script>
