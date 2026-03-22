@@ -2,7 +2,7 @@
 
 ## Overview
 
-This roadmap delivers management dashboards, analytics, and role-based portals (student, faculty, HOD, parent, management) on top of an existing Frappe v15 university ERP with 275+ doctypes. Frappe Desk is admin-only backend; all other users access a unified Vue 3 portal. The work begins with security remediation and cross-app verification, then builds a shared component library, delivers portal vertical slices, and performs a comprehensive system audit + fix before proceeding with remaining portals. ERPNext's Accounts module is being forked with student-centric terminology. The existing student portal is being recreated in the unified portal app.
+This roadmap delivers management dashboards, analytics, and role-based portals (student, faculty, HOD, parent, management) on top of an existing Frappe v15 university ERP with 275+ doctypes. Strategy: **backend-first** — the complete Frappe Desk backend (accounts fork, workflows, data integrity) must be fully working before any Vue portal frontend work begins. All portal UIs will be designed and built fresh once the backend is stable, ensuring no rework.
 
 ## Phases
 
@@ -15,13 +15,14 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Security Hardening** - Fix critical vulnerabilities, verify cross-app data, scaffold unified Vue app shell with role routing
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
-- [x] **Phase 03.1: Comprehensive System Audit & Fix** (INSERTED) - Full system testing: fix custom fields, fix reports, fix permissions, test ALL APIs, test desk/portal UI, fix SQL errors, audit duplicate business logic. Builds on initial 03.1 audit results. (completed 2026-03-19)
-- [ ] **Phase 03.2: Student Portal Recreation** (INSERTED) - Recreate all 11 student views in portal-vue with shared component library, deprecate old student-portal-spa
-- [ ] **Phase 03.3: ERPNext Accounts Module Fork** (INSERTED) - Fork full Accounts module into university_erp with student-centric terminology
-- [ ] **Phase 4: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
-- [ ] **Phase 5: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
-- [ ] **Phase 6: HOD Portal** - HODs can oversee department performance, manage faculty, and handle approvals
-- [ ] **Phase 7: Scheduled Reports & Cross-Portal Polish** - Scheduled email delivery, export integration verification, and cross-cutting enhancements
+- [x] **Phase 03.1: Comprehensive System Audit & Fix** (INSERTED) - Full system testing: fix custom fields, fix reports, fix permissions, test ALL APIs, test desk/portal UI, fix SQL errors, audit duplicate business logic (completed 2026-03-19)
+- [ ] **Phase 03.3: ERPNext Accounts Module Fork** - Fork Accounts module into university_erp, relabel with student-centric terminology, remove unnecessary files/workflows, set up new workflows
+- [ ] **Phase 03.4: Post-Fork Backend Audit & Fix** (INSERTED) - Complete system test after accounts fork, verify all Frappe Desk UI works, fix any issues, ensure backend stability before frontend
+- [ ] **Phase 4: Portal Redesign & Build** - Redesign complete Vue portal from scratch for all user types (Student, Faculty, HOD, Parent, Management) with proper design system, now that backend is stable
+- [ ] **Phase 5: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
+- [ ] **Phase 6: Parent Portal** - Parents can monitor child academics, finances, hostel/transport, and communicate with faculty
+- [ ] **Phase 7: HOD Portal** - HODs can oversee department performance, manage faculty, and handle approvals
+- [ ] **Phase 8: Scheduled Reports & Cross-Portal Polish** - Scheduled email delivery, export integration verification, and cross-cutting enhancements
 
 ## Phase Details
 
@@ -103,47 +104,55 @@ Plans (gap closure + expansion — planned):
 - [x] 03.1-05-PLAN.md — Comprehensive API audit + permission matrix testing for all roles
 - [ ] 03.1-06-PLAN.md — Desk UI link verification + portal UI verification + SQL injection scan + business logic duplicate audit
 
-### Phase 03.2: Student Portal Recreation (INSERTED)
+### Phase 03.3: ERPNext Accounts Module Fork
 
-**Goal:** All 11 student portal views are recreated inside portal-vue using the shared component library, with consistent UI matching faculty portal, and the old student-portal-spa is deprecated
-**Depends on:** Phase 2 (shared components), Phase 03.1 (gap closure for working APIs)
-**Requirements**: STUD-01, STUD-02, STUD-03, STUD-04, STUD-05, STUD-06, STUD-07, STUD-08, STUD-09, STUD-10, STUD-11
-**Success Criteria** (what must be TRUE):
-  1. Student dashboard shows today's classes, pending tasks, announcements, and key academic metrics using shared KPI cards and charts
-  2. Student can view full academics (timetable, attendance heatmap, grades) and finance (fee status, payment history, online payment via Razorpay/PayU)
-  3. Student can view examinations (schedule, hall tickets, results), hostel (room, attendance, mess), and transport (route, bus)
-  4. Student can view library (books, fines, catalog), placement (companies, applications, stats), and submit/track grievances
-  5. All student views use the same shared components, CSS custom properties, and dark mode support as faculty portal
-**Plans**: TBD
-
-Plans:
-- [ ] 03.2-01: Student API endpoints + dashboard + academics (timetable, attendance, grades)
-- [ ] 03.2-02: Finance (fees, payments, online pay) + examinations (schedule, hall tickets, results)
-- [ ] 03.2-03: Hostel + transport + library + placement + grievances + notifications + profile
-
-### Phase 03.3: ERPNext Accounts Module Fork (INSERTED)
-
-**Goal:** The entire ERPNext Accounts module is forked into university_erp as university_accounts with student-centric terminology, and all existing finance flows (fee→GL, payment gateway, bank reconciliation) work through the forked module
-**Depends on:** Phase 03.1 (gap closure — need working finance reports first)
+**Goal:** The entire ERPNext Accounts module is forked into university_erp as university_accounts with student-centric terminology, unnecessary files/workflows are removed, new workflows set up, and all existing finance flows (fee→GL, payment gateway, bank reconciliation) work through the forked module
+**Depends on:** Phase 03.1 (working finance reports first)
 **Requirements**: ACCT-01, ACCT-02, ACCT-03, ACCT-04, ACCT-05, ACCT-06, ACCT-07
 **Success Criteria** (what must be TRUE):
   1. Full ERPNext Accounts module copied into university_erp/university_accounts/ with all doctypes, reports, and controllers
   2. All doctype labels relabeled: Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor, Sales Order→Fee Order, Purchase Invoice→Procurement Invoice
-  3. GL Entry, Journal Entry, Payment Entry, Bank Reconciliation create/read/update/delete operations work through forked module
-  4. Fee collection → GL posting → Payment Entry flow verified end-to-end (submit fee, verify GL entries, verify payment)
-  5. Payment gateway webhooks (Razorpay/PayU) create Payment Entries through forked module
-  6. All university_erp finance reports (Daily Collection, Gateway Reconciliation, Refund, Fee Collection Summary, Fee Defaulters, Program-wise Fee) use forked module
-  7. No remaining import references to erpnext.accounts in university_erp code (all redirected to university_accounts)
+  3. Unnecessary files, workflows, and unused doctypes removed from forked module
+  4. New university-specific workflows set up for fee collection, refunds, and financial approvals
+  5. GL Entry, Journal Entry, Payment Entry, Bank Reconciliation CRUD operations work through forked module
+  6. Fee collection → GL posting → Payment Entry flow verified end-to-end
+  7. Payment gateway webhooks (Razorpay/PayU) create Payment Entries through forked module
+  8. All university_erp finance reports use forked module
+  9. No remaining import references to erpnext.accounts in university_erp code
 **Plans**: TBD
 
-Plans:
-- [ ] 03.3-01: Copy Accounts module, rename doctypes, relabel fields, update module registry
-- [ ] 03.3-02: Rewire GL posting, Payment Entry, Bank Reconciliation to forked module
-- [ ] 03.3-03: Update finance reports, payment gateway webhooks, verify end-to-end flows
+### Phase 03.4: Post-Fork Backend Audit & Fix (INSERTED)
 
-### Phase 4: Management Dashboards
+**Goal:** After the accounts fork, the entire ERP backend is fully re-tested — every doctype accessible in Frappe Desk, every report running, every workflow functional, all cross-app connections verified — ensuring complete backend stability before any frontend portal work begins
+**Depends on:** Phase 03.3
+**Requirements**: AUDIT-BACKEND-01, AUDIT-BACKEND-02, AUDIT-BACKEND-03, AUDIT-BACKEND-04
+**Success Criteria** (what must be TRUE):
+  1. All university_erp doctypes are accessible and CRUD-functional in Frappe Desk (no 404s, no schema errors)
+  2. All reports across university_erp execute without error (extending Phase 03.1 audit with post-fork verification)
+  3. All workflows (fee collection, leave approval, admission, grade submission) operate correctly end-to-end in Frappe Desk
+  4. All cross-app data connections verified (Student↔Enrollment, Fees↔GL, Employee↔Faculty, Academic Year consistency)
+  5. Permission matrix re-verified for all 9 roles after accounts fork changes
+  6. Comprehensive demo data seeded so all Desk views show meaningful content
+**Plans**: TBD
+
+### Phase 4: Portal Redesign & Build
+
+**Goal:** The complete Vue portal is redesigned from scratch with a proper design system and built for all user types (Student, Faculty, HOD, Parent, Management), now that the backend is stable and proven in Frappe Desk
+**Depends on:** Phase 03.4 (backend must be fully working first)
+**Requirements**: PORTAL-01, PORTAL-02, PORTAL-03, PORTAL-04, PORTAL-05
+**Success Criteria** (what must be TRUE):
+  1. New design system chosen and implemented (discuss during /gsd:discuss-phase)
+  2. Student portal: all 11 views recreated with proper styling, data, and UX
+  3. Faculty portal: existing views redesigned to match new design system
+  4. HOD portal: department overview, faculty management, approvals
+  5. Parent portal: child academics, fees, hostel/transport, messaging
+  6. Management portal: role-specific dashboards for VC, Registrar, Finance Officer, Dean
+  7. All portals share consistent design system, components, and dark mode support
+**Plans**: TBD
+
+### Phase 5: Management Dashboards
 **Goal**: University leadership (VC, Registrar, Finance Officer, Dean) can make data-driven decisions through role-specific dashboards with drill-down from summary to student level
-**Depends on**: Phase 03.3 (accounts fork needed for accurate finance data in dashboards)
+**Depends on**: Phase 4 (portal redesign provides the dashboard views)
 **Requirements**: MGMT-01, MGMT-02, MGMT-03, MGMT-04, MGMT-05, MGMT-06, MGMT-07, MGMT-08, MGMT-09, MGMT-10, MGMT-11, ANLT-03, ANLT-04
 **Success Criteria** (what must be TRUE):
   1. VC, Registrar, Finance Officer, and Dean each see a dashboard tailored to their role with real aggregated KPIs (not mocked data)
@@ -154,13 +163,13 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 04-01: Management layout, role-specific dashboards (VC, Registrar, Finance, Dean)
-- [ ] 04-02: Drill-down navigation, department comparison, trend charts, alert panel
-- [ ] 04-03: Report viewer integration, year-over-year analytics
+- [ ] 05-01: Management layout, role-specific dashboards (VC, Registrar, Finance, Dean)
+- [ ] 05-02: Drill-down navigation, department comparison, trend charts, alert panel
+- [ ] 05-03: Report viewer integration, year-over-year analytics
 
-### Phase 5: Parent Portal
+### Phase 6: Parent Portal
 **Goal**: Parents can monitor their child's complete university life (academics, finances, hostel, transport) and communicate with faculty, all within a secure guardian-verified context
-**Depends on**: Phase 03.2 (student portal shares academic/finance views that parent views read-only)
+**Depends on**: Phase 4 (portal redesign provides parent views)
 **Requirements**: PRNT-01, PRNT-02, PRNT-03, PRNT-04, PRNT-05, PRNT-06, PRNT-07, PRNT-08, PRNT-09, PRNT-10
 **Success Criteria** (what must be TRUE):
   1. Parent with multiple enrolled children can switch between them via a child context selector, and every view scopes data to the selected child with guardian ownership verification (no IDOR)
@@ -171,12 +180,12 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 05-01: Parent layout, child selector with guardian verification, academics views
-- [ ] 05-02: Finance views with online payment, hostel/transport, announcements, messaging
+- [ ] 06-01: Parent layout, child selector with guardian verification, academics views
+- [ ] 06-02: Finance views with online payment, hostel/transport, announcements, messaging
 
-### Phase 6: HOD Portal
+### Phase 7: HOD Portal
 **Goal**: HODs can oversee their entire department's academic performance, manage faculty workload, and process approvals without leaving the portal
-**Depends on**: Phase 3
+**Depends on**: Phase 4 (portal redesign provides HOD views)
 **Requirements**: HOD-01, HOD-02, HOD-03, HOD-04, HOD-05, HOD-06, HOD-07, HOD-08
 **Success Criteria** (what must be TRUE):
   1. HOD can access all faculty portal features for their own courses (inherits faculty module views)
@@ -187,12 +196,12 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 06-01: HOD layout extending faculty, department analytics, faculty workload
-- [ ] 06-02: Approval workflows, CO-PO heatmap, budget views, department KPIs
+- [ ] 07-01: HOD layout extending faculty, department analytics, faculty workload
+- [ ] 07-02: Approval workflows, CO-PO heatmap, budget views, department KPIs
 
-### Phase 7: Scheduled Reports & Cross-Portal Polish
+### Phase 8: Scheduled Reports & Cross-Portal Polish
 **Goal**: Stakeholders receive automated reports on schedule, and export/analytics capabilities work consistently across all portals
-**Depends on**: Phase 4, Phase 5, Phase 6
+**Depends on**: Phase 5, Phase 6, Phase 7
 **Requirements**: ANLT-01, ANLT-02, ANLT-05, MGMT-10
 **Success Criteria** (what must be TRUE):
   1. PDF and Excel export works on every data table and report view across all portals (student, faculty, HOD, parent, management)
@@ -201,23 +210,24 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 07-01: Export integration verification, scheduled report configuration and email delivery
+- [ ] 08-01: Export integration verification, scheduled report configuration and email delivery
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 03.1 (full audit + fix) → 03.2 → 03.3 → 4 → 5 → 6 → 7
-Note: Phase 03.1 must complete fully (all 10 SC green) before proceeding. Phase 03.2 and 03.3 can execute in parallel after 03.1. Phase 5 depends on 03.2. Phase 4 depends on 03.3. Phase 6 depends on Phase 3.
+**Execution Order (Backend-First):**
+Phases execute: 1 → 2 → 3 → 03.1 → **03.3 (accounts fork) → 03.4 (backend audit)** → 4 (portal redesign) → 5 → 6 → 7 → 8
+Key principle: Backend must be fully working in Frappe Desk before any Vue portal work. Phase 4 redesigns all portals from scratch once backend is stable.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Security Hardening | 3/3 | Complete | 2026-03-18 |
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
-| 03.1. System Audit & Fix | 6/6 | Complete   | 2026-03-19 |
-| 03.2. Student Portal Recreation | 0/3 | Not started | - |
-| 03.3. ERPNext Accounts Fork | 0/3 | Not started | - |
-| 4. Management Dashboards | 0/3 | Not started | - |
-| 5. Parent Portal | 0/2 | Not started | - |
-| 6. HOD Portal | 0/2 | Not started | - |
-| 7. Scheduled Reports & Cross-Portal Polish | 0/1 | Not started | - |
+| 03.1. System Audit & Fix | 6/6 | Complete | 2026-03-19 |
+| 03.3. ERPNext Accounts Fork | 0/TBD | Not started | - |
+| 03.4. Post-Fork Backend Audit | 0/TBD | Not started | - |
+| 4. Portal Redesign & Build | 0/TBD | Not started | - |
+| 5. Management Dashboards | 0/TBD | Not started | - |
+| 6. Parent Portal | 0/TBD | Not started | - |
+| 7. HOD Portal | 0/TBD | Not started | - |
+| 8. Scheduled Reports & Polish | 0/TBD | Not started | - |

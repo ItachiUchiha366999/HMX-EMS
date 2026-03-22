@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access through a unified portal UI.
-**Current focus:** Phase 03.1 complete. Ready for next phase.
+**Current focus:** Phase 03.3 ERPNext Accounts Fork (backend-first strategy)
 
 ## Current Position
 
-Phase: 03.1 COMPLETE (UAT 8/8 pass), ready for Phase 4
-Plan: 6/6 complete + UAT passed
-Status: Phase 03.1 fully complete — execution, verification, and UAT all passed
-Last activity: 2026-03-22 - Phase 03.1 UAT: 8/8 pass. Portal CSS variables linked, faculty API null-guards, session fallback.
+Phase: 03.3 next (ERPNext Accounts Fork)
+Plan: Not yet planned — needs /gsd:discuss-phase 03.3
+Status: Roadmap restructured — backend-first strategy. Accounts fork → backend audit → portal redesign.
+Last activity: 2026-03-22 - Roadmap reordered: backend-first strategy. Phase 03.2 (Student Portal) moved to Phase 4 (Portal Redesign). Phase 03.3 (Accounts Fork) is next.
 
 Progress: [████░░░░░░] 42% (Phases 1-3 + 03.1 complete, ready for 03.2 or 04)
 
