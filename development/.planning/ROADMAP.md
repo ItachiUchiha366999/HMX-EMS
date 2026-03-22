@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Shared Component Library** - Build reusable KPI cards, charts, data tables, filters, and export components consumed by all portals
 - [x] **Phase 3: Faculty Portal** - Faculty can manage daily teaching workflow (timetable, attendance, grades, leave, LMS, research)
 - [x] **Phase 03.1: Comprehensive System Audit & Fix** (INSERTED) - Full system testing: fix custom fields, fix reports, fix permissions, test ALL APIs, test desk/portal UI, fix SQL errors, audit duplicate business logic (completed 2026-03-19)
-- [ ] **Phase 03.3: ERPNext Accounts Module Fork** - Fork Accounts module into university_erp, relabel with student-centric terminology, remove unnecessary files/workflows, set up new workflows
+- [ ] **Phase 03.3: ERPNext Accounts Module Fork** - Fork Accounts module into university_erp/university_finance, relabel with student-centric terminology, archive unused doctypes/reports, wire GL posting through forked module
 - [ ] **Phase 03.4: Post-Fork Backend Audit & Fix** (INSERTED) - Complete system test after accounts fork, verify all Frappe Desk UI works, fix any issues, ensure backend stability before frontend
 - [ ] **Phase 4: Portal Redesign & Build** - Redesign complete Vue portal from scratch for all user types (Student, Faculty, HOD, Parent, Management) with proper design system, now that backend is stable
 - [ ] **Phase 5: Management Dashboards** - University leadership can view KPIs, trends, drill-down analytics, and reports by role
@@ -106,20 +106,26 @@ Plans (gap closure + expansion — planned):
 
 ### Phase 03.3: ERPNext Accounts Module Fork
 
-**Goal:** The entire ERPNext Accounts module is forked into university_erp as university_accounts with student-centric terminology, unnecessary files/workflows are removed, new workflows set up, and all existing finance flows (fee→GL, payment gateway, bank reconciliation) work through the forked module
+**Goal:** The entire ERPNext Accounts module is forked into university_erp as university_finance with student-centric terminology, unnecessary doctypes/reports archived, controller hierarchy forked and stripped of stock/selling/buying dependencies, and all existing finance flows (fee->GL, payment gateway) work through the forked module
 **Depends on:** Phase 03.1 (working finance reports first)
 **Requirements**: ACCT-01, ACCT-02, ACCT-03, ACCT-04, ACCT-05, ACCT-06, ACCT-07
 **Success Criteria** (what must be TRUE):
-  1. Full ERPNext Accounts module copied into university_erp/university_accounts/ with all doctypes, reports, and controllers
-  2. All doctype labels relabeled: Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor, Sales Order→Fee Order, Purchase Invoice→Procurement Invoice
+  1. Full ERPNext Accounts module copied into university_erp/university_finance/ with all doctypes, reports, and controllers
+  2. All doctype labels relabeled: Customer->Student, Sales Invoice->Fee Invoice, Supplier->Vendor, Sales Order->Fee Order, Purchase Invoice->Procurement Invoice
   3. Unnecessary files, workflows, and unused doctypes removed from forked module
   4. New university-specific workflows set up for fee collection, refunds, and financial approvals
   5. GL Entry, Journal Entry, Payment Entry, Bank Reconciliation CRUD operations work through forked module
-  6. Fee collection → GL posting → Payment Entry flow verified end-to-end
+  6. Fee collection -> GL posting -> Payment Entry flow verified end-to-end
   7. Payment gateway webhooks (Razorpay/PayU) create Payment Entries through forked module
   8. All university_erp finance reports use forked module
   9. No remaining import references to erpnext.accounts in university_erp code
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 03.3-01-PLAN.md — Fork infrastructure: compat shim, exceptions, fork script, execute file copy, JSON module updates, import rewriting (Wave 1)
+- [ ] 03.3-02-PLAN.md — Controller fork: StatusUpdater/TransactionBase/AccountsController hierarchy, strip stock/selling/buying, rewrite invoice controllers, archive 56 unused doctypes (Wave 2)
+- [ ] 03.3-03-PLAN.md — Relabeling + reports: workspace with university terminology, rename report titles, archive 16 unused reports, verify report imports (Wave 2)
+- [ ] 03.3-04-PLAN.md — Integration wiring: redirect GLPostingManager import, run bench migrate, verify module registration, create smoke tests (Wave 3)
 
 ### Phase 03.4: Post-Fork Backend Audit & Fix (INSERTED)
 
@@ -130,7 +136,7 @@ Plans (gap closure + expansion — planned):
   1. All university_erp doctypes are accessible and CRUD-functional in Frappe Desk (no 404s, no schema errors)
   2. All reports across university_erp execute without error (extending Phase 03.1 audit with post-fork verification)
   3. All workflows (fee collection, leave approval, admission, grade submission) operate correctly end-to-end in Frappe Desk
-  4. All cross-app data connections verified (Student↔Enrollment, Fees↔GL, Employee↔Faculty, Academic Year consistency)
+  4. All cross-app data connections verified (Student<->Enrollment, Fees<->GL, Employee<->Faculty, Academic Year consistency)
   5. Permission matrix re-verified for all 9 roles after accounts fork changes
   6. Comprehensive demo data seeded so all Desk views show meaningful content
 **Plans**: TBD
@@ -215,7 +221,7 @@ Plans:
 ## Progress
 
 **Execution Order (Backend-First):**
-Phases execute: 1 → 2 → 3 → 03.1 → **03.3 (accounts fork) → 03.4 (backend audit)** → 4 (portal redesign) → 5 → 6 → 7 → 8
+Phases execute: 1 -> 2 -> 3 -> 03.1 -> **03.3 (accounts fork) -> 03.4 (backend audit)** -> 4 (portal redesign) -> 5 -> 6 -> 7 -> 8
 Key principle: Backend must be fully working in Frappe Desk before any Vue portal work. Phase 4 redesigns all portals from scratch once backend is stable.
 
 | Phase | Plans Complete | Status | Completed |
@@ -224,7 +230,7 @@ Key principle: Backend must be fully working in Frappe Desk before any Vue porta
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
 | 03.1. System Audit & Fix | 6/6 | Complete | 2026-03-19 |
-| 03.3. ERPNext Accounts Fork | 0/TBD | Not started | - |
+| 03.3. ERPNext Accounts Fork | 0/4 | Not started | - |
 | 03.4. Post-Fork Backend Audit | 0/TBD | Not started | - |
 | 4. Portal Redesign & Build | 0/TBD | Not started | - |
 | 5. Management Dashboards | 0/TBD | Not started | - |
