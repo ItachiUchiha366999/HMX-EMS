@@ -2,16 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Phase 03.1 UAT complete (8/8 pass). Ready for next phase.
-last_updated: "2026-03-22T00:00:00.000Z"
-last_activity: "2026-03-22 - Phase 03.1 UAT complete: 8/8 tests pass. Portal CSS fixed, faculty API null-guards added."
+status: unknown
+stopped_at: Completed 03.3-01-PLAN.md
+last_updated: "2026-03-22T12:56:42.857Z"
 progress:
-  total_phases: 10
+  total_phases: 11
   completed_phases: 4
-  total_plans: 14
-  completed_plans: 14
-  percent: 42
+  total_plans: 18
+  completed_plans: 15
 ---
 
 # Project State
@@ -21,20 +19,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access through a unified portal UI.
-**Current focus:** Phase 03.3 ERPNext Accounts Fork (backend-first strategy)
+**Current focus:** Phase 03.3 — erpnext-accounts-fork
 
 ## Current Position
 
-Phase: 03.3 next (ERPNext Accounts Fork)
-Plan: Not yet planned — needs /gsd:discuss-phase 03.3
-Status: Roadmap restructured — backend-first strategy. Accounts fork → backend audit → portal redesign.
-Last activity: 2026-03-22 - Roadmap reordered: backend-first strategy. Phase 03.2 (Student Portal) moved to Phase 4 (Portal Redesign). Phase 03.3 (Accounts Fork) is next.
-
-Progress: [████░░░░░░] 42% (Phases 1-3 + 03.1 complete, ready for 03.2 or 04)
+Phase: 03.3 (erpnext-accounts-fork) — EXECUTING
+Plan: 2 of 4
 
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 9
 - Average duration: 9min
 - Total execution time: 1.2 hours
@@ -48,11 +43,13 @@ Progress: [████░░░░░░] 42% (Phases 1-3 + 03.1 complete, read
 | 03-faculty-portal | 3 | 37min | 12min |
 
 **Recent Trend:**
+
 - Last 5 plans: 8min, 8min, 13min, 12min, 12min
 - Trend: stable (Phase 3 at ~12min per plan)
 
 *Updated after each plan completion*
 | Phase 03.1 P06 | 16min | 3 tasks | 57 files |
+| Phase 03.3 P01 | 20min | 2 tasks | 1053 files |
 
 ## Accumulated Context
 
@@ -120,6 +117,9 @@ Recent decisions affecting current work:
 - [03.1-06]: INFO-level SQL findings (table name interpolation in audit/seed scripts) left unfixed -- controlled source values
 - [03.1-06]: Education authoritative for Fees, Assessment Result, Student Attendance, Student; university_erp extends via override
 - [03.1-06]: Attendance domain MEDIUM risk: dual input channels (Student Attendance Tool vs faculty_api) -- idempotency check exists
+- [Phase 03.3]: Stock/warehouse functions stubbed (return empty/0) since university has no inventory
+- [Phase 03.3]: allow_regional simplified to no-op passthrough; get_exchange_rate queries Currency Exchange with 1.0 fallback
+- [Phase 03.3]: Non-accounts erpnext imports (setup/utilities/stock/buying/selling) stubbed as comments to preserve code structure
 
 ### Roadmap Evolution
 
@@ -152,6 +152,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T14:35:13.703Z
-Stopped at: Completed 03.1-06-PLAN.md (Phase 03.1 fully complete)
+Last session: 2026-03-22T12:56:42.781Z
+Stopped at: Completed 03.3-01-PLAN.md
 Resume file: None
