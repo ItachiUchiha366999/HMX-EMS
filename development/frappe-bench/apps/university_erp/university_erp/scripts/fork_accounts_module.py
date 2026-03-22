@@ -170,6 +170,9 @@ def update_module_in_jsons():
 			except (json.JSONDecodeError, UnicodeDecodeError):
 				continue
 
+			if not isinstance(doc, dict):
+				continue
+
 			if doc.get("module") == "Accounts":
 				doc["module"] = "University Finance"
 				with open(json_file, "w") as f:
@@ -334,6 +337,23 @@ def rewrite_imports_in_file(filepath):
 	content = re.sub(
 		r"from erpnext\.subcontracting\.",
 		"# Stubbed: from erpnext.subcontracting.",
+		content,
+	)
+
+	# 10b. Handle erpnext.setup.* and erpnext.utilities.* imports
+	content = re.sub(
+		r"from erpnext\.setup\.",
+		"# Stubbed: from erpnext.setup.",
+		content,
+	)
+	content = re.sub(
+		r"from erpnext\.utilities\.",
+		"# Stubbed: from erpnext.utilities.",
+		content,
+	)
+	content = re.sub(
+		r"from erpnext\.utilities import ",
+		"# Stubbed: from erpnext.utilities import ",
 		content,
 	)
 

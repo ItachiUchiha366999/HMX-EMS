@@ -1,5 +1,10 @@
 {
-  "actions": [],
+  "actions": [
+    {
+      "action_label": "Generate Fees",
+      "action": "frappe.call({method: 'university_erp.university_finance.doctype.bulk_fee_generator.bulk_fee_generator.generate_fees', args: {bulk_fee_generator: frm.docname}, callback: function(r) { if(r.message) { frappe.msgprint(r.message.message); frm.reload_doc(); } }})"
+    }
+  ],
   "allow_rename": 1,
   "autoname": "format:BFG-{YYYY}-{#####}",
   "creation": "2025-12-31 00:00:00",

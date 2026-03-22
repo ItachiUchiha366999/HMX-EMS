@@ -6,7 +6,7 @@
   "icon": "money",
   "public": 1,
   "title": "University Finance",
-  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>University Finance</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Category\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Payment\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Refund\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Razorpay Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Fees\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Scholarships\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Payments\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>University Finance</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fees\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Refund\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Schedule\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Razorpay Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Fees\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Scholarships\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Payments\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
   "links": [
     {
       "type": "Card Break",
@@ -14,15 +14,27 @@
     },
     {
       "type": "Link",
-      "link_to": "Fee Category",
+      "link_to": "Fees",
       "link_type": "DocType",
-      "label": "Fee Category"
+      "label": "Fees"
     },
     {
       "type": "Link",
-      "link_to": "Fee Payment",
+      "link_to": "Fee Structure",
       "link_type": "DocType",
-      "label": "Fee Payment"
+      "label": "Fee Structure"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Schedule",
+      "link_type": "DocType",
+      "label": "Fee Schedule"
+    },
+    {
+      "type": "Link",
+      "link_to": "Fee Category",
+      "link_type": "DocType",
+      "label": "Fee Category"
     },
     {
       "type": "Link",
@@ -52,6 +64,12 @@
     },
     {
       "type": "Link",
+      "link_to": "Fee Refund",
+      "link_type": "DocType",
+      "label": "Fee Refund"
+    },
+    {
+      "type": "Link",
       "link_to": "Razorpay Settings",
       "link_type": "DocType",
       "label": "Razorpay Settings"
@@ -76,21 +94,9 @@
     },
     {
       "type": "Link",
-      "link_to": "Fee Refund",
-      "link_type": "DocType",
-      "label": "Fee Refund"
-    },
-    {
-      "type": "Link",
       "link_to": "Bank Transaction",
       "link_type": "DocType",
       "label": "Bank Transaction"
-    },
-    {
-      "type": "Link",
-      "link_to": "Webhook Log",
-      "link_type": "DocType",
-      "label": "Webhook Log"
     },
     {
       "type": "Card Break",
@@ -136,15 +142,15 @@
     {
       "color": "Blue",
       "doc_view": "List",
-      "label": "Fee Category",
-      "link_to": "Fee Category",
+      "label": "Fees",
+      "link_to": "Fees",
       "type": "DocType"
     },
     {
       "color": "Green",
       "doc_view": "List",
-      "label": "Fee Payment",
-      "link_to": "Fee Payment",
+      "label": "Fee Schedule",
+      "link_to": "Fee Schedule",
       "type": "DocType"
     },
     {
