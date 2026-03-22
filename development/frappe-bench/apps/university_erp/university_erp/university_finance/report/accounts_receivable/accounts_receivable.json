@@ -13,7 +13,7 @@
  "name": "Accounts Receivable",
  "owner": "Administrator",
  "ref_doctype": "Sales Invoice",
- "report_name": "Accounts Receivable",
+ "report_name": "Fee Receivable",
  "report_type": "Script Report",
  "roles": [
   {
