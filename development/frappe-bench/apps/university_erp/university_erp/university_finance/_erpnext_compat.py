@@ -9,6 +9,7 @@ perpetual inventory or stock valuation.
 """
 
 import functools
+from contextlib import contextmanager
 
 import frappe
 
@@ -217,3 +218,27 @@ def get_exchange_rate(from_currency, to_currency, transaction_date=None, args=No
 
 	# Default to 1.0 for single-currency university setups
 	return 1.0
+
+
+# ---------------------------------------------------------------------------
+# Utility: temporary_flag context manager
+# Replaces erpnext.utilities.regional.temporary_flag
+# ---------------------------------------------------------------------------
+
+@contextmanager
+def temporary_flag(flag_name, value):
+	"""Context manager that temporarily sets a flag on frappe.local.flags.
+
+	Used by party.py, accounts_controller.py, and taxes_and_totals.py
+	to temporarily set company context for regional operations.
+	"""
+	old_value = getattr(frappe.local.flags, flag_name, None)
+	setattr(frappe.local.flags, flag_name, value)
+	try:
+		yield
+	finally:
+		if old_value is None:
+			if hasattr(frappe.local.flags, flag_name):
+				delattr(frappe.local.flags, flag_name)
+		else:
+			setattr(frappe.local.flags, flag_name, old_value)

@@ -14,10 +14,21 @@ from university_erp.university_finance.doctype.accounting_dimension.accounting_d
 from university_erp.university_finance.doctype.payment_entry.payment_entry import (
 	get_payment_entry,
 )
-from university_erp.university_finance.doctype.subscription_plan.subscription_plan import get_plan_rate
 from university_erp.university_finance.party import get_party_account, get_party_bank_account
 from university_erp.university_finance.utils import get_account_currency, get_currency_precision
+# Stubbed: subscription_plan archived (university does not use subscriptions)
+
+def get_plan_rate(plan, quantity=1):
+	"""Stub: University does not use subscription plans."""
+	return 0
+
 # Stubbed: from erpnext.utilities import payment_app_import_guard
+from contextlib import contextmanager
+
+@contextmanager
+def payment_app_import_guard():
+	"""Stub: passthrough context manager replacing erpnext.utilities.payment_app_import_guard."""
+	yield
 
 ALLOWED_DOCTYPES_FOR_PAYMENT_REQUEST = [
 	"Sales Order",
@@ -45,9 +56,8 @@ class PaymentRequest(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		from university_erp.university_finance.doctype.subscription_plan_detail.subscription_plan_detail import (
-			SubscriptionPlanDetail,
-		)
+		# Stubbed: subscription_plan_detail archived
+		SubscriptionPlanDetail = object
 
 		account: DF.ReadOnly | None
 		amended_from: DF.Link | None

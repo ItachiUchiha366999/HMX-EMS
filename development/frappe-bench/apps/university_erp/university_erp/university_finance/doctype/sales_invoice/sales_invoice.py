@@ -11,10 +11,12 @@ from frappe.utils import add_days, cint, cstr, flt, formatdate, get_link_to_form
 
 from university_erp.university_finance import _erpnext_compat as erpnext
 from university_erp.university_finance.deferred_revenue import validate_service_stop_date
-from university_erp.university_finance.doctype.loyalty_program.loyalty_program import (
-	get_loyalty_program_details_with_points,
-	validate_loyalty_points,
-)
+# Stubbed: loyalty_program archived (university does not use loyalty programs)
+def get_loyalty_program_details_with_points(*args, **kwargs):
+	return frappe._dict()
+
+def validate_loyalty_points(*args, **kwargs):
+	pass
 from university_erp.university_finance.doctype.repost_accounting_ledger.repost_accounting_ledger import (
 	validate_docs_for_deferred_accounting,
 	validate_docs_for_voucher_types,
