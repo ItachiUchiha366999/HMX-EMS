@@ -39,7 +39,7 @@ from university_erp.university_finance.utils import (
 # )
 # Stubbed: from erpnext.assets.doctype.asset_activity.asset_activity import add_asset_activity
 from university_erp.university_finance.controllers.accounts_controller import validate_account_head
-from university_erp.university_finance.controllers.selling_controller import SellingController
+from university_erp.university_finance.controllers.accounts_controller import AccountsController
 # Stubbed: from erpnext.projects.doctype.timesheet.timesheet import get_projectwise_timesheet_data
 # Stubbed: from erpnext.setup.doctype.company.company import update_company_current_month_sales
 # Stubbed: from erpnext.stock.doctype.delivery_note.delivery_note import update_billed_amount_based_on_so
@@ -48,7 +48,7 @@ from university_erp.university_finance.controllers.selling_controller import Sel
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
 
-class SalesInvoice(SellingController):
+class SalesInvoice(AccountsController):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 

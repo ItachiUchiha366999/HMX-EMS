@@ -39,7 +39,7 @@ from university_erp.university_finance.utils import get_account_currency, get_fi
 # Stubbed: from erpnext.assets.doctype.asset_category.asset_category import get_asset_category_account
 # Stubbed: from erpnext.buying.utils import check_on_hold_or_closed_status
 from university_erp.university_finance.controllers.accounts_controller import validate_account_head
-from university_erp.university_finance.controllers.buying_controller import BuyingController
+from university_erp.university_finance.controllers.accounts_controller import AccountsController
 from university_erp.university_finance._erpnext_compat import get_warehouse_account_map
 # Stubbed: from erpnext.stock.doctype.purchase_receipt.purchase_receipt import (
 	# get_item_account_wise_additional_cost,
@@ -54,7 +54,7 @@ class WarehouseMissingError(frappe.ValidationError):
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
 
-class PurchaseInvoice(BuyingController):
+class PurchaseInvoice(AccountsController):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
