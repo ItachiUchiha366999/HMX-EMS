@@ -122,10 +122,10 @@ Plans (gap closure + expansion — planned):
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03.3-01-PLAN.md — Fork infrastructure: compat shim, exceptions, fork script, execute file copy, JSON module updates, import rewriting (Wave 1)
-- [ ] 03.3-02-PLAN.md — Controller fork: StatusUpdater/TransactionBase/AccountsController hierarchy, strip stock/selling/buying, rewrite invoice controllers, archive 56 unused doctypes (Wave 2)
-- [ ] 03.3-03-PLAN.md — Relabeling + reports: workspace with university terminology, rename report titles, archive 16 unused reports, verify report imports (Wave 2)
-- [ ] 03.3-04-PLAN.md — Integration wiring: redirect GLPostingManager import, run bench migrate, verify module registration, create smoke tests (Wave 3)
+- [x] 03.3-01-PLAN.md — Fork infrastructure: compat shim, exceptions, fork script, execute file copy, JSON module updates, import rewriting (Wave 1)
+- [x] 03.3-02-PLAN.md — Controller fork: StatusUpdater/TransactionBase/AccountsController hierarchy, strip stock/selling/buying, rewrite invoice controllers, archive 56 unused doctypes (Wave 2)
+- [x] 03.3-03-PLAN.md — Relabeling + reports: workspace with university terminology, rename report titles, archive 16 unused reports, verify report imports (Wave 2)
+- [x] 03.3-04-PLAN.md — Integration wiring: redirect GLPostingManager import, run bench migrate, verify module registration, create smoke tests (Wave 3)
 
 ### Phase 03.4: Post-Fork Backend Audit & Fix (INSERTED)
 
