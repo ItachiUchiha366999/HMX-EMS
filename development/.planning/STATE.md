@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03.3-04-PLAN.md (verified and finalized)
-last_updated: "2026-03-24T16:11:47.069Z"
+stopped_at: Completed 03.4-01-PLAN.md
+last_updated: "2026-03-24T20:16:05.177Z"
 progress:
   total_phases: 11
   completed_phases: 5
-  total_plans: 18
-  completed_plans: 18
+  total_plans: 21
+  completed_plans: 19
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** University leadership can make data-driven decisions through real-time dashboards with drill-down capability, while students, faculty, HODs, and parents have self-service portal access through a unified portal UI.
-**Current focus:** Phase 03.3 — erpnext-accounts-fork
+**Current focus:** Phase 03.4 — post-fork-backend-audit-fix
 
 ## Current Position
 
-Phase: 03.4
-Plan: Not started
+Phase: 03.4 (post-fork-backend-audit-fix) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Plan: Not started
 | Phase 03.3 P03 | 2min | 2 tasks | 78 files |
 | Phase 03.3 P02 | 9min | 2 tasks | 219 files |
 | Phase 03.3 P04 | 32min | 3 tasks | 11 files |
+| Phase 03.4 P01 | 56min | 1 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -131,6 +132,8 @@ Recent decisions affecting current work:
 - [Phase 03.3]: Payment webhook uses ORM pattern (frappe.get_doc) -- no erpnext.accounts imports needed
 - [Phase 03.3]: Archived doctype imports stubbed inline (subscription_plan, loyalty_program) rather than restoring archived dirs
 - [Phase 03.3]: JE/PE accounting approval workflows not yet configured -- deferred to Phase 03.4 backend audit
+- [Phase 03.4]: GL posting uses grand_total instead of non-existent paid_amount; party_type removed from Bank/Income GL entries; dunning import stubbed
+- [Phase 03.4]: Education Settings user_creation_skip=1 for bulk student seeding; throttle_user_limit override for demo user creation
 
 ### Roadmap Evolution
 
@@ -163,6 +166,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T16:11:47.041Z
-Stopped at: Completed 03.3-04-PLAN.md (verified and finalized)
+Last session: 2026-03-24T20:16:05.067Z
+Stopped at: Completed 03.4-01-PLAN.md
 Resume file: None
