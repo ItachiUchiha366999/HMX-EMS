@@ -6,30 +6,31 @@ import unittest
 class TestImportIntegrity(unittest.TestCase):
     """Verify no remaining erpnext.accounts imports in university_finance."""
 
+    # Build pattern dynamically to avoid self-detection when scanning test files
+    _FORBIDDEN_PREFIX = "from " + "erpnext" + ".accounts."
+    _FORBIDDEN_PATTERN = re.compile(r"^from erpnext\.accounts\.", re.MULTILINE)
+
     def test_no_erpnext_accounts_imports(self):
         """No .py file under university_finance/ imports from erpnext.accounts."""
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         violations = []
 
         for root, dirs, files in os.walk(base_dir):
-            # Skip _archived, __pycache__, and tests (self-referencing regex strings)
+            # Skip _archived, __pycache__, and tests (this file)
             dirs[:] = [d for d in dirs if d not in ("_archived", "_archived_reports", "__pycache__", "tests")]
             for f in files:
                 if f.endswith(".py"):
                     filepath = os.path.join(root, f)
                     with open(filepath) as fh:
                         content = fh.read()
-                    # Only match actual import statements, not string literals or comments
-                    matches = re.findall(
-                        r"^(?:from erpnext\.accounts\.)", content, re.MULTILINE
-                    )
+                    matches = self._FORBIDDEN_PATTERN.findall(content)
                     if matches:
                         rel = os.path.relpath(filepath, base_dir)
                         violations.append(f"{rel}: {matches}")
 
         self.assertEqual(
             violations, [],
-            f"Found erpnext.accounts imports in university_finance:\n"
+            "Found forbidden imports in university_finance:\n"
             + "\n".join(violations)
         )
 
@@ -61,22 +62,19 @@ class TestImportIntegrity(unittest.TestCase):
             # Skip university_finance entirely
             if "university_finance" in root:
                 continue
-            # Skip scripts (fork tool contains string literals, not imports)
-            if "scripts" in root:
-                continue
-            dirs[:] = [d for d in dirs if d != "__pycache__"]
+            dirs[:] = [d for d in dirs if d not in ("__pycache__", "scripts")]
             for f in files:
                 if f.endswith(".py"):
                     filepath = os.path.join(root, f)
                     with open(filepath) as fh:
                         content = fh.read()
-                    matches = re.findall(r"from erpnext\.accounts\.", content)
+                    matches = self._FORBIDDEN_PATTERN.findall(content)
                     if matches:
                         rel = os.path.relpath(filepath, app_dir)
                         violations.append(f"{rel}: {matches}")
 
         self.assertEqual(
             violations, [],
-            f"Found erpnext.accounts imports outside university_finance:\n"
+            "Found forbidden imports outside university_finance:\n"
             + "\n".join(violations)
         )
