@@ -239,7 +239,7 @@ class GLPostingManager:
             return
 
         try:
-            from erpnext.accounts.general_ledger import make_gl_entries
+            from university_erp.university_finance.general_ledger import make_gl_entries
 
             gl_entries = []
             posting_date = voucher.posting_date if hasattr(voucher, 'posting_date') else frappe.utils.today()

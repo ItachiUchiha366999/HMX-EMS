@@ -40,7 +40,7 @@ def _analyze_fees_overlap():
     return {
         "domain": "Fees / Finance",
         "education_entities": [
-            "Fees doctype (fee creation, submission, GL posting via erpnext.accounts)",
+            "Fees doctype (fee creation, submission, GL posting via university_finance)",
             "Fee Component (child table for fee line items)",
             "Fee Schedule (batch fee generation)",
             "Fee Structure (template for fee calculation)",
