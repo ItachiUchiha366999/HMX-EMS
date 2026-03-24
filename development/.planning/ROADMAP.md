@@ -230,7 +230,7 @@ Key principle: Backend must be fully working in Frappe Desk before any Vue porta
 | 2. Shared Component Library | 2/2 | Complete | 2026-03-18 |
 | 3. Faculty Portal | 3/3 | Complete | 2026-03-18 |
 | 03.1. System Audit & Fix | 6/6 | Complete | 2026-03-19 |
-| 03.3. ERPNext Accounts Fork | 1/4 | In Progress|  |
+| 03.3. ERPNext Accounts Fork | 2/4 | In Progress|  |
 | 03.4. Post-Fork Backend Audit | 0/TBD | Not started | - |
 | 4. Portal Redesign & Build | 0/TBD | Not started | - |
 | 5. Management Dashboards | 0/TBD | Not started | - |

@@ -99,11 +99,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Accounts Module Fork
 
 - [x] **ACCT-01**: Full ERPNext Accounts module forked into university_erp as university_accounts
-- [ ] **ACCT-02**: All doctype labels relabeled with student-centric terminology (Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor)
+- [x] **ACCT-02**: All doctype labels relabeled with student-centric terminology (Customer→Student, Sales Invoice→Fee Invoice, Supplier→Vendor)
 - [ ] **ACCT-03**: GL Entry, Journal Entry, Payment Entry, Bank Reconciliation working through forked module
 - [ ] **ACCT-04**: Fee collection → GL posting flow verified end-to-end through forked module
 - [ ] **ACCT-05**: Payment gateway integration (Razorpay/PayU) working through forked module
-- [ ] **ACCT-06**: All university_erp finance reports updated to use forked module references
+- [x] **ACCT-06**: All university_erp finance reports updated to use forked module references
 - [x] **ACCT-07**: Original ERPNext Accounts module dependencies removed or redirected
 
 ### Gap Closure (Phase 03.1)
@@ -237,11 +237,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STUD-10 | Phase 03.2 | Pending |
 | STUD-11 | Phase 03.2 | Pending |
 | ACCT-01 | Phase 03.3 | Complete |
-| ACCT-02 | Phase 03.3 | Pending |
+| ACCT-02 | Phase 03.3 | Complete |
 | ACCT-03 | Phase 03.3 | Pending |
 | ACCT-04 | Phase 03.3 | Pending |
 | ACCT-05 | Phase 03.3 | Pending |
-| ACCT-06 | Phase 03.3 | Pending |
+| ACCT-06 | Phase 03.3 | Complete |
 | ACCT-07 | Phase 03.3 | Complete |
 | GAP-01 | Phase 03.1 (gaps) | Complete |
 | GAP-02 | Phase 03.1 (gaps) | Complete |
