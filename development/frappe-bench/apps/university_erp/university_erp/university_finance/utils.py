@@ -1945,7 +1945,12 @@ def create_payment_ledger_entry(
 
 
 def update_voucher_outstanding(voucher_type, voucher_no, account, party_type, party):
-	from university_erp.university_finance.doctype.dunning.dunning import update_linked_dunnings
+	try:
+		from university_erp.university_finance.doctype.dunning.dunning import update_linked_dunnings
+	except (ImportError, ModuleNotFoundError):
+		# Dunning module archived in Phase 03.3 -- stub as no-op
+		def update_linked_dunnings(*args, **kwargs):
+			pass
 
 	if not voucher_type or not voucher_no:
 		return

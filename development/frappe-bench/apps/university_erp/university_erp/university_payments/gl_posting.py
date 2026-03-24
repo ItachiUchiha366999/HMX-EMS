@@ -29,20 +29,31 @@ class GLPostingManager:
             )
             return
 
+        # paid_amount is derived: grand_total - outstanding_amount
+        # On submission, use grand_total as the full amount being invoiced
+        paid_amount = flt(
+            getattr(fees, "paid_amount", None)
+            or (flt(fees.grand_total) - flt(fees.outstanding_amount))
+            or flt(fees.grand_total)
+        )
+        if not paid_amount:
+            return
+
         entries = []
 
         # Debit: Bank/Cash/Payment Gateway Account
+        # Note: party_type/party only valid on Receivable/Payable accounts,
+        # NOT on Bank/Cash accounts
         entries.append({
             "account": self.settings.fee_collection_account,
-            "debit": flt(fees.paid_amount),
+            "debit": paid_amount,
             "credit": 0,
-            "party_type": "Student",
-            "party": fees.student,
             "against": self.settings.fee_income_account,
             "remarks": f"Fee collection - {fees.name}"
         })
 
         # Credit: Fee Income Account (per component if configured)
+        # Income accounts also do not take party_type/party
         if hasattr(fees, 'components') and fees.components:
             for component in fees.components:
                 income_account = self.get_fee_component_account(component.fees_category)
@@ -52,8 +63,6 @@ class GLPostingManager:
                     "account": income_account,
                     "debit": 0,
                     "credit": flt(component.amount),
-                    "party_type": "Student",
-                    "party": fees.student,
                     "against": self.settings.fee_collection_account,
                     "remarks": f"{component.fees_category} - {fees.name}",
                     "cost_center": cost_center
@@ -63,9 +72,7 @@ class GLPostingManager:
             entries.append({
                 "account": self.settings.fee_income_account,
                 "debit": 0,
-                "credit": flt(fees.paid_amount),
-                "party_type": "Student",
-                "party": fees.student,
+                "credit": paid_amount,
                 "against": self.settings.fee_collection_account,
                 "remarks": f"Fee income - {fees.name}",
                 "cost_center": self.get_department_cost_center(fees)
