@@ -476,25 +476,32 @@ def fix_semester2_fees():
     academic_year = "2025-26"
     due_date = "2026-04-30"
 
+    # Ensure Academic Term "2025-26 (Semester 2)" exists
+    if not frappe.db.exists("Academic Term", "2025-26 (Semester 2)"):
+        # Find the academic year record
+        ay_doc = frappe.get_doc({
+            "doctype": "Academic Term",
+            "academic_year": academic_year,
+            "term_name": "Semester 2",
+            "term_start_date": "2026-01-15",
+            "term_end_date": "2026-06-30",
+        })
+        ay_doc.flags.ignore_validate = True
+        ay_doc.flags.ignore_mandatory = True
+        ay_doc.insert(ignore_permissions=True)
+        print(f"  Created Academic Term: {ay_doc.name}")
+
+    # Use exact Fee Category names from production DB
     fee_components = [
         {"fees_category": "Tuition Fee", "description": "Tuition Fee", "amount": 50000},
-        {"fees_category": "Lab Fee", "description": "Laboratory Fee", "amount": 10000},
+        {"fees_category": "Laboratory Fee", "description": "Laboratory Fee", "amount": 10000},
         {"fees_category": "Library Fee", "description": "Library Fee", "amount": 5000},
-        {"fees_category": "Exam Fee", "description": "Examination Fee", "amount": 3000},
+        {"fees_category": "Examination Fee", "description": "Examination Fee", "amount": 3000},
     ]
     grand_total = sum(c["amount"] for c in fee_components)
 
-    # Ensure fee categories exist
-    for comp in fee_components:
-        cat_name = comp["fees_category"]
-        if not frappe.db.exists("Fee Category", cat_name):
-            frappe.get_doc({
-                "doctype": "Fee Category",
-                "name": cat_name,
-                "category_name": cat_name,
-                "description": comp["description"],
-            }).insert(ignore_permissions=True)
-            print(f"  Created Fee Category: {cat_name}")
+    # All fee categories already exist on production (Tuition Fee, Laboratory Fee,
+    # Library Fee, Examination Fee with codes TUI, LAB, LIB, EXM)
 
     created = 0
     for idx, (student_id, email) in enumerate(STUDENTS_WITH_LOGINS):
@@ -601,7 +608,7 @@ def fix_notice_board():
         },
         {
             "title": "Annual Sports Day Registration Open",
-            "notice_type": "Event",
+            "notice_type": "Sports",
             "priority": "Medium",
             "expiry_date": "2026-04-25",
             "content": "Registration for the Annual Sports Day 2026 is now open. "
@@ -692,14 +699,14 @@ def fix_library_transactions():
     overdue = frappe.db.sql("""
         SELECT name, member, article
         FROM `tabLibrary Transaction`
-        WHERE type = 'Issue' AND due_date < '2026-04-08'
+        WHERE transaction_type = 'Issue' AND due_date < '2026-04-08'
     """, as_dict=True)
 
     returned = 0
     for txn in overdue:
         # Check if already returned
         already_returned = frappe.db.exists("Library Transaction", {
-            "type": "Return",
+            "transaction_type": "Return",
             "article": txn["article"],
             "member": txn["member"],
         })
@@ -709,10 +716,10 @@ def fix_library_transactions():
         # Create return transaction
         ret_doc = frappe.get_doc({
             "doctype": "Library Transaction",
-            "type": "Return",
+            "transaction_type": "Return",
             "member": txn["member"],
             "article": txn["article"],
-            "date": "2026-04-08",
+            "transaction_date": "2026-04-08",
         })
         ret_doc.flags.ignore_validate = True
         ret_doc.flags.ignore_mandatory = True
@@ -725,29 +732,27 @@ def fix_library_transactions():
     print(f"  Created {returned} return transactions")
 
     # Issue new books for demo student
-    # Find library member for EDU-STU-2026-00145
-    demo_member = frappe.db.get_value("Library Member", {"library_member_name": "student1@nit.edu"})
+    # Find library member for EDU-STU-2026-00145 via student field
+    demo_member = frappe.db.get_value("Library Member", {"student": "EDU-STU-2026-00145"})
     if not demo_member:
-        # Try finding by pattern
-        demo_member = frappe.db.sql("""
-            SELECT name FROM `tabLibrary Member` LIMIT 1
-        """, as_dict=True)
-        demo_member = demo_member[0]["name"] if demo_member else None
+        # Fallback: use known member ID
+        demo_member = "LM-2026-00025" if frappe.db.exists("Library Member", "LM-2026-00025") else None
+    if not demo_member:
+        demo_member = frappe.db.get_all("Library Member", limit=1, pluck="name")
+        demo_member = demo_member[0] if demo_member else None
 
     if not demo_member:
         print("  [WARN] No library member found, skipping new issues")
         return
 
-    # Get available articles
-    articles = frappe.db.sql("""
-        SELECT name, article_name FROM `tabArticle` LIMIT 5
-    """, as_dict=True)
+    # Get available Library Articles
+    articles = frappe.db.get_all("Library Article", fields=["name", "title"], limit=5)
 
     issued = 0
     for article in articles[:3]:
         # Check if already issued and not returned
         active_issue = frappe.db.exists("Library Transaction", {
-            "type": "Issue",
+            "transaction_type": "Issue",
             "article": article["name"],
             "member": demo_member,
         })
@@ -756,10 +761,11 @@ def fix_library_transactions():
 
         doc = frappe.get_doc({
             "doctype": "Library Transaction",
-            "type": "Issue",
+            "transaction_type": "Issue",
             "member": demo_member,
             "article": article["name"],
-            "date": "2026-04-08",
+            "transaction_date": "2026-04-08",
+            "issue_date": "2026-04-08",
             "due_date": "2026-04-30",
         })
         doc.flags.ignore_validate = True
@@ -786,24 +792,22 @@ def fix_mess_menu():
         print("  [WARN] No Hostel Mess found, skipping mess menu")
         return
 
+    # Autoname is format:{mess}-{week_start_date}, fields: week_start_date, week_end_date
     weeks = [
-        ("2026-04-06", "2026-04-12", "Week of April 6-12, 2026"),
-        ("2026-04-13", "2026-04-19", "Week of April 13-19, 2026"),
+        ("2026-04-06", "2026-04-12"),
+        ("2026-04-13", "2026-04-19"),
     ]
 
     created = 0
-    for from_date, to_date, title in weeks:
-        # Check if menu exists for this period
-        existing = frappe.db.exists("Mess Menu", {
-            "mess": mess_name,
-            "from_date": from_date,
-        })
-        if existing:
-            print(f"  [SKIP] Mess menu already exists for {from_date}")
+    for week_start, week_end in weeks:
+        # Check if menu exists: autoname = "{mess}-{week_start_date}"
+        expected_name = f"{mess_name}-{week_start}"
+        if frappe.db.exists("Mess Menu", expected_name):
+            print(f"  [SKIP] Mess menu '{expected_name}' already exists")
             continue
 
         menu_items = []
-        start = datetime.strptime(from_date, "%Y-%m-%d").date()
+        start = datetime.strptime(week_start, "%Y-%m-%d").date()
         for day_offset in range(7):
             menu_date = start + timedelta(days=day_offset)
             day_name = menu_date.strftime("%A")
@@ -814,43 +818,34 @@ def fix_mess_menu():
                     "doctype": "Mess Menu Item",
                     "day": day_name,
                     "meal_type": "Breakfast",
-                    "from_time": "07:00:00",
-                    "to_time": "09:00:00",
-                    "menu": BREAKFAST_ITEMS[day_idx % len(BREAKFAST_ITEMS)],
+                    "menu_items": BREAKFAST_ITEMS[day_idx % len(BREAKFAST_ITEMS)],
                 },
                 {
                     "doctype": "Mess Menu Item",
                     "day": day_name,
                     "meal_type": "Lunch",
-                    "from_time": "12:00:00",
-                    "to_time": "14:00:00",
-                    "menu": LUNCH_ITEMS[day_idx % len(LUNCH_ITEMS)],
+                    "menu_items": LUNCH_ITEMS[day_idx % len(LUNCH_ITEMS)],
                 },
                 {
                     "doctype": "Mess Menu Item",
                     "day": day_name,
                     "meal_type": "Snacks",
-                    "from_time": "16:00:00",
-                    "to_time": "17:00:00",
-                    "menu": SNACKS_ITEMS[day_idx % len(SNACKS_ITEMS)],
+                    "menu_items": SNACKS_ITEMS[day_idx % len(SNACKS_ITEMS)],
                 },
                 {
                     "doctype": "Mess Menu Item",
                     "day": day_name,
                     "meal_type": "Dinner",
-                    "from_time": "19:00:00",
-                    "to_time": "21:00:00",
-                    "menu": DINNER_ITEMS[day_idx % len(DINNER_ITEMS)],
+                    "menu_items": DINNER_ITEMS[day_idx % len(DINNER_ITEMS)],
                 },
             ])
 
         doc = frappe.get_doc({
             "doctype": "Mess Menu",
             "mess": mess_name,
-            "title": title,
-            "from_date": from_date,
-            "to_date": to_date,
-            "status": "Active",
+            "week_start_date": week_start,
+            "week_end_date": week_end,
+            "status": "Published",
             "menu_items": menu_items,
         })
         doc.flags.ignore_validate = True
