@@ -43,3 +43,7 @@ development/frappe-bench/apps/university_erp/university_erp/public/student-porta
 
 # GSD working cache
 .gsd-cache/
+
+# GSD planning artifacts (local-only)
+.planning/
+**/.planning/
