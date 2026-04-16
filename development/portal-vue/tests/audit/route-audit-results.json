@@ -1,0 +1,62 @@
+[
+  {
+    "route": "/faculty",
+    "component": "FacultyDashboard",
+    "status": "PASS",
+    "notes": "Renders successfully"
+  },
+  {
+    "route": "/faculty/teaching",
+    "component": "FacultyTeaching",
+    "status": "PASS",
+    "notes": "Renders successfully"
+  },
+  {
+    "route": "/faculty/work",
+    "component": "FacultyWork",
+    "status": "PASS",
+    "notes": "Renders successfully"
+  },
+  {
+    "route": "/faculty/notices",
+    "component": "FacultyNotices",
+    "status": "PASS",
+    "notes": "Renders successfully"
+  },
+  {
+    "route": "/",
+    "component": "ComingSoon (home)",
+    "status": "PASS",
+    "notes": "Renders successfully"
+  },
+  {
+    "route": "/management",
+    "component": "ComingSoon",
+    "status": "PASS",
+    "notes": "Placeholder -- future phase"
+  },
+  {
+    "route": "/hod",
+    "component": "ComingSoon",
+    "status": "PASS",
+    "notes": "Placeholder -- future phase"
+  },
+  {
+    "route": "/student",
+    "component": "ComingSoon",
+    "status": "PASS",
+    "notes": "Placeholder -- future phase"
+  },
+  {
+    "route": "/finance",
+    "component": "ComingSoon",
+    "status": "PASS",
+    "notes": "Placeholder -- future phase"
+  },
+  {
+    "route": "/admin/health",
+    "component": "ComingSoon",
+    "status": "PASS",
+    "notes": "Placeholder -- future phase"
+  }
+]
