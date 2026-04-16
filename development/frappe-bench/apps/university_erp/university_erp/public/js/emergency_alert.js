@@ -193,6 +193,10 @@ university_erp.emergency = {
                     <button class="btn btn-sm btn-link view-details-btn" data-alert="${alert_id}">
                         <i class="fa fa-external-link"></i>
                     </button>
+                    <button class="btn btn-sm btn-link dismiss-banner-btn" data-alert="${alert_id}"
+                            title="Dismiss" style="color:white;font-size:16px;line-height:1;padding:0 4px;">
+                        &times;
+                    </button>
                 </div>
             </div>
         `);
@@ -203,6 +207,10 @@ university_erp.emergency = {
 
         banner.find('.view-details-btn').on('click', function() {
             frappe.set_route('Form', 'Emergency Alert', $(this).data('alert'));
+        });
+
+        banner.find('.dismiss-banner-btn').on('click', function() {
+            university_erp.emergency.dismiss_alert($(this).data('alert'));
         });
 
         $('body').prepend(banner);

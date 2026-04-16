@@ -8,7 +8,7 @@ from frappe.utils import nowdate, getdate, flt
 
 # ==================== Student Portal APIs ====================
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_dashboard():
     """Get student dashboard data"""
     from university_erp.www.student_portal.index import (
@@ -30,7 +30,7 @@ def get_student_dashboard():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_timetable(week_start=None):
     """Get student weekly timetable"""
     from university_erp.www.student_portal.index import get_current_student
@@ -52,7 +52,7 @@ def get_student_timetable(week_start=None):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_results():
     """Get student results"""
     from university_erp.www.student_portal.index import get_current_student
@@ -73,7 +73,7 @@ def get_student_results():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_attendance_details(month=None):
     """Get student attendance details"""
     from university_erp.www.student_portal.index import get_current_student
@@ -162,7 +162,7 @@ def create_payment_request(fee_schedule):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_logged_student():
     """Get lightweight student info for the SPA layout"""
     from university_erp.www.student_portal.index import get_current_student
@@ -180,7 +180,7 @@ def get_logged_student():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_academics():
     """Get academics data: courses, credits, CGPA, semester results"""
     from university_erp.www.student_portal.index import get_current_student
@@ -207,7 +207,7 @@ def get_student_academics():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_fees():
     """Get fees data: pending fees, payment history, summary"""
     from university_erp.www.student_portal.index import get_current_student
@@ -228,7 +228,7 @@ def get_student_fees():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_library():
     """Get library data: issued books, history, stats, overdue"""
     from university_erp.www.student_portal.index import get_current_student
@@ -251,7 +251,7 @@ def get_student_library():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_notifications():
     """Get notifications and announcements"""
     from university_erp.www.student_portal.index import get_current_student
@@ -273,7 +273,7 @@ def get_student_notifications():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_profile():
     """Get full profile data with guardians and academic info"""
     from university_erp.www.student_portal.index import get_current_student
@@ -297,7 +297,7 @@ def get_student_profile():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_grievances():
     """Get grievances, categories, and stats"""
     from university_erp.www.student_portal.index import get_current_student
@@ -318,7 +318,7 @@ def get_student_grievances():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_certificates():
     """Get certificate requests, available types, and issued certificates"""
     from university_erp.www.student_portal.index import get_current_student
@@ -339,7 +339,7 @@ def get_student_certificates():
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_hostel():
     """Get hostel allocation, room, building, attendance, and maintenance data"""
     from university_erp.www.student_portal.index import get_current_student
@@ -465,7 +465,7 @@ def submit_maintenance_request(subject, description, priority="Medium"):
     }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_student_transport():
     """Get transport allocation, route, and schedule data"""
     from university_erp.www.student_portal.index import get_current_student
@@ -525,7 +525,7 @@ def get_student_transport():
 
 # ==================== Faculty Portal APIs ====================
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_faculty_dashboard():
     """Get faculty dashboard data"""
     from university_erp.university_portals.www.faculty_portal.index import (
@@ -586,7 +586,7 @@ def approve_leave_request(leave_application, status, remarks=None):
 
 # ==================== Parent Portal APIs ====================
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_parent_dashboard():
     """Get parent dashboard data"""
     guardian = get_current_guardian()
@@ -648,7 +648,7 @@ def get_child_fee_summary(student):
     return get_fee_summary(student)
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_child_details(student):
     """Get detailed information about a child"""
     guardian = get_current_guardian()
@@ -748,7 +748,7 @@ def get_portal_redirect():
 
 # ==================== Unified Portal APIs ====================
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_session_info():
     """
     Get current session info for the unified portal app shell.

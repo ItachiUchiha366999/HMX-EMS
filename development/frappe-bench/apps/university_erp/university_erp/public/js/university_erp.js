@@ -50,9 +50,10 @@
                 ];
 
                 // Check if current module is a university module
-                if (frappe.get_route && frappe.get_route()[0] === 'Workspaces') {
-                    var workspace = frappe.get_route()[1];
-                    if (university_modules.includes(workspace)) {
+                var route = frappe.get_route ? frappe.get_route() : null;
+                if (route && route[0] === 'Workspaces') {
+                    var workspace = route[1];
+                    if (workspace && university_modules.includes(workspace)) {
                         // Add custom styling for university workspaces
                         setTimeout(function() {
                             var header = document.querySelector('.page-head .page-title');

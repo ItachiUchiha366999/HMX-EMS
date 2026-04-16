@@ -17,7 +17,6 @@
     "content",
     "attachments",
     "section_replies",
-    "replies",
     "section_stats",
     "reply_count",
     "view_count",
@@ -97,12 +96,6 @@
       "fieldname": "section_replies",
       "fieldtype": "Section Break",
       "label": "Replies"
-    },
-    {
-      "fieldname": "replies",
-      "fieldtype": "Table",
-      "label": "Replies",
-      "options": "Discussion Reply"
     },
     {
       "collapsible": 1,

@@ -5,6 +5,26 @@ import frappe
 from frappe import _
 
 
+@frappe.whitelist()
+def get_program_courses(doctype, txt, searchfield, start, page_len, filters):
+	"""Return courses that have a submitted CO PO Mapping for the selected program."""
+	program = frappe.parse_json(filters).get("program") if filters else None
+	if not program:
+		return []
+
+	conditions = "program = %(program)s AND docstatus = 1"
+	values = {"program": program}
+	if txt:
+		conditions += " AND course LIKE %(txt)s"
+		values["txt"] = f"%{txt}%"
+
+	rows = frappe.db.sql(
+		f"SELECT DISTINCT course FROM `tabCO PO Mapping` WHERE {conditions} ORDER BY course LIMIT %(limit)s OFFSET %(offset)s",
+		{**values, "limit": int(page_len), "offset": int(start)},
+	)
+	return rows
+
+
 def execute(filters=None):
     columns = get_columns(filters)
     data = get_data(filters)

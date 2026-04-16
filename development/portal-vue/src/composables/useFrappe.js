@@ -1,14 +1,22 @@
 import { ref } from 'vue'
 
 function getCsrfToken() {
+  // Prefer the token injected by the Frappe www page template
+  if (window.frappe?.csrf_token) return window.frappe.csrf_token
+  // Fallback to cookie
   const match = document.cookie.match(/csrf_token=([^;]+)/)
   return match ? decodeURIComponent(match[1]) : ''
 }
 
 async function handleResponse(res) {
-  if (res.status === 403 || res.status === 401) {
+  if (res.status === 401) {
+    // Only redirect on 401 (truly unauthenticated)
     window.location.href = '/login?redirect-to=/portal/'
     throw new Error('Session expired')
+  }
+  if (res.status === 403) {
+    // Permission denied — don't redirect, just throw so the component can handle it
+    throw new Error('Permission denied')
   }
   const data = await res.json()
   if (data.exc) {
@@ -28,6 +36,7 @@ export function useFrappe() {
     try {
       let url = `/api/method/${method}`
       const fetchOptions = {
+        credentials: 'same-origin',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

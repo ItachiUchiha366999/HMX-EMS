@@ -7,15 +7,13 @@ frappe.query_reports["CO-PO Mapping Matrix"] = {
 			"fieldname": "program",
 			"label": __("Program"),
 			"fieldtype": "Link",
-			"options": "Program",
-			"reqd": 1
+			"options": "Program"
 		},
 		{
 			"fieldname": "course",
 			"label": __("Course"),
 			"fieldtype": "Link",
 			"options": "Course",
-			"reqd": 1,
 			"get_query": function() {
 				let program = frappe.query_report.get_filter_value('program');
 				if (program) {
@@ -24,6 +22,7 @@ frappe.query_reports["CO-PO Mapping Matrix"] = {
 						filters: { program: program }
 					};
 				}
+				return { filters: {} };
 			}
 		},
 		{

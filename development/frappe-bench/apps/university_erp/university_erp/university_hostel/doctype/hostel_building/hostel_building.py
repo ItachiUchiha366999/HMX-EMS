@@ -71,6 +71,56 @@ class HostelBuilding(Document):
 
 
 @frappe.whitelist()
+def recalculate_all_building_stats():
+    """Recalculate and persist occupancy stats for all buildings and rooms.
+    Call this after bulk imports or data restores to fix stale cached fields."""
+    # Recalculate room occupied_beds from live Hostel Allocation records
+    frappe.db.sql("""
+        UPDATE `tabHostel Room` hr
+        SET hr.occupied_beds = (
+            SELECT COUNT(*)
+            FROM `tabHostel Allocation` ha
+            WHERE ha.room = hr.name
+            AND ha.status = 'Active'
+            AND ha.docstatus = 1
+        ),
+        hr.available_beds = hr.capacity - (
+            SELECT COUNT(*)
+            FROM `tabHostel Allocation` ha
+            WHERE ha.room = hr.name
+            AND ha.status = 'Active'
+            AND ha.docstatus = 1
+        )
+    """)
+
+    # Recalculate building occupied/available/occupancy_rate from room stats
+    frappe.db.sql("""
+        UPDATE `tabHostel Building` hb
+        JOIN (
+            SELECT
+                hostel_building,
+                COUNT(*) as total_rooms,
+                COALESCE(SUM(capacity), 0) as total_capacity,
+                COALESCE(SUM(occupied_beds), 0) as occupied
+            FROM `tabHostel Room`
+            WHERE status != 'Under Maintenance'
+            GROUP BY hostel_building
+        ) stats ON stats.hostel_building = hb.name
+        SET
+            hb.total_rooms = stats.total_rooms,
+            hb.total_capacity = stats.total_capacity,
+            hb.occupied = stats.occupied,
+            hb.available = stats.total_capacity - stats.occupied,
+            hb.occupancy_rate = CASE WHEN stats.total_capacity > 0
+                THEN ROUND(stats.occupied / stats.total_capacity * 100, 2)
+                ELSE 0 END
+    """)
+
+    frappe.db.commit()
+    return {"message": "Occupancy stats recalculated for all buildings"}
+
+
+@frappe.whitelist()
 def get_building_stats(building):
     """Get detailed building statistics"""
     doc = frappe.get_doc("Hostel Building", building)

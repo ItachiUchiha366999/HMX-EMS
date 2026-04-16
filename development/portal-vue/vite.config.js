@@ -5,6 +5,11 @@ import path from 'path'
 export default defineConfig({
   plugins: [vue()],
   base: '/assets/university_erp/portal/',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   build: {
     outDir: path.resolve(__dirname, '../frappe-bench/apps/university_erp/university_erp/public/portal'),
     emptyOutDir: true,

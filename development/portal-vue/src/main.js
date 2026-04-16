@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router/index.js'
 import { useSessionStore } from './stores/session.js'
 
+
 const app = createApp(App)
 const pinia = createPinia()
 

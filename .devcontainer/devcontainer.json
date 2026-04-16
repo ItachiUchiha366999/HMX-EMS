@@ -44,5 +44,6 @@
   "service": "frappe",
   "workspaceFolder": "/workspace/development",
   "shutdownAction": "stopCompose",
-  "mounts": []
+  "mounts": [],
+  "postStartCommand": "bash /workspace/.devcontainer/install-gsd.sh"
 }

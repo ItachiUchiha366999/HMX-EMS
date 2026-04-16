@@ -13,7 +13,10 @@ class CourseOutcome(Document):
 
     def set_co_code(self):
         """Generate CO code based on course"""
-        course_code = frappe.db.get_value("Course", self.course, "course_code") or self.course[:8]
+        course_code = (
+            frappe.db.get_value("Course", self.course, "custom_course_code")
+            or self.course[:8]
+        )
         self.co_code = f"{course_code}.CO{self.co_number}"
 
     def set_bloom_level_number(self):

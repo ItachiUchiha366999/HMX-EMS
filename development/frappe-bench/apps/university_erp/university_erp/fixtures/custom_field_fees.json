@@ -1,6 +1,45 @@
 [
  {
   "doctype": "Custom Field",
+  "dt": "Fee Category",
+  "name": "Fee Category-custom_category_code",
+  "fieldname": "custom_category_code",
+  "fieldtype": "Data",
+  "label": "Category Code",
+  "insert_after": "category_name",
+  "reqd": 0
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Category",
+  "name": "Fee Category-custom_fee_type",
+  "fieldname": "custom_fee_type",
+  "fieldtype": "Select",
+  "label": "Fee Type",
+  "options": "Tuition\nExamination\nHostel\nTransport\nLibrary\nLaboratory\nOther",
+  "insert_after": "custom_category_code"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Category",
+  "name": "Fee Category-custom_refundable",
+  "fieldname": "custom_refundable",
+  "fieldtype": "Check",
+  "label": "Refundable",
+  "insert_after": "custom_fee_type"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Fee Category",
+  "name": "Fee Category-custom_income_account",
+  "fieldname": "custom_income_account",
+  "fieldtype": "Link",
+  "label": "Income Account",
+  "options": "Account",
+  "insert_after": "custom_refundable"
+ },
+ {
+  "doctype": "Custom Field",
   "dt": "Fee Structure",
   "name": "Fee Structure-custom_academic_year",
   "fieldname": "custom_academic_year",

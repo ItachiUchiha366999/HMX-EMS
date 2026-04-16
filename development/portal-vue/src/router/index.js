@@ -3,10 +3,10 @@ import { useSessionStore } from '../stores/session.js'
 import PortalLayout from '../layouts/PortalLayout.vue'
 
 // Placeholder views — Phases 3-6 replace these with real implementations
-const NotFound = { template: '<div style="padding:2rem"><h2>Page Not Found</h2></div>' }
+const NotFound = { template: '<div style="padding:2rem;color:#0f172a"><h2>Page Not Found</h2></div>' }
 const ComingSoon = {
   props: ['moduleName'],
-  template: '<div style="padding:2rem"><h2>{{ moduleName || \'Module\' }}</h2><p style="color:#64748b">Coming in a future phase.</p></div>',
+  template: '<div style="padding:2rem;color:#0f172a"><h2 style="color:#0f172a">{{ moduleName || \'Module\' }}</h2><p style="color:#64748b">Coming in a future phase.</p></div>',
 }
 
 const routes = [
