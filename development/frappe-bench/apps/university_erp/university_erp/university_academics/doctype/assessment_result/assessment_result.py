@@ -8,11 +8,43 @@ from frappe.model.document import Document
 from frappe.utils import flt
 from frappe.utils.csvutils import getlink
 
-from university_erp.api import get_assessment_details, get_grade
-
-
 class StudentNotInGroupError(frappe.ValidationError):
 	pass
+
+
+# Forked inline from education.education.api (Phase 03.3.1 Plan 06).
+# Original location: frappe-bench/apps/education/education/education/api.py
+@frappe.whitelist()
+def get_assessment_details(assessment_plan):
+	"""Returns Assessment Criteria and Maximum Score from Assessment Plan Master."""
+	return frappe.get_all(
+		"Assessment Plan Criteria",
+		fields=["assessment_criteria", "maximum_score", "docstatus"],
+		filters={"parent": assessment_plan},
+		order_by="idx",
+	)
+
+
+@frappe.whitelist()
+def get_grade(grading_scale, percentage):
+	"""Returns Grade based on the Grading Scale and Score."""
+	grading_scale_intervals = {}
+	if not hasattr(frappe.local, "grading_scale"):
+		grading_scale_rows = frappe.get_all(
+			"Grading Scale Interval",
+			fields=["grade_code", "threshold"],
+			filters={"parent": grading_scale},
+		)
+		frappe.local.grading_scale = grading_scale_rows
+	for d in frappe.local.grading_scale:
+		grading_scale_intervals.update({d.threshold: d.grade_code})
+	intervals = sorted(grading_scale_intervals.keys(), key=float, reverse=True)
+	grade = ""
+	for interval in intervals:
+		if flt(percentage) >= interval:
+			grade = grading_scale_intervals.get(interval)
+			break
+	return grade
 
 
 def validate_student_belongs_to_group(student, student_group):

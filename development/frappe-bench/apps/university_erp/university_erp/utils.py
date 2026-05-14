@@ -379,11 +379,114 @@ def on_session_creation(login_manager):
         if "System Manager" in roles:
             return
 
-        # Redirect students to student portal
-        # Use home_page which is the correct way Frappe handles post-login redirects
         if "Student" in roles:
+            # Set redirect_to — takes priority over last_visited in localStorage
+            frappe.local.response["redirect_to"] = "/student_portal"
             frappe.local.response["home_page"] = "/student_portal"
 
     except Exception as e:
         # Log error but don't break login
         frappe.log_error(f"on_session_creation error: {str(e)}", "Student Redirect")
+
+
+# ---------------------------------------------------------------------------
+# Education utils migrated into university_erp (Phase 03.3.1 Plan 06, Wave 4)
+# Source: frappe-bench/apps/education/education/utils.py
+# Only the symbols referenced by forked controllers are migrated here.
+# ---------------------------------------------------------------------------
+
+
+class OverlapError(frappe.ValidationError):
+    """Raised when Course Schedule / Assessment Plan time slots overlap."""
+    pass
+
+
+def validate_overlap_for(doc, doctype, fieldname, value=None):
+    """Checks overlap for specified field."""
+    existing = get_overlap_for(doc, doctype, fieldname, value)
+    if existing:
+        frappe.throw(
+            _("This {0} conflicts with {1} for {2} {3}").format(
+                doc.doctype,
+                existing.name,
+                doc.meta.get_label(fieldname) if not value else fieldname,
+                value or doc.get(fieldname),
+            ),
+            OverlapError,
+        )
+
+
+def get_overlap_for(doc, doctype, fieldname, value=None):
+    """Returns overlapping document for specified field."""
+    existing = frappe.db.sql(
+        """select name, from_time, to_time from `tab{0}`
+        where `{1}`=%(val)s and schedule_date = %(schedule_date)s and
+        (
+            (from_time > %(from_time)s and from_time < %(to_time)s) or
+            (to_time > %(from_time)s and to_time < %(to_time)s) or
+            (%(from_time)s > from_time and %(from_time)s < to_time) or
+            (%(from_time)s = from_time and %(to_time)s = to_time))
+        and name!=%(name)s and docstatus!=2""".format(doctype, fieldname),
+        {
+            "schedule_date": doc.schedule_date,
+            "val": value or doc.get(fieldname),
+            "from_time": doc.from_time,
+            "to_time": doc.to_time,
+            "name": doc.name or "No Name",
+        },
+        as_dict=True,
+    )
+    return existing[0] if existing else None
+
+
+def validate_duplicate_student(students):
+    """Reject duplicate Student rows in a child table."""
+    unique_students = []
+    for stud in students:
+        if stud.student in unique_students:
+            frappe.throw(
+                _("Student {0} - {1} appears Multiple times in row {2} & {3}").format(
+                    stud.student,
+                    stud.student_name,
+                    unique_students.index(stud.student) + 1,
+                    stud.idx,
+                )
+            )
+        else:
+            unique_students.append(stud.student)
+    return None
+
+
+def check_content_completion(content_name, content_type, enrollment_name):
+    """LMS helper — returns True if a Course Activity exists for the content."""
+    activity = frappe.get_all(
+        "Course Activity",
+        filters={
+            "enrollment": enrollment_name,
+            "content_type": content_type,
+            "content": content_name,
+        },
+    )
+    return bool(activity)
+
+
+def check_quiz_completion(quiz, enrollment_name):
+    """LMS helper — returns (status, score, result, time_taken) for a Quiz Activity."""
+    attempts = frappe.get_all(
+        "Quiz Activity",
+        filters={"enrollment": enrollment_name, "quiz": quiz.name},
+        fields=["name", "activity_date", "score", "status", "time_taken"],
+    )
+    status = False if quiz.max_attempts == 0 else bool(len(attempts) >= quiz.max_attempts)
+    score = None
+    result = None
+    time_taken = None
+    if attempts:
+        if quiz.grading_basis == "Last Highest Score":
+            attempts = sorted(attempts, key=lambda i: int(i.score), reverse=True)
+        score = attempts[0]["score"]
+        result = attempts[0]["status"]
+        time_taken = attempts[0]["time_taken"]
+        if result == "Pass":
+            status = True
+    return status, score, result, time_taken

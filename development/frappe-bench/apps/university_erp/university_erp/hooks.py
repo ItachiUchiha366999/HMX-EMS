@@ -67,7 +67,9 @@ override_doctype_class = {}
 fixtures = [
     {"dt": "Role", "filters": [["name", "like", "University%"]]},
     {"dt": "Custom Field", "filters": [["module", "=", "University ERP"]]},
-    {"dt": "Property Setter", "filters": [["module", "=", "University ERP"]]},
+    {"dt": "Property Setter", "filters": [["module", "in", ["University ERP", "University Academics", "University Hostel"]]]},
+    # Education-fork relabels (Property Setter; loaded via fork fixture files)
+    {"dt": "Property Setter", "filters": [["name", "in", ["School House-main-label", "Education Settings-main-label"]]]},
     {"dt": "Workspace", "filters": [["module", "in", ["University ERP", "University Academics", "University Admissions", "University Student Info", "University Examinations", "University Finance", "Faculty Management", "University Hostel", "University Transport", "University Library", "University Placement", "University LMS", "University Research", "University OBE", "University Integrations", "University Portals", "University Payments", "University Inventory", "University Grievance", "University Analytics", "University Feedback"]]]},
     {"dt": "Workflow", "filters": [["name", "in", ["Leave Application Workflow", "Teaching Assignment Approval Workflow", "Fee Refund Approval Workflow"]]]},
     "university_erp.faculty_management.fixtures.academic_leave_types",
