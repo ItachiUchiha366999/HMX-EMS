@@ -10,7 +10,11 @@ import frappe
 class TestEducationForkAdmissions(unittest.TestCase):
     MODULE = "University Admissions"
     DOCTYPES: list = [
-        # filled in by plan 02/03/04 after fork
+        "Student Applicant",
+        "Student Admission",
+        "Student Admission Program",
+        "Student Category",
+        "Student Batch Name",
     ]
 
     def test_doctypes_owned_by_module(self):

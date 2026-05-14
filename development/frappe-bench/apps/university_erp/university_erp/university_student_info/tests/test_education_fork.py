@@ -10,7 +10,24 @@ import frappe
 class TestEducationForkStudentInfo(unittest.TestCase):
     MODULE = "University Student Info"
     DOCTYPES: list = [
-        # filled in by plan 02/03/04 after fork
+        "Student",
+        "Student Group",
+        "Student Group Creation Tool",
+        "Student Group Creation Tool Course",
+        "Student Group Instructor",
+        "Student Group Student",
+        "Student Attendance",
+        "Student Attendance Tool",
+        "Student Log",
+        "Student Leave Application",
+        "Student Language",
+        "Student Sibling",
+        "Student Siblings",
+        "Student Guardian",
+        "Guardian",
+        "Guardian Interest",
+        "Guardian Student",
+        "Room",
     ]
 
     def test_doctypes_owned_by_module(self):
