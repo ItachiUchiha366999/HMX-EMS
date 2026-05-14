@@ -132,7 +132,7 @@ Plans:
 **Goal:** Education app fully forked into university_erp with doctypes distributed across existing modules by domain fit, all 6 overrides collapsed into forked controllers, every `education.*` reference redirected, Education app uninstallable — mirroring the 03.3 Accounts fork pattern.
 **Requirements**: EDU-01, EDU-02, EDU-03, EDU-04, EDU-05, EDU-06, EDU-07, EDU-08, EDU-09
 **Depends on:** Phase 03.3
-**Plans:** 6 plans
+**Plans:** 3/6 plans executed
 
 Plans:
 - [x] 03.3.1-01-PLAN.md — Audit + DOCTYPE_MAPPING + fork script + Wave 0 test scaffolding
