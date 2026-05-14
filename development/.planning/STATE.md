@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03.3.1-02-PLAN.md (academics fork, Wave 2 parallel)
-last_updated: "2026-05-14T18:39:08.733Z"
+stopped_at: Completed 03.3.1-05-PLAN.md (override collapse, Wave 3)
+last_updated: "2026-05-14T18:51:30.818Z"
 progress:
   total_phases: 12
   completed_phases: 5
   total_plans: 29
-  completed_plans: 23
+  completed_plans: 24
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-19)
 ## Current Position
 
 Phase: 03.3.1 (fork-education-app-into-university-erp-audit-each-doctype-fields-features-and-workflows-then-fork-into-custom-app) — EXECUTING
-Plan: 2 of 6 (Plan 01 complete)
+Plan: 06 of 6 (Plans 01, 02, 03, 04, 05 complete — Wave 3 done, Wave 4 cleanup pending)
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Plan: 2 of 6 (Plan 01 complete)
 | Phase 03.3.1 P01 | ~15min | 3 tasks | 13 files (audit + fork scripts + 8 test scaffolds + DOCTYPE_MAPPING.md) |
 | Phase 03.3.1 P04 | 5min | 3 tasks | 40 files |
 | Phase 03.3.1 P02 | 10min | 2 tasks | 37 files |
+| Phase 03.3.1 P05 | 7min | 3 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -149,6 +150,8 @@ Recent decisions affecting current work:
 - [03.3.1-01]: verify_education_removable baseline = 6 violations (the overrides/*.py files); must be 0 after Wave 3 collapse
 - [Phase 03.3.1]: [03.3.1-04] program_fee forked to University Finance per DOCTYPE_MODULE_MAP (authoritative over plan's advisory note); 3 academics reports deferred to parallel 03.3.1-02 to respect scope_boundary
 - [Phase 03.3.1]: [03.3.1-02] fork_subset routed 36 academics doctypes (29 active + 7 archived); Education Settings relabel via Property Setter fixture preserves DB table name
+- [Phase 03.3.1]: [03.3.1-05] Override-by-absorption: UniversityX class bodies inlined into forked Education-cloned controllers; no super() chain remains so Education app uninstall in Wave 4 will not break university_erp.
+- [Phase 03.3.1]: [03.3.1-05] validate_student_belongs_to_group forked inline into assessment_result.py rather than into a shared utils module -- last 'import education.education' usage eliminated; verify_education_removable.py = 0 violations.
 
 ### Roadmap Evolution
 
@@ -183,6 +186,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-14T18:39:03.930Z
-Stopped at: Completed 03.3.1-02-PLAN.md (academics fork, Wave 2 parallel)
+Last session: 2026-05-14T18:51:30.789Z
+Stopped at: Completed 03.3.1-05-PLAN.md (override collapse, Wave 3)
 Resume file: None
