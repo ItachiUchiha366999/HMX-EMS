@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03.3.1-01-PLAN.md (Wave 1 fork scaffolding); next = Wave 2 plans 02/03/04 in parallel
-last_updated: "2026-05-14T18:38:12.964Z"
+stopped_at: Completed 03.3.1-02-PLAN.md (academics fork, Wave 2 parallel)
+last_updated: "2026-05-14T18:39:08.733Z"
 progress:
   total_phases: 12
   completed_phases: 5
   total_plans: 29
-  completed_plans: 22
+  completed_plans: 23
 ---
 
 # Project State
@@ -57,6 +57,7 @@ Plan: 2 of 6 (Plan 01 complete)
 | Phase 03.4 P01 (re-run 2026-04-28) | 36min | 1 task | 1 file (seed_comprehensive_demo_data.py +72 lines) |
 | Phase 03.3.1 P01 | ~15min | 3 tasks | 13 files (audit + fork scripts + 8 test scaffolds + DOCTYPE_MAPPING.md) |
 | Phase 03.3.1 P04 | 5min | 3 tasks | 40 files |
+| Phase 03.3.1 P02 | 10min | 2 tasks | 37 files |
 
 ## Accumulated Context
 
@@ -147,6 +148,7 @@ Recent decisions affecting current work:
 - [03.3.1-01]: fork_subset(doctype_names) helper added so Wave 2 plans 02/03/04 fork only their domain; run_full_fork retained for plan 06
 - [03.3.1-01]: verify_education_removable baseline = 6 violations (the overrides/*.py files); must be 0 after Wave 3 collapse
 - [Phase 03.3.1]: [03.3.1-04] program_fee forked to University Finance per DOCTYPE_MODULE_MAP (authoritative over plan's advisory note); 3 academics reports deferred to parallel 03.3.1-02 to respect scope_boundary
+- [Phase 03.3.1]: [03.3.1-02] fork_subset routed 36 academics doctypes (29 active + 7 archived); Education Settings relabel via Property Setter fixture preserves DB table name
 
 ### Roadmap Evolution
 
@@ -181,6 +183,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-14T19:30:00.000Z
-Stopped at: Completed 03.3.1-01-PLAN.md (Wave 1 fork scaffolding); next = Wave 2 plans 02/03/04 in parallel
-Resume file: .planning/phases/03.3.1-fork-education-app-into-university-erp-audit-each-doctype-fields-features-and-workflows-then-fork-into-custom-app/03.3.1-02-PLAN.md
+Last session: 2026-05-14T18:39:03.930Z
+Stopped at: Completed 03.3.1-02-PLAN.md (academics fork, Wave 2 parallel)
+Resume file: None
