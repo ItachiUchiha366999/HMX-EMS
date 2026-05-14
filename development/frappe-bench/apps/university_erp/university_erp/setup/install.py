@@ -18,6 +18,10 @@ def after_install():
     hide_erpnext_workspaces()
     create_default_grading_scale()
     create_university_settings()
+    # Education install.py migration (Phase 03.3.1 Plan 06, Wave 4)
+    setup_education_fixtures()
+    create_student_role()
+    create_parent_assessment_group()
 
     frappe.logger().info("University ERP installation completed successfully!")
     frappe.msgprint(
@@ -157,3 +161,62 @@ def setup_permissions():
     """Setup role permissions for university DocTypes"""
     # This will be enhanced as more DocTypes are added
     pass
+
+
+# ---------------------------------------------------------------------------
+# Education install.py logic migrated into university_erp (Phase 03.3.1 Plan 06)
+# Source: frappe-bench/apps/education/education/install.py
+# Idempotent — safe to re-run on existing sites.
+# ---------------------------------------------------------------------------
+
+def setup_education_fixtures():
+    """Create Party Type 'Student' (Receivable) — migrated from Education.
+
+    Education's install.py registered Student as a Receivable party type so
+    Fees can post GL entries against Student-as-party. Idempotent.
+    """
+    records = [
+        {"doctype": "Party Type", "party_type": "Student", "account_type": "Receivable"}
+    ]
+    for record in records:
+        if not frappe.db.exists("Party Type", record.get("party_type")):
+            try:
+                doc = frappe.get_doc(record)
+                doc.insert(ignore_permissions=True)
+                frappe.logger().info("Created Party Type: Student")
+            except Exception as e:
+                frappe.logger().error(f"Error creating Party Type Student: {str(e)}")
+
+
+def create_parent_assessment_group():
+    """Create root Assessment Group 'All Assessment Groups' — from Education install.py."""
+    if frappe.db.exists("Assessment Group", "All Assessment Groups"):
+        frappe.logger().info("Assessment Group 'All Assessment Groups' already exists")
+        return
+    try:
+        doc = frappe.get_doc(
+            {
+                "doctype": "Assessment Group",
+                "assessment_group_name": "All Assessment Groups",
+                "is_group": 1,
+            }
+        )
+        doc.flags.ignore_permissions = True
+        doc.insert(ignore_mandatory=True)
+        frappe.logger().info("Created Assessment Group: All Assessment Groups")
+    except Exception as e:
+        frappe.logger().error(f"Error creating parent Assessment Group: {str(e)}")
+
+
+def create_student_role():
+    """Create 'Student' role — migrated from Education install.py."""
+    if frappe.db.exists("Role", "Student"):
+        frappe.logger().info("Role 'Student' already exists")
+        return
+    try:
+        doc = frappe.get_doc({"doctype": "Role", "role_name": "Student", "desk_access": 0})
+        doc.flags.ignore_permissions = True
+        doc.insert()
+        frappe.logger().info("Created Role: Student")
+    except Exception as e:
+        frappe.logger().error(f"Error creating Student role: {str(e)}")
