@@ -1,0 +1,12 @@
+[
+ {
+  "doctype": "Property Setter",
+  "name": "School House-main-label",
+  "doctype_or_field": "DocType",
+  "doc_type": "School House",
+  "field_name": null,
+  "property": "label",
+  "property_type": "Data",
+  "value": "Hostel House"
+ }
+]

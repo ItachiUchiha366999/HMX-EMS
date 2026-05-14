@@ -31,13 +31,13 @@ frappe.query_reports["Maintenance Summary"] = {
 			"fieldname": "from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
-			"default": frappe.datetime.add_months(frappe.datetime.get_today(), -1)
+			"default": "2026-02-01"
 		},
 		{
 			"fieldname": "to_date",
 			"label": __("To Date"),
 			"fieldtype": "Date",
-			"default": frappe.datetime.get_today()
+			"default": "2026-05-01"
 		}
 	]
 };

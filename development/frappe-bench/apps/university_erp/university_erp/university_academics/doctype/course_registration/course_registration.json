@@ -24,7 +24,8 @@
       "label": "Student",
       "options": "Student",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "student_name",
@@ -96,8 +97,8 @@
   "sort_field": "modified",
   "sort_order": "DESC",
   "states": [],
-  "autoname": "hash",
-  "naming_rule": "Random",
+  "autoname": "format:CR-{YYYY}-{#####}",
+  "naming_rule": "Expression",
   "is_submittable": 1,
   "permissions": [
     {

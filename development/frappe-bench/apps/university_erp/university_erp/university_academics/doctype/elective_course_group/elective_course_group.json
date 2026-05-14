@@ -22,7 +22,9 @@
       "fieldtype": "Data",
       "label": "Group Name",
       "reqd": 1,
-      "unique": 1
+      "unique": 1,
+      "in_list_view": 1,
+      "description": "A short, unique name for this elective bucket. Example: 'CSE Sem-5 Open Electives' or 'Mech DSE-A'. Used to identify the group in registration screens."
     },
     {
       "fieldname": "program",
@@ -45,8 +47,11 @@
       "fieldname": "elective_type",
       "fieldtype": "Select",
       "label": "Elective Type",
-      "options": "DSE\\nGE\\nSEC\\nAEC",
-      "reqd": 1
+      "options": "DSE - Discipline Specific Elective\nGE - Generic Elective\nSEC - Skill Enhancement Course\nAEC - Ability Enhancement Course\nVAC - Value Addition Course\nOE - Open Elective\nMOOC - Online Elective (SWAYAM/NPTEL)",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "description": "Per UGC NEP 2020 nomenclature. DSE = department core electives; GE = cross-discipline; SEC = skills (e.g. communication, computing); AEC = ability (e.g. languages, ethics); VAC = value addition; OE = open to all programs; MOOC = approved external online course."
     },
     {
       "fieldname": "section_break_4",

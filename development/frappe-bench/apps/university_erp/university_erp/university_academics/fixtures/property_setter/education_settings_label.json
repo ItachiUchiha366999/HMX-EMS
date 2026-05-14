@@ -1,0 +1,12 @@
+[
+ {
+  "doctype": "Property Setter",
+  "name": "Education Settings-main-label",
+  "doctype_or_field": "DocType",
+  "doc_type": "Education Settings",
+  "field_name": null,
+  "property": "label",
+  "property_type": "Data",
+  "value": "Academics Settings"
+ }
+]

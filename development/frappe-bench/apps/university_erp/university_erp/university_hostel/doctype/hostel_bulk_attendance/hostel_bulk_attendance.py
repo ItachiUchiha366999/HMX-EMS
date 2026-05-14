@@ -85,6 +85,7 @@ class HostelBulkAttendance(Document):
                 attendance = frappe.get_doc({
                     "doctype": "Hostel Attendance",
                     "student": record.student,
+                    "hostel_building": self.building,
                     "attendance_date": self.attendance_date,
                     "attendance_type": self.attendance_type,
                     "status": record.status,
