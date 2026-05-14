@@ -40,21 +40,28 @@ web_include_js = [
     # "/assets/university_erp/js/web_portal.js"
 ]
 
+# Per-doctype client scripts shipped with the app
+doctype_js = {
+    "Student Applicant": "public/js/student_applicant.js",
+    "Fees": "public/js/fees.js",
+    "Student": "public/js/student_exam_actions.js",
+    "Hall Ticket": "public/js/hall_ticket.js",
+    "Library Article": "public/js/library_article.js",
+    "Library Transaction": "public/js/library_transaction.js",
+    "Placement Application": "public/js/placement_application.js",
+    "Purchase Order": "public/js/purchase_order.js",
+}
+
 # App Modules (7 modules as per blueprint)
 # Format: {"module_name": "Module Name", "category": "Category", "label": "Display Label"}
 # Note: Using app_include_js instead of modules for Frappe v15
 # Modules are defined in modules.txt
 
-# Override Education DocType Classes (6 overrides)
-# This allows us to extend Education DocTypes with university-specific logic
-override_doctype_class = {
-    "Student": "university_erp.overrides.student.UniversityStudent",
-    "Program": "university_erp.overrides.program.UniversityProgram",
-    "Course": "university_erp.overrides.course.UniversityCourse",
-    "Assessment Result": "university_erp.overrides.assessment_result.UniversityAssessmentResult",
-    "Fees": "university_erp.overrides.fees.UniversityFees",
-    "Student Applicant": "university_erp.overrides.student_applicant.UniversityApplicant",
-}
+# Override DocType Classes
+# Education overrides were collapsed into the forked controllers in
+# university_erp.university_{student_info,academics,finance,admissions}.* (plan 03.3.1-05).
+# Keep the dict so downstream code referencing it does not error.
+override_doctype_class = {}
 
 # Fixtures - Data that will be exported/imported during bench export-fixtures
 fixtures = [
@@ -88,8 +95,8 @@ block_modules = [
 # Hook into Education DocTypes to add university-specific logic
 doc_events = {
     "Student": {
-        "validate": "university_erp.overrides.student.validate_student",
-        "on_update": "university_erp.overrides.student.on_student_update",
+        "validate": "university_erp.university_student_info.doctype.student.student.validate_student",
+        "on_update": "university_erp.university_student_info.doctype.student.student.on_student_update",
     },
     "Fees": {
         "on_submit": [
@@ -246,11 +253,11 @@ has_website_permission = {
 # Permissions
 # Skip certain permissions for university-specific workflows
 permission_query_conditions = {
-    "Student": "university_erp.overrides.student.get_permission_query_conditions",
+    "Student": "university_erp.university_student_info.doctype.student.student.get_permission_query_conditions",
 }
 
 has_permission = {
-    "Student": "university_erp.overrides.student.has_permission",
+    "Student": "university_erp.university_student_info.doctype.student.student.has_permission",
 }
 
 # Jinja Filters
@@ -266,7 +273,7 @@ jinja = {
 # Standard Filters
 # These filters appear in list views
 standard_queries = {
-    "Student": "university_erp.overrides.student.student_query",
+    "Student": "university_erp.university_student_info.doctype.student.student.student_query",
 }
 
 # Notification Config
@@ -281,13 +288,13 @@ standard_queries = {
 
 # Override Whitelisted Methods
 # override_whitelisted_methods = {
-#     "frappe.desk.form.save.savedocs": "university_erp.overrides.savedocs"
+#     "frappe.desk.form.save.savedocs": "university_erp.custom_overrides.savedocs"
 # }
 
 # Each module gets its own controllers
 # Uncomment when specific controllers are created
 # override_doctype_dashboards = {
-#     "Student": "university_erp.overrides.student.get_dashboard_data",
+#     "Student": "university_erp.university_student_info.doctype.student.student.get_dashboard_data",
 # }
 
 # User Data Protection
@@ -302,7 +309,7 @@ user_data_fields = [
 # Regional Overrides (if needed for specific regions/countries)
 # regional_overrides = {
 #     "India": {
-#         "university_erp.overrides.student": "university_erp.regional.india.student"
+#         "university_erp.university_student_info.doctype.student.student": "university_erp.regional.india.student"
 #     }
 # }
 
