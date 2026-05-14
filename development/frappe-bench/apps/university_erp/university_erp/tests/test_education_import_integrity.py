@@ -12,6 +12,22 @@ class TestEducationImportIntegrity(unittest.TestCase):
     def test_no_from_education_imports(self):
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         violations = []
+        # Files exempted because they LEGITIMATELY mention 'education' inside
+        # docstrings, comments, or string-literal replacement rules — they do
+        # not perform a runtime `from education.` import. Mirrors the
+        # exclusion list in scripts/verify_education_removable.py.
+        exempt_files = {
+            "scripts/fork_education_module.py",
+            "scripts/verify_education_removable.py",
+        }
+        # Match only true python import statements at the start of a logical
+        # line (allow leading whitespace for try/conditional imports):
+        #   from education.X import ...
+        #   import education
+        #   import education.X
+        import_re = re.compile(
+            r"^\s*(?:from\s+education(?:\.|\s)|import\s+education(?:\.|\s|$))"
+        )
         for root, dirs, files in os.walk(base):
             dirs[:] = [
                 d for d in dirs
@@ -21,11 +37,13 @@ class TestEducationImportIntegrity(unittest.TestCase):
                 if not f.endswith(".py"):
                     continue
                 path = os.path.join(root, f)
+                rel = os.path.relpath(path, base)
+                if rel in exempt_files:
+                    continue
                 try:
                     with open(path) as fh:
                         for lineno, line in enumerate(fh, 1):
-                            if re.search(r"from education\.|\bimport education\b", line):
-                                rel = os.path.relpath(path, base)
+                            if import_re.match(line):
                                 violations.append(f"{rel}:{lineno}: {line.strip()}")
                 except (OSError, UnicodeDecodeError):
                     continue
