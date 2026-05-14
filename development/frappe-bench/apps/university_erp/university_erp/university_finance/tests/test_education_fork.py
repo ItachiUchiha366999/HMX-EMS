@@ -10,7 +10,13 @@ import frappe
 class TestEducationForkFinance(unittest.TestCase):
     MODULE = "University Finance"
     DOCTYPES: list = [
-        # filled in by plan 02/03/04 after fork
+        "Fees",
+        "Fee Category",
+        "Fee Component",
+        "Fee Schedule",
+        "Fee Schedule Program",
+        "Fee Schedule Student Group",
+        "Fee Structure",
     ]
 
     def test_doctypes_owned_by_module(self):

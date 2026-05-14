@@ -10,7 +10,8 @@ import frappe
 class TestEducationForkFacultyManagement(unittest.TestCase):
     MODULE = "Faculty Management"
     DOCTYPES: list = [
-        # filled in by plan 02/03/04 after fork
+        "Instructor",
+        "Instructor Log",
     ]
 
     def test_doctypes_owned_by_module(self):
