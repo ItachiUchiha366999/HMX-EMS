@@ -10,7 +10,7 @@ from erpnext.accounts.doctype.payment_request.payment_request import (
 from erpnext.accounts.general_ledger import make_reverse_gl_entries
 from erpnext.controllers.accounts_controller import AccountsController
 from frappe import _
-from frappe.utils import money_in_words
+from frappe.utils import date_diff, flt, getdate, money_in_words
 from frappe.utils.csvutils import getlink
 
 
@@ -28,6 +28,14 @@ class Fees(AccountsController):
 		self.calculate_total()
 		self.set_missing_accounts_and_fields()
 		self.validate_enrollment()
+
+		# University-specific validations (absorbed from former UniversityFees override)
+		self.calculate_penalty()
+		self.calculate_net_amount()
+
+	def before_submit(self):
+		# University-specific pre-submit (absorbed from former UniversityFees override)
+		self.validate_payment()
 
 	def set_missing_accounts_and_fields(self):
 		if not self.company:
@@ -108,7 +116,6 @@ class Fees(AccountsController):
 	def on_cancel(self):
 		self.ignore_linked_doctypes = ("GL Entry", "Payment Ledger Entry")
 		make_reverse_gl_entries(voucher_type=self.doctype, voucher_no=self.name)
-		# frappe.db.set(self, 'status', 'Cancelled')
 
 	def make_gl_entries(self):
 		if not self.grand_total:
@@ -147,6 +154,82 @@ class Fees(AccountsController):
 			merge_entries=False,
 		)
 
+	# =========================================================================
+	# University-specific methods (absorbed from former UniversityFees override)
+	# =========================================================================
+
+	def calculate_penalty(self):
+		"""Calculate late fee penalty if payment is overdue.
+
+		Penalty = Grand Total x (Penalty Percentage / 100) x Number of Periods
+		"""
+		if not self.get("custom_penalty_applicable"):
+			self.custom_penalty_amount = 0.0
+			return
+
+		if not self.get("custom_due_date"):
+			self.custom_penalty_amount = 0.0
+			return
+
+		if self.docstatus == 1 and self.outstanding_amount == 0:
+			return
+
+		today = getdate()
+		due_date = getdate(self.custom_due_date)
+
+		if today <= due_date:
+			self.custom_penalty_amount = 0.0
+			return
+
+		days_overdue = date_diff(today, due_date)
+
+		if days_overdue <= 0:
+			self.custom_penalty_amount = 0.0
+			return
+
+		penalty_period = self.get("custom_penalty_period_days") or 7
+		penalty_percentage = self.get("custom_penalty_percentage") or 0.0
+
+		num_periods = (days_overdue // penalty_period) + 1
+
+		grand_total = self.grand_total or 0.0
+		penalty = grand_total * (penalty_percentage / 100) * num_periods
+
+		self.custom_penalty_amount = flt(penalty, 2)
+
+		if penalty > 0:
+			frappe.msgprint(
+				_("Late fee penalty of {0} applied ({1} days overdue)").format(
+					frappe.utils.fmt_money(penalty, currency=self.currency), days_overdue
+				),
+				alert=True,
+				indicator="orange",
+			)
+
+	def calculate_net_amount(self):
+		"""Net Amount = Grand Total - Scholarship + Penalty."""
+		grand_total = self.grand_total or 0.0
+		scholarship = self.get("custom_scholarship_amount") or 0.0
+		penalty = self.get("custom_penalty_amount") or 0.0
+
+		self.custom_net_amount = flt(grand_total - scholarship + penalty, 2)
+
+		if self.docstatus == 0:
+			self.outstanding_amount = self.custom_net_amount
+
+	def validate_payment(self):
+		"""Validate payment before submission"""
+		if self.outstanding_amount > 0:
+			frappe.msgprint(
+				_(
+					"Outstanding amount: {0}. Ensure payment is received before submitting."
+				).format(
+					frappe.utils.fmt_money(self.outstanding_amount, currency=self.currency)
+				),
+				alert=True,
+				indicator="orange",
+			)
+
 
 def get_fee_list(
 	doctype, txt, filters, limit_start, limit_page_length=20, order_by="modified"
@@ -179,3 +262,121 @@ def get_list_context(context=None):
 		"get_list": get_fee_list,
 		"row_template": "templates/includes/fee/fee_row.html",
 	}
+
+
+# =============================================================================
+# Module-level helpers (absorbed from former university_erp.overrides.fees)
+# =============================================================================
+
+
+def calculate_late_fees():
+	"""Scheduled task to calculate late fees for all pending fees."""
+	overdue_fees = frappe.get_all(
+		"Fees",
+		filters={
+			"docstatus": 1,
+			"outstanding_amount": (">", 0),
+			"custom_due_date": ("<", getdate()),
+			"custom_penalty_applicable": 1,
+		},
+		fields=["name"],
+	)
+
+	for fee in overdue_fees:
+		try:
+			fee_doc = frappe.get_doc("Fees", fee.name)
+			old_penalty = fee_doc.get("custom_penalty_amount") or 0.0
+
+			fee_doc.calculate_penalty()
+			fee_doc.calculate_net_amount()
+
+			if fee_doc.custom_penalty_amount != old_penalty:
+				fee_doc.save(ignore_permissions=True)
+
+				frappe.logger().info(
+					f"Updated penalty for {fee_doc.name}: {old_penalty} -> {fee_doc.custom_penalty_amount}"
+				)
+
+		except Exception as e:
+			frappe.logger().error(f"Error calculating late fee for {fee.name}: {str(e)}")
+			continue
+
+
+def apply_scholarship(student, scholarship_amount, fee_category=None):
+	"""Apply scholarship to student's fees."""
+	filters = {"student": student, "docstatus": 0}
+
+	if fee_category:
+		filters["custom_fee_category"] = fee_category
+
+	fees_list = frappe.get_all(
+		"Fees",
+		filters=filters,
+		fields=["name", "grand_total"],
+		order_by="due_date",
+	)
+
+	remaining_scholarship = scholarship_amount
+
+	for fee in fees_list:
+		if remaining_scholarship <= 0:
+			break
+
+		fee_doc = frappe.get_doc("Fees", fee.name)
+		applicable_scholarship = min(remaining_scholarship, fee_doc.grand_total)
+
+		fee_doc.custom_scholarship_amount = applicable_scholarship
+		fee_doc.calculate_net_amount()
+		fee_doc.save(ignore_permissions=True)
+
+		remaining_scholarship -= applicable_scholarship
+
+		frappe.logger().info(
+			f"Applied scholarship of {applicable_scholarship} to {fee_doc.name}"
+		)
+
+	return scholarship_amount - remaining_scholarship
+
+
+def get_fee_summary(student, academic_year=None):
+	"""Get fee summary for a student"""
+	filters = {"student": student}
+
+	if academic_year:
+		filters["academic_year"] = academic_year
+
+	fees_list = frappe.get_all(
+		"Fees",
+		filters=filters,
+		fields=[
+			"name",
+			"custom_fee_category",
+			"due_date",
+			"grand_total",
+			"custom_scholarship_amount",
+			"custom_penalty_amount",
+			"custom_net_amount",
+			"outstanding_amount",
+			"docstatus",
+		],
+		order_by="due_date",
+	)
+
+	summary = {
+		"total_fees": 0.0,
+		"total_scholarship": 0.0,
+		"total_penalty": 0.0,
+		"total_paid": 0.0,
+		"total_outstanding": 0.0,
+		"fees_list": fees_list,
+	}
+
+	for fee in fees_list:
+		summary["total_fees"] += fee.grand_total or 0.0
+		summary["total_scholarship"] += fee.custom_scholarship_amount or 0.0
+		summary["total_penalty"] += fee.custom_penalty_amount or 0.0
+		summary["total_outstanding"] += fee.outstanding_amount or 0.0
+
+	summary["total_paid"] = summary["total_fees"] - summary["total_outstanding"]
+
+	return summary
