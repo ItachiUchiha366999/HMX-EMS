@@ -21,6 +21,15 @@ class Student(Document):
 			self.check_unique()
 			self.update_applicant_status()
 
+		# University-specific validations (absorbed from former UniversityStudent override)
+		self.validate_enrollment_number()
+		self.validate_category_certificate()
+		self.calculate_cgpa()
+
+	def on_update(self):
+		# University-specific post-update hook (absorbed from former UniversityStudent override)
+		self.update_student_status()
+
 	def set_title(self):
 		self.student_name = " ".join(
 			filter(None, [self.first_name, self.middle_name, self.last_name])
@@ -193,6 +202,82 @@ class Student(Document):
 		else:
 			return enrollment
 
+	# =========================================================================
+	# University-specific methods (absorbed from former UniversityStudent override)
+	# =========================================================================
+
+	def validate_enrollment_number(self):
+		"""Validate that enrollment number is unique"""
+		if not self.get("custom_enrollment_number"):
+			return
+
+		existing = frappe.db.exists(
+			"Student",
+			{
+				"custom_enrollment_number": self.custom_enrollment_number,
+				"name": ("!=", self.name),
+			},
+		)
+
+		if existing:
+			frappe.throw(
+				_("Enrollment Number {0} already exists").format(self.custom_enrollment_number)
+			)
+
+	def validate_category_certificate(self):
+		"""Validate that reserved category students have uploaded certificates"""
+		if not self.get("custom_category"):
+			return
+
+		reserved_categories = ["SC", "ST", "OBC", "EWS"]
+
+		if self.custom_category in reserved_categories and not self.get(
+			"custom_category_certificate"
+		):
+			frappe.msgprint(
+				_("Category certificate is required for {0} category").format(
+					self.custom_category
+				),
+				alert=True,
+				indicator="orange",
+			)
+
+	def calculate_cgpa(self):
+		"""Calculate CGPA from all assessment results"""
+		if not self.name:
+			return
+
+		assessment_results = frappe.get_all(
+			"Assessment Result",
+			filters={"student": self.name, "docstatus": 1},
+			fields=["custom_grade_points", "custom_credits"],
+		)
+
+		if not assessment_results:
+			self.custom_cgpa = 0.0
+			return
+
+		total_credit_points = 0.0
+		total_credits = 0.0
+
+		for result in assessment_results:
+			grade_points = result.get("custom_grade_points") or 0.0
+			credits = result.get("custom_credits") or 0.0
+
+			total_credit_points += grade_points * credits
+			total_credits += credits
+
+		if total_credits > 0:
+			self.custom_cgpa = round(total_credit_points / total_credits, 2)
+		else:
+			self.custom_cgpa = 0.0
+
+	def update_student_status(self):
+		"""Update student status based on various conditions"""
+		frappe.logger().info(
+			f"Student {self.name} updated. Status: {self.get('custom_student_status')}"
+		)
+
 
 def get_timeline_data(doctype, name):
 	"""Return timeline for attendance"""
@@ -206,4 +291,109 @@ def get_timeline_data(doctype, name):
 			group by date""",
 			name,
 		)
+	)
+
+
+# =============================================================================
+# Module-level hooks (absorbed from former university_erp.overrides.student)
+# =============================================================================
+
+
+def validate_student(doc, method):
+	"""Global validate hook for Student DocType"""
+	pass
+
+
+def on_student_update(doc, method):
+	"""Global on_update hook for Student DocType"""
+	pass
+
+
+STUDENT_SELF_ROLES = ("University Student", "Student", "Guardian")
+
+
+def _is_student_self_only(roles):
+	"""True iff the user's read access to Student comes ONLY through the
+	self-restricted roles (`University Student`, `Student`, `Guardian`)
+	and they have no broader Student-read role.
+	"""
+	role_set = set(roles)
+
+	if not role_set.intersection(STUDENT_SELF_ROLES):
+		return False
+
+	other_roles = role_set.difference(STUDENT_SELF_ROLES)
+	if not other_roles:
+		return True
+
+	has_broader_read = frappe.db.sql(
+		"""
+		select 1 from `tabDocPerm`
+		where parent = 'Student' and `read` = 1 and role in %s
+		limit 1
+		""",
+		(tuple(other_roles),),
+	)
+	return not has_broader_read
+
+
+def get_permission_query_conditions(user):
+	"""Restrict Student list view ONLY for users whose access is via the
+	student-self roles. Everyone else gets unrestricted access.
+	"""
+	if not user:
+		user = frappe.session.user
+
+	if user == "Administrator":
+		return ""
+
+	roles = frappe.get_roles(user)
+
+	if _is_student_self_only(roles):
+		return f"""(`tabStudent`.`user` = {frappe.db.escape(user)})"""
+
+	return ""
+
+
+def has_permission(doc, ptype="read", user=None):
+	"""Row-level permission for Student."""
+	if not user:
+		user = frappe.session.user
+
+	if user == "Administrator":
+		return True
+
+	roles = frappe.get_roles(user)
+
+	if _is_student_self_only(roles):
+		target_user = getattr(doc, "user", None) if doc else None
+		return target_user == user
+
+	return None
+
+
+@frappe.whitelist()
+def student_query(doctype, txt, searchfield, start, page_len, filters):
+	"""Custom Link-field search for Student."""
+	if not searchfield:
+		searchfield = "name"
+
+	return frappe.db.sql(
+		f"""
+		select name, student_name, custom_enrollment_number
+		from `tabStudent`
+		where (`{searchfield}` like %(txt)s
+		       or student_name like %(txt)s
+		       or ifnull(custom_enrollment_number, '') like %(txt)s)
+		order by
+		    case when `{searchfield}` like %(prefix)s then 0 else 1 end,
+		    modified desc
+		limit %(start)s, %(page_len)s
+		""",
+		{
+			"txt": f"%{txt}%",
+			"prefix": f"{txt}%",
+			"start": start,
+			"page_len": page_len,
+		},
 	)
