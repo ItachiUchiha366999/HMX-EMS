@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03.3.1-05-PLAN.md (override collapse, Wave 3)
-last_updated: "2026-05-14T18:51:30.818Z"
+stopped_at: Completed 03.3.1-06-PLAN.md (Wave 4 finalization; Education uninstall deferred per user)
+last_updated: "2026-05-14T19:19:00.410Z"
 progress:
   total_phases: 12
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 29
-  completed_plans: 24
+  completed_plans: 25
 ---
 
 # Project State
@@ -23,8 +23,8 @@ See: .planning/PROJECT.md (updated 2026-03-19)
 
 ## Current Position
 
-Phase: 03.3.1 (fork-education-app-into-university-erp-audit-each-doctype-fields-features-and-workflows-then-fork-into-custom-app) — EXECUTING
-Plan: 06 of 6 (Plans 01, 02, 03, 04, 05 complete — Wave 3 done, Wave 4 cleanup pending)
+Phase: 03.3.1 (fork-education-app-into-university-erp-audit-each-doctype-fields-features-and-workflows-then-fork-into-custom-app) — COMPLETE (all 6 plans done; Education uninstall deferred per user directive)
+Plan: 6 of 6 (all complete)
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Plan: 06 of 6 (Plans 01, 02, 03, 04, 05 complete — Wave 3 done, Wave 4 cleanup
 | Phase 03.3.1 P04 | 5min | 3 tasks | 40 files |
 | Phase 03.3.1 P02 | 10min | 2 tasks | 37 files |
 | Phase 03.3.1 P05 | 7min | 3 tasks | 14 files |
+| Phase 03.3.1 P06 | 25min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -152,6 +153,8 @@ Recent decisions affecting current work:
 - [Phase 03.3.1]: [03.3.1-02] fork_subset routed 36 academics doctypes (29 active + 7 archived); Education Settings relabel via Property Setter fixture preserves DB table name
 - [Phase 03.3.1]: [03.3.1-05] Override-by-absorption: UniversityX class bodies inlined into forked Education-cloned controllers; no super() chain remains so Education app uninstall in Wave 4 will not break university_erp.
 - [Phase 03.3.1]: [03.3.1-05] validate_student_belongs_to_group forked inline into assessment_result.py rather than into a shared utils module -- last 'import education.education' usage eliminated; verify_education_removable.py = 0 violations.
+- [Phase 03.3.1]: [03.3.1-06] Wave 4 finalization: Education hooks + install.py migrated; bench migrate clean; all 62 forked doctypes owned by destination modules; School House -> 'Hostel House' and Education Settings -> 'Academics Settings' labels applied; verify_education_removable=0; Education uninstall DEFERRED per user directive.
+- [Phase 03.3.1]: [03.3.1-06] Forked education.education.api wholesale to university_erp/api.py (Wave-2 catch-all rewrite implicitly assumed this file would exist); migrated 6 Education utils helpers (OverlapError + validate_overlap_for + get_overlap_for + validate_duplicate_student + check_content_completion + check_quiz_completion) into university_erp/utils.py; inlined get_assessment_details + get_grade into assessment_result.py next to validate_student_belongs_to_group.
 
 ### Roadmap Evolution
 
@@ -186,6 +189,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-14T18:51:30.789Z
-Stopped at: Completed 03.3.1-05-PLAN.md (override collapse, Wave 3)
+Last session: 2026-05-14T19:18:51.043Z
+Stopped at: Completed 03.3.1-06-PLAN.md (Wave 4 finalization; Education uninstall deferred per user)
 Resume file: None
