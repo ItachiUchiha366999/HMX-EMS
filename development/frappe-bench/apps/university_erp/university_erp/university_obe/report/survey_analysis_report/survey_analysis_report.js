@@ -4,23 +4,23 @@
 frappe.query_reports["Survey Analysis Report"] = {
 	"filters": [
 		{
+			"fieldname": "academic_year",
+			"label": __("Academic Year"),
+			"fieldtype": "Link",
+			"options": "Academic Year",
+			"default": "2026-2027"
+		},
+		{
 			"fieldname": "program",
 			"label": __("Program"),
 			"fieldtype": "Link",
-			"options": "Program",
-			"reqd": 1
+			"options": "Program"
 		},
 		{
 			"fieldname": "survey_type",
 			"label": __("Survey Type"),
 			"fieldtype": "Select",
 			"options": "\nAlumni Survey\nEmployer Survey\nStudent Exit Survey\nCourse End Survey\nProgram Exit Survey\nMid-term Feedback"
-		},
-		{
-			"fieldname": "academic_year",
-			"label": __("Academic Year"),
-			"fieldtype": "Link",
-			"options": "Academic Year"
 		}
 	],
 

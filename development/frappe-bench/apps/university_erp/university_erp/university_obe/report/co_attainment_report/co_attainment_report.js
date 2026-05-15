@@ -4,22 +4,24 @@
 frappe.query_reports["CO Attainment Report"] = {
 	"filters": [
 		{
-			"fieldname": "course",
-			"label": __("Course"),
+			"fieldname": "academic_year",
+			"label": __("Academic Year"),
 			"fieldtype": "Link",
-			"options": "Course"
+			"options": "Academic Year",
+			"default": "2026-2027"
 		},
 		{
 			"fieldname": "academic_term",
 			"label": __("Academic Term"),
 			"fieldtype": "Link",
-			"options": "Academic Term"
+			"options": "Academic Term",
+			"default": "2026-2027 (Semester 2)"
 		},
 		{
-			"fieldname": "academic_year",
-			"label": __("Academic Year"),
+			"fieldname": "course",
+			"label": __("Course"),
 			"fieldtype": "Link",
-			"options": "Academic Year"
+			"options": "Course"
 		}
 	],
 

@@ -30,11 +30,17 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ""
     if filters.get("academic_year"):
         conditions += " AND pd.academic_year = %(academic_year)s"
 
-    data = frappe.db.sql("""
+    program_join = ""
+    if filters.get("program"):
+        program_join = " LEFT JOIN `tabStudent` s ON s.name = pa.student "
+        conditions += " AND s.custom_program = %(program)s"
+
+    data = frappe.db.sql(f"""
         SELECT
             pd.academic_year,
             COUNT(DISTINCT pd.company) as total_companies,
@@ -48,10 +54,11 @@ def get_data(filters):
         FROM `tabPlacement Drive` pd
         LEFT JOIN `tabPlacement Job Opening` pjo ON pjo.company = pd.company
         LEFT JOIN `tabPlacement Application` pa ON pa.job_opening = pjo.name
+        {program_join}
         WHERE pd.docstatus < 2 {conditions}
         GROUP BY pd.academic_year
         ORDER BY pd.academic_year DESC
-    """.format(conditions=conditions), filters, as_dict=True)
+    """, filters, as_dict=True)
 
     # Calculate placement rate
     for row in data:

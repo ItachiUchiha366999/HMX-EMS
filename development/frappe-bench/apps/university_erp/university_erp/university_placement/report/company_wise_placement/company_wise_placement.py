@@ -30,6 +30,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ""
     if filters.get("academic_year"):
         conditions += " AND pd.academic_year = %(academic_year)s"
@@ -38,6 +39,8 @@ def get_data(filters):
     if filters.get("company"):
         conditions += " AND pc.name = %(company)s"
 
+    # Placement Application links to company directly (pa.company), and to a job_opening
+    # which has a 1:1 with Placement Drive via pd.job_opening = pa.job_opening.
     data = frappe.db.sql("""
         SELECT
             pc.name as company,
@@ -52,7 +55,7 @@ def get_data(filters):
             AVG(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as avg_package
         FROM `tabPlacement Company` pc
         LEFT JOIN `tabPlacement Drive` pd ON pd.company = pc.name
-        LEFT JOIN `tabPlacement Application` pa ON pa.placement_drive = pd.name
+        LEFT JOIN `tabPlacement Application` pa ON pa.company = pc.name
         WHERE pc.docstatus < 2 {conditions}
         GROUP BY pc.name
         ORDER BY placed DESC, total_applications DESC

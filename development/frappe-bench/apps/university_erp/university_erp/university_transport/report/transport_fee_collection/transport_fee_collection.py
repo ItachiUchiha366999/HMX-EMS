@@ -26,6 +26,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ["ta.status = 'Active'", "ta.docstatus = 1"]
     values = []
 
@@ -36,6 +37,10 @@ def get_data(filters):
     if filters.get("route"):
         conditions.append("ta.route = %s")
         values.append(filters.get("route"))
+
+    if filters.get("program"):
+        conditions.append("ta.program = %s")
+        values.append(filters.get("program"))
 
     where_clause = " AND ".join(conditions)
 
@@ -70,6 +75,9 @@ def get_data(filters):
         row["collection_rate"] = round(
             collected / row.total_fare * 100, 2
         ) if row.total_fare else 0
+
+    if filters.get("outstanding_only"):
+        data = [r for r in data if (r.get("outstanding") or 0) > 0]
 
     return data
 

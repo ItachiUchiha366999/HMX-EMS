@@ -29,6 +29,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ""
     values = {}
 
@@ -39,6 +40,13 @@ def get_data(filters):
     if filters.get("quiz"):
         conditions += " AND qa.quiz = %(quiz)s"
         values["quiz"] = filters.get("quiz")
+
+    if filters.get("student"):
+        conditions += " AND qa.student = %(student)s"
+        values["student"] = filters.get("student")
+
+    if filters.get("passed"):
+        conditions += " AND qa.passed = 1"
 
     if filters.get("from_date"):
         conditions += " AND qa.start_time >= %(from_date)s"

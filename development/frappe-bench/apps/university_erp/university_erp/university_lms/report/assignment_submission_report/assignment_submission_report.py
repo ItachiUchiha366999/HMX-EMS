@@ -28,6 +28,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ""
     values = {}
 
@@ -42,6 +43,10 @@ def get_data(filters):
     if filters.get("status"):
         conditions += " AND s.status = %(status)s"
         values["status"] = filters.get("status")
+
+    if filters.get("student"):
+        conditions += " AND s.student = %(student)s"
+        values["student"] = filters.get("student")
 
     if filters.get("from_date"):
         conditions += " AND s.submission_date >= %(from_date)s"

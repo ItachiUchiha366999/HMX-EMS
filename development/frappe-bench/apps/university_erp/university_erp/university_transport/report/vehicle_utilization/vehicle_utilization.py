@@ -29,6 +29,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = []
     values = []
 
@@ -39,6 +40,10 @@ def get_data(filters):
     if filters.get("status"):
         conditions.append("tv.status = %s")
         values.append(filters.get("status"))
+
+    if filters.get("route"):
+        conditions.append("tr.name = %s")
+        values.append(filters.get("route"))
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 

@@ -16,15 +16,34 @@ def execute(filters=None):
         {"fieldname": "fine_amount", "label": _("Fine"), "fieldtype": "Currency", "width": 80}
     ]
 
+    filters = filters or {}
     if not filters.get("member"):
         return columns, [], None, None, [{"value": 0, "label": _("Please select a member"), "datatype": "Data"}]
 
-    data = frappe.db.sql("""
+    conditions = ["lt.member = %s"]
+    values = [filters.get("member")]
+
+    if filters.get("from_date"):
+        conditions.append("lt.transaction_date >= %s")
+        values.append(filters.get("from_date"))
+
+    if filters.get("to_date"):
+        conditions.append("lt.transaction_date <= %s")
+        values.append(filters.get("to_date"))
+
+    if filters.get("transaction_type"):
+        conditions.append("lt.transaction_type = %s")
+        values.append(filters.get("transaction_type"))
+
+    where_clause = " AND ".join(conditions)
+
+    data = frappe.db.sql(f"""
         SELECT lt.name as transaction, lt.article, la.title, lt.transaction_type, lt.issue_date, lt.due_date, lt.return_date, lt.status, lt.fine_amount
         FROM `tabLibrary Transaction` lt
         JOIN `tabLibrary Article` la ON lt.article = la.name
-        WHERE lt.member = %s ORDER BY lt.transaction_date DESC
-    """, (filters.get("member"),), as_dict=True)
+        WHERE {where_clause}
+        ORDER BY lt.transaction_date DESC
+    """, tuple(values), as_dict=True)
 
     summary = [
         {"value": len(data), "label": _("Total Transactions"), "datatype": "Int"},

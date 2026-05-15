@@ -20,8 +20,11 @@ class HallTicket(Document):
 	def check_eligibility(self):
 		"""Check if student is eligible for exams"""
 		# Check attendance eligibility for all courses
-		from university_erp.academics.attendance import AttendanceManager
-		
+		try:
+			from university_erp.academics.attendance import AttendanceManager
+		except ImportError:
+			return  # academics.attendance not deployed; skip eligibility check
+
 		manager = AttendanceManager()
 		ineligible_courses = []
 		

@@ -69,7 +69,13 @@ def get_columns():
 
 
 def get_data(filters):
-    conditions = get_conditions(filters)
+    filters = filters or {}
+    conditions, values = get_conditions(filters)
+
+    having_clause = ""
+    if filters.get("min_rating"):
+        having_clause = " HAVING avg_score >= %(min_rating)s"
+        values["min_rating"] = filters.get("min_rating")
 
     data = frappe.db.sql("""
         SELECT
@@ -78,8 +84,8 @@ def get_data(filters):
             COUNT(DISTINCT fr.course) as courses,
             COUNT(*) as responses,
             AVG(fr.overall_score) as avg_score,
-            AVG(CASE WHEN fss.section_name LIKE '%Content%' THEN fss.score END) as content_score,
-            AVG(CASE WHEN fss.section_name LIKE '%Teaching%' THEN fss.score END) as teaching_score,
+            AVG(CASE WHEN fss.section_name LIKE '%%Content%%' THEN fss.score END) as content_score,
+            AVG(CASE WHEN fss.section_name LIKE '%%Teaching%%' THEN fss.score END) as teaching_score,
             (SUM(CASE WHEN fr.nps_category = 'Promoter' THEN 1 ELSE 0 END) -
              SUM(CASE WHEN fr.nps_category = 'Detractor' THEN 1 ELSE 0 END)) * 100.0 / COUNT(*) as nps
         FROM `tabFeedback Response` fr
@@ -91,23 +97,35 @@ def get_data(filters):
         AND fr.instructor IS NOT NULL
         {conditions}
         GROUP BY fr.instructor, inst.department
+        {having_clause}
         ORDER BY avg_score DESC
-    """.format(conditions=conditions), as_dict=True)
+    """.format(conditions=conditions, having_clause=having_clause), values, as_dict=True)
 
     return data
 
 
 def get_conditions(filters):
+    """Build parameterised condition string + values dict."""
     conditions = ""
+    values = {}
 
     if filters.get("academic_term"):
-        conditions += f" AND ff.academic_term = '{filters.get('academic_term')}'"
+        conditions += " AND ff.academic_term = %(academic_term)s"
+        values["academic_term"] = filters.get("academic_term")
     if filters.get("department"):
-        conditions += f" AND inst.department = '{filters.get('department')}'"
+        conditions += " AND inst.department = %(department)s"
+        values["department"] = filters.get("department")
     if filters.get("instructor"):
-        conditions += f" AND fr.instructor = '{filters.get('instructor')}'"
+        conditions += " AND fr.instructor = %(instructor)s"
+        values["instructor"] = filters.get("instructor")
+    if filters.get("from_date"):
+        conditions += " AND fr.creation >= %(from_date)s"
+        values["from_date"] = filters.get("from_date")
+    if filters.get("to_date"):
+        conditions += " AND fr.creation <= %(to_date)s"
+        values["to_date"] = filters.get("to_date")
 
-    return conditions
+    return conditions, values
 
 
 def get_chart(data):

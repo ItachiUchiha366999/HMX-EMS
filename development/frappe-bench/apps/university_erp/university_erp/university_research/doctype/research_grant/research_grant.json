@@ -7,6 +7,11 @@
   "field_order": [
     "grant_title",
     "research_project",
+    "recipient_type",
+    "recipient_employee",
+    "recipient_employee_name",
+    "recipient_student",
+    "recipient_student_name",
     "column_break_1",
     "funding_agency",
     "grant_type",
@@ -40,6 +45,49 @@
       "in_standard_filter": 1,
       "label": "Research Project",
       "options": "Research Project"
+    },
+    {
+      "fieldname": "recipient_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Recipient Type",
+      "options": "Faculty\nStudent",
+      "default": "Faculty",
+      "reqd": 1,
+      "description": "Whether this grant goes to a faculty researcher or a student (e.g. travel grant for student paper)."
+    },
+    {
+      "fieldname": "recipient_employee",
+      "fieldtype": "Link",
+      "label": "Recipient (Faculty)",
+      "options": "Employee",
+      "depends_on": "eval:doc.recipient_type === 'Faculty'",
+      "mandatory_depends_on": "eval:doc.recipient_type === 'Faculty'"
+    },
+    {
+      "fetch_from": "recipient_employee.employee_name",
+      "fieldname": "recipient_employee_name",
+      "fieldtype": "Data",
+      "label": "Faculty Name",
+      "read_only": 1,
+      "depends_on": "eval:doc.recipient_type === 'Faculty'"
+    },
+    {
+      "fieldname": "recipient_student",
+      "fieldtype": "Link",
+      "label": "Recipient (Student)",
+      "options": "Student",
+      "depends_on": "eval:doc.recipient_type === 'Student'",
+      "mandatory_depends_on": "eval:doc.recipient_type === 'Student'"
+    },
+    {
+      "fetch_from": "recipient_student.student_name",
+      "fieldname": "recipient_student_name",
+      "fieldtype": "Data",
+      "label": "Student Name",
+      "read_only": 1,
+      "depends_on": "eval:doc.recipient_type === 'Student'"
     },
     {
       "fieldname": "column_break_1",

@@ -7,7 +7,8 @@ frappe.query_reports["Faculty Workload Summary"] = {
 			"fieldname": "academic_term",
 			"label": __("Academic Term"),
 			"fieldtype": "Link",
-			"options": "Academic Term"
+			"options": "Academic Term",
+			"default": "2026-2027 (Semester 2)"
 		},
 		{
 			"fieldname": "department",

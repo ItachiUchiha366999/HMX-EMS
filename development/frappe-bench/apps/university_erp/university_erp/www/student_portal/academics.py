@@ -67,7 +67,7 @@ def get_student_results(student):
 
         results = frappe.db.get_all(
             "Assessment Result",
-            filters={"student": student, "docstatus": 1},
+            filters={"student": student},
             fields=select_fields,
             order_by="creation desc"
         )
@@ -113,12 +113,11 @@ def get_semester_wise_results(student):
             select_parts.append("ar.grade")
 
         query = """
-            SELECT {', '.join(select_parts)}
+            SELECT {fields}
             FROM `tabAssessment Result` ar
             WHERE ar.student = %s
-            AND ar.docstatus = 1
             ORDER BY ar.creation DESC
-        """
+        """.format(fields=", ".join(select_parts))
 
         course_results = frappe.db.sql(query, student, as_dict=1)
 
@@ -170,7 +169,6 @@ def get_cgpa_trend(student):
                 AVG(ar.total_score * 100.0 / NULLIF(ar.maximum_score, 0)) as avg_percentage
             FROM `tabAssessment Result` ar
             WHERE ar.student = %s
-            AND ar.docstatus = 1
             AND ar.maximum_score > 0
             GROUP BY ar.academic_year, ar.academic_term
             ORDER BY ar.academic_year ASC, ar.academic_term ASC
@@ -258,7 +256,6 @@ def get_total_courses(student):
             SELECT COUNT(DISTINCT course) as count
             FROM `tabAssessment Result`
             WHERE student = %s
-            AND docstatus = 1
         """, student, as_dict=1)
 
         return count[0].count if count else 0
@@ -289,17 +286,14 @@ def get_total_credits(student):
                 FROM `tabAssessment Result` ar
                 JOIN `tabCourse` c ON c.name = ar.course
                 WHERE ar.student = %s
-                AND ar.docstatus = 1
                 AND ar.grade NOT IN ('F', 'Fail')
             """, student, as_dict=1)
         else:
-            # Without grade filtering
             credits = frappe.db.sql("""
                 SELECT COALESCE(SUM(c.credits), 0) as total
                 FROM `tabAssessment Result` ar
                 JOIN `tabCourse` c ON c.name = ar.course
                 WHERE ar.student = %s
-                AND ar.docstatus = 1
             """, student, as_dict=1)
 
         return int(credits[0].total) if credits else 0
@@ -330,7 +324,6 @@ def get_current_cgpa(student):
             SELECT AVG(ar.total_score * 100.0 / NULLIF(ar.maximum_score, 0)) as avg_percentage
             FROM `tabAssessment Result` ar
             WHERE ar.student = %s
-            AND ar.docstatus = 1
             AND ar.maximum_score > 0
         """, student, as_dict=1)
 

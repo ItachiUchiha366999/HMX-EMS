@@ -15,13 +15,14 @@ frappe.query_reports["Examination Result Analysis"] = {
         {
             "fieldname": "from_date",
             "label": __("From Date"),
-            "fieldtype": "Date"
+            "fieldtype": "Date",
+            "default": "2026-02-01"
         },
         {
             "fieldname": "to_date",
             "label": __("To Date"),
             "fieldtype": "Date",
-            "default": frappe.datetime.get_today()
+            "default": "2026-05-01"
         }
     ]
 };

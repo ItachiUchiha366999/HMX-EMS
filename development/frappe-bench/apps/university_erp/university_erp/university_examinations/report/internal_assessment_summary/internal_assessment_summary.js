@@ -1,30 +1,32 @@
 frappe.query_reports["Internal Assessment Summary"] = {
     "filters": [
         {
-            "fieldname": "course",
-            "label": __("Course"),
-            "fieldtype": "Link",
-            "options": "Course",
-            "reqd": 1
-        },
-        {
             "fieldname": "academic_year",
             "label": __("Academic Year"),
             "fieldtype": "Link",
             "options": "Academic Year",
+            "default": "2026-2027",
             "reqd": 1
         },
         {
             "fieldname": "academic_term",
             "label": __("Academic Term"),
             "fieldtype": "Link",
-            "options": "Academic Term"
+            "options": "Academic Term",
+            "default": "2026-2027 (Semester 2)"
         },
         {
-            "fieldname": "grading_scale",
-            "label": __("Grading Scale"),
+            "fieldname": "course",
+            "label": __("Course"),
             "fieldtype": "Link",
-            "options": "Grading Scale"
+            "options": "Course",
+            "default": "Operations Management"
+        },
+        {
+            "fieldname": "student_group",
+            "label": __("Student Group"),
+            "fieldtype": "Link",
+            "options": "Student Group"
         }
     ]
 };

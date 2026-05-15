@@ -24,5 +24,14 @@
     {
       "role": "IQAC Member"
     }
+  ],
+  "filters": [
+    {
+      "fieldname": "accreditation_cycle",
+      "fieldtype": "Link",
+      "label": "Accreditation Cycle",
+      "options": "Accreditation Cycle",
+      "mandatory": 0
+    }
   ]
 }

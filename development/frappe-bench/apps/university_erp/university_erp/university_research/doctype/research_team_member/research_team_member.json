@@ -4,28 +4,58 @@
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
+        "member_type",
         "employee",
         "employee_name",
+        "student",
+        "student_name",
         "role",
         "from_date",
         "to_date"
     ],
     "fields": [
         {
+            "fieldname": "member_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Member Type",
+            "options": "Faculty\nStudent",
+            "default": "Faculty",
+            "reqd": 1
+        },
+        {
             "fieldname": "employee",
             "fieldtype": "Link",
             "in_list_view": 1,
-            "label": "Employee",
+            "label": "Faculty",
             "options": "Employee",
-            "reqd": 1
+            "depends_on": "eval:doc.member_type === 'Faculty'",
+            "mandatory_depends_on": "eval:doc.member_type === 'Faculty'"
         },
         {
             "fetch_from": "employee.employee_name",
             "fieldname": "employee_name",
             "fieldtype": "Data",
             "in_list_view": 1,
-            "label": "Employee Name",
-            "read_only": 1
+            "label": "Faculty Name",
+            "read_only": 1,
+            "depends_on": "eval:doc.member_type === 'Faculty'"
+        },
+        {
+            "fieldname": "student",
+            "fieldtype": "Link",
+            "label": "Student",
+            "options": "Student",
+            "depends_on": "eval:doc.member_type === 'Student'",
+            "mandatory_depends_on": "eval:doc.member_type === 'Student'"
+        },
+        {
+            "fetch_from": "student.student_name",
+            "fieldname": "student_name",
+            "fieldtype": "Data",
+            "label": "Student Name",
+            "read_only": 1,
+            "depends_on": "eval:doc.member_type === 'Student'"
         },
         {
             "default": "Co-Investigator",
@@ -33,7 +63,7 @@
             "fieldtype": "Select",
             "in_list_view": 1,
             "label": "Role",
-            "options": "Co-Investigator\nConsultant\nResearch Scholar\nResearch Associate"
+            "options": "Co-Investigator\nConsultant\nResearch Scholar\nResearch Associate\nStudent Researcher\nIntern"
         },
         {
             "fieldname": "from_date",

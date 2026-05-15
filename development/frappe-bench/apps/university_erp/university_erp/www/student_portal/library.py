@@ -29,29 +29,22 @@ def get_context(context):
 
 
 def get_library_member(student):
-    """Get library member ID for student - handles different field names"""
+    """Get library member ID for student"""
     try:
         if not frappe.db.exists("DocType", "Library Member"):
             return None
 
-        # Check what fields exist on Library Member
-        meta = frappe.get_meta("Library Member")
-        fields = [f.fieldname for f in meta.fields]
+        # Try by student FK (may be populated)
+        member = frappe.db.get_value("Library Member", {"student": student}, "name")
+        if member:
+            return member
 
-        # Try different possible field names
-        if "student" in fields:
-            member = frappe.db.get_value("Library Member", {"student": student}, "name")
+        # Fallback: match by student_name — seed data stores member_name = student_name
+        student_name = frappe.db.get_value("Student", student, "student_name")
+        if student_name:
+            member = frappe.db.get_value("Library Member", {"member_name": student_name}, "name")
             if member:
                 return member
-
-        if "library_member_name" in fields:
-            member = frappe.db.get_value("Library Member", {"library_member_name": student}, "name")
-            if member:
-                return member
-
-        # Try matching by name directly
-        if frappe.db.exists("Library Member", student):
-            return student
 
         return None
     except Exception:

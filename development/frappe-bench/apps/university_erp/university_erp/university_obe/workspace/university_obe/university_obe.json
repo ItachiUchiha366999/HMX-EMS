@@ -54,6 +54,16 @@
     {
       "hidden": 0,
       "is_query_report": 0,
+      "label": "Assessment Rubric",
+      "link_count": 0,
+      "link_to": "Assessment Rubric",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
       "label": "Outcome Mapping",
       "link_count": 0,
       "link_type": "DocType",
@@ -186,12 +196,6 @@
       "link_type": "Report",
       "onboard": 0,
       "type": "Link"
-    },
-    {
-      "type": "Link",
-      "link_to": "Assessment Rubric",
-      "link_type": "DocType",
-      "label": "Assessment Rubric"
     },
     {
       "type": "Card Break",

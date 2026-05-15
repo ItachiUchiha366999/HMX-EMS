@@ -23,12 +23,21 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = []
     values = []
 
     if filters.get("category"):
         conditions.append("category = %s")
         values.append(filters.get("category"))
+
+    if filters.get("subject"):
+        conditions.append("subject = %s")
+        values.append(filters.get("subject"))
+
+    if filters.get("status"):
+        conditions.append("status = %s")
+        values.append(filters.get("status"))
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 

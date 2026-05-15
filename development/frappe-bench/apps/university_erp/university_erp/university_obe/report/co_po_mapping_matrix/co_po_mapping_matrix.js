@@ -7,13 +7,15 @@ frappe.query_reports["CO-PO Mapping Matrix"] = {
 			"fieldname": "program",
 			"label": __("Program"),
 			"fieldtype": "Link",
-			"options": "Program"
+			"options": "Program",
+			"default": "B.Tech Computer Science and Engineering"
 		},
 		{
 			"fieldname": "course",
 			"label": __("Course"),
 			"fieldtype": "Link",
 			"options": "Course",
+			"default": "Operating Systems",
 			"get_query": function() {
 				let program = frappe.query_report.get_filter_value('program');
 				if (program) {
@@ -29,7 +31,8 @@ frappe.query_reports["CO-PO Mapping Matrix"] = {
 			"fieldname": "academic_term",
 			"label": __("Academic Term"),
 			"fieldtype": "Link",
-			"options": "Academic Term"
+			"options": "Academic Term",
+			"default": "2026-2027 (Semester 2)"
 		}
 	],
 

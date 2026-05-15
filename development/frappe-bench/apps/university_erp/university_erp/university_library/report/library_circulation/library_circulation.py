@@ -24,30 +24,45 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = []
     values = []
 
     if filters.get("from_date"):
-        conditions.append("transaction_date >= %s")
+        conditions.append("lt.transaction_date >= %s")
         values.append(filters.get("from_date"))
 
     if filters.get("to_date"):
-        conditions.append("transaction_date <= %s")
+        conditions.append("lt.transaction_date <= %s")
         values.append(filters.get("to_date"))
+
+    if filters.get("member_type"):
+        conditions.append("lm.member_type = %s")
+        values.append(filters.get("member_type"))
+
+    if filters.get("category"):
+        conditions.append("la.category = %s")
+        values.append(filters.get("category"))
+
+    if filters.get("transaction_type"):
+        conditions.append("lt.transaction_type = %s")
+        values.append(filters.get("transaction_type"))
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
 
     return frappe.db.sql("""
         SELECT
-            transaction_date,
-            SUM(CASE WHEN transaction_type = 'Issue' THEN 1 ELSE 0 END) as issues,
-            SUM(CASE WHEN transaction_type = 'Return' THEN 1 ELSE 0 END) as returns,
-            SUM(CASE WHEN transaction_type = 'Renew' THEN 1 ELSE 0 END) as renewals,
+            lt.transaction_date,
+            SUM(CASE WHEN lt.transaction_type = 'Issue' THEN 1 ELSE 0 END) as issues,
+            SUM(CASE WHEN lt.transaction_type = 'Return' THEN 1 ELSE 0 END) as returns,
+            SUM(CASE WHEN lt.transaction_type = 'Renew' THEN 1 ELSE 0 END) as renewals,
             COUNT(*) as total
-        FROM `tabLibrary Transaction`
+        FROM `tabLibrary Transaction` lt
+        LEFT JOIN `tabLibrary Member` lm ON lt.member = lm.name
+        LEFT JOIN `tabLibrary Article` la ON lt.article = la.name
         {where_clause}
-        GROUP BY transaction_date
-        ORDER BY transaction_date DESC
+        GROUP BY lt.transaction_date
+        ORDER BY lt.transaction_date DESC
     """.format(where_clause=where_clause), values, as_dict=True)
 
 

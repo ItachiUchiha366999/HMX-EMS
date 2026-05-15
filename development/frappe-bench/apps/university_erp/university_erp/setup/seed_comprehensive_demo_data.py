@@ -436,12 +436,20 @@ def _seed_core(ctx):
         "name",
     ) or "Semester 1"
 
-    # Fiscal Year
+    # Fiscal Year(s) -- seed both the academic year FY and a current-period FY so
+    # GL postings dated near today succeed even when today is past 2025-2026's end.
     if not frappe.db.exists("Fiscal Year", ACADEMIC_YEAR):
         _exists_or_create("Fiscal Year", {"name": ACADEMIC_YEAR}, {
             "year": ACADEMIC_YEAR,
             "year_start_date": "2025-04-01",
             "year_end_date": "2026-03-31",
+            "is_short_year": 0,
+        })
+    if not frappe.db.exists("Fiscal Year", "2026-2027"):
+        _exists_or_create("Fiscal Year", {"name": "2026-2027"}, {
+            "year": "2026-2027",
+            "year_start_date": "2026-04-01",
+            "year_end_date": "2027-03-31",
             "is_short_year": 0,
         })
 
@@ -1191,12 +1199,76 @@ def _seed_finance(ctx):
 
     frappe.db.commit()
 
+    # Backfill: reprocess GL posting for already-submitted fees that have no GL entries.
+    # This makes the script idempotent across re-runs -- if a prior run submitted fees
+    # before the gl_posting.py fix landed, those fees stayed in docstatus=1 with no
+    # GL entries; this loop runs them through the (now-fixed) GLPostingManager so the
+    # university_finance fork is exercised end-to-end on every run.
+    backfilled = 0
+    if frappe.db.exists("DocType", "GL Entry"):
+        try:
+            from university_erp.university_payments.gl_posting import GLPostingManager
+            gl_mgr = GLPostingManager()
+            submitted_fees = frappe.get_all(
+                "Fees",
+                filters={"docstatus": 1, "academic_year": ctx["academic_year"]},
+                pluck="name",
+                limit_page_length=0,
+            )
+            BACKFILL_CAP = 200  # mirror the original submit cap to bound runtime
+            for fname in submitted_fees:
+                if backfilled >= BACKFILL_CAP:
+                    break
+                # Skip if GL entries already exist for this voucher
+                if frappe.db.exists("GL Entry", {"voucher_no": fname}):
+                    continue
+                try:
+                    fdoc = frappe.get_doc("Fees", fname)
+                    accts = ctx.get("accounts", {})
+                    abbr = ctx.get("abbr", COMPANY_ABBR)
+                    # Ensure required fields are populated for GL posting
+                    if not getattr(fdoc, "receivable_account", None):
+                        fdoc.receivable_account = accts.get("student_receivable") or f"Student Receivable - {abbr}"
+                    if not getattr(fdoc, "income_account", None):
+                        fdoc.income_account = accts.get("fee_income") or f"Fee Income - {abbr}"
+                    if not getattr(fdoc, "cost_center", None):
+                        fdoc.cost_center = accts.get("cost_center") or frappe.db.get_value(
+                            "Cost Center", {"company": ctx["company"], "is_group": 0}, "name"
+                        )
+                    # Force posting_date inside an active Fiscal Year. The fee's stored
+                    # posting_date may have been set to a day outside the current FY when
+                    # the fee was originally created; override it on this in-memory doc so
+                    # GL posting succeeds without mutating the persisted Fees record.
+                    today_str = frappe.utils.today()
+                    fy = frappe.db.sql(
+                        """SELECT name FROM `tabFiscal Year`
+                           WHERE %s BETWEEN year_start_date AND year_end_date
+                           AND IFNULL(disabled, 0) = 0
+                           LIMIT 1""",
+                        today_str,
+                    )
+                    if fy:
+                        fdoc.posting_date = today_str
+                    else:
+                        # Fall back to a date inside the academic year FY
+                        fdoc.posting_date = "2025-09-30"
+                    gl_mgr.post_fee_collection(fdoc)
+                    backfilled += 1
+                except Exception as e:
+                    if backfilled == 0:
+                        print(f"    GL backfill note: {str(e)[:200]}")
+            if backfilled:
+                frappe.db.commit()
+                print(f"    Backfilled GL posting for {backfilled} previously-submitted fees")
+        except Exception as e:
+            print(f"    GL backfill skipped: {str(e)[:150]}")
+
     # Verify GL Entries
     gl_count = 0
     if frappe.db.exists("DocType", "GL Entry"):
         gl_count = frappe.db.count("GL Entry")
 
-    print(f"  Created {created} fees, submitted {submitted}, GL entries: {gl_count}")
+    print(f"  Created {created} fees, submitted {submitted}, backfilled {backfilled}, GL entries: {gl_count}")
     if gl_count > 0:
         print("  GL posting VERIFIED -- university_finance fork works end-to-end!")
     else:

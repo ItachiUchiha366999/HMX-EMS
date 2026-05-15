@@ -23,7 +23,9 @@
       "fieldname": "member_name",
       "fieldtype": "Data",
       "in_list_view": 1,
-      "label": "Member Name"
+      "label": "Member Name",
+      "fetch_from": "user.full_name",
+      "read_only": 1
     },
     {
       "fieldname": "column_break_1",

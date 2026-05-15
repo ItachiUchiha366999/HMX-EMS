@@ -40,13 +40,13 @@ def get_certificate_requests(student):
             SELECT
                 cr.name,
                 cr.certificate_template,
-                ct.certificate_name,
+                cr.certificate_type,
+                COALESCE(ct.template_name, cr.certificate_type, cr.certificate_template) as certificate_name,
                 cr.request_date,
                 cr.status,
                 cr.purpose,
                 cr.certificate_number,
-                cr.issue_date,
-                cr.remarks
+                cr.issue_date
             FROM `tabCertificate Request` cr
             LEFT JOIN `tabCertificate Template` ct ON ct.name = cr.certificate_template
             WHERE cr.student = %s
@@ -54,7 +54,8 @@ def get_certificate_requests(student):
         """, student, as_dict=1)
 
         return requests
-    except Exception:
+    except Exception as e:
+        frappe.log_error(f"get_certificate_requests error: {e}", "Portal Certificates")
         return []
 
 
@@ -104,10 +105,10 @@ def get_issued_certificates(student):
             SELECT
                 cr.name,
                 cr.certificate_template,
-                ct.certificate_name,
+                cr.certificate_type,
+                COALESCE(ct.template_name, cr.certificate_type, cr.certificate_template) as certificate_name,
                 cr.certificate_number,
-                cr.issue_date,
-                cr.certificate_file
+                cr.issue_date
             FROM `tabCertificate Request` cr
             LEFT JOIN `tabCertificate Template` ct ON ct.name = cr.certificate_template
             WHERE cr.student = %s
@@ -116,7 +117,8 @@ def get_issued_certificates(student):
         """, student, as_dict=1)
 
         return issued
-    except Exception:
+    except Exception as e:
+        frappe.log_error(f"get_issued_certificates error: {e}", "Portal Certificates")
         return []
 
 

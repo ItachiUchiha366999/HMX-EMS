@@ -141,7 +141,7 @@ def _workflow_hostel_allocation():
             {"state": "Cancelled", "doc_status": "2" if sub else "0", "allow_edit": "University Warden", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Warden Approval", "next_state": "Pending Warden Approval", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Warden Approval", "next_state": "Pending Warden Approval", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Pending Warden Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Warden", "allow_self_approval": 1},
             {"state": "Pending Warden Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Warden", "allow_self_approval": 1},
             {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Warden", "allow_self_approval": 1},
@@ -184,17 +184,17 @@ def _workflow_transport_allocation():
         name="Transport Allocation Approval",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Pending Approval", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Active", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Academics User", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "2" if sub else "0", "allow_edit": "Academics User", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending Approval", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Active", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2" if sub else "0", "allow_edit": "University Admin", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Approval", "allowed": "Academics User", "allow_self_approval": 1},
-            {"state": "Pending Approval", "action": "Approve", "next_state": "Active", "allowed": "Education Manager", "allow_self_approval": 1},
-            {"state": "Pending Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Education Manager", "allow_self_approval": 1},
-            {"state": "Active", "action": "Cancel", "next_state": "Cancelled", "allowed": "Education Manager", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Approval", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "Pending Approval", "action": "Approve", "next_state": "Active", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Pending Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Active", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Registrar", "allow_self_approval": 1},
         ],
     )
 
@@ -207,17 +207,17 @@ def _workflow_certificate_request():
         name="Certificate Request Workflow",
         document_type=dt,
         states=[
-            {"state": "Pending", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "0", "allow_edit": "Academics User", "style": "Primary"},
-            {"state": "Generated", "doc_status": "0", "allow_edit": "Academics User", "style": "Info"},
-            {"state": "Issued", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Academics User", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
+            {"state": "Pending", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Approved", "doc_status": "0", "allow_edit": "University Admin", "style": "Primary"},
+            {"state": "Generated", "doc_status": "0", "allow_edit": "University Admin", "style": "Info"},
+            {"state": "Issued", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
         ],
         transitions=[
             {"state": "Pending", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Pending", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
-            {"state": "Approved", "action": "Generate", "next_state": "Generated", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Generate", "next_state": "Generated", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Generated", "action": "Issue", "next_state": "Issued", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Registrar", "allow_self_approval": 1},
         ],
@@ -232,15 +232,15 @@ def _workflow_course_registration():
         name="Course Registration Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Pending Faculty Approval", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Academics User", "style": "Danger"},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending Faculty Approval", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Faculty Approval", "allowed": "Academics User", "allow_self_approval": 1},
-            {"state": "Pending Faculty Approval", "action": "Approve", "next_state": "Approved", "allowed": "Education Manager", "allow_self_approval": 1},
-            {"state": "Pending Faculty Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Education Manager", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Faculty Approval", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "Pending Faculty Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Pending Faculty Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
         ],
     )
 
@@ -253,14 +253,14 @@ def _workflow_revaluation_request():
         name="Revaluation Request Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
             {"state": "Pending Review", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Warning"},
             {"state": "In Progress", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Primary"},
             {"state": "Completed", "doc_status": "1" if sub else "0", "allow_edit": "University Exam Cell", "style": "Success"},
             {"state": "Rejected", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Danger"},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Review", "next_state": "Pending Review", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Review", "next_state": "Pending Review", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Pending Review", "action": "Accept", "next_state": "In Progress", "allowed": "University Exam Cell", "allow_self_approval": 1},
             {"state": "In Progress", "action": "Complete", "next_state": "Completed", "allowed": "University Exam Cell", "allow_self_approval": 1},
             {"state": "Pending Review", "action": "Reject", "next_state": "Rejected", "allowed": "University Exam Cell", "allow_self_approval": 1},
@@ -276,14 +276,14 @@ def _workflow_research_grant():
         name="Research Grant Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Under Review", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Academics User", "style": "Danger"},
-            {"state": "Completed", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Primary"},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Under Review", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Completed", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Primary"},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Review", "next_state": "Under Review", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Review", "next_state": "Under Review", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Under Review", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Under Review", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Approved", "action": "Mark Completed", "next_state": "Completed", "allowed": "University Registrar", "allow_self_approval": 1},
@@ -303,8 +303,8 @@ def _workflow_grievance():
         name="Grievance Resolution Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Submitted", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Submitted", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
             {"state": "Under Review", "doc_status": "0", "allow_edit": "University Registrar", "style": "Primary"},
             {"state": "Resolution Proposed", "doc_status": "0", "allow_edit": "University Registrar", "style": "Info"},
             {"state": "Resolved", "doc_status": "0", "allow_edit": "University Registrar", "style": "Success"},
@@ -312,10 +312,10 @@ def _workflow_grievance():
             {"state": "Rejected", "doc_status": "0", "allow_edit": "University Registrar", "style": "Danger"},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit", "next_state": "Submitted", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit", "next_state": "Submitted", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Submitted", "action": "Take Up for Review", "next_state": "Under Review", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Under Review", "action": "Propose Resolution", "next_state": "Resolution Proposed", "allowed": "University Registrar", "allow_self_approval": 1},
-            {"state": "Resolution Proposed", "action": "Accept Resolution", "next_state": "Resolved", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Resolution Proposed", "action": "Accept Resolution", "next_state": "Resolved", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Resolved", "action": "Close", "next_state": "Closed", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Under Review", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Resolved", "action": "Reopen", "next_state": "Under Review", "allowed": "University Registrar", "allow_self_approval": 1},
@@ -324,45 +324,45 @@ def _workflow_grievance():
 
 
 def _workflow_journal_entry():
-    """Journal Entry Approval workflow (deferred from Phase 03.3)."""
+    """Journal Entry — Finance staff raises → Finance Manager approves."""
     dt = "Journal Entry"
     return _create_workflow(
         name="Journal Entry Approval",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Accounts User", "style": ""},
-            {"state": "Pending Finance Approval", "doc_status": "0", "allow_edit": "Accounts User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1", "allow_edit": "Accounts Manager", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Accounts User", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "2", "allow_edit": "Accounts Manager", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Finance", "style": ""},
+            {"state": "Pending Finance Approval", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Finance", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Finance", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Finance", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Finance Approval", "allowed": "Accounts User", "allow_self_approval": 1},
-            {"state": "Pending Finance Approval", "action": "Approve", "next_state": "Approved", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Pending Finance Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "Accounts Manager", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Finance Approval", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Pending Finance Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Pending Finance Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Finance", "allow_self_approval": 1},
         ],
     )
 
 
 def _workflow_payment_entry():
-    """Payment Entry Approval workflow (deferred from Phase 03.3)."""
+    """Payment Entry — Finance staff raises → Finance Manager approves."""
     dt = "Payment Entry"
     return _create_workflow(
         name="Payment Entry Approval",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Accounts User", "style": ""},
-            {"state": "Pending Finance Approval", "doc_status": "0", "allow_edit": "Accounts User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1", "allow_edit": "Accounts Manager", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Accounts User", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "2", "allow_edit": "Accounts Manager", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Finance", "style": ""},
+            {"state": "Pending Finance Approval", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Finance", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Finance", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Finance", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Finance Approval", "allowed": "Accounts User", "allow_self_approval": 1},
-            {"state": "Pending Finance Approval", "action": "Approve", "next_state": "Approved", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Pending Finance Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "Accounts Manager", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending Finance Approval", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Pending Finance Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Pending Finance Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Finance", "allow_self_approval": 1},
         ],
     )
 
@@ -383,8 +383,8 @@ def _workflow_generated_question_paper():
         ],
         transitions=[
             {"state": "Draft", "action": "Submit for Review", "next_state": "Ready for Review", "allowed": "University Exam Cell", "allow_self_approval": 1},
-            {"state": "Ready for Review", "action": "Approve", "next_state": "Approved", "allowed": "Education Manager", "allow_self_approval": 1},
-            {"state": "Ready for Review", "action": "Reject", "next_state": "Rejected", "allowed": "Education Manager", "allow_self_approval": 1},
+            {"state": "Ready for Review", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Ready for Review", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Approved", "action": "Lock", "next_state": "Locked", "allowed": "University Exam Cell", "allow_self_approval": 1},
         ],
     )
@@ -401,17 +401,17 @@ def _workflow_lab_equipment_booking():
         name="Lab Equipment Booking Workflow",
         document_type=dt,
         states=[
-            {"state": "Pending", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "In Use", "doc_status": "0", "allow_edit": "Academics User", "style": "Primary"},
-            {"state": "Completed", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Cancelled", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
+            {"state": "Pending", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Approved", "doc_status": "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "In Use", "doc_status": "0", "allow_edit": "University Admin", "style": "Primary"},
+            {"state": "Completed", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Cancelled", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
         ],
         transitions=[
-            {"state": "Pending", "action": "Approve", "next_state": "Approved", "allowed": "Education Manager", "allow_self_approval": 1},
-            {"state": "Approved", "action": "Start Use", "next_state": "In Use", "allowed": "Academics User", "allow_self_approval": 1},
-            {"state": "In Use", "action": "Complete", "next_state": "Completed", "allowed": "Academics User", "allow_self_approval": 1},
-            {"state": "Pending", "action": "Cancel", "next_state": "Cancelled", "allowed": "Education Manager", "allow_self_approval": 1},
+            {"state": "Pending", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Start Use", "next_state": "In Use", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "In Use", "action": "Complete", "next_state": "Completed", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "Pending", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Registrar", "allow_self_approval": 1},
         ],
     )
 
@@ -424,13 +424,13 @@ def _workflow_merit_list():
         name="Merit List Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Pending Publication", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Published", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Expired", "doc_status": "1" if sub else "0", "allow_edit": "Academics User", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending Publication", "doc_status": "0", "allow_edit": "University Admin", "style": "Warning"},
+            {"state": "Published", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Expired", "doc_status": "1" if sub else "0", "allow_edit": "University Admin", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Publication", "next_state": "Pending Publication", "allowed": "Academics User", "allow_self_approval": 1},
+            {"state": "Draft", "action": "Submit for Publication", "next_state": "Pending Publication", "allowed": "University Admin", "allow_self_approval": 1},
             {"state": "Pending Publication", "action": "Publish", "next_state": "Published", "allowed": "University Registrar", "allow_self_approval": 1},
             {"state": "Published", "action": "Mark Expired", "next_state": "Expired", "allowed": "University Registrar", "allow_self_approval": 1},
         ],
@@ -438,100 +438,297 @@ def _workflow_merit_list():
 
 
 def _workflow_leave_application():
-    """
-    Leave Application Workflow (from existing fixture).
-
-    Re-creates the workflow that was defined in the fixture JSON but not loaded into DB.
-    """
+    """Leave Application Workflow — 2-level HOD → HR approval."""
     dt = "Leave Application"
     return _create_workflow(
         name="Leave Application Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Employee", "style": ""},
-            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "HR Manager", "style": "Warning"},
-            {"state": "Pending HR Approval", "doc_status": "0", "allow_edit": "HR Manager", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1", "allow_edit": "HR Manager", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Employee", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "2", "allow_edit": "HR Manager", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Faculty", "style": ""},
+            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Pending HR Approval", "doc_status": "0", "allow_edit": "University HR Admin", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University HR Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Faculty", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University HR Admin", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending HOD Approval", "allowed": "Employee", "allow_self_approval": 0},
-            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Pending HR Approval", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HR Approval", "action": "Approve", "next_state": "Approved", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HR Approval", "action": "Reject", "next_state": "Rejected", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HR Approval", "action": "Send Back to HOD", "next_state": "Pending HOD Approval", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "HR Manager", "allow_self_approval": 0},
+            {"state": "Draft", "action": "Submit for Approval", "next_state": "Pending HOD Approval", "allowed": "University Faculty", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Pending HR Approval", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HR Approval", "action": "Approve", "next_state": "Approved", "allowed": "University HR Admin", "allow_self_approval": 0},
+            {"state": "Pending HR Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University HR Admin", "allow_self_approval": 0},
+            {"state": "Pending HR Approval", "action": "Send Back to HOD", "next_state": "Pending HOD Approval", "allowed": "University HR Admin", "allow_self_approval": 0},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University HR Admin", "allow_self_approval": 0},
         ],
         send_email_alert=1,
     )
 
 
 def _workflow_teaching_assignment():
-    """
-    Teaching Assignment Approval Workflow (from existing fixture).
-
-    Re-creates the workflow that was defined in the fixture JSON but not loaded into DB.
-    Uses HR Manager instead of non-existent 'Department Manager' role.
-    """
+    """Teaching Assignment — Faculty acceptance → HOD → Registrar 3-level chain."""
     dt = "Teaching Assignment"
     return _create_workflow(
         name="Teaching Assignment Approval Workflow",
         document_type=dt,
         states=[
-            {"state": "Draft", "doc_status": "0", "allow_edit": "Academics User", "style": ""},
-            {"state": "Pending Faculty Acceptance", "doc_status": "0", "allow_edit": "Employee", "style": "Warning"},
-            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "HR Manager", "style": "Warning"},
-            {"state": "Pending Academic Registrar Approval", "doc_status": "0", "allow_edit": "Academics User", "style": "Warning"},
-            {"state": "Approved", "doc_status": "1", "allow_edit": "Academics User", "style": "Success"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Academics User", "style": "Danger"},
-            {"state": "Cancelled", "doc_status": "2", "allow_edit": "Academics User", "style": ""},
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending Faculty Acceptance", "doc_status": "0", "allow_edit": "University Faculty", "style": "Warning"},
+            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Pending Academic Registrar Approval", "doc_status": "0", "allow_edit": "University Registrar", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Registrar", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Admin", "style": ""},
         ],
         transitions=[
-            {"state": "Draft", "action": "Send to Faculty", "next_state": "Pending Faculty Acceptance", "allowed": "Academics User", "allow_self_approval": 0},
-            {"state": "Pending Faculty Acceptance", "action": "Accept", "next_state": "Pending HOD Approval", "allowed": "Employee", "allow_self_approval": 0},
-            {"state": "Pending Faculty Acceptance", "action": "Decline", "next_state": "Rejected", "allowed": "Employee", "allow_self_approval": 0},
-            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Pending Academic Registrar Approval", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending HOD Approval", "action": "Send Back to Faculty", "next_state": "Pending Faculty Acceptance", "allowed": "HR Manager", "allow_self_approval": 0},
-            {"state": "Pending Academic Registrar Approval", "action": "Approve", "next_state": "Approved", "allowed": "Academics User", "allow_self_approval": 0},
-            {"state": "Pending Academic Registrar Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Academics User", "allow_self_approval": 0},
-            {"state": "Pending Academic Registrar Approval", "action": "Send Back to HOD", "next_state": "Pending HOD Approval", "allowed": "Academics User", "allow_self_approval": 0},
-            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "Academics User", "allow_self_approval": 0},
+            {"state": "Draft", "action": "Send to Faculty", "next_state": "Pending Faculty Acceptance", "allowed": "University Admin", "allow_self_approval": 0},
+            {"state": "Pending Faculty Acceptance", "action": "Accept", "next_state": "Pending HOD Approval", "allowed": "University Faculty", "allow_self_approval": 0},
+            {"state": "Pending Faculty Acceptance", "action": "Decline", "next_state": "Rejected", "allowed": "University Faculty", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Pending Academic Registrar Approval", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Send Back to Faculty", "next_state": "Pending Faculty Acceptance", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending Academic Registrar Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Registrar", "allow_self_approval": 0},
+            {"state": "Pending Academic Registrar Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 0},
+            {"state": "Pending Academic Registrar Approval", "action": "Send Back to HOD", "next_state": "Pending HOD Approval", "allowed": "University Registrar", "allow_self_approval": 0},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Registrar", "allow_self_approval": 0},
         ],
         send_email_alert=1,
     )
 
 
 def _workflow_fee_refund():
-    """
-    Fee Refund Approval Workflow (from existing fixture).
-
-    Re-creates the workflow that was defined in the fixture JSON but not loaded into DB.
-    """
+    """Fee Refund — Finance raises → Finance Manager approves → processes payment."""
     dt = "Fee Refund"
     return _create_workflow(
         name="Fee Refund Approval Workflow",
         document_type=dt,
         states=[
-            {"state": "Pending", "doc_status": "0", "allow_edit": "Accounts User", "style": "Warning"},
-            {"state": "Pending Approval", "doc_status": "0", "allow_edit": "Accounts Manager", "style": "Warning"},
-            {"state": "Approved", "doc_status": "0", "allow_edit": "Accounts Manager", "style": "Primary"},
-            {"state": "Rejected", "doc_status": "0", "allow_edit": "Accounts Manager", "style": "Danger"},
-            {"state": "Processed", "doc_status": "1", "allow_edit": "Accounts Manager", "style": "Success"},
-            {"state": "Cancelled", "doc_status": "2", "allow_edit": "Accounts Manager", "style": ""},
+            {"state": "Pending", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Pending Approval", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Approved", "doc_status": "0", "allow_edit": "University Finance", "style": "Primary"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Finance", "style": "Danger"},
+            {"state": "Processed", "doc_status": "1", "allow_edit": "University Finance", "style": "Success"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Finance", "style": ""},
         ],
         transitions=[
-            {"state": "Pending", "action": "Submit for Approval", "next_state": "Pending Approval", "allowed": "Accounts User", "allow_self_approval": 1},
-            {"state": "Pending Approval", "action": "Approve", "next_state": "Approved", "allowed": "Accounts Manager", "allow_self_approval": 0},
-            {"state": "Pending Approval", "action": "Reject", "next_state": "Rejected", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Pending Approval", "action": "Return to Draft", "next_state": "Pending", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Approved", "action": "Process Refund", "next_state": "Processed", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Processed", "action": "Cancel", "next_state": "Cancelled", "allowed": "Accounts Manager", "allow_self_approval": 1},
-            {"state": "Rejected", "action": "Reconsider", "next_state": "Pending Approval", "allowed": "Accounts Manager", "allow_self_approval": 1},
+            {"state": "Pending", "action": "Submit for Approval", "next_state": "Pending Approval", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Pending Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Pending Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Pending Approval", "action": "Return to Draft", "next_state": "Pending", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Process Refund", "next_state": "Processed", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Processed", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Rejected", "action": "Reconsider", "next_state": "Pending Approval", "allowed": "University Finance", "allow_self_approval": 1},
         ],
         send_email_alert=1,
+    )
+
+
+def _workflow_student_applicant():
+    """Student Applicant — online application → verification → admission decision."""
+    dt = "Student Applicant"
+    return _create_workflow(
+        name="Student Admission Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Applied", "doc_status": "0", "allow_edit": "University Registrar", "style": ""},
+            {"state": "Document Verification", "doc_status": "0", "allow_edit": "University Registrar", "style": "Warning"},
+            {"state": "Shortlisted", "doc_status": "0", "allow_edit": "University Registrar", "style": "Info"},
+            {"state": "Admitted", "doc_status": "1", "allow_edit": "University Registrar", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Registrar", "style": "Danger"},
+            {"state": "Withdrawn", "doc_status": "2", "allow_edit": "University Registrar", "style": ""},
+        ],
+        transitions=[
+            {"state": "Applied", "action": "Verify Documents", "next_state": "Document Verification", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Document Verification", "action": "Shortlist", "next_state": "Shortlisted", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Document Verification", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Shortlisted", "action": "Admit", "next_state": "Admitted", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Shortlisted", "action": "Reject", "next_state": "Rejected", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Admitted", "action": "Withdraw", "next_state": "Withdrawn", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Rejected", "action": "Reconsider", "next_state": "Document Verification", "allowed": "University Registrar", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_placement_application():
+    """Placement Application — student applies → screening → interviews → offer."""
+    dt = "Placement Application"
+    return _create_workflow(
+        name="Placement Application Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Applied", "doc_status": "0", "allow_edit": "University Placement Officer", "style": ""},
+            {"state": "Screening", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Warning"},
+            {"state": "Shortlisted", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Info"},
+            {"state": "Interview Scheduled", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Primary"},
+            {"state": "Offer Received", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Success"},
+            {"state": "Accepted", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Placement Officer", "style": "Danger"},
+            {"state": "Withdrawn", "doc_status": "0", "allow_edit": "University Placement Officer", "style": ""},
+        ],
+        transitions=[
+            {"state": "Applied", "action": "Start Screening", "next_state": "Screening", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Screening", "action": "Shortlist", "next_state": "Shortlisted", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Screening", "action": "Reject", "next_state": "Rejected", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Shortlisted", "action": "Schedule Interview", "next_state": "Interview Scheduled", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Shortlisted", "action": "Reject", "next_state": "Rejected", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Interview Scheduled", "action": "Mark Offer Received", "next_state": "Offer Received", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Interview Scheduled", "action": "Reject", "next_state": "Rejected", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Offer Received", "action": "Accept Offer", "next_state": "Accepted", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Offer Received", "action": "Decline Offer", "next_state": "Withdrawn", "allowed": "University Placement Officer", "allow_self_approval": 1},
+            {"state": "Applied", "action": "Withdraw", "next_state": "Withdrawn", "allowed": "University Student", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_hall_ticket():
+    """Hall Ticket — exam cell creates → verifies eligibility → issues to student."""
+    dt = "Hall Ticket"
+    return _create_workflow(
+        name="Hall Ticket Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Exam Cell", "style": ""},
+            {"state": "Eligibility Check", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Warning"},
+            {"state": "Issued", "doc_status": "1", "allow_edit": "University Exam Cell", "style": "Success"},
+            {"state": "Withheld", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Exam Cell", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Submit for Eligibility Check", "next_state": "Eligibility Check", "allowed": "University Exam Cell", "allow_self_approval": 1},
+            {"state": "Eligibility Check", "action": "Issue", "next_state": "Issued", "allowed": "University Exam Cell", "allow_self_approval": 1},
+            {"state": "Eligibility Check", "action": "Withhold", "next_state": "Withheld", "allowed": "University Exam Cell", "allow_self_approval": 1},
+            {"state": "Withheld", "action": "Release", "next_state": "Issued", "allowed": "University Exam Cell", "allow_self_approval": 1},
+            {"state": "Issued", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Exam Cell", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_internal_assessment():
+    """Internal Assessment — faculty creates → HOD reviews → Registrar finalises."""
+    dt = "Internal Assessment"
+    return _create_workflow(
+        name="Internal Assessment Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Faculty", "style": ""},
+            {"state": "Marks Entry", "doc_status": "0", "allow_edit": "University Faculty", "style": "Warning"},
+            {"state": "Pending HOD Review", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Finalised", "doc_status": "1", "allow_edit": "University Exam Cell", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Faculty", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Exam Cell", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Start Marks Entry", "next_state": "Marks Entry", "allowed": "University Faculty", "allow_self_approval": 1},
+            {"state": "Marks Entry", "action": "Submit for HOD Review", "next_state": "Pending HOD Review", "allowed": "University Faculty", "allow_self_approval": 1},
+            {"state": "Pending HOD Review", "action": "Finalise", "next_state": "Finalised", "allowed": "University HOD", "allow_self_approval": 1},
+            {"state": "Pending HOD Review", "action": "Send Back for Correction", "next_state": "Marks Entry", "allowed": "University HOD", "allow_self_approval": 1},
+            {"state": "Pending HOD Review", "action": "Reject", "next_state": "Rejected", "allowed": "University HOD", "allow_self_approval": 1},
+            {"state": "Finalised", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Exam Cell", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_purchase_order():
+    """Purchase Order — inventory staff raises → HOD approves → Finance disburses."""
+    dt = "Purchase Order"
+    return _create_workflow(
+        name="Purchase Order Approval",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Pending Finance Approval", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Finance", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Finance", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Submit for HOD Approval", "next_state": "Pending HOD Approval", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Pending Finance Approval", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending Finance Approval", "action": "Approve", "next_state": "Approved", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Pending Finance Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Pending Finance Approval", "action": "Send Back to HOD", "next_state": "Pending HOD Approval", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Finance", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_material_request():
+    """Material Request — department raises → HOD approves → sent to purchase."""
+    dt = "Material Request"
+    return _create_workflow(
+        name="Material Request Approval",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Admin", "style": ""},
+            {"state": "Pending HOD Approval", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Admin", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Admin", "style": "Danger"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Admin", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Submit for HOD Approval", "next_state": "Pending HOD Approval", "allowed": "University Admin", "allow_self_approval": 1},
+            {"state": "Pending HOD Approval", "action": "Approve", "next_state": "Approved", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Pending HOD Approval", "action": "Reject", "next_state": "Rejected", "allowed": "University HOD", "allow_self_approval": 0},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University HOD", "allow_self_approval": 1},
+        ],
+    )
+
+
+def _workflow_student_scholarship():
+    """Student Scholarship — applied → finance verifies → Registrar awards."""
+    dt = "Student Scholarship"
+    return _create_workflow(
+        name="Student Scholarship Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Registrar", "style": ""},
+            {"state": "Under Verification", "doc_status": "0", "allow_edit": "University Finance", "style": "Warning"},
+            {"state": "Approved", "doc_status": "1", "allow_edit": "University Registrar", "style": "Success"},
+            {"state": "Rejected", "doc_status": "0", "allow_edit": "University Registrar", "style": "Danger"},
+            {"state": "Disbursed", "doc_status": "1", "allow_edit": "University Finance", "style": "Success"},
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Registrar", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Submit for Verification", "next_state": "Under Verification", "allowed": "University Registrar", "allow_self_approval": 1},
+            {"state": "Under Verification", "action": "Approve", "next_state": "Approved", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Under Verification", "action": "Reject", "next_state": "Rejected", "allowed": "University Finance", "allow_self_approval": 0},
+            {"state": "Approved", "action": "Disburse", "next_state": "Disbursed", "allowed": "University Finance", "allow_self_approval": 1},
+            {"state": "Approved", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Registrar", "allow_self_approval": 1},
+        ],
+        send_email_alert=1,
+    )
+
+
+def _workflow_practical_examination():
+    """Practical Examination — exam cell schedules → faculty conducts → HOD submits."""
+    dt = "Practical Examination"
+    return _create_workflow(
+        name="Practical Examination Workflow",
+        document_type=dt,
+        states=[
+            {"state": "Draft", "doc_status": "0", "allow_edit": "University Exam Cell", "style": ""},
+            {"state": "Scheduled", "doc_status": "0", "allow_edit": "University Exam Cell", "style": "Info"},
+            {"state": "In Progress", "doc_status": "0", "allow_edit": "University Faculty", "style": "Primary"},
+            {"state": "Marks Submitted", "doc_status": "0", "allow_edit": "University HOD", "style": "Warning"},
+            {"state": "Finalised", "doc_status": "1", "allow_edit": "University Exam Cell", "style": "Success"},
+            # Cancelled must come only from a submitted (doc_status=1) state
+            {"state": "Cancelled", "doc_status": "2", "allow_edit": "University Exam Cell", "style": ""},
+        ],
+        transitions=[
+            {"state": "Draft", "action": "Schedule", "next_state": "Scheduled", "allowed": "University Exam Cell", "allow_self_approval": 1},
+            {"state": "Scheduled", "action": "Start", "next_state": "In Progress", "allowed": "University Faculty", "allow_self_approval": 1},
+            {"state": "In Progress", "action": "Submit Marks", "next_state": "Marks Submitted", "allowed": "University Faculty", "allow_self_approval": 1},
+            {"state": "Marks Submitted", "action": "Finalise", "next_state": "Finalised", "allowed": "University HOD", "allow_self_approval": 1},
+            {"state": "Marks Submitted", "action": "Send Back for Correction", "next_state": "In Progress", "allowed": "University HOD", "allow_self_approval": 1},
+            # Can only cancel from Finalised (doc_status=1 → doc_status=2)
+            {"state": "Finalised", "action": "Cancel", "next_state": "Cancelled", "allowed": "University Exam Cell", "allow_self_approval": 1},
+        ],
     )
 
 
@@ -540,24 +737,38 @@ def _workflow_fee_refund():
 # ---------------------------------------------------------------------------
 
 ALL_WORKFLOW_CREATORS = [
-    # Existing fixtures (not yet in DB)
+    # HR / Faculty
     _workflow_leave_application,
     _workflow_teaching_assignment,
+    # Finance
     _workflow_fee_refund,
-    # New workflows
+    _workflow_journal_entry,
+    _workflow_payment_entry,
+    # Hostel & Transport
     _workflow_hostel_allocation,
     _workflow_hostel_maintenance,
     _workflow_transport_allocation,
+    # Student services
     _workflow_certificate_request,
     _workflow_course_registration,
+    _workflow_student_scholarship,
+    # Admissions & Placement
+    _workflow_student_applicant,
+    _workflow_placement_application,
+    _workflow_merit_list,
+    # Examinations
     _workflow_revaluation_request,
+    _workflow_generated_question_paper,
+    _workflow_hall_ticket,
+    _workflow_internal_assessment,
+    _workflow_practical_examination,
+    _workflow_lab_equipment_booking,
+    # Research & Governance
     _workflow_research_grant,
     _workflow_grievance,
-    _workflow_journal_entry,
-    _workflow_payment_entry,
-    _workflow_generated_question_paper,
-    _workflow_lab_equipment_booking,
-    _workflow_merit_list,
+    # Inventory / Procurement
+    _workflow_purchase_order,
+    _workflow_material_request,
 ]
 
 

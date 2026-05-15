@@ -12,7 +12,8 @@ frappe.query_reports["Publication Statistics"] = {
 		{
 			"fieldname": "year",
 			"label": __("Year"),
-			"fieldtype": "Int"
+			"fieldtype": "Int",
+			"default": "2026"
 		},
 		{
 			"fieldname": "indexing",

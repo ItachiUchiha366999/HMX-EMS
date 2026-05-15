@@ -7,6 +7,7 @@ frappe.query_reports["NIRF Parameter Report"] = {
             "fieldname": "ranking_year",
             "label": __("Ranking Year"),
             "fieldtype": "Data",
+            "default": "2026",
             "reqd": 0
         },
         {
@@ -14,6 +15,7 @@ frappe.query_reports["NIRF Parameter Report"] = {
             "label": __("Category"),
             "fieldtype": "Select",
             "options": "\nOverall\nUniversity\nEngineering\nManagement\nPharmacy\nMedical\nLaw",
+            "default": "Engineering",
             "reqd": 0
         }
     ]

@@ -27,10 +27,32 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     try:
         fine_per_day = frappe.db.get_single_value("University Settings", "library_fine_per_day") or 5
     except Exception:
         fine_per_day = 5
+
+    extra_conditions = []
+    values = [nowdate()]
+
+    if filters.get("member_type"):
+        extra_conditions.append("lm.member_type = %s")
+        values.append(filters.get("member_type"))
+
+    if filters.get("category"):
+        extra_conditions.append("la.category = %s")
+        values.append(filters.get("category"))
+
+    min_days = filters.get("min_overdue_days") or 1
+    extra_conditions.append("DATEDIFF(CURDATE(), lt.due_date) >= %s")
+    values.append(int(min_days))
+
+    if filters.get("max_overdue_days"):
+        extra_conditions.append("DATEDIFF(CURDATE(), lt.due_date) <= %s")
+        values.append(int(filters.get("max_overdue_days")))
+
+    extra_where = (" AND " + " AND ".join(extra_conditions)) if extra_conditions else ""
 
     return frappe.db.sql("""
         SELECT
@@ -49,8 +71,9 @@ def get_data(filters):
         WHERE lt.transaction_type = 'Issue'
         AND lt.status = 'Active'
         AND lt.due_date < %s
+        {extra_where}
         ORDER BY overdue_days DESC
-    """.format(fine_per_day=fine_per_day), (nowdate(),), as_dict=True)
+    """.format(fine_per_day=fine_per_day, extra_where=extra_where), tuple(values), as_dict=True)
 
 
 def get_chart(data):

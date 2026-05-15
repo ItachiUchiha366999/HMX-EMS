@@ -28,6 +28,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ""
     values = {}
 
@@ -38,6 +39,15 @@ def get_data(filters):
     if filters.get("academic_term"):
         conditions += " AND lc.academic_term = %(academic_term)s"
         values["academic_term"] = filters.get("academic_term")
+
+    if filters.get("student"):
+        conditions += " AND lcp.student = %(student)s"
+        values["student"] = filters.get("student")
+
+    having_clause = ""
+    if filters.get("min_progress"):
+        having_clause = " HAVING overall_progress >= %(min_progress)s"
+        values["min_progress"] = filters.get("min_progress")
 
     # Get students with progress records
     data = frappe.db.sql("""
@@ -55,8 +65,9 @@ def get_data(filters):
         INNER JOIN `tabLMS Course` lc ON lc.name = lcp.lms_course
         WHERE 1=1 {conditions}
         GROUP BY lcp.student, s.student_name
+        {having_clause}
         ORDER BY overall_progress DESC
-    """.format(conditions=conditions), values, as_dict=True)
+    """.format(conditions=conditions, having_clause=having_clause), values, as_dict=True)
 
     # Add assignment and quiz data
     for row in data:

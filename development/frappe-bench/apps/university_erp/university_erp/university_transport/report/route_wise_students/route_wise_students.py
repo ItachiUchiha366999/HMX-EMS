@@ -28,6 +28,7 @@ def get_columns():
 
 
 def get_data(filters):
+    filters = filters or {}
     conditions = ["ta.status = 'Active'", "ta.docstatus = 1"]
     values = []
 
@@ -38,6 +39,14 @@ def get_data(filters):
     if filters.get("academic_year"):
         conditions.append("ta.academic_year = %s")
         values.append(filters.get("academic_year"))
+
+    if filters.get("program"):
+        conditions.append("ta.program = %s")
+        values.append(filters.get("program"))
+
+    if filters.get("vehicle"):
+        conditions.append("ta.vehicle = %s")
+        values.append(filters.get("vehicle"))
 
     where_clause = " AND ".join(conditions)
 

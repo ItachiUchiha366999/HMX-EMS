@@ -5,7 +5,9 @@
     "engine": "InnoDB",
     "field_order": [
         "author_name",
+        "author_type",
         "employee",
+        "student",
         "affiliation",
         "author_order",
         "is_corresponding"
@@ -16,14 +18,32 @@
             "fieldtype": "Data",
             "in_list_view": 1,
             "label": "Author Name",
-            "reqd": 1
+            "reqd": 1,
+            "description": "Free-text. Auto-fills from employee/student selection but can be edited (e.g. for external co-authors)."
+        },
+        {
+            "fieldname": "author_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Type",
+            "options": "Faculty\nStudent\nExternal",
+            "default": "Faculty"
         },
         {
             "fieldname": "employee",
             "fieldtype": "Link",
             "in_list_view": 1,
-            "label": "Employee",
-            "options": "Employee"
+            "label": "Faculty",
+            "options": "Employee",
+            "depends_on": "eval:doc.author_type === 'Faculty'"
+        },
+        {
+            "fieldname": "student",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Student",
+            "options": "Student",
+            "depends_on": "eval:doc.author_type === 'Student'"
         },
         {
             "fieldname": "affiliation",

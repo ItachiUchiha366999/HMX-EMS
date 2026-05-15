@@ -7,9 +7,12 @@
   "field_order": [
     "project_title",
     "project_type",
+    "researcher_type",
     "column_break_1",
     "principal_investigator",
     "pi_name",
+    "principal_student_investigator",
+    "principal_student_name",
     "department",
     "status",
     "section_team",
@@ -54,6 +57,17 @@
       "reqd": 1
     },
     {
+      "fieldname": "researcher_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Researcher Type",
+      "options": "Faculty\nStudent\nMixed",
+      "default": "Faculty",
+      "reqd": 1,
+      "description": "Faculty = led by faculty; Student = student-led (UG/PG project, capstone, thesis); Mixed = both faculty and students as principal contributors."
+    },
+    {
       "fieldname": "column_break_1",
       "fieldtype": "Column Break"
     },
@@ -62,16 +76,35 @@
       "fieldtype": "Link",
       "in_list_view": 1,
       "in_standard_filter": 1,
-      "label": "Principal Investigator",
+      "label": "Principal Investigator (Faculty)",
       "options": "Employee",
-      "reqd": 1
+      "depends_on": "eval:doc.researcher_type !== 'Student'",
+      "mandatory_depends_on": "eval:doc.researcher_type !== 'Student'"
     },
     {
       "fetch_from": "principal_investigator.employee_name",
       "fieldname": "pi_name",
       "fieldtype": "Data",
       "label": "PI Name",
-      "read_only": 1
+      "read_only": 1,
+      "depends_on": "eval:doc.researcher_type !== 'Student'"
+    },
+    {
+      "fieldname": "principal_student_investigator",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "Principal Investigator (Student)",
+      "options": "Student",
+      "depends_on": "eval:doc.researcher_type !== 'Faculty'",
+      "mandatory_depends_on": "eval:doc.researcher_type === 'Student'"
+    },
+    {
+      "fetch_from": "principal_student_investigator.student_name",
+      "fieldname": "principal_student_name",
+      "fieldtype": "Data",
+      "label": "Student PI Name",
+      "read_only": 1,
+      "depends_on": "eval:doc.researcher_type !== 'Faculty'"
     },
     {
       "fieldname": "department",

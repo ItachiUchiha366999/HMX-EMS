@@ -89,11 +89,12 @@ def get_notifications(student):
             except Exception:
                 pass
 
-        # Sort by creation date
-        notifications.sort(key=lambda x: x.get("creation") or "", reverse=True)
+        # Sort by creation date — normalize to str to handle datetime vs date mix
+        notifications.sort(key=lambda x: str(x.get("creation") or ""), reverse=True)
 
         return notifications[:30]
-    except Exception:
+    except Exception as e:
+        frappe.log_error(f"get_notifications error: {str(e)}", "Portal Notifications")
         return []
 
 

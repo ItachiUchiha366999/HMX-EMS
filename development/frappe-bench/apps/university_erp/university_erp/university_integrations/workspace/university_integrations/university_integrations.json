@@ -45,10 +45,50 @@
       "hidden": 0,
       "is_query_report": 0,
       "label": "SMS Gateway",
-      "link_count": 0,
+      "link_count": 4,
       "link_type": "DocType",
       "onboard": 0,
       "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "SMS Settings",
+      "link_count": 0,
+      "link_to": "University SMS Settings",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "SMS Template",
+      "link_count": 0,
+      "link_to": "SMS Template",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "SMS Log",
+      "link_count": 0,
+      "link_to": "SMS Log",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "SMS Queue",
+      "link_count": 0,
+      "link_to": "SMS Queue",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
     },
     {
       "hidden": 0,

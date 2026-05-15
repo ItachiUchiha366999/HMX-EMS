@@ -37,7 +37,7 @@
     "name": "Communication Analytics",
     "owner": "Administrator",
     "prepared_report": 0,
-    "ref_doctype": "",
+    "ref_doctype": "Communication",
     "report_name": "Communication Analytics",
     "report_type": "Script Report",
     "roles": [

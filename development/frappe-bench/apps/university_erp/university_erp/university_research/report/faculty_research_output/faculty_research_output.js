@@ -18,12 +18,14 @@ frappe.query_reports["Faculty Research Output"] = {
 		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
-			"fieldtype": "Date"
+			"fieldtype": "Date",
+			"default": "2024-01-01"
 		},
 		{
 			"fieldname": "to_date",
 			"label": __("To Date"),
-			"fieldtype": "Date"
+			"fieldtype": "Date",
+			"default": "2026-05-01"
 		}
 	]
 };

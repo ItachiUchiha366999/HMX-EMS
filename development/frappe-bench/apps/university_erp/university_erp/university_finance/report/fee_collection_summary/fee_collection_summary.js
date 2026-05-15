@@ -4,21 +4,22 @@
 frappe.query_reports["Fee Collection Summary"] = {
 	"filters": [
 		{
-			"fieldname": "academic_year",
-			"label": __("Academic Year"),
-			"fieldtype": "Link",
-			"options": "Academic Year"
-		},
-		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
-			"fieldtype": "Date"
+			"fieldtype": "Date",
+			"default": "2026-01-01"
 		},
 		{
 			"fieldname": "to_date",
 			"label": __("To Date"),
 			"fieldtype": "Date",
-			"default": frappe.datetime.get_today()
+			"default": "2026-05-01"
+		},
+		{
+			"fieldname": "program",
+			"label": __("Program"),
+			"fieldtype": "Link",
+			"options": "Program"
 		}
 	]
 };

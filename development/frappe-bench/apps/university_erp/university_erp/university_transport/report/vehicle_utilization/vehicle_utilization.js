@@ -4,6 +4,20 @@
 frappe.query_reports["Vehicle Utilization"] = {
     "filters": [
         {
+            "fieldname": "from_date",
+            "label": __("From Date"),
+            "fieldtype": "Date",
+            "default": frappe.datetime.add_months(frappe.datetime.get_today(), -1),
+            "reqd": 1
+        },
+        {
+            "fieldname": "to_date",
+            "label": __("To Date"),
+            "fieldtype": "Date",
+            "default": frappe.datetime.get_today(),
+            "reqd": 1
+        },
+        {
             "fieldname": "vehicle_type",
             "label": __("Vehicle Type"),
             "fieldtype": "Select",
@@ -16,16 +30,10 @@ frappe.query_reports["Vehicle Utilization"] = {
             "options": "\nAvailable\nIn Service\nUnder Maintenance\nOut of Service"
         },
         {
-            "fieldname": "from_date",
-            "label": __("From Date"),
-            "fieldtype": "Date",
-            "default": frappe.datetime.add_months(frappe.datetime.get_today(), -1)
-        },
-        {
-            "fieldname": "to_date",
-            "label": __("To Date"),
-            "fieldtype": "Date",
-            "default": frappe.datetime.get_today()
+            "fieldname": "route",
+            "label": __("Assigned Route"),
+            "fieldtype": "Link",
+            "options": "Transport Route"
         }
     ]
 };

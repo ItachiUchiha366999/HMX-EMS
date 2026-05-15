@@ -33,7 +33,7 @@ def get_data(filters):
 		values["program"] = filters.get("program")
 
 	if filters.get("academic_year"):
-		conditions.append("fs.custom_academic_year = %(academic_year)s")
+		conditions.append("f.academic_year = %(academic_year)s")
 		values["academic_year"] = filters.get("academic_year")
 
 	if filters.get("min_days_overdue"):

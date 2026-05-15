@@ -19,7 +19,8 @@ frappe.query_reports["Program Attainment Summary"] = {
 			"fieldname": "academic_year",
 			"label": __("Academic Year"),
 			"fieldtype": "Link",
-			"options": "Academic Year"
+			"options": "Academic Year",
+			"default": "2026-2027"
 		}
 	],
 

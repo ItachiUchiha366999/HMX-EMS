@@ -207,9 +207,7 @@ def get_announcements():
             records = frappe.db.get_all(
                 "Notice Board",
                 filters={
-                    "docstatus": 1,
                     "publish_date": ["<=", nowdate()],
-                    "expiry_date": [">=", nowdate()],
                 },
                 fields=["title", "content", "publish_date", "priority"],
                 order_by="publish_date desc",

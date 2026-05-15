@@ -24,13 +24,14 @@ frappe.query_reports["Leave Utilization Report"] = {
 		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
-			"fieldtype": "Date"
+			"fieldtype": "Date",
+			"default": "2026-01-01"
 		},
 		{
 			"fieldname": "to_date",
 			"label": __("To Date"),
 			"fieldtype": "Date",
-			"default": frappe.datetime.get_today()
+			"default": "2026-05-01"
 		}
 	]
 };

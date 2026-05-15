@@ -6,7 +6,34 @@
   "disabled": 0,
   "docstatus": 0,
   "doctype": "Report",
-  "filters": [],
+  "filters": [
+    {
+      "label": "Academic Year",
+      "fieldtype": "Link",
+      "fieldname": "academic_year",
+      "options": "Academic Year",
+      "default": "2026-2027",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    },
+    {
+      "label": "Program",
+      "fieldtype": "Link",
+      "fieldname": "program",
+      "options": "Program",
+      "default": "",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    },
+    {
+      "label": "Department",
+      "fieldtype": "Data",
+      "fieldname": "department",
+      "default": "",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    }
+  ],
   "idx": 0,
   "is_standard": "Yes",
   "modified": "2026-01-02 10:00:00.000000",

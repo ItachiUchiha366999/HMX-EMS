@@ -102,7 +102,7 @@ def get_data(filters):
     # Get all assessments
     term_filter = ""
     if filters.get("academic_term"):
-        term_filter = "AND ia.academic_term = %(academic_term)s"
+        term_filter = "AND academic_term = %(academic_term)s"
 
     assessments = frappe.db.sql("""
         SELECT name, assessment_name, assessment_type, maximum_marks
@@ -117,17 +117,18 @@ def get_data(filters):
         return []
 
     # Get students enrolled in the course
+    # Course Enrollment links via Program Enrollment for academic year
     students = frappe.db.sql("""
         SELECT
             s.name as student,
             s.student_name,
-            s.roll_number
+            s.custom_enrollment_number as roll_number
         FROM `tabStudent` s
         INNER JOIN `tabCourse Enrollment` ce ON ce.student = s.name
+        INNER JOIN `tabProgram Enrollment` pe ON pe.name = ce.program_enrollment
         WHERE ce.course = %(course)s
-        AND ce.academic_year = %(academic_year)s
-        AND ce.enrollment_status = 'Enrolled'
-        ORDER BY s.roll_number
+        AND pe.academic_year = %(academic_year)s
+        ORDER BY s.custom_enrollment_number
     """, filters, as_dict=True)
 
     # Get scores for each student

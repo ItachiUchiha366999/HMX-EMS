@@ -30,24 +30,24 @@ def get_context(context):
 def get_student_grievances(student):
     """Get all grievances submitted by student"""
     try:
-        if not frappe.db.exists("DocType", "Student Grievance"):
+        if not frappe.db.exists("DocType", "Grievance"):
             return []
 
         grievances = frappe.db.sql("""
             SELECT
-                sg.name,
-                sg.category,
-                sg.subject,
-                sg.description,
-                sg.submission_date,
-                sg.status,
-                sg.priority,
-                sg.assigned_to,
-                sg.resolution,
-                sg.resolved_date
-            FROM `tabStudent Grievance` sg
-            WHERE sg.student = %s
-            ORDER BY sg.submission_date DESC
+                g.name,
+                g.category,
+                g.subject,
+                g.description,
+                g.creation as submission_date,
+                g.status,
+                g.priority,
+                g.assigned_to,
+                g.resolution_notes as resolution,
+                g.resolution_date as resolved_date
+            FROM `tabGrievance` g
+            WHERE g.student = %s
+            ORDER BY g.creation DESC
         """, student, as_dict=1)
 
         return grievances
@@ -74,17 +74,17 @@ def get_grievance_categories():
 def get_grievance_stats(student):
     """Get grievance statistics for student"""
     try:
-        if not frappe.db.exists("DocType", "Student Grievance"):
+        if not frappe.db.exists("DocType", "Grievance"):
             return {"total": 0, "pending": 0, "in_progress": 0, "resolved": 0, "closed": 0}
 
         stats = frappe.db.sql("""
             SELECT
                 COUNT(*) as total,
-                SUM(CASE WHEN status = 'Pending' THEN 1 ELSE 0 END) as pending,
+                SUM(CASE WHEN status = 'Open' OR status = 'Draft' THEN 1 ELSE 0 END) as pending,
                 SUM(CASE WHEN status = 'In Progress' THEN 1 ELSE 0 END) as in_progress,
                 SUM(CASE WHEN status = 'Resolved' THEN 1 ELSE 0 END) as resolved,
                 SUM(CASE WHEN status = 'Closed' THEN 1 ELSE 0 END) as closed
-            FROM `tabStudent Grievance`
+            FROM `tabGrievance`
             WHERE student = %s
         """, student, as_dict=1)
 
@@ -112,18 +112,18 @@ def submit_grievance(category, subject, description, priority="Medium"):
         if not student:
             frappe.throw(_("You are not registered as a student"), frappe.PermissionError)
 
-        if not frappe.db.exists("DocType", "Student Grievance"):
+        if not frappe.db.exists("DocType", "Grievance"):
             frappe.throw(_("Grievance system not configured"))
 
         grievance = frappe.get_doc({
-            "doctype": "Student Grievance",
+            "doctype": "Grievance",
             "student": student.name,
+            "submitted_by_type": "Student",
             "category": category,
             "subject": subject,
             "description": description,
             "priority": priority,
-            "submission_date": nowdate(),
-            "status": "Pending"
+            "status": "Open"
         })
         grievance.insert()
 
@@ -151,11 +151,11 @@ def add_grievance_comment(grievance, comment):
         if not student:
             frappe.throw(_("You are not registered as a student"), frappe.PermissionError)
 
-        if not frappe.db.exists("DocType", "Student Grievance"):
+        if not frappe.db.exists("DocType", "Grievance"):
             frappe.throw(_("Grievance system not configured"))
 
         # Verify ownership
-        grievance_doc = frappe.get_doc("Student Grievance", grievance)
+        grievance_doc = frappe.get_doc("Grievance", grievance)
         if grievance_doc.student != student.name:
             frappe.throw(_("You can only comment on your own grievances"), frappe.PermissionError)
 
@@ -163,7 +163,7 @@ def add_grievance_comment(grievance, comment):
         frappe.get_doc({
             "doctype": "Comment",
             "comment_type": "Comment",
-            "reference_doctype": "Student Grievance",
+            "reference_doctype": "Grievance",
             "reference_name": grievance,
             "content": comment
         }).insert(ignore_permissions=True)

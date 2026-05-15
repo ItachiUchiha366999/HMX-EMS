@@ -6,9 +6,46 @@
   "is_standard": "Yes",
   "module": "University Examinations",
   "roles": [
-    {"role": "System Manager"},
-    {"role": "Instructor"},
-    {"role": "HOD"},
-    {"role": "Examination Controller"}
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "Instructor"
+    },
+    {
+      "role": "HOD"
+    },
+    {
+      "role": "Examination Controller"
+    }
+  ],
+  "filters": [
+    {
+      "label": "Academic Year",
+      "fieldtype": "Link",
+      "fieldname": "academic_year",
+      "options": "Academic Year",
+      "default": "2026-2027",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    },
+    {
+      "label": "Academic Term",
+      "fieldtype": "Link",
+      "fieldname": "academic_term",
+      "options": "Academic Term",
+      "default": "2026-2027 (Semester 2)",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    },
+    {
+      "label": "Course",
+      "fieldtype": "Link",
+      "fieldname": "course",
+      "options": "Course",
+      "default": "Operations Management",
+      "mandatory": 0,
+      "wildcard_filter": 0
+    }
   ]
 }

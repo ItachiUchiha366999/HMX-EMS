@@ -13,7 +13,9 @@
     "meeting_frequency",
     "section_break_members",
     "chairperson",
+    "chairperson_name",
     "secretary",
+    "secretary_name",
     "members",
     "section_break_categories",
     "grievance_categories",
@@ -70,15 +72,30 @@
     {
       "fieldname": "chairperson",
       "fieldtype": "Link",
+      "in_list_view": 1,
       "label": "Chairperson",
       "options": "User",
       "reqd": 1
+    },
+    {
+      "fieldname": "chairperson_name",
+      "fieldtype": "Data",
+      "label": "Chairperson Name",
+      "fetch_from": "chairperson.full_name",
+      "read_only": 1
     },
     {
       "fieldname": "secretary",
       "fieldtype": "Link",
       "label": "Secretary",
       "options": "User"
+    },
+    {
+      "fieldname": "secretary_name",
+      "fieldtype": "Data",
+      "label": "Secretary Name",
+      "fetch_from": "secretary.full_name",
+      "read_only": 1
     },
     {
       "fieldname": "members",

@@ -55,6 +55,15 @@ def get_columns(filters):
         }
     ]
 
+    # Auto-fill program if missing so PO columns are always generated
+    if not filters.get("program"):
+        first = frappe.db.sql(
+            "SELECT program FROM `tabCO PO Mapping` WHERE docstatus=1 ORDER BY creation LIMIT 1",
+            as_dict=True
+        )
+        if first:
+            filters["program"] = first[0].program
+
     # Get POs for the selected program/course
     if filters.get("program"):
         pos = frappe.get_all(
@@ -89,7 +98,17 @@ def get_data(filters):
     data = []
 
     if not filters.get("course") or not filters.get("program"):
-        return data
+        # Auto-pick the first available submitted mapping
+        first = frappe.db.sql(
+            "SELECT course, program FROM `tabCO PO Mapping` WHERE docstatus=1 ORDER BY creation LIMIT 1",
+            as_dict=True
+        )
+        if not first:
+            return data
+        if not filters.get("course"):
+            filters["course"] = first[0].course
+        if not filters.get("program"):
+            filters["program"] = first[0].program
 
     # Get the CO-PO mapping
     mapping_filters = {

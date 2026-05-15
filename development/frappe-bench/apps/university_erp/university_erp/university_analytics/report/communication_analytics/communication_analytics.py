@@ -101,7 +101,7 @@ def get_summary_data(from_date, to_date):
         })
 
     # SMS stats
-    if frappe.db.table_exists("tabSMS Log"):
+    if frappe.db.exists("DocType", "SMS Log"):
         sms_stats = frappe.db.sql("""
             SELECT
                 COUNT(*) as total,
@@ -123,7 +123,7 @@ def get_summary_data(from_date, to_date):
             })
 
     # WhatsApp stats
-    if frappe.db.table_exists("tabWhatsApp Log"):
+    if frappe.db.exists("DocType", "WhatsApp Log"):
         wa_stats = frappe.db.sql("""
             SELECT
                 COUNT(*) as total,
@@ -146,7 +146,7 @@ def get_summary_data(from_date, to_date):
             })
 
     # In-App notifications
-    if frappe.db.table_exists("tabUser Notification"):
+    if frappe.db.exists("DocType", "User Notification"):
         inapp_stats = frappe.db.sql("""
             SELECT
                 COUNT(*) as total,
@@ -199,14 +199,14 @@ def get_daily_data(from_date, to_date):
         ) or 0
 
         # SMS
-        if frappe.db.table_exists("tabSMS Log"):
+        if frappe.db.exists("DocType", "SMS Log"):
             row["sms_sent"] = frappe.db.count(
                 "SMS Log",
                 filters={"creation": ["between", [f"{date_str} 00:00:00", f"{date_str} 23:59:59"]]}
             ) or 0
 
         # WhatsApp
-        if frappe.db.table_exists("tabWhatsApp Log"):
+        if frappe.db.exists("DocType", "WhatsApp Log"):
             row["whatsapp_sent"] = frappe.db.count(
                 "WhatsApp Log",
                 filters={
@@ -237,7 +237,7 @@ def get_category_data(from_date, to_date):
     }
 
     # Get from User Notification if available
-    if frappe.db.table_exists("tabUser Notification"):
+    if frappe.db.exists("DocType", "User Notification"):
         cat_stats = frappe.db.sql("""
             SELECT category, COUNT(*) as count
             FROM `tabUser Notification`
@@ -277,7 +277,7 @@ def get_template_usage_data(from_date, to_date):
     data = []
 
     # Notification templates
-    if frappe.db.table_exists("tabNotification Template"):
+    if frappe.db.exists("DocType", "Notification Template"):
         templates = frappe.get_all(
             "Notification Template",
             fields=["name", "template_name", "send_email", "send_sms"]
@@ -293,7 +293,7 @@ def get_template_usage_data(from_date, to_date):
                     "notification_type": template.name,
                     "creation": ["between", [from_date, to_date]]
                 }
-            ) if frappe.db.table_exists("tabUser Notification") else 0
+            ) if frappe.db.exists("DocType", "User Notification") else 0
 
             if usage_count > 0:
                 data.append({
@@ -307,11 +307,11 @@ def get_template_usage_data(from_date, to_date):
                         filters={"notification_type": template.name},
                         fieldname="creation",
                         order_by="creation desc"
-                    ) if frappe.db.table_exists("tabUser Notification") else None
+                    ) if frappe.db.exists("DocType", "User Notification") else None
                 })
 
     # WhatsApp templates
-    if frappe.db.table_exists("tabWhatsApp Log"):
+    if frappe.db.exists("DocType", "WhatsApp Log"):
         wa_templates = frappe.db.sql("""
             SELECT
                 template_name,

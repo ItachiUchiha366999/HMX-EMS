@@ -4,17 +4,17 @@
 frappe.query_reports["PO Attainment Report"] = {
 	"filters": [
 		{
-			"fieldname": "program",
-			"label": __("Program"),
-			"fieldtype": "Link",
-			"options": "Program",
-			"reqd": 1
-		},
-		{
 			"fieldname": "academic_year",
 			"label": __("Academic Year"),
 			"fieldtype": "Link",
-			"options": "Academic Year"
+			"options": "Academic Year",
+			"default": "2026-2027"
+		},
+		{
+			"fieldname": "program",
+			"label": __("Program"),
+			"fieldtype": "Link",
+			"options": "Program"
 		}
 	],
 

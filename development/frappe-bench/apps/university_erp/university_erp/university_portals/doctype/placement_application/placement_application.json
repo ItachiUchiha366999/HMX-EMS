@@ -58,7 +58,7 @@
       "in_standard_filter": 1,
       "label": "Placement Drive",
       "options": "Placement Drive",
-      "reqd": 1
+      "reqd": 0
     },
     {
       "fieldname": "column_break_1",
@@ -92,7 +92,7 @@
       "in_list_view": 1,
       "in_standard_filter": 1,
       "label": "Status",
-      "options": "Applied\nShortlisted\nInterview Scheduled\nSelected\nRejected\nWithdrawn"
+      "options": "Applied\nScreening\nShortlisted\nInterview Scheduled\nOffer Received\nAccepted\nSelected\nRejected\nWithdrawn"
     },
     {
       "fieldname": "interview_section",

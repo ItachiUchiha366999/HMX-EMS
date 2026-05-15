@@ -55,7 +55,8 @@
       "fieldname": "student",
       "fieldtype": "Link",
       "label": "Student",
-      "options": "Student"
+      "options": "Student",
+      "in_standard_filter": 1
     },
     {
       "depends_on": "eval:doc.created_by_type=='Instructor'",

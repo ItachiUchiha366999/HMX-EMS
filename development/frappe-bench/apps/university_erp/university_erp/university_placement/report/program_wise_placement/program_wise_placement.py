@@ -57,7 +57,7 @@ def get_data(filters):
             MAX(CASE WHEN pa.status = 'Placed' THEN pa.offered_ctc ELSE NULL END) as highest_package
         FROM `tabPlacement Application` pa
         LEFT JOIN `tabStudent` s ON s.name = pa.student
-        LEFT JOIN `tabPlacement Drive` pd ON pd.name = pa.placement_drive
+        LEFT JOIN `tabPlacement Drive` pd ON pd.job_opening = pa.job_opening
         WHERE pa.docstatus < 2 {conditions}
         GROUP BY {program_field}
         ORDER BY placed DESC

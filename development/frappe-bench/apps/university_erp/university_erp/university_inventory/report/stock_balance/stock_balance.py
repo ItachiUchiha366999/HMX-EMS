@@ -3,7 +3,7 @@
 
 import frappe
 from frappe import _
-from frappe.utils import flt
+from frappe.utils import flt, nowdate, add_months
 
 
 def execute(filters=None):
@@ -93,6 +93,13 @@ def get_columns():
 
 
 def get_data(filters):
+    if not filters:
+        filters = {}
+    if not filters.get("from_date"):
+        filters["from_date"] = add_months(nowdate(), -12)
+    if not filters.get("to_date"):
+        filters["to_date"] = nowdate()
+
     conditions = get_conditions(filters)
 
     # Get stock movements

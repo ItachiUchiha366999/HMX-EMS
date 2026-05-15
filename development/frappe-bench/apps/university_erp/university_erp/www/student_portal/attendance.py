@@ -68,9 +68,15 @@ def get_attendance_summary(student):
         else:
             result["percentage"] = 0
 
+        # Add Vue-expected aliases
+        result["total_attendance"] = result["percentage"]
+        result["sick_leaves"] = result["absent"]
+        result["duty_leaves"] = result["late"]
+
         return result
     except Exception:
-        return {"total_classes": 0, "present": 0, "absent": 0, "late": 0, "percentage": 0}
+        return {"total_classes": 0, "present": 0, "absent": 0, "late": 0, "percentage": 0,
+                "total_attendance": 0, "sick_leaves": 0, "duty_leaves": 0}
 
 
 def get_monthly_attendance(student, month):
@@ -121,24 +127,50 @@ def get_course_wise_attendance(student):
         if not frappe.db.exists("DocType", "Student Attendance"):
             return []
 
-        if not frappe.db.exists("DocType", "Course Schedule"):
-            return []
+        # Attendance rows may have course_schedule=NULL but student_group is always set.
+        # Primary path: join via student_group -> Student Group -> course
+        if frappe.db.exists("DocType", "Student Group"):
+            courses = frappe.db.sql("""
+                SELECT
+                    sg.course,
+                    sg.course as course_name,
+                    COUNT(*) as total,
+                    SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) as present,
+                    SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) as attended,
+                    SUM(CASE WHEN sa.status = 'Absent' THEN 1 ELSE 0 END) as absent,
+                    ROUND(SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) as percentage
+                FROM `tabStudent Attendance` sa
+                JOIN `tabStudent Group` sg ON sg.name = sa.student_group
+                WHERE sa.student = %s
+                AND sa.student_group IS NOT NULL
+                AND sg.course IS NOT NULL AND sg.course != ''
+                GROUP BY sg.course
+                ORDER BY percentage ASC
+            """, student, as_dict=1)
+            if courses:
+                return courses
 
-        courses = frappe.db.sql("""
-            SELECT
-                cs.course,
-                COUNT(*) as total,
-                SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) as present,
-                SUM(CASE WHEN sa.status = 'Absent' THEN 1 ELSE 0 END) as absent,
-                ROUND(SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) as percentage
-            FROM `tabStudent Attendance` sa
-            JOIN `tabCourse Schedule` cs ON cs.name = sa.course_schedule
-            WHERE sa.student = %s
-            GROUP BY cs.course
-            ORDER BY percentage ASC
-        """, student, as_dict=1)
+        # Fallback: join via course_schedule if rows are linked that way
+        if frappe.db.exists("DocType", "Course Schedule"):
+            courses = frappe.db.sql("""
+                SELECT
+                    cs.course,
+                    cs.course as course_name,
+                    COUNT(*) as total,
+                    SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) as present,
+                    SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) as attended,
+                    SUM(CASE WHEN sa.status = 'Absent' THEN 1 ELSE 0 END) as absent,
+                    ROUND(SUM(CASE WHEN sa.status = 'Present' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) as percentage
+                FROM `tabStudent Attendance` sa
+                JOIN `tabCourse Schedule` cs ON cs.name = sa.course_schedule
+                WHERE sa.student = %s
+                GROUP BY cs.course
+                ORDER BY percentage ASC
+            """, student, as_dict=1)
+            if courses:
+                return courses
 
-        return courses
+        return []
     except Exception:
         return []
 

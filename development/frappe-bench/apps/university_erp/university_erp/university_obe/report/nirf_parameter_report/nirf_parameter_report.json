@@ -24,5 +24,23 @@
     {
       "role": "IQAC Member"
     }
+  ],
+  "filters": [
+    {
+      "fieldname": "ranking_year",
+      "fieldtype": "Select",
+      "label": "Ranking Year",
+      "options": "\n2023\n2024\n2025\n2026",
+      "default": "2026",
+      "mandatory": 0
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "\nEngineering\nManagement",
+      "default": "Engineering",
+      "mandatory": 0
+    }
   ]
 }
