@@ -50,3 +50,9 @@ development/frappe-bench/apps/university_erp/university_erp/public/student-porta
 # GSD planning artifacts (local-only)
 .planning/
 **/.planning/
+
+# Claude Code config (agents, commands, settings — local tooling, not project code)
+.claude/
+**/.claude/
+.claude.json
+**/.claude.json
