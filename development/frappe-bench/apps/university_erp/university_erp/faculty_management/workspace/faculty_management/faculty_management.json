@@ -1,6 +1,6 @@
 {
   "charts": [],
-  "content": "[{\"id\":\"hr_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Faculty Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_employee\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"shortcut_faculty\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Faculty Profile\",\"col\":3}},{\"id\":\"shortcut_teaching\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Teaching Assignment\",\"col\":3}},{\"id\":\"shortcut_leave\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Application\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_hr\",\"type\":\"card\",\"data\":{\"card_name\":\"HR Management\",\"col\":4}},{\"id\":\"card_performance\",\"type\":\"card\",\"data\":{\"card_name\":\"Performance & Feedback\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "content": "[{\"id\":\"hr_intro\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Faculty Management</b></span>\",\"col\":12}},{\"id\":\"shortcut_employee\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"shortcut_faculty\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Faculty Profile\",\"col\":3}},{\"id\":\"shortcut_teaching\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Teaching Assignment\",\"col\":3}},{\"id\":\"shortcut_leave\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Application\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\",\"col\":12}},{\"id\":\"card_hr\",\"type\":\"card\",\"data\":{\"card_name\":\"HR Management\",\"col\":4}},{\"id\":\"card_performance\",\"type\":\"card\",\"data\":{\"card_name\":\"Performance & Feedback\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"card_instructors\",\"type\":\"card\",\"data\":{\"card_name\":\"Instructors\",\"col\":4}}]",
   "creation": "2026-01-01 00:00:00",
   "custom_blocks": [],
   "docstatus": 0,
@@ -143,7 +143,7 @@
     {"type": "Link", "link_to": "Instructor", "link_type": "DocType", "label": "Instructor"},
     {"type": "Link", "link_to": "Instructor Log", "link_type": "DocType", "label": "Instructor Log"}
   ],
-  "modified": "2026-03-16 15:00:00.000000",
+  "modified": "2026-05-15 09:00:00.000000",
   "modified_by": "Administrator",
   "module": "Faculty Management",
   "name": "Faculty Management",

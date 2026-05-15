@@ -6,7 +6,9 @@
   "icon": "education",
   "public": 1,
   "title": "University Academics",
-  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>University Academics</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Registration\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Admission Cycle\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"University Alumni\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timetable Slot\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Academics\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Admissions\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Student Info\",\"col\":4}}]",
+  "modified": "2026-05-15 09:00:00.000000",
+  "modified_by": "Administrator",
+  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>University Academics</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Registration\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Admission Cycle\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"University Alumni\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timetable Slot\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Academics\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Curriculum\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Assessments\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Admissions\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Student Info\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Calendar\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
   "links": [
     {"type": "Card Break", "label": "Academics"},
     {"type": "Link", "link_to": "Course Registration", "link_type": "DocType", "label": "Course Registration"},
