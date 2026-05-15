@@ -322,6 +322,20 @@
       "is_query_report": 1
     },
     {
+      "type": "Link",
+      "link_to": "Student Fee Collection",
+      "link_type": "Report",
+      "label": "Student Fee Collection",
+      "is_query_report": 1
+    },
+    {
+      "type": "Link",
+      "link_to": "Program wise Fee Collection",
+      "link_type": "Report",
+      "label": "Program wise Fee Collection",
+      "is_query_report": 1
+    },
+    {
       "type": "Card Break",
       "label": "Scholarships"
     },

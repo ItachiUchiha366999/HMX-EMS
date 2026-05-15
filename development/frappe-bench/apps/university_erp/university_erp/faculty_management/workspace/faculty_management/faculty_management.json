@@ -138,7 +138,10 @@
       "link_type": "Report",
       "label": "Leave Utilization Report",
       "is_query_report": 1
-    }
+    },
+    {"type": "Card Break", "label": "Instructors"},
+    {"type": "Link", "link_to": "Instructor", "link_type": "DocType", "label": "Instructor"},
+    {"type": "Link", "link_to": "Instructor Log", "link_type": "DocType", "label": "Instructor Log"}
   ],
   "modified": "2026-03-16 15:00:00.000000",
   "modified_by": "Administrator",
