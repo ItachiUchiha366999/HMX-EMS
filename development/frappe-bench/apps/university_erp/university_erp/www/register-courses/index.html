@@ -1,0 +1,178 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Register for Courses{% endblock %}
+
+{% block page_content %}
+<div class="container" style="max-width: 900px; padding: 24px;">
+
+	<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+		<div>
+			<h1 style="margin:0;">Register for Courses</h1>
+			<p class="text-muted" style="margin:4px 0 0 0;">
+				Hi {{ student.student_name }} — pick courses for <b>{{ academic_term or "the current term" }}</b>
+				{% if program %}({{ program }}){% endif %}.
+			</p>
+		</div>
+		<a href="/student_portal" class="btn btn-default btn-sm">← Back to portal</a>
+	</div>
+
+	{% if available_courses %}
+	<div class="card" style="border:1px solid #e5e7eb; border-radius:8px; padding:20px; margin-bottom:24px;">
+		<h4 style="margin-top:0;">Available Courses</h4>
+		<form id="register-form">
+			<table class="table table-hover" style="margin-bottom:16px;">
+				<thead>
+					<tr>
+						<th style="width:40px;"></th>
+						<th>Course</th>
+						<th>Type</th>
+						<th style="text-align:right;">Credits</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for c in available_courses %}
+					<tr>
+						<td>
+							<input type="checkbox" class="course-checkbox"
+								data-course="{{ c.course }}"
+								data-name="{{ c.course_name }}"
+								data-credits="{{ c.credits }}"
+								data-required="{{ c.required }}">
+						</td>
+						<td>
+							<b>{{ c.course_name }}</b><br>
+							<small class="text-muted">{{ c.course }}</small>
+						</td>
+						<td>{% if c.required %}<span class="indicator-pill orange">Core</span>{% else %}<span class="indicator-pill blue">Elective</span>{% endif %}</td>
+						<td style="text-align:right;">{{ c.credits }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div style="display:flex; align-items:center; justify-content:space-between;">
+				<div class="text-muted">
+					<span id="picked-count">0</span> selected, <b><span id="picked-credits">0</span></b> credits
+				</div>
+				<button type="button" id="submit-btn" class="btn btn-primary" disabled>
+					Submit Registration
+				</button>
+			</div>
+		</form>
+	</div>
+	{% else %}
+	<div class="card" style="border:1px solid #e5e7eb; border-radius:8px; padding:24px; text-align:center; color:#6b7280;">
+		No new courses available right now. You may already be enrolled in everything your program offers,
+		or your registration window for {{ academic_term or "this term" }} hasn't opened yet.
+	</div>
+	{% endif %}
+
+	<div class="card" style="border:1px solid #e5e7eb; border-radius:8px; padding:20px; margin-top:24px;">
+		<h4 style="margin-top:0;">My Registrations</h4>
+		{% if my_registrations %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Registration #</th>
+					<th>Term</th>
+					<th>Courses</th>
+					<th>Credits</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for r in my_registrations %}
+				<tr>
+					<td><code>{{ r.name }}</code></td>
+					<td>{{ r.academic_term }}</td>
+					<td>{{ r.course_count }}</td>
+					<td>{{ r.total_credits }}</td>
+					<td>
+						{% if r.workflow_state == "Approved" %}
+							<span class="indicator-pill green">Approved</span>
+						{% elif r.workflow_state == "Pending Faculty Approval" %}
+							<span class="indicator-pill orange">Pending</span>
+						{% elif r.workflow_state == "Rejected" %}
+							<span class="indicator-pill red">Rejected</span>
+						{% else %}
+							<span class="indicator-pill gray">{{ r.workflow_state }}</span>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p class="text-muted" style="margin:0;">You haven't submitted any course registrations yet.</p>
+		{% endif %}
+	</div>
+
+</div>
+
+<script>
+(function() {
+	var checkboxes = document.querySelectorAll('.course-checkbox');
+	var countEl = document.getElementById('picked-count');
+	var creditsEl = document.getElementById('picked-credits');
+	var btn = document.getElementById('submit-btn');
+
+	function recompute() {
+		var n = 0, c = 0;
+		checkboxes.forEach(function(cb) {
+			if (cb.checked) {
+				n += 1;
+				c += parseFloat(cb.dataset.credits || 0);
+			}
+		});
+		countEl.textContent = n;
+		creditsEl.textContent = c;
+		btn.disabled = (n === 0);
+	}
+
+	checkboxes.forEach(function(cb) {
+		cb.addEventListener('change', recompute);
+	});
+
+	if (btn) {
+		btn.addEventListener('click', function() {
+			var picked = [];
+			checkboxes.forEach(function(cb) {
+				if (cb.checked) {
+					picked.push({
+						course: cb.dataset.course,
+						course_name: cb.dataset.name,
+						credits: parseFloat(cb.dataset.credits || 0),
+						required: cb.dataset.required === "1" ? 1 : 0,
+					});
+				}
+			});
+
+			btn.disabled = true;
+			btn.textContent = 'Submitting...';
+
+			frappe.call({
+				method: 'university_erp.university_academics.doctype.course_registration.course_registration.submit_registration',
+				args: {
+					courses: picked,
+					academic_term: {{ academic_term | tojson }},
+				},
+				callback: function(r) {
+					if (r.message) {
+						frappe.show_alert({
+							message: 'Registration ' + r.message.name + ' submitted ('
+								+ r.message.course_count + ' courses, '
+								+ r.message.total_credits + ' credits). Pending Registrar approval.',
+							indicator: 'green',
+						}, 5);
+						setTimeout(function() { window.location.reload(); }, 1500);
+					}
+				},
+				error: function(e) {
+					btn.disabled = false;
+					btn.textContent = 'Submit Registration';
+				},
+			});
+		});
+	}
+})();
+</script>
+{% endblock %}
