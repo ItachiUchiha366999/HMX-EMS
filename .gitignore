@@ -35,17 +35,13 @@ development/frappe-bench/sites/*/touched_tables.json
 # Frappe site backups (contain DB dumps — never commit)
 development/frappe-bench/sites/*/private/backups/
 
-# Per-site runtime data (locks, logs, test logs, indexes, etc.)
-# Sites are deployment-specific; only common_site_config.json + apps.txt + apps.json
-# at the bench/sites/ root should be tracked.
-development/frappe-bench/sites/*/locks/
-development/frappe-bench/sites/*/.test_log
-development/frappe-bench/sites/*/.build
-development/frappe-bench/sites/*/private/
-development/frappe-bench/sites/*/public/files/
-development/frappe-bench/sites/*/error-snapshots/
-development/frappe-bench/sites/*/task-logs/
-development/frappe-bench/sites/localhost/
+# Per-site runtime data — sites are deployment-specific.
+# Ignore everything under sites/, then re-include only the bench-level metadata
+# files at sites/ root (common_site_config.json, apps.txt, apps.json).
+development/frappe-bench/sites/*
+!development/frappe-bench/sites/common_site_config.json
+!development/frappe-bench/sites/apps.txt
+!development/frappe-bench/sites/apps.json
 
 # Local pre-phase backup snapshots (created by /gsd:execute-phase before risky migrations)
 development/backups/
