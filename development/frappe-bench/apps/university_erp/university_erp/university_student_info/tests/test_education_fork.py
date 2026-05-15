@@ -22,7 +22,6 @@ class TestEducationForkStudentInfo(unittest.TestCase):
         "Student Leave Application",
         "Student Language",
         "Student Sibling",
-        "Student Siblings",
         "Student Guardian",
         "Guardian",
         "Guardian Interest",
